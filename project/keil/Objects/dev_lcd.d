@@ -1,0 +1,14 @@
+.\objects\dev_lcd.o: ..\..\device\dev_lcd.c
+.\objects\dev_lcd.o: E:\sdhLib\inc\basis/sdhDebug.h
+.\objects\dev_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\dev_lcd.o: E:\sdhLib\inc\sdhDef.h
+.\objects\dev_lcd.o: ..\..\app\sdhlibConf.h
+.\objects\dev_lcd.o: E:\sdhLib\inc\basis/sdhError.h
+.\objects\dev_lcd.o: E:\sdhLib\inc\basis/macros.h
+.\objects\dev_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\dev_lcd.o: ..\..\device\dev_lcd.h
+.\objects\dev_lcd.o: E:\sdhLib\inc\lw_oopc.h
+.\objects\dev_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\dev_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\dev_lcd.o: ..\..\device\dev_id.h
+.\objects\dev_lcd.o: ..\..\device\dev_lcd/FM12864/dev_lcd_fm12864.h
