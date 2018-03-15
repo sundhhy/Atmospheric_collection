@@ -1,0 +1,12 @@
+.\objects\test_lcd.o: ..\..\unit_tests\test_lcd.c
+.\objects\test_lcd.o: ..\..\..\Atmospheric_collection\configs/tdd_conf.h
+.\objects\test_lcd.o: ..\..\unit_tests\unit_test.h
+.\objects\test_lcd.o: ..\..\device\device.h
+.\objects\test_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\test_lcd.o: ..\..\device\dev_id.h
+.\objects\test_lcd.o: ..\..\device\dev_cmd.h
+.\objects\test_lcd.o: ..\..\device\dev_char.h
+.\objects\test_lcd.o: E:\sdhLib\inc\lw_oopc.h
+.\objects\test_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\test_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\test_lcd.o: ..\..\device\dev_lcd.h
