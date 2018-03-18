@@ -64,19 +64,19 @@ int main (void) {
 	OpenPrpClock();
 	Pin_init();
 	NVIC_Configuration();
-	PVD_Init();
 	
 	Init_device();
 	
 
-	#if TDD_ON == 1
-	unit_test();
-	#endif
+	
   // create 'thread' functions that start executing,
   // example: tid_name = osThreadCreate (osThread(name), NULL);
 
   osKernelStart ();                         // start thread execution 
 	
+	#if TDD_ON == 1
+	unit_test();
+	#endif
 	while(1)
 	{
 		

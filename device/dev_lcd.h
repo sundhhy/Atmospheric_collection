@@ -1,8 +1,18 @@
-#ifndef __DEV_LCD_H_
-#define __DEV_LCD_H_
+//------------------------------------------------------------------------------
+// includes
+//------------------------------------------------------------------------------
+#ifndef __INC_dev_lcd_H_
+#define __INC_dev_lcd_H_
 #include <stdint.h>
 #include "lw_oopc.h"
 
+//------------------------------------------------------------------------------
+// check for correct compilation options
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+// const defines
+//------------------------------------------------------------------------------
 #define IS_CHINESE( c) ( c & 0x80)
 #define IS_BR( c) ( c == '\n')
 #define IS_TAB( c) ( c == '\r')
@@ -47,10 +57,25 @@
 #define SIZE_ERR					0xffff
 #define SIZE_BOUNDARY					0xfffe
 
-#define EMPTY_RECTANGLE				0
-#define FILLED_RECTANGLE			1
-#define LINE						2
+//#define EMPTY_RECTANGLE				0
+//#define FILLED_RECTANGLE			1
+//#define LINE						2
 
+#define GEO_LINE					0
+#define GEO_RECTANGLE				1
+#define GEO_CYCLE					2
+#define GEO_NUM						3
+
+#define ATT_NONE				0
+#define ATT_STRONG				1		//加粗
+#define ATT_FULL_CORE			2		//实心,用于几何图形
+
+#define CLR_BLACK				0
+#define CLR_WHITE				1
+
+//------------------------------------------------------------------------------
+// typedef
+//------------------------------------------------------------------------------
 //字符型设备的接口
 //包括uart设备
 
@@ -65,9 +90,16 @@ ABS_CLASS(dev_lcd)
 	int (*init)( void);
 	void (*clear)( int c);
 	void (*display_control_switch)(int on_off);
-	void (*dispaly_text)( char m, char *string,  int len, int x, int y, char font, char c);
-	void	(*lcd_flush)(void);
+	
+	//font 高16位，字体编号，一般是0，除非有字体变化的需求，才会赋其他值; 低16位大小
+	void (*dispaly_text)(char m, char *string,  int len, int x, int y, int font, char c);
+	void (*draw_geometry)(char type_g, char attr, char clr, short x0, short y0, short x1, short y1);
+	
+	
+	
+	void (*lcd_flush)(void);
 	void (*lcd_lightness)(uint8_t		pct);
+	int (*lcd_ctl)(int cmd, ...);
 //	int ( *label)( char *string,  int len, scArea_t *area, int font, char c, char ali);
 //	void ( *BKColor)( char c);
 //	int ( *Box)( int x1, int y1, int x2, int y2, char type, char c);
@@ -79,12 +111,15 @@ ABS_CLASS(dev_lcd)
 //	void	(*done)(void);
 //	void	(*icon)(int x1, int y1, char num, int xn, int yn, int n);
 };
+//------------------------------------------------------------------------------
+// global variable declarations
+//------------------------------------------------------------------------------
 
+//------------------------------------------------------------------------------
+// function prototypes
+//------------------------------------------------------------------------------
 int Open_dev_lcd(int major, int minor, void **dev);
 
 
 
-
 #endif
-
-

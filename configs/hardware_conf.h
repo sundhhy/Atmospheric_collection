@@ -17,13 +17,9 @@
 #define UART_MODE_INTR		0
 #define UART_MODE_DMA		1
 #define UART_MODE_CPU		2
-//各种外设的引脚配置
 
-/************* PWR	*********************************************/
-#define PORT_PWR                               GPIOA    					 
-#define PIN_PWR                                GPIO_Pin_9	
-#define GPIO_PORTSOURCE_PWR                              GPIO_PortSourceGPIOA					 
-#define GPIO_PINSOURCE_PWR                               GPIO_PinSource9
+#define PWM_TIME	TIM2
+//各种外设的引脚配置
 
 /*********** LCD *************************************************/
 #define PORT_LCD_DI                              GPIOB    					 
@@ -58,6 +54,10 @@
 #define PIN_LCD_DATA_6                           GPIO_Pin_14
 #define PORT_LCD_DATA_7                          GPIOE    					 
 #define PIN_LCD_DATA_7                           GPIO_Pin_15
+
+//注意：因为是用GPIO模拟并口，因此下面两个宏要保证与上面的DATA0 ` DATA7保持匹配，程序的正确执行依赖于此
+#define PORT_LCD_DATAS                          GPIOE   
+#define PIN_LCD_DATAS_OFFSET                     8  
 /************* spi flash ****************************************/
 #define PORT_FSH_nWP                               GPIOD    					 
 #define PIN_FSH_nWP                                GPIO_Pin_10	

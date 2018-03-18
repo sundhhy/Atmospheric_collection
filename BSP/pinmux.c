@@ -33,7 +33,7 @@ void Pin_init(void)
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_PWM; 				//PA.0
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; 	//  上拉输出
 	GPIO_Init(PORT_LCD_PWM, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_RST; 				//PD.14
@@ -53,42 +53,42 @@ void Pin_init(void)
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_DATA_0; 				//PE.8
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 	//  上拉输出
 	GPIO_Init(PORT_LCD_DATA_0, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_DATA_1; 				//PE.9
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 	//  上拉输出
 	GPIO_Init(PORT_LCD_DATA_1, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_DATA_2; 				//PE.10
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 	//  上拉输出
 	GPIO_Init(PORT_LCD_DATA_2, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_DATA_3; 				//PE.11
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 	//  上拉输出
 	GPIO_Init(PORT_LCD_DATA_3, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_DATA_4; 				//PE.12
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 	//  上拉输出
 	GPIO_Init(PORT_LCD_DATA_4, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_DATA_5; 				//PE.13
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 	//  上拉输出
 	GPIO_Init(PORT_LCD_DATA_5, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_DATA_6; 				//PE.14
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 	//  上拉输出
 	GPIO_Init(PORT_LCD_DATA_6, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_DATA_7; 				//PE.15
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 	//  上拉输出
 	GPIO_Init(PORT_LCD_DATA_7, &GPIO_InitStructure);
 	
 //	/*** pwr ***/
