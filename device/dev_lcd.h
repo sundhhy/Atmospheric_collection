@@ -97,11 +97,15 @@ ABS_CLASS(dev_lcd)
 	
 	
 	
-	void (*lcd_flush)(void);
+	void (*lcd_flush)(char );
 	void (*lcd_lightness)(uint8_t		pct);
+	
+	//Œ¥ µœ÷
+	int	(*get_size)(int font, uint16_t *width, uint16_t *heigh);
+	void ( *set_backcolor)( char c);
 	int (*lcd_ctl)(int cmd, ...);
 //	int ( *label)( char *string,  int len, scArea_t *area, int font, char c, char ali);
-//	void ( *BKColor)( char c);
+//	
 //	int ( *Box)( int x1, int y1, int x2, int y2, char type, char c);
 //	int ( *getStrSize)( int font, uint16_t *width, uint16_t *heigh);
 //	void ( *getScrnSize)( uint16_t *xsize, uint16_t *ysize);

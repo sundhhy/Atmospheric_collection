@@ -5,21 +5,18 @@
 // includes
 //------------------------------------------------------------------------------
 #include <stdint.h>
-#include "HMI_comm.h"
-#include "HMI_main.h"
-#include "HMI_keyboard.h"
-#include "HMI_menu.h"
-#include "HMI_barGraph.h"
-#include "HMI_data.h"
-#include "HMI_curve.h"
-#include "HMI_news_select.h"
-//#include "News_Alarm_HMI.h"
-//#include "News_Power_down_HMI.h"
-//#include "History_HMI.h"
-#include "HMI_Accumulate.h"
-#include "HMI_setup.h"
-#include "HMI_striped_background.h"
-#include "HMI_windows.h"
+//#include "HMI_comm.h"
+//#include "HMI_main.h"
+//#include "HMI_keyboard.h"
+//#include "HMI_menu.h"
+//#include "HMI_barGraph.h"
+//#include "HMI_data.h"
+//#include "HMI_curve.h"
+//#include "HMI_news_select.h"
+//#include "HMI_Accumulate.h"
+//#include "HMI_setup.h"
+//#include "HMI_striped_background.h"
+//#include "HMI_windows.h"
 
 //------------------------------------------------------------------------------
 // check for correct compilation options

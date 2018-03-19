@@ -55,19 +55,28 @@ x7
 // const defines
 //------------------------------------------------------------------------------
 #define FM_VRAM(x, y) fm_vram[(x) >> 3][y]
+
+#define FM12864_WIDE_8			8		//8 * 8 = 64
+#define FM12864_HALF_LONG		64
+#define FM12864_LONG				128
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
 typedef void (*fm_draw_geo)(char attr, char clr, short vx0, short vy0, short vx1, short vy1);
+
+
 //------------------------------------------------------------------------------
 // local vars
 //------------------------------------------------------------------------------
 
 //x是行坐标，y是列坐标
-static uint8_t fm_vram[LCD_WIDE / 8][LCD_LONG];
+static uint8_t fm_vram[FM12864_WIDE_8][FM12864_LONG];
 static fm_draw_geo arr_func_draw_geo[GEO_NUM];
 
-
+struct {
+	short chg_x0, chg_y0;
+	short chg_x1, chg_y1;
+}fm_vram_mgr;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
@@ -75,7 +84,7 @@ static	int FM_Init(void);
 static	void FM_Clear(int c);
 static	void FM_Switch(int on_off);
 static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c);
-static	void FM_Flush(void);
+static	void FM_Flush(char all);
 static	void FM_Lightness(uint8_t		pct);
 static  int  FM_Lcd_ctl(int cmd, ...);
 static void FM_Draw_geometry(char type_g, char attr, char clr, short x0, short y0, short x1, short y1);
@@ -86,7 +95,8 @@ static void FM_Draw_cycle(char attr, char clr, short vx0, short vy0, short vx1, 
 
 static void FM_Coordinate_converter(short in_x, short in_y, short *o_vx, short *o_vy);
 static void FM_Set_vxy(short vx, short vy);
-
+static void FM_Init_change_area(void);
+static void FM_Update_change_area(short chg_vx, short chg_vy);
 
 
 //============================================================================//
@@ -117,7 +127,7 @@ END_CTOR
 /// \{
 static	int FM_Init(void)
 {
-	uint8_t		s = 0;
+//	uint8_t		s = 0;
 	
 	
 	arr_func_draw_geo[GEO_LINE] = FM_Draw_line;
@@ -130,14 +140,14 @@ static	int FM_Init(void)
 	LHI_Reset_lcd();
 	
 	LHI_SELECT_LEFT;
-	s = LHI_Read_status();
+//	s = LHI_Read_status();
 
 	
 	
 	LHI_Send_cmd(FM_CMD_UNLOCK);
 	
 	
-	s = LHI_Read_status();
+//	s = LHI_Read_status();
 //	if((s & FM_STATUS_UNLOCK) == 0)
 //		goto err;
 	
@@ -149,18 +159,18 @@ static	int FM_Init(void)
 	LHI_SELECT_RIGHT;
 	LHI_Send_cmd(FM_CMD_UNLOCK);
 	LHI_Send_cmd(FM_CMD_START_LINE(0));
-	s = LHI_Read_status();
+//	s = LHI_Read_status();
 //	if((s & FM_STATUS_UNLOCK) == 0)
 //		goto err;
 	LHI_SELECT_NONE;
 	LHI_LCD_ON;
 	return RET_OK;
-err:
-	return RET_FAILED;
+//err:
+//	return RET_FAILED;
 }
 static	void FM_Clear(int c)
 {
-	short i, j;
+	short i;
 	uint8_t  buf[64] = {0xff};
 
 	
@@ -176,7 +186,7 @@ static	void FM_Clear(int c)
 	}
 	LHI_SELECT_LEFT;
 	
-	for(i = 0; i < 8; i++)
+	for(i = 0; i < FM12864_WIDE_8; i++)
 	{
 		
 		LHI_Send_cmd(FM_CMD_SET_VX(i));
@@ -187,7 +197,7 @@ static	void FM_Clear(int c)
 	
 	LHI_SELECT_RIGHT;
 
-	for(i = 0; i < 8; i++)
+	for(i = 0; i < FM12864_WIDE_8; i++)
 	{
 		
 		LHI_Send_cmd(FM_CMD_SET_VX(i));
@@ -195,6 +205,8 @@ static	void FM_Clear(int c)
 		LHI_Write_vram(buf, 64);
 			
 	}
+	
+	FM_Init_change_area();
 	
 	LHI_SELECT_NONE;
 }
@@ -215,11 +227,10 @@ static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c)
 	int		code_len;
 	short 	vx, vy;
 	short		i;
-	short		offset_y = 0;
 	FM_Coordinate_converter(x, y, &vx, &vy);
 	
 	//显示时，LCD的y轴会自动累加，因此就只需要在开头设置一次y轴。
-	FM_Set_vxy(vx, vy);
+//	FM_Set_vxy(vx, vy);
 	while(*str)
 	{
 		code_len = CHD_Get_code(code, str, 32, 0, 0);
@@ -231,8 +242,8 @@ static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c)
 		for(i = 0; i < code_len; i++)
 		{
 			FM_VRAM(vx, vy) = code[i];
-			
-			LHI_Write_vram(&FM_VRAM(vx, vy), 1);
+			FM_Update_change_area(vx, vy);
+//			LHI_Write_vram(&FM_VRAM(vx, vy), 1);
 			vy ++;
 			
 		}
@@ -286,8 +297,92 @@ static void FM_Draw_geometry(char type_g, char attr, char clr, short x0, short y
 	
 }
 	
-static	void FM_Flush(void)
+static	void FM_Flush(char all)
 {
+	short i, j;
+	short limit_y;
+	if(all)
+	{
+
+
+		fm_vram_mgr.chg_x0 = 0;
+		fm_vram_mgr.chg_y0 = 0;
+		
+		fm_vram_mgr.chg_x1 = FM12864_WIDE_8;
+		fm_vram_mgr.chg_y1 = FM12864_LONG;
+		
+	}
+	
+	//因为LCD是分左右两半，因此为了方便操作，也先刷左屏，再刷右屏
+	
+	if(fm_vram_mgr.chg_y0 > FM12864_HALF_LONG)
+		goto flush_right;
+	if(fm_vram_mgr.chg_y1 < FM12864_HALF_LONG)
+		limit_y = fm_vram_mgr.chg_y1 ;
+	else
+		limit_y = FM12864_HALF_LONG;
+	
+	//刷左半屏
+	for(i = fm_vram_mgr.chg_x0; i < fm_vram_mgr.chg_x1; i ++)
+	{
+		FM_Set_vxy(i, fm_vram_mgr.chg_y0);		//y轴方向只需设置一次就够了，LCD内部会自动加1
+		for(j = fm_vram_mgr.chg_y0;j < limit_y;j ++)
+		{
+			
+			LHI_Write_vram(&FM_VRAM(i, j), 1);
+			
+		}
+		
+	}
+	
+	flush_right:
+	if(fm_vram_mgr.chg_y1 < FM12864_HALF_LONG)
+		goto exit;
+	
+	if(fm_vram_mgr.chg_y0 > FM12864_HALF_LONG)
+		limit_y = fm_vram_mgr.chg_y0 ;
+	else
+		limit_y = FM12864_HALF_LONG;
+	
+	//刷右半屏
+	for(i = fm_vram_mgr.chg_x0; i < fm_vram_mgr.chg_x1; i ++)
+	{
+		FM_Set_vxy(i, limit_y);
+		for(j = limit_y;j < fm_vram_mgr.chg_y1;j ++)
+		{
+			
+			LHI_Write_vram(&FM_VRAM(i, j), 1);
+			
+		}
+		
+	}
+	exit:
+	FM_Init_change_area();
+}
+
+static void FM_Init_change_area(void)
+{
+	fm_vram_mgr.chg_x0 = FM12864_WIDE_8;
+	fm_vram_mgr.chg_y0 = FM12864_LONG;
+
+	fm_vram_mgr.chg_x1 = 0;
+	fm_vram_mgr.chg_y1 = 0;
+	
+}
+
+static void FM_Update_change_area(short chg_vx, short chg_vy)
+{
+	chg_vx >>= 3;
+	if(fm_vram_mgr.chg_x0 > chg_vx)
+		fm_vram_mgr.chg_x0 = chg_vx;
+	if(fm_vram_mgr.chg_y0 > chg_vy)
+		fm_vram_mgr.chg_y0 = chg_vy;
+	
+	if(fm_vram_mgr.chg_x1 < chg_vx)
+		fm_vram_mgr.chg_x1 = chg_vx;
+	if(fm_vram_mgr.chg_y1 < chg_vy)
+		fm_vram_mgr.chg_y1 = chg_vy;
+	
 	
 }
 static	void FM_Lightness(uint8_t		pct)
@@ -320,9 +415,9 @@ static void FM_Draw_line(char attr, char clr, short vx0, short vy0, short vx1, s
 	int dx, dy;	
 	int	len;
 	int x, y;
-	uint8_t  *p_vram;
+//	uint8_t  *p_vram;
 	uint8_t bit = 0;
-	uint8_t val;
+//	uint8_t val;
 
 //	if(vy0 == vy1)
 //	{
@@ -360,8 +455,9 @@ static void FM_Draw_line(char attr, char clr, short vx0, short vy0, short vx1, s
 			
 			FM_VRAM(vx0, i) &= ~( 1 << bit);
 			FM_VRAM(vx0, i) |= ( clr << bit);
-			FM_Set_vxy(vx0, i);
-			LHI_Write_vram(&FM_VRAM(vx0, i), 1);
+			FM_Update_change_area(vx0, i);
+//			FM_Set_vxy(vx0, i);
+//			LHI_Write_vram(&FM_VRAM(vx0, i), 1);
 		}
 		
 		return;
@@ -443,8 +539,9 @@ static void FM_Draw_line(char attr, char clr, short vx0, short vy0, short vx1, s
 		
 		FM_VRAM(x >> 10, y >> 10) &= ~( 1 << bit);
 		FM_VRAM(x >> 10, y >> 10) |= ( clr << bit);
-		FM_Set_vxy(x >> 10, y >> 10);
-		LHI_Write_vram(&FM_VRAM(x >> 10, y >> 10), 1);
+		FM_Update_change_area(x >> 10, y >> 10);
+//		FM_Set_vxy(x >> 10, y >> 10);
+//		LHI_Write_vram(&FM_VRAM(x >> 10, y >> 10), 1);
 		
 		x += dx;
 		y += dy;

@@ -12,7 +12,7 @@
 #else
 #include "assert.h"
 #endif
-#include "sheet.h"
+#include "GUI/sheet/sheet.h"
 //------------------------------------------------------------------------------
 // check for correct compilation options
 //------------------------------------------------------------------------------

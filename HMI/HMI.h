@@ -15,7 +15,7 @@
 #include "assert.h"
 #endif
 
-#include "sheet.h"
+#include "GUI/sheet/sheet.h"
 #include "focus.h"
 
 #include "Component_Button.h"

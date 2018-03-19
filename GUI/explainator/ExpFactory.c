@@ -29,41 +29,41 @@ Expr *ExpCreate( char *type)
 		return (Expr *)GetTxtExpr();
 	}
 	
-	p = strstr( type, "input");
-	if( p)
-	{
-		return (Expr *)GetNtInput();
-	}
-	p = strstr( type, "box");
-	if( p)
-	{
-		return (Expr *)GetGmtrExpr();
-	}
-	
-	p = strstr( type, "rct");
-	if( p)
-	{
-		return (Expr *)GetGmtrExpr();
-	}
-	p = strstr( type, "line");
-	if( p)
-	{
-		return (Expr *)GetGmtrExpr();
-	}
+//	p = strstr( type, "input");
+//	if( p)
+//	{
+//		return (Expr *)GetNtInput();
+//	}
+//	p = strstr( type, "box");
+//	if( p)
+//	{
+//		return (Expr *)GetGmtrExpr();
+//	}
+//	
+//	p = strstr( type, "rct");
+//	if( p)
+//	{
+//		return (Expr *)GetGmtrExpr();
+//	}
+//	p = strstr( type, "line");
+//	if( p)
+//	{
+//		return (Expr *)GetGmtrExpr();
+//	}
 
-	p = strstr( type, "pic");
-	if( p)
-	{
-		return (Expr *)GetPictExpr();
-	}
-	
-	
+//	p = strstr( type, "pic");
+//	if( p)
+//	{
+//		return (Expr *)GetPictExpr();
+//	}
+//	
+//	
 
-	
-	if( !strcasecmp( type, "bu"))
-	{
-		return (Expr *)GetNtButton();
-	}
+//	
+//	if( !strcasecmp( type, "bu"))
+//	{
+//		return (Expr *)GetNtButton();
+//	}
 
 	
 

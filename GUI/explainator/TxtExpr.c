@@ -3,7 +3,7 @@
 //#include "basis/sdhError.h"
 #include "sdhDef.h"
 #include "dev_lcd.h"
-#include "Gh_txt.h"
+#include "GUI/Glyph/Gh_txt.h"
 
 #include <string.h>
 

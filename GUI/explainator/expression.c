@@ -129,12 +129,12 @@ int Set_shtContextAtt( char *p_att, sheet *p_sht)
 	
 	p_sht->cnt.font = String2Font( p_att);
 	
-	if( GetKeyVal( p_att, "mdl", tmpbuf, 8))
-	{
-		p_sht->p_mdl = ModelCreate(tmpbuf); 
-		
-		
-	}
+//	if( GetKeyVal( p_att, "mdl", tmpbuf, 8))
+//	{
+//		p_sht->p_mdl = ModelCreate(tmpbuf); 
+//		
+//		
+//	}
 //	else {
 //		p_sht->p_mdl = NULL;
 //		

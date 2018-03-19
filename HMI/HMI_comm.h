@@ -1,8 +1,8 @@
 #ifndef _INC_commHMI_H_
 #define _INC_commHMI_H_
 #include "HMI.h"
-#include "ModelFactory.h"
-#include "sheet.h"
+//#include "ModelFactory.h"
+#include "GUI/sheet/sheet.h"
 #include "HMI_keyboard.h"
 #include "system.h"
 //------------------------------------------------------------------------------

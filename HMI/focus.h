@@ -4,7 +4,7 @@
 // includes
 //------------------------------------------------------------------------------
 #include <stdint.h>
-#include "sheet.h"
+#include "GUI/sheet/sheet.h"
 
 //------------------------------------------------------------------------------
 // check for correct compilation options

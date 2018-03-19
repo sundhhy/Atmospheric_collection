@@ -8,7 +8,7 @@
 #include "basis/sdhDebug.h"
 #include "sdhDef.h"
 #include "basis/sdhError.h"
-#include "system.h"
+#include "APP/system.h"
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -47,42 +47,42 @@
 // local function prototypes
 //------------------------------------------------------------------------------
 
-static int Init( Glyph *self, I_dev_lcd *lcd);
+static int Init( Glyph *self, dev_lcd *lcd);
 static void Draw_self( Glyph *self);
 static void vDraw( Glyph *self, dspContent_t *cnt, vArea_t *area);
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
-void Flush_LCD(void)
+void Flush_lcd(void)
 {
-	flush_flag = 1;
+	aci_sys.flag_lcd_flush = 1;
 	
 	
 }
 
-void Stop_flush_LCD(void)
+void Stop_flush_lcd(void)
 {
-	flush_flag = 0;
+	aci_sys.flag_lcd_flush = 0;
 	
 	
 }
 
-void LCD_Run(void)
+void Lcd_run(void)
 {
-	if(flush_flag) {
-		I_dev_lcd *lcd;
+	if(aci_sys.flag_lcd_flush) {
+		dev_lcd *lcd;
 		Dev_open( LCD_DEVID, (void *)&lcd);
-		lcd->done();
-		flush_flag = 0;
+		lcd->lcd_flush(0);
+		aci_sys.flag_lcd_flush = 0;
 		
 	}
 	
 }
-void CLR_LCD(void)
+void Clr_lcd(void)
 {
-	I_dev_lcd *lcd;
+	dev_lcd *lcd;
 	Dev_open( LCD_DEVID, (void *)&lcd);
-	lcd->Clear(0);
+	lcd->clear(CLR_WHITE);
 	
 }
 
@@ -365,7 +365,7 @@ END_ABS_CTOR
 
 
 
-static int Init( Glyph *self, I_dev_lcd *lcd)
+static int Init( Glyph *self, dev_lcd *lcd)
 {
 	
 //	self->myLcd = lcd;

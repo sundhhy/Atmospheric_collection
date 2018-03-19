@@ -1,7 +1,10 @@
 #include "HMI.h"
-#include "HMI_comm.h"
+//#include "HMI_comm.h"
 #include <string.h>
+
+
 #include "os/os_depend.h"
+#include "APP/system.h"
 #include "sys_cmd.h"
 #include "HMIFactory.h"
 
@@ -146,11 +149,11 @@ END_ABS_CTOR
 static void HMI_Flush(void)
 {
 	Cmd_Rgt_time_task(HMI_Flush, HMI_FLUSH_CYCLE_S);
-	if(Sem_wait(&phn_sys.hmi_mgr.hmi_sem, 1000) <= 0)
+	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 1000) <= 0)
 		return;
 	g_p_curHmi->show(g_p_curHmi);
 	g_p_curHmi->show_cmp(g_p_curHmi);
-	Sem_post(&phn_sys.hmi_mgr.hmi_sem);
+	Sem_post(&aci_sys.hmi_mgr.hmi_sem);
 }
 
 
@@ -171,20 +174,20 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 	HMI		*save_last_case_err = NULL;		//如果切换发生错误，就要恢复之前的旧画面
 	if( p_hmi == NULL)
 		return;
-	if(p_hmi ==  g_p_winHmi ) {
-		
-		g_p_win_last = self;
-	} else if((self != p_hmi) && (self != g_p_winHmi)) {		//切换到不同的界面上，才更新
-		save_last_case_err = g_p_lastHmi;
-		g_p_lastHmi = g_p_curHmi;
-		
-	}
-	phn_sys.key_weight = 1;
+//	if(p_hmi ==  g_p_winHmi ) {
+//		
+//		g_p_win_last = self;
+//	} else if((self != p_hmi) && (self != g_p_winHmi)) {		//切换到不同的界面上，才更新
+//		save_last_case_err = g_p_lastHmi;
+//		g_p_lastHmi = g_p_curHmi;
+//		
+//	}
+	aci_sys.key_weight = 1;
 	
 	g_p_curHmi = p_hmi;
 	
 	
-	if(Sem_wait(&phn_sys.hmi_mgr.hmi_sem, 1000) <= 0)
+	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 1000) <= 0)
 		return;
 	
 	Set_flag_show(&self->flag, 0);
@@ -214,7 +217,7 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 	
 	p_hmi->flag &= ~HMI_FLAG_KEEP;
 	
-	Sem_post(&phn_sys.hmi_mgr.hmi_sem);
+	Sem_post(&aci_sys.hmi_mgr.hmi_sem);
 	
 }
 
@@ -224,13 +227,13 @@ static void	SwitchBack( HMI *self)
 	if(g_p_lastHmi == NULL)
 		return;
 	
-	if(Sem_wait(&phn_sys.hmi_mgr.hmi_sem, 1000) <= 0)
+	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 1000) <= 0)
 		return;
 	
 	g_p_lastHmi = g_p_curHmi;
 	g_p_curHmi = nowHmi;
 	
-	phn_sys.key_weight = 1;
+	aci_sys.key_weight = 1;
 	Set_flag_show(&self->flag, 0);
 	self->hide( self);
 	self->clean_cmp(self);
@@ -244,7 +247,7 @@ static void	SwitchBack( HMI *self)
 	Set_flag_show(&nowHmi->flag, 1);
 	nowHmi->show_cmp(nowHmi);
 	
-	Sem_post(&phn_sys.hmi_mgr.hmi_sem);
+	Sem_post(&aci_sys.hmi_mgr.hmi_sem);
 }
 
 
@@ -268,13 +271,13 @@ static void ConposeKeyHandle(HMI *self, char *s_key1, char *s_key2)
 	if( !strcmp( s_key1, HMIKEY_LEFT) && !strcmp( s_key2, HMIKEY_RIGHT))
 	{
 
-		phn_sys.sys_flag |= SYSFLAG_SETTING;
-		self->switchHMI(self, g_p_Setup_HMI);
+//		aci_sys.sys_flag |= SYSFLAG_SETTING;
+//		self->switchHMI(self, g_p_Setup_HMI);
 	} 
-	else if( !strcmp( s_key1, HMIKEY_RIGHT) && !strcmp( s_key2, HMIKEY_LEFT)) {
-		phn_sys.sys_flag |= SYSFLAG_SETTING;
-		self->switchHMI(self, g_p_Setup_HMI);
-	}
+//	else if( !strcmp( s_key1, HMIKEY_RIGHT) && !strcmp( s_key2, HMIKEY_LEFT)) {
+//		aci_sys.sys_flag |= SYSFLAG_SETTING;
+//		self->switchHMI(self, g_p_Setup_HMI);
+//	}
 	else if( !strcmp( s_key1, HMIKEY_UP) && !strcmp( s_key2, HMIKEY_DOWN)) {
 		self->switchBack(self);
 	}
@@ -353,17 +356,17 @@ static void		HMI_Show_cmp(HMI *self)
 	p_crv->crv_show_bkg();
 	p_tips->show_tips();
 	
-	for(i = 0; i < NUM_CHANNEL; i++)
-	{
-		if(g_arr_p_chnData[i]->update)
-			g_arr_p_chnData[i]->update(g_arr_p_chnData[i], NULL);
-		if(g_arr_p_chnUtil[i]->update)
-			g_arr_p_chnUtil[i]->update(g_arr_p_chnUtil[i], NULL);
-		if(g_arr_p_chnAlarm[i]->update)
-			g_arr_p_chnAlarm[i]->update(g_arr_p_chnAlarm[i], NULL);
-		
-		
-	}
+//	for(i = 0; i < NUM_CHANNEL; i++)
+//	{
+//		if(g_arr_p_chnData[i]->update)
+//			g_arr_p_chnData[i]->update(g_arr_p_chnData[i], NULL);
+//		if(g_arr_p_chnUtil[i]->update)
+//			g_arr_p_chnUtil[i]->update(g_arr_p_chnUtil[i], NULL);
+//		if(g_arr_p_chnAlarm[i]->update)
+//			g_arr_p_chnAlarm[i]->update(g_arr_p_chnAlarm[i], NULL);
+//		
+//		
+//	}
 }
 
 static int		HMI_Btn_forward(HMI *self)
