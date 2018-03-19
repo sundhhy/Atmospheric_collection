@@ -55,6 +55,7 @@ void Test_lcd(void)
 	p_lcd->lcd_lightness(60);
 	
 	p_lcd->draw_geometry(GEO_LINE, ATT_NONE, CLR_BLACK, 0, 0, 63, 0);
+	
 	p_lcd->draw_geometry(GEO_LINE, ATT_NONE, CLR_BLACK, 0, 0, 0, 63);
 	p_lcd->draw_geometry(GEO_LINE, ATT_NONE, CLR_BLACK, 63, 0, 63, 63);
 	p_lcd->draw_geometry(GEO_LINE, ATT_NONE, CLR_BLACK, 0, 63, 63, 63);
@@ -69,15 +70,20 @@ void Test_lcd(void)
 	
 	p_lcd->draw_geometry(GEO_LINE, ATT_NONE, CLR_BLACK, 0, 0, 127, 63);
 	p_lcd->draw_geometry(GEO_LINE, ATT_NONE, CLR_BLACK, 0, 63, 127, 0);
-	
+	p_lcd->lcd_flush(0);
 	delay_ms(500);
 	p_lcd->clear(CLR_WHITE);
 	p_lcd->draw_geometry(GEO_RECTANGLE, ATT_NONE, CLR_BLACK, 0, 0, 8, 8);
-	
+	p_lcd->lcd_flush(0);
 	//²âÊÔÊý×ÖÏÔÊ¾
 	delay_ms(500);
 	p_lcd->clear(CLR_WHITE);
 	p_lcd->dispaly_text(0, "0123456789", 0, 0, 0, FONT_12, COLOUR_BLACK);
+	p_lcd->lcd_flush(0);
+	
+	p_lcd->dispaly_text(0, "é‡‡", 0, 0, 16, FONT_12, COLOUR_BLACK);
+	p_lcd->lcd_flush(0);
+
 //	p_lcd->lcd_lightness(0);
 	
 //	p_lcd->display_control_switch(1);

@@ -226,25 +226,34 @@ static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c)
 	char	code[32];
 	int		code_len;
 	short 	vx, vy;
-	short		i;
+	short		i, j;
 	FM_Coordinate_converter(x, y, &vx, &vy);
 	
-	//显示时，LCD的y轴会自动累加，因此就只需要在开头设置一次y轴。
 //	FM_Set_vxy(vx, vy);
 	while(*str)
 	{
 		code_len = CHD_Get_code(code, str, 32, 0, 0);
-		str ++;
+		if(IS_CHINESE(str[0]))
+			str += 2;
+		else
+			str ++;
+		
+		j = vx;
 		if(code_len <= 0)
 			continue;
 		
 		
 		for(i = 0; i < code_len; i++)
 		{
-			FM_VRAM(vx, vy) = code[i];
-			FM_Update_change_area(vx, vy);
+			FM_VRAM(j, vy) = code[i];
+			FM_Update_change_area(j, vy);
 //			LHI_Write_vram(&FM_VRAM(vx, vy), 1);
 			vy ++;
+			if(((i & 0x7) == 0) && ( i > 0))
+			{
+				j += 8;
+				vy -= 8;
+			}
 			
 		}
 		
@@ -320,18 +329,19 @@ static	void FM_Flush(char all)
 	if(fm_vram_mgr.chg_y1 < FM12864_HALF_LONG)
 		limit_y = fm_vram_mgr.chg_y1 ;
 	else
-		limit_y = FM12864_HALF_LONG;
+		limit_y = FM12864_HALF_LONG - 1;
 	
 	//刷左半屏
-	for(i = fm_vram_mgr.chg_x0; i < fm_vram_mgr.chg_x1; i ++)
+	for(i = fm_vram_mgr.chg_x0; i <= fm_vram_mgr.chg_x1; i ++)
 	{
 		FM_Set_vxy(i, fm_vram_mgr.chg_y0);		//y轴方向只需设置一次就够了，LCD内部会自动加1
-		for(j = fm_vram_mgr.chg_y0;j < limit_y;j ++)
-		{
-			
-			LHI_Write_vram(&FM_VRAM(i, j), 1);
-			
-		}
+//		for(j = fm_vram_mgr.chg_y0;j <= limit_y;j ++)
+//		{
+//			
+//			LHI_Write_vram(&FM_VRAM(i, j), 1);
+//			
+//		}
+		LHI_Write_vram(&fm_vram[i][fm_vram_mgr.chg_y0], limit_y - fm_vram_mgr.chg_y0 + 1);
 		
 	}
 	
@@ -345,16 +355,16 @@ static	void FM_Flush(char all)
 		limit_y = FM12864_HALF_LONG;
 	
 	//刷右半屏
-	for(i = fm_vram_mgr.chg_x0; i < fm_vram_mgr.chg_x1; i ++)
+	for(i = fm_vram_mgr.chg_x0; i <= fm_vram_mgr.chg_x1; i ++)
 	{
 		FM_Set_vxy(i, limit_y);
-		for(j = limit_y;j < fm_vram_mgr.chg_y1;j ++)
-		{
-			
-			LHI_Write_vram(&FM_VRAM(i, j), 1);
-			
-		}
-		
+//		for(j = limit_y;j <= fm_vram_mgr.chg_y1;j ++)
+//		{
+//			
+//			LHI_Write_vram(&FM_VRAM(i, j), 1);
+//			
+//		}
+		LHI_Write_vram(&fm_vram[i][limit_y], fm_vram_mgr.chg_y1 - limit_y + 1);
 	}
 	exit:
 	FM_Init_change_area();
@@ -580,7 +590,7 @@ static void FM_Set_vxy(short vx, short vy)
 	short x_addr;
 	short y_addr;
 
-	x_addr = vx/8;	   
+	x_addr = vx;	   
 	y_addr = vy%64;	 // 设置Y地址
 
 	if(vy<64)
