@@ -38,9 +38,9 @@ V010 171226 :
 #define EFS_NUM_IDLE_FILES				0		//ø’œ–«¯”Ú
 
 
-#define EFS_SYS								phn_sys
-#define EFS_FS								phn_sys.fs
-#define EFS_FSH(NO)							phn_sys.arr_fsh[NO]
+#define EFS_SYS								aci_sys
+#define EFS_FS								aci_sys.fs
+#define EFS_FSH(NO)							aci_sys.arr_fsh[NO]
 #define EFS_LOWSPACE_ALARM_0				0
 #define EFS_LOWSPACE_ALARM_1				64
 

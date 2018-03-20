@@ -5,7 +5,7 @@
 #include "lw_oopc.h"
 #include "mem/Ping_PongBuf.h"
 #include "dri_cmd.h"
-#include "configs/hardware_conf.h"
+#include "hardwareConfig.h"
 
 
 

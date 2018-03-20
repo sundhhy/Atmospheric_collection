@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 #ifndef __INC_lcd_hardware_interfaces_H_
 #define __INC_lcd_hardware_interfaces_H_
-#include "configs/hardware_conf.h"
+#include "hardwareConfig.h"
 
 
 

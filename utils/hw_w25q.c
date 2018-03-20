@@ -83,7 +83,7 @@ static	I_dev_Char	*w25q_spi;
 
 ///移植时需要修改的接口
 #define W25Q_SPI_DEVID				DEVID_SPI2
-#define W25Q_FSH					phn_sys.arr_fsh[FSH_W25Q_NUM]
+#define W25Q_FSH					aci_sys.arr_fsh[FSH_W25Q_NUM]
 
 #define W25Q_DELAY_MS(ms)			delay_ms(ms)	
 #define W25Q_Enable_CS          	GPIO_ResetBits(PORT_W25Q_nCS, PIN_W25Q_nCS)
@@ -174,23 +174,23 @@ int w25q_init(void)
 	}
 	
 	
-//	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_init = w25q_init;
-	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_info = w25q_info;
-	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_wp = W25Q_WP;
+//	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_init = w25q_init;
+	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_info = w25q_info;
+	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_wp = W25Q_WP;
 
-	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_ersse = W25Q_erase;
-	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_ersse_addr = W25Q_Erase_addr;
+	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_ersse = W25Q_erase;
+	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_ersse_addr = W25Q_Erase_addr;
 
-//	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_wr_sector = w25q_Write_Sector_Data;
-//	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_rd_sector = w25q_Read_Sector_Data;
-	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_write = w25q_Write;
-	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_raw_write = W25Q_wr_fsh;
-	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_read = w25q_rd_data;
-	phn_sys.arr_fsh[FSH_W25Q_NUM].fsh_raw_read = w25q_Read_flash;
+//	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_wr_sector = w25q_Write_Sector_Data;
+//	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_rd_sector = w25q_Read_Sector_Data;
+	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_write = w25q_Write;
+	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_raw_write = W25Q_wr_fsh;
+	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_read = w25q_rd_data;
+	aci_sys.arr_fsh[FSH_W25Q_NUM].fsh_raw_read = w25q_Read_flash;
 	W25Q_FSH.fsh_flush = W25Q_Flush;
 	W25Q_Disable_WP;
 	
-	w25q_info(&phn_sys.arr_fsh[FSH_W25Q_NUM].fnf);
+	w25q_info(&aci_sys.arr_fsh[FSH_W25Q_NUM].fnf);
 	
 	w25q_mgr.w25q_flag  = 0;
 	w25q_mgr.cache_earse = 0;

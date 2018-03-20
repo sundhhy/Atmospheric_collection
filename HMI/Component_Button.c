@@ -182,10 +182,7 @@ static int		BTN_Build_each_btn(uint8_t	seq, uint8_t btn_type, btn_hdl bh, void *
 			arr_p_btn_sht[seq]->id = ICO_ID_DIGITAL;
 			break;
 	
-		case BTN_TYPE_TREND:
-			btn_pic->data = BTN_ICO_TREND;
-			arr_p_btn_sht[seq]->id = ICO_ID_TREND;
-			break;
+
 		case BTN_TYPE_COPY:
 			btn_pic->data = BTN_ICO_COPY;
 			arr_p_btn_sht[seq]->id = ICO_ID_COPY;

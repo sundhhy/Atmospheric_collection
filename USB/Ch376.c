@@ -477,7 +477,7 @@ uint8_t	CH376ByteWrite( uint8_t *buf, uint16_t ReqCount, uint16_t *RealCount )
 		}
 	}
 	
-	Ch376_enbale_Irq(1);
+//	Ch376_enbale_Irq(1);
 	
 //	return 0;
 }

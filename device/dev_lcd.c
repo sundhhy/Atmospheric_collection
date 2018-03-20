@@ -6,7 +6,7 @@
 #include "basis/sdhError.h"
 
 #include "dev_lcd.h"
-#include "dev_id.h"
+#include "deviceId.h"
 
 //#include "dev_lcd
 #include "dev_lcd/FM12864/dev_lcd_fm12864.h"

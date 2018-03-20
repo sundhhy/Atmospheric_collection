@@ -14,7 +14,7 @@
 #include "dev_lcd_fm12864.h"
 
 #include "lcd_hardware_interfaces.h"
-#include "GUI/glyph/character_database.h"
+#include "character_database.h"
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -308,7 +308,7 @@ static void FM_Draw_geometry(char type_g, char attr, char clr, short x0, short y
 	
 static	void FM_Flush(char all)
 {
-	short i, j;
+	short i;
 	short limit_y;
 	if(all)
 	{

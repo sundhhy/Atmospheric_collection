@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "dev_id.h"
+#include "deviceId.h"
 #include "dev_cmd.h"
 
 #include "dev_char.h"

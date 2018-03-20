@@ -31,7 +31,7 @@
 //------------------------------------------------------------------------------
 #define MBA_UART_ID				DEVID_UART4
 #define MBA_UART_CONF			g_confUart4
-#define MBA_SYSTEM				phn_sys
+#define MBA_SYSTEM				aci_sys
 
 #define MBA_ACC_READ				0
 #define MBA_ACC_WRITE				1
@@ -422,7 +422,7 @@ static int MBA_Acc_param_system(uint16_t	offset, char rd_or_wr, uint16_t *p)
 			if(rd_or_wr == MBA_ACC_READ)
 			{
 
-				*p = phn_sys.major_ver* 10 + phn_sys.minor_ver;
+				*p = aci_sys.major_ver* 10 + aci_sys.minor_ver;
 			}
 			else 
 			{

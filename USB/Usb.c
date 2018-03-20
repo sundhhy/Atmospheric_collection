@@ -624,7 +624,7 @@ static int	Usb_deal_remove(void)
 	
 	usb_ctl.cur_state = NOSUPPORTDEV;
 	msg = et_remove;
-	phn_sys.usb_device = 0;
+	aci_sys.usb_device = 0;
 	CQ_Write(&usb_ctl.usb_cq, &msg, 1);
 	return ret;	
 	
@@ -701,7 +701,7 @@ static int	Usb_deal_identify(void)
 exit:
 	usb_ctl.cur_state = U_HAVEREADY;
 	msg = et_ready;
-	phn_sys.usb_device = 1;
+	aci_sys.usb_device = 1;
 	CQ_Write(&usb_ctl.usb_cq, &msg, 1);	
 
 	Ch376_enbale_Irq(1);

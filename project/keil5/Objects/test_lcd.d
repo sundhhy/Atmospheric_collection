@@ -1,0 +1,17 @@
+.\objects\test_lcd.o: ..\..\unit_tests\test_lcd.c
+.\objects\test_lcd.o: E:\sdhLib\inc\os/os_depend.h
+.\objects\test_lcd.o: ..\..\APP\sdhlibConf.h
+.\objects\test_lcd.o: E:\sdhLib\inc\os/rtx/rtx_depend.h
+.\objects\test_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\test_lcd.o: D:\Keil_v5\ARM\PACK\ARM\CMSIS\5.1.1\CMSIS\RTOS\RTX\INC\cmsis_os.h
+.\objects\test_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\test_lcd.o: ..\..\..\Atmospheric_collection\configs/tdd_conf.h
+.\objects\test_lcd.o: ..\..\..\Atmospheric_collection\configs/lcd_conf.h
+.\objects\test_lcd.o: ..\..\unit_tests\unit_test.h
+.\objects\test_lcd.o: ..\..\device\device.h
+.\objects\test_lcd.o: ..\..\device\deviceId.h
+.\objects\test_lcd.o: ..\..\device\dev_cmd.h
+.\objects\test_lcd.o: ..\..\device\dev_char.h
+.\objects\test_lcd.o: E:\sdhLib\inc\lw_oopc.h
+.\objects\test_lcd.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\test_lcd.o: ..\..\device\dev_lcd.h

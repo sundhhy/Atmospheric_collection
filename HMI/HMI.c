@@ -1,10 +1,7 @@
 #include "HMI.h"
-//#include "HMI_comm.h"
+#include "HMI_comm.h"
 #include <string.h>
-
-
 #include "os/os_depend.h"
-#include "APP/system.h"
 #include "sys_cmd.h"
 #include "HMIFactory.h"
 
@@ -95,10 +92,28 @@ int HMI_Init(void)
 {
 	
 	HMI 			*p_mainHmi;
+	HMI 			*p_hmi;
+	
+	Focus_init();
+	
+	aci_sys.hmi_mgr.hmi_sem = Alloc_sem();
+	Sem_init(&aci_sys.hmi_mgr.hmi_sem);
+	Sem_post(&aci_sys.hmi_mgr.hmi_sem);
+	
+	p_hmi = CreateHMI(HMI_CMM);
+	p_hmi->init(p_hmi, NULL);
+	
 	p_mainHmi = CreateHMI( HMI_MAIN);
 	p_mainHmi->init( p_mainHmi, NULL);
+	
+	p_hmi = CreateHMI(HMI_CONFIG);
+	p_hmi->init(p_hmi, NULL);
+	
+	
+	
 	p_mainHmi->switchHMI(p_mainHmi, p_mainHmi);
 	Cmd_Rgt_time_task(HMI_Flush, HMI_FLUSH_CYCLE_S);
+	g_p_curHmi = p_mainHmi;
 	
 	return RET_OK;
 }
@@ -271,13 +286,13 @@ static void ConposeKeyHandle(HMI *self, char *s_key1, char *s_key2)
 	if( !strcmp( s_key1, HMIKEY_LEFT) && !strcmp( s_key2, HMIKEY_RIGHT))
 	{
 
-//		aci_sys.sys_flag |= SYSFLAG_SETTING;
+		aci_sys.sys_flag |= SYSFLAG_SETTING;
 //		self->switchHMI(self, g_p_Setup_HMI);
 	} 
-//	else if( !strcmp( s_key1, HMIKEY_RIGHT) && !strcmp( s_key2, HMIKEY_LEFT)) {
-//		aci_sys.sys_flag |= SYSFLAG_SETTING;
+	else if( !strcmp( s_key1, HMIKEY_RIGHT) && !strcmp( s_key2, HMIKEY_LEFT)) {
+		aci_sys.sys_flag |= SYSFLAG_SETTING;
 //		self->switchHMI(self, g_p_Setup_HMI);
-//	}
+	}
 	else if( !strcmp( s_key1, HMIKEY_UP) && !strcmp( s_key2, HMIKEY_DOWN)) {
 		self->switchBack(self);
 	}
@@ -356,17 +371,17 @@ static void		HMI_Show_cmp(HMI *self)
 	p_crv->crv_show_bkg();
 	p_tips->show_tips();
 	
-//	for(i = 0; i < NUM_CHANNEL; i++)
-//	{
-//		if(g_arr_p_chnData[i]->update)
-//			g_arr_p_chnData[i]->update(g_arr_p_chnData[i], NULL);
-//		if(g_arr_p_chnUtil[i]->update)
-//			g_arr_p_chnUtil[i]->update(g_arr_p_chnUtil[i], NULL);
-//		if(g_arr_p_chnAlarm[i]->update)
-//			g_arr_p_chnAlarm[i]->update(g_arr_p_chnAlarm[i], NULL);
-//		
-//		
-//	}
+	for(i = 0; i < NUM_CHANNEL; i++)
+	{
+		if(g_arr_p_chnData[i]->update)
+			g_arr_p_chnData[i]->update(g_arr_p_chnData[i], NULL);
+		if(g_arr_p_chnUtil[i]->update)
+			g_arr_p_chnUtil[i]->update(g_arr_p_chnUtil[i], NULL);
+		if(g_arr_p_chnAlarm[i]->update)
+			g_arr_p_chnAlarm[i]->update(g_arr_p_chnAlarm[i], NULL);
+		
+		
+	}
 }
 
 static int		HMI_Btn_forward(HMI *self)

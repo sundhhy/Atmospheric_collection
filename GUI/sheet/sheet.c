@@ -1,7 +1,7 @@
 #include "sheet.h"
 #include "sdhDef.h"
 #include "device.h"
-#include "GUI/Glyph/glyph.h"
+#include "glyph.h"
 #include "mem/CiiMem.h"
 
 #include "sdhDef.h"
@@ -13,9 +13,8 @@
 
 
 #include <string.h>
+#include "lcd_conf.h"
 
-
-#include "configs/lcd_conf.h"
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -63,14 +62,12 @@ void ShtDefualtExc( shtCmd *self, struct SHEET *p_sht, void *arg);
 //============================================================================//
 shtctl *GetShtctl(void)
 {
-//	dev_lcd *lcd;
-//	uint16_t	vxsize, vysize;
+	dev_lcd *lcd;
 	if( p_signalShtctl == NULL)
 	{
-//		Dev_open(LCD_DEVID, (void *)&lcd);
+		Dev_open(LCD_DEVID, (void *)&lcd);
 //		lcd->open();
-//		lcd->getScrnSize( &vxsize, &vysize);
-		p_signalShtctl = Shtctl_init( LCD_LONG, LCD_WIDE);
+		p_signalShtctl = Shtctl_init(LCD_LONG, LCD_WIDE);
 		
 	}
 	
@@ -164,14 +161,14 @@ void Sheet_setbuf( struct SHEET *p_sht, uint8_t *buf, int bxsize, int bysize, in
 
 int ShtUpdate( void *p_sht, void *p_mdl)
 {
-//	struct SHEET *p = ( struct SHEET *)p_sht;
-//	
-//	if(Sheet_is_hide(p_sht))
-//		return RET_OK;
-//		
-//	p->cnt.data = p->p_mdl->to_string( p->p_mdl, 0, NULL);
-//	p->cnt.len = strlen( p->cnt.data);
-//	Sheet_slide( p_sht);
+	struct SHEET *p = ( struct SHEET *)p_sht;
+	
+	if(Sheet_is_hide(p_sht))
+		return RET_OK;
+		
+	p->cnt.data = p->p_mdl->to_string( p->p_mdl, 0, NULL);
+	p->cnt.len = strlen( p->cnt.data);
+	Sheet_slide( p_sht);
 	return RET_OK;
 	
 }
@@ -302,7 +299,7 @@ void Sheet_refresh( struct SHEET *p_sht)
 		Sheet_refreshsub( p);
 		
 	}
-	Flush_lcd();
+	Flush_LCD();
 	
 	
 //    {
@@ -320,7 +317,7 @@ void Sheet_slide( struct SHEET *p_sht)
 		return;
 	p_sht->p_gp->vdraw( p_sht->p_gp, &p_sht->cnt, &p_sht->area);
 	Sheet_refreshsub( p_sht);
-	Flush_lcd();
+	Flush_LCD();
     return;
     
 }
@@ -330,7 +327,7 @@ void Sheet_force_slide( struct SHEET *p_sht)
 	
 	p_sht->p_gp->vdraw( p_sht->p_gp, &p_sht->cnt, &p_sht->area);
 	Sheet_refreshsub( p_sht);
-	Flush_lcd();
+	Flush_LCD();
     return;
     
 }

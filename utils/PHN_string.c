@@ -103,7 +103,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			if(p_data)
 				p_u8 = (uint8_t *)p_data;
 			else 
-				p_u8 = phn_sys.sys_conf.password;
+				p_u8 = aci_sys.sys_conf.password;
 			
 			sprintf(p_s, "%02d %02d %02d", p_u8[0], p_u8[1], p_u8[2]);
 			break;
@@ -112,7 +112,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			if(p_data)
 				p_u8 = (uint8_t *)p_data;
 			else 
-				p_u8 = &phn_sys.sys_conf.break_couple;
+				p_u8 = &aci_sys.sys_conf.break_couple;
 			
 			Break_deal_string(p_s, *p_u8);
 			break;
@@ -120,7 +120,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			if(p_data)
 				p_u8 = (uint8_t *)p_data;
 			else 
-				p_u8 = &phn_sys.sys_conf.break_resistor;
+				p_u8 = &aci_sys.sys_conf.break_resistor;
 			
 			Break_deal_string(p_s, *p_u8);
 			break;
@@ -131,7 +131,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			if(p_data)
 				p_u8 = (uint8_t *)p_data;
 			else 
-				p_u8 = &phn_sys.sys_conf.communication_mode;
+				p_u8 = &aci_sys.sys_conf.communication_mode;
 			
 			if(*p_u8 == 0)
 				sprintf(p_s, "通讯");
@@ -142,7 +142,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			if(p_data)
 				p_u8 = (uint8_t *)p_data;
 			else 
-				p_u8 = &phn_sys.sys_conf.disable_modify_adjust_paramter;
+				p_u8 = &aci_sys.sys_conf.disable_modify_adjust_paramter;
 			
 			Disable_string(p_s, *p_u8);
 			break;
@@ -155,14 +155,14 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			}
 			else 
 			{
-				if(phn_sys.sys_conf.cold_end_way)
+				if(aci_sys.sys_conf.cold_end_way)
 				{
 
-					sprintf(p_s, "%2d", phn_sys.sys_conf.CJC);
+					sprintf(p_s, "%2d", aci_sys.sys_conf.CJC);
 				}
 				else
 				{
-					sprintf(p_s, "%2d", phn_sys.code_end_temperature);
+					sprintf(p_s, "%2d", aci_sys.code_end_temperature);
 				}
 				
 			}
@@ -174,7 +174,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			if(p_data)
 				p_u8 = (uint8_t *)p_data;
 			else 
-				p_u8 = &phn_sys.sys_conf.cold_end_way;
+				p_u8 = &aci_sys.sys_conf.cold_end_way;
 			if(*p_u8 ==0) {
 				
 				sprintf(p_s, "外部");
@@ -187,7 +187,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			if(p_data)
 				p_u8 = (uint8_t *)p_data;
 			else 
-				p_u8 = &phn_sys.sys_conf.disable_view_chn_status;
+				p_u8 = &aci_sys.sys_conf.disable_view_chn_status;
 			
 			Disable_string(p_s, *p_u8);
 			break;
@@ -195,7 +195,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			if(p_data)
 				p_u8 = (uint8_t *)p_data;
 			else 
-				p_u8 = &phn_sys.sys_conf.enable_beep;
+				p_u8 = &aci_sys.sys_conf.enable_beep;
 			
 			Disable_string(p_s, *p_u8);
 			break;
@@ -209,57 +209,57 @@ void Str_set_sys_param(char	*p_s, int aux, int op, int val)
 	switch(aux)
 	{
 		case es_rcd_t_s:
-			phn_sys.sys_conf.record_gap_s = Operate_in_tange(phn_sys.sys_conf.record_gap_s, op, val, 0, 240);
-			sprintf(p_s, "%d", phn_sys.sys_conf.record_gap_s);
+			aci_sys.sys_conf.record_gap_s = Operate_in_tange(aci_sys.sys_conf.record_gap_s, op, val, 0, 240);
+			sprintf(p_s, "%d", aci_sys.sys_conf.record_gap_s);
 			break;
 		case es_brk_cpl:
 			
-			phn_sys.sys_conf.break_couple = Operate_in_tange(phn_sys.sys_conf.break_couple, op, val, 0, 2);
-			Break_deal_string(p_s, phn_sys.sys_conf.break_couple);
+			aci_sys.sys_conf.break_couple = Operate_in_tange(aci_sys.sys_conf.break_couple, op, val, 0, 2);
+			Break_deal_string(p_s, aci_sys.sys_conf.break_couple);
 			break;
 		case es_brk_rss:
-			phn_sys.sys_conf.break_resistor = Operate_in_tange(phn_sys.sys_conf.break_resistor, op, val, 0, 2);
-			Break_deal_string(p_s, phn_sys.sys_conf.break_resistor);
+			aci_sys.sys_conf.break_resistor = Operate_in_tange(aci_sys.sys_conf.break_resistor, op, val, 0, 2);
+			Break_deal_string(p_s, aci_sys.sys_conf.break_resistor);
 			break;
 		case es_baud:
-			phn_sys.sys_conf.baud_idx = Operate_in_tange(phn_sys.sys_conf.baud_idx, op, val, 0, 6);
-			phn_sys.sys_conf.baud_rate = arr_baud[phn_sys.sys_conf.baud_idx];
-			sprintf(p_s, "%d", phn_sys.sys_conf.baud_rate);
+			aci_sys.sys_conf.baud_idx = Operate_in_tange(aci_sys.sys_conf.baud_idx, op, val, 0, 6);
+			aci_sys.sys_conf.baud_rate = arr_baud[aci_sys.sys_conf.baud_idx];
+			sprintf(p_s, "%d", aci_sys.sys_conf.baud_rate);
 			break;
 		case es_id:
-			phn_sys.sys_conf.id = Operate_in_tange(phn_sys.sys_conf.id, op, val, 1, 63);
-			sprintf(p_s, "%d", phn_sys.sys_conf.id);
+			aci_sys.sys_conf.id = Operate_in_tange(aci_sys.sys_conf.id, op, val, 1, 63);
+			sprintf(p_s, "%d", aci_sys.sys_conf.id);
 			break;
 		case es_cmn_md:
-			phn_sys.sys_conf.communication_mode = Operate_in_tange(phn_sys.sys_conf.communication_mode, op, val, 0, 1);
-			if(phn_sys.sys_conf.communication_mode == 0)
+			aci_sys.sys_conf.communication_mode = Operate_in_tange(aci_sys.sys_conf.communication_mode, op, val, 0, 1);
+			if(aci_sys.sys_conf.communication_mode == 0)
 				sprintf(p_s, "通讯");
 			else 
 				sprintf(p_s, "打印");
 			break;
 		case es_mdfy_prm:
 		
-			phn_sys.sys_conf.disable_modify_adjust_paramter = Operate_in_tange(phn_sys.sys_conf.disable_modify_adjust_paramter, op, val, 0, 1);
-			Disable_string(p_s, phn_sys.sys_conf.disable_modify_adjust_paramter );
+			aci_sys.sys_conf.disable_modify_adjust_paramter = Operate_in_tange(aci_sys.sys_conf.disable_modify_adjust_paramter, op, val, 0, 1);
+			Disable_string(p_s, aci_sys.sys_conf.disable_modify_adjust_paramter );
 			break;
 		case es_cold_end_way:
-			phn_sys.sys_conf.cold_end_way = Operate_in_tange(phn_sys.sys_conf.cold_end_way, op, val, 0, 1);
+			aci_sys.sys_conf.cold_end_way = Operate_in_tange(aci_sys.sys_conf.cold_end_way, op, val, 0, 1);
 			Print_sys_param(NULL, p_s, 0xff, es_cold_end_way);
 			break;
 			
 		case es_CJC:
-			phn_sys.sys_conf.CJC = Operate_in_tange(phn_sys.sys_conf.CJC, op, val, 0, 99);
+			aci_sys.sys_conf.CJC = Operate_in_tange(aci_sys.sys_conf.CJC, op, val, 0, 99);
 			Print_sys_param(NULL, p_s, 0xff, es_CJC);
 			break;
 			
 			
 		case es_vcs:
-			phn_sys.sys_conf.disable_view_chn_status = Operate_in_tange(phn_sys.sys_conf.disable_view_chn_status, op, val, 0, 1);
-			Disable_string(p_s, phn_sys.sys_conf.disable_view_chn_status);
+			aci_sys.sys_conf.disable_view_chn_status = Operate_in_tange(aci_sys.sys_conf.disable_view_chn_status, op, val, 0, 1);
+			Disable_string(p_s, aci_sys.sys_conf.disable_view_chn_status);
 			break;
 		case es_beep:
-			phn_sys.sys_conf.enable_beep = Operate_in_tange(phn_sys.sys_conf.enable_beep, op, val, 0, 1);
-			Disable_string(p_s, phn_sys.sys_conf.enable_beep);
+			aci_sys.sys_conf.enable_beep = Operate_in_tange(aci_sys.sys_conf.enable_beep, op, val, 0, 1);
+			Disable_string(p_s, aci_sys.sys_conf.enable_beep);
 			break;
 		default:
 			
@@ -345,7 +345,7 @@ void Str_set_password(char	*p_s_psd)
 	for(i = 0; i < 3; i++) {
 		data = atoi(p_s_psd);
 	
-		phn_sys.sys_conf.password[i] = data;
+		aci_sys.sys_conf.password[i] = data;
 		
 		p_s_psd += 3;
 	}
@@ -396,7 +396,7 @@ int Str_Password_match(char *p_s_psd)
 	for(i = 0; i < 3; i++) {
 		data = atoi(p_s_psd);
 	
-		if( phn_sys.sys_conf.password[i] != data) {
+		if( aci_sys.sys_conf.password[i] != data) {
 			ret = 1;
 			break;
 		}

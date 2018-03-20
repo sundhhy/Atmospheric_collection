@@ -102,31 +102,34 @@ static void GhTxt_vDraw( Glyph *self, dspContent_t *cnt, vArea_t *area)
 	dev_lcd *lcd;
 	char	m = 0xff;
 	uint8_t	c = cnt->colour;
-	uint8_t	bkc = cnt->bkc;
-//	uint8_t	i ;
-	
-//	uint16_t tmp_x0;
+//	uint8_t	bkc = cnt->bkc;
+
 	
 	if( GP_CKECK_EFF( cnt->effects , EFF_HIDE))
 		return;
 	
 	if( GP_CKECK_EFF( cnt->effects , EFF_FOCUS)) {
 		c = ColorInvert( c);
-		bkc  = ColorInvert( c);
+//		bkc  = ColorInvert( c);
 	}
 	
 
 	Dev_open( LCD_DEVID, (void *)&lcd);
 
-	if( GP_CKECK_EFF( cnt->effects , EFF_BKPIC)) {
-		m = cnt->bkc;
-		
-	} else {
-		lcd->set_backcolor( bkc);
-	}
+//	if( GP_CKECK_EFF( cnt->effects , EFF_BKPIC)) {
+//		m = cnt->bkc;
+//		
+//	} else {
+//		lcd->BKColor( bkc);
+//	}
 	
+
+		
 	lcd->dispaly_text(m, cnt->data, cnt->len, area->x0, area->y0, cnt->font,c);
 		
+
+
+
 }
 
 
@@ -138,7 +141,7 @@ static int GhTxt_GetSize(Glyph *self, int font, uint16_t *x, uint16_t *y)
 	
 	Dev_open( LCD_DEVID, (void *)&lcd);
 	
-	return lcd->get_size(font, x, y);
+	return lcd->get_size( font, x, y);
 	
 }
 

@@ -1,5 +1,5 @@
 #include "device.h"
-#include "dev_id.h"
+#include "deviceId.h"
 
 #include "basis/sdhDebug.h"
 #include "sdhDef.h"
@@ -39,10 +39,10 @@ int Dev_open( devId_t devId, void **dev)
 	switch( type)
 	{
 		case DEVTYPE_CHAR:
-			ret = Open_dev_char(majorId, minorId, dev);
+			ret = DevChar_open( majorId, minorId, dev);
 			break;
 		case DEVTYPE_DISPLAY:
-			ret = Open_dev_lcd(majorId, minorId, dev);
+			ret = Open_dev_lcd( majorId, minorId, dev);
 			break;
 		default:
 			ret = ERR_BAD_PARAMETER;

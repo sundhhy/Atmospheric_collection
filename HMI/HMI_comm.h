@@ -1,10 +1,11 @@
 #ifndef _INC_commHMI_H_
 #define _INC_commHMI_H_
 #include "HMI.h"
-//#include "ModelFactory.h"
-#include "GUI/sheet/sheet.h"
-#include "HMI_keyboard.h"
+#include "ModelFactory.h"
+#include "sheet.h"
 #include "system.h"
+#include "hmi_conf.h"
+#include "model_conf.h"
 //------------------------------------------------------------------------------
 // includes
 //------------------------------------------------------------------------------
@@ -59,9 +60,13 @@ typedef struct {
 //------------------------------------------------------------------------------
 // global variable declarations
 //------------------------------------------------------------------------------
+extern sheet			*arr_p_pool_shts[HMI_NUM_P_SHT];
+extern sheet			*arr_p_sht_choices[HMI_NUM_P_CHOICE_SHT];
+extern sheet			*g_p_shtTime;
+
 
 //sheet
-extern	sheet			*g_p_sht_bkpic, *g_p_sht_title, *g_p_shtTime, *g_p_text, *g_p_boxlist;
+extern	sheet			*g_p_sht_bkpic, *g_p_sht_title, *g_p_text, *g_p_boxlist;
 extern 	sheet			*g_p_cpic;
 
 //extern 	sheet			*g_p_ico_memu, *g_p_ico_digital, *g_p_ico_bar,  *g_p_ico_trend, *g_p_cpic;
@@ -77,10 +82,9 @@ extern	sheet  			*g_arr_p_check[NUM_CHANNEL]; 		//通道的勾选图标
 
 
 //values
-extern 	char			prn_buf[NUM_CHANNEL][8];
 extern	const char		arr_clrs[NUM_CHANNEL];
 extern	hmiAtt_t		CmmHmiAtt;
-extern 	keyboardHMI		*g_keyHmi;
+//extern 	keyboardHMI		*g_keyHmi;
 extern 	ro_char 		news_cpic[];
 //extern curve_ctl_t		g_curve[NUM_CHANNEL];
 
@@ -89,23 +93,22 @@ extern 	HMI 			*g_p_mainHmi;
 extern 	HMI 			*g_p_HMI_menu;
 extern  HMI 			*g_p_dataHmi;
 extern 	HMI 			*g_p_barGhHmi;
-extern 	HMI 			*g_p_RLT_trendHmi;
 
 //extern 	HMI 			*g_p_News_Alarm_HMI;
 //extern	HMI 			*g_p_News_PwrDn_HMI;
 extern	HMI 			*g_p_History_HMI;
 extern	HMI 			*g_p_Accm_HMI;
 
-extern 	HMI 			*g_p_Setup_HMI;
+//extern 	HMI 			*g_p_Setup_HMI;
 extern 	HMI 			*g_p_HMI_striped;
-extern 	HMI 			*g_p_winHmi;
+//extern 	HMI 			*g_p_winHmi;
 
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
 cmmHmi *GetCmmHMI(void);
 
-extern void Build_ChnSheets(void);
+//extern void Build_ChnSheets(void);
 extern int Stripe_clean_clr(int row);
 extern int Stripe_vy(int row) ;
 

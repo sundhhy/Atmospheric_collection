@@ -4,7 +4,7 @@
 #include "stm32f10x.h"
 #include "stm32f10x_rcc.h"
 #include "stm32f10x_flash.h"
-#include "configs/hardware_conf.h"
+#include "hardwareConfig.h"
 #include "stm32f10x_dma.h"
 #include "stm32f10x_iwdg.h"
 #include "system.h"

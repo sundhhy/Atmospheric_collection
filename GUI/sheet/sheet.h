@@ -5,8 +5,8 @@
 // includes
 //------------------------------------------------------------------------------
 #include <stdint.h>
-#include "GUI/Glyph/glyph.h"
-//#include "ModelFactory.h"
+#include "glyph.h"
+#include "ModelFactory.h"
 
 //------------------------------------------------------------------------------
 // check for correct compilation options
@@ -74,7 +74,7 @@ typedef struct SHEET {
 	dspContent_t	cnt;
 	vArea_t			area;
 	Glyph			*p_gp;
-//	Model			*p_mdl;
+	Model			*p_mdl;
 	
 	//键盘相关
 //	shtCmd		*p_enterCmd;

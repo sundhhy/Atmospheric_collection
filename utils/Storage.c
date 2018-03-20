@@ -41,7 +41,7 @@
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
-#define STRG_SYS				phn_sys
+#define STRG_SYS				aci_sys
 #define STRG_RCD_FSH_NUM		FSH_FM25_NUM
 #define STRG_CFG_FSH_NUM		FSH_FM25_NUM
 #define STRG_CHN_DATA_FSH_NUM	FSH_W25Q_NUM

@@ -9,7 +9,7 @@
 #include "stm32f10x_gpio.h"
 #include "lw_oopc.h"
 #include "dri_cmd.h"
-#include "configs/hardware_conf.h"
+#include "hardwareConfig.h"
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------

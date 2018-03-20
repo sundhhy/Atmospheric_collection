@@ -158,18 +158,18 @@ void Cmd_del_recv(int	cmd_fd)
 static void Cmd_Thread (void const *argument) {
 
 	short 	i;
-	char	pwr_val = 1;
-	char	j;
+//	char	pwr_val = 1;
+//	char	j;
 	uint32_t cur_s ;
 //	I_dev_Char		*gpio_pwr;
 //	Dev_open(DEVID_GPIO_PWR, ( void *)&gpio_pwr);
 	
 	while (1) {
 //		gpio_pwr->read(gpio_pwr, &pwr_val, 1);
-//		if(phn_sys.sys_flag & SYSFLAG_POWEROFF)
+//		if(aci_sys.sys_flag & SYSFLAG_POWEROFF)
 //		{
 
-//			if(phn_sys.sys_flag & SYSFLAG_POWEON)		//上过电 才认为需要保存，否则可能是假掉电
+//			if(aci_sys.sys_flag & SYSFLAG_POWEON)		//上过电 才认为需要保存，否则可能是假掉电
 //				System_power_off();
 //			break;
 //		}

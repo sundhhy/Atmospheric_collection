@@ -1,4 +1,8 @@
 #include "HMIFactory.h"
+#include "HMI_comm.h"
+#include "HMI_main.h"
+#include "HMI_config.h"
+
 
 //提供 按键，事件，消息，窗口，报警，时间，复选框的图层
 //这些图层可能会被其他界面所使用
@@ -55,47 +59,35 @@ HMI *CreateHMI( int hmiType)
 			
 			p_hmi = SUPER_PTR(GetCmmHMI(), HMI);
 			break; 
-		case HMI_KYBRD:
+		case HMI_CONFIG:
 			
-			p_hmi = SUPER_PTR(GetkeyboardHMI(), HMI);
+			p_hmi = SUPER_PTR(Get_hmi_config(), HMI);
 			break;
-		case HMI_MENU:
-			
-			p_hmi = SUPER_PTR(GetmenuHMI(), HMI);
-			break;
-		case HMI_BAR:
-			p_hmi = SUPER_PTR(Get_barGhHMI(), HMI);
-			break;
-		case HMI_DATA:
-			p_hmi = SUPER_PTR(Get_dataHMI(), HMI);
-			break;
-		case HMI_RLT_TREND:
-			p_hmi = SUPER_PTR(Get_RLT_trendHMI(), HMI);
-			break;
-		case HMI_NWS:
-			p_hmi = SUPER_PTR(Get_NewSlct_HMI(), HMI);
-			break;
-//		case HMI_NEWS_ALARM:
-//			p_hmi = SUPER_PTR(Get_News_Alarm_HMI(), HMI);
+//		case HMI_MENU:
+//			
+//			p_hmi = SUPER_PTR(GetmenuHMI(), HMI);
 //			break;
-//		case HMI_NEWS_POWER_DOWN:
-//			p_hmi = SUPER_PTR(Get_PwrDn_HMI(), HMI);
+//		case HMI_BAR:
+//			p_hmi = SUPER_PTR(Get_barGhHMI(), HMI);
 //			break;
-//		case HMI_HISTORY:
-//			p_hmi = SUPER_PTR(Get_History_HMI(), HMI);
+//		case HMI_DATA:
+//			p_hmi = SUPER_PTR(Get_dataHMI(), HMI);
 //			break;
-		case HMI_ACCM:
-			p_hmi = SUPER_PTR(Get_Accm_HMI(), HMI);
-			break;
-		case HMI_SETUP:
-			p_hmi = SUPER_PTR(Get_Setup_HMI(), HMI);
-			break;
-		case HMI_SETTING:
-			p_hmi = SUPER_PTR(Get_Setting_HMI(), HMI);
-			break;
-		case HMI_WINDOWS:
-			p_hmi = SUPER_PTR(Get_winHmi(), HMI);
-			break;
+//		case HMI_NWS:
+//			p_hmi = SUPER_PTR(Get_NewSlct_HMI(), HMI);
+//			break;
+//		case HMI_ACCM:
+//			p_hmi = SUPER_PTR(Get_Accm_HMI(), HMI);
+//			break;
+//		case HMI_SETUP:
+//			p_hmi = SUPER_PTR(Get_Setup_HMI(), HMI);
+//			break;
+//		case HMI_SETTING:
+//			p_hmi = SUPER_PTR(Get_Setting_HMI(), HMI);
+//			break;
+//		case HMI_WINDOWS:
+//			p_hmi = SUPER_PTR(Get_winHmi(), HMI);
+//			break;
 		default:
 			break;
 	}

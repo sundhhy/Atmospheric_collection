@@ -26,7 +26,7 @@
 //#define GMTR_ST_ROUNDRCT				2    //Ô²½Ç¾ØÐÎ
 //#define GMTR_ST_ROUND				3    //Ô²
 
-#define LCD_DEVID		DEVID_FM12864
+#define LCD_DEVID		DEVID_USARTGPULCD
 
 
 typedef struct {
@@ -139,10 +139,10 @@ ABS_CLASS( Glyph)
 	
 };
 
-void Flush_lcd(void);
-void Stop_flush_lcd(void);
-void Lcd_run(void);
-void Clr_lcd(void);
+void Flush_LCD(void);
+void Stop_flush_LCD(void);
+void LCD_Run(void);
+void CLR_LCD(void);
 uint8_t ColorInvert( uint8_t clr);
 int	String2Bkc( char *s);
 int String2Clr( char *s);

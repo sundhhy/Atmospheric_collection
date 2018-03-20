@@ -86,32 +86,32 @@ static int FM25_Write_status(uint8_t s);
 //============================================================================//
 int FM25_init(void)
 {
-	if(phn_sys.arr_fsh[FM25_SPI_NO].fnf.fnf_flag == 0)
+	if(aci_sys.arr_fsh[FM25_SPI_NO].fnf.fnf_flag == 0)
 	{
 		
 			
 		Dev_open(FM25_SPI_DEVID, (void *)&p_fm25_spi);
 		FM25_Disable_CS;
 		
-		phn_sys.arr_fsh[FM25_SPI_NO].fnf.fnf_flag = 1;
+		aci_sys.arr_fsh[FM25_SPI_NO].fnf.fnf_flag = 1;
 		
 		
 	}
 	
 	
-	phn_sys.arr_fsh[FM25_SPI_NO].fsh_info = FM25_info;
-	phn_sys.arr_fsh[FM25_SPI_NO].fsh_wp = FM25_WP;
+	aci_sys.arr_fsh[FM25_SPI_NO].fsh_info = FM25_info;
+	aci_sys.arr_fsh[FM25_SPI_NO].fsh_wp = FM25_WP;
 
-	phn_sys.arr_fsh[FM25_SPI_NO].fsh_ersse = FM25_Erase;
-	phn_sys.arr_fsh[FM25_SPI_NO].fsh_ersse_addr = FM25_Erase_addr;
+	aci_sys.arr_fsh[FM25_SPI_NO].fsh_ersse = FM25_Erase;
+	aci_sys.arr_fsh[FM25_SPI_NO].fsh_ersse_addr = FM25_Erase_addr;
 
-	phn_sys.arr_fsh[FM25_SPI_NO].fsh_write = FM25_Write;
-	phn_sys.arr_fsh[FM25_SPI_NO].fsh_raw_write = FM25_Write;
-	phn_sys.arr_fsh[FM25_SPI_NO].fsh_raw_read = FM25_rd_data;
-	phn_sys.arr_fsh[FM25_SPI_NO].fsh_read = FM25_rd_data;
-	phn_sys.arr_fsh[FM25_SPI_NO].fsh_flush = FM25_Flush;
+	aci_sys.arr_fsh[FM25_SPI_NO].fsh_write = FM25_Write;
+	aci_sys.arr_fsh[FM25_SPI_NO].fsh_raw_write = FM25_Write;
+	aci_sys.arr_fsh[FM25_SPI_NO].fsh_raw_read = FM25_rd_data;
+	aci_sys.arr_fsh[FM25_SPI_NO].fsh_read = FM25_rd_data;
+	aci_sys.arr_fsh[FM25_SPI_NO].fsh_flush = FM25_Flush;
 	
-	FM25_info(&phn_sys.arr_fsh[FM25_SPI_NO].fnf);
+	FM25_info(&aci_sys.arr_fsh[FM25_SPI_NO].fnf);
 		
 	return RET_OK;
 
@@ -346,7 +346,7 @@ static void FM25_cmd_addr(uint8_t cmd, uint16_t addr)
 	tmp_u8 = addr & 0x00ff;
 	FM25_SPI_WRITE(&tmp_u8, 1);
 	
-#else FM25_DEVTYPE == FM25L64B
+#elif FM25_DEVTYPE == FM25L64B
 	// op-code (8-bit) | address(16 -bit ,高3位被忽视)
 	tmp_u8 = cmd;
 	FM25_SPI_WRITE(&tmp_u8, 1);
@@ -358,6 +358,7 @@ static void FM25_cmd_addr(uint8_t cmd, uint16_t addr)
 	tmp_u8 = addr & 0x00ff;
 	FM25_SPI_WRITE(&tmp_u8, 1);
 #endif
+	
 }
 
 

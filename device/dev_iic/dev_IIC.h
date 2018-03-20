@@ -31,7 +31,7 @@ typedef struct {
 
 CLASS(Dev_IIC)
 {
-	EXTENDS(dev_Char);
+	IMPLEMENTS( I_dev_Char);
 	void			*p_IIC;
 	I2C_slave_t		*p_i2c_slaver;
 	uint8_t		minor;

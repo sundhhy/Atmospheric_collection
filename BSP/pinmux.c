@@ -1,13 +1,14 @@
 #include "stm32f10x.h"
 
 #include "pinmux.h"
-#include "configs/hardware_conf.h"
+#include "hardwareConfig.h"
 
 
 
 void Pin_init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
+	
 	
 	
 	/***** LCD ****************/

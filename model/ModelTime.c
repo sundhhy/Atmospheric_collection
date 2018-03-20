@@ -51,7 +51,7 @@ int MdlTime_init( Model *self, IN void *arg)
 {
 //	UtlRtc *rtc = ( UtlRtc *)Pcf8563_new();
 //	struct  tm	*tm = CALLOC( 1, sizeof( *tm));
-	struct  tm	*tm = &phn_sys.sys_time;
+	struct  tm	*tm = &aci_sys.sys_time;
 //	self->dataSource = Pcf8563_new();
 //	rtc->init( rtc, NULL);
 //	
@@ -76,9 +76,9 @@ void MdlTime_run(Model *self)
 	System_time(tm);
 	
 	//180121 时钟更新的话 允许失败
-	phn_sys.lcd_sem_wait_ms = 200;
+	aci_sys.lcd_sem_wait_ms = 200;
 	self->notify( self);
-	phn_sys.lcd_sem_wait_ms = 0xffffffff;;
+	aci_sys.lcd_sem_wait_ms = 0xffffffff;;
 	
 }
 

@@ -227,7 +227,7 @@ int MdlChn_Commit_conf(int chn_num)
 //这么做是为了避免多个线程对串口产生竞争
 void MdlChn_Read_code_end_temperature()
 {
-	phn_sys.sys_flag |= SYSFLAG_READ_CET;
+	aci_sys.sys_flag |= SYSFLAG_READ_CET;
 	
 }
 
@@ -423,7 +423,7 @@ static void Signal_Alarm(Model_chn *cthis)
 	int16_t tempS2,tempS3,bjhc, prc_data;
 	int32_t temps4;
 	
-	if(phn_sys.sys_flag & SYSFLAG_POWEROFF)
+	if(aci_sys.sys_flag & SYSFLAG_POWEROFF)
 		return;
 
 	flag = p_alm->alm_flag;
@@ -446,12 +446,12 @@ static void Signal_Alarm(Model_chn *cthis)
 	{
 		if(p->value < tempS2)
 		{	//低低报
-			phn_sys.DO_err |= 1 << p_alm->touch_spot_ll;
+			aci_sys.DO_err |= 1 << p_alm->touch_spot_ll;
 			new_flag |= ALM_LL;
 		}
 		else
 		{	//低报
-			phn_sys.DO_err |= 1 << p_alm->touch_spot_lo;
+			aci_sys.DO_err |= 1 << p_alm->touch_spot_lo;
 			new_flag |= ALM_LO;
 		}
 	}
@@ -469,13 +469,13 @@ static void Signal_Alarm(Model_chn *cthis)
 		{
 				if(p->value>tempS2)
 				{		//高高报
-					phn_sys.DO_err |= 1 << p_alm->touch_spot_hh;
+					aci_sys.DO_err |= 1 << p_alm->touch_spot_hh;
 					new_flag |= ALM_HH;
 				}
 				else
 				{
 					//高报
-					phn_sys.DO_err |= 1 << p_alm->alarm_hi;
+					aci_sys.DO_err |= 1 << p_alm->alarm_hi;
 					new_flag |= ALM_HI;
 				}
 				
@@ -814,7 +814,7 @@ static void MdlChn_run(Model *self)
 	
 	Dev_open(DEVID_UART3, ( void *)&I_uart3);
 	
-	if(phn_sys.sys_flag & SYSFLAG_READ_CET)
+	if(aci_sys.sys_flag & SYSFLAG_READ_CET)
 	{
 		i = SmBus_AI_Read(CDT_CHN, AI_READ_ENGVAL, chk_buf, 16);
 		if( I_uart3->write(I_uart3, chk_buf, i) != RET_OK)
@@ -826,8 +826,8 @@ static void MdlChn_run(Model *self)
 		if(SmBus_decode(SMBUS_AI_READ, chk_buf, &rst, sizeof(SmBus_result_t)) != RET_OK)
 			goto rd_smpval;
 		
-		phn_sys.code_end_temperature = rst.val;
-		phn_sys.sys_flag &= ~SYSFLAG_READ_CET;	
+		aci_sys.code_end_temperature = rst.val;
+		aci_sys.sys_flag &= ~SYSFLAG_READ_CET;	
 	}
 //	
 //	//读取采样值
@@ -869,10 +869,10 @@ static void MdlChn_run(Model *self)
 	
 	rst.val = Zero_shift_K_B(&cthis->chni, rst.val);
 	rst.val = Cut_small_signal(&cthis->chni, rst.val);
-	if(phn_sys.sys_conf.cold_end_way)
+	if(aci_sys.sys_conf.cold_end_way)
 	{
 		
-		rst.val -= phn_sys.sys_conf.CJC;
+		rst.val -= aci_sys.sys_conf.CJC;
 	}
 	if(rst.val != cthis->chni.value)
 	{
@@ -880,7 +880,7 @@ static void MdlChn_run(Model *self)
 		
 		cthis->chni.signal_type = rst.signal_type;
 		cthis->chni.value = rst.val;
-//		if((phn_sys.sys_flag & SYSFLAG_SETTING) == 0)
+//		if((aci_sys.sys_flag & SYSFLAG_SETTING) == 0)
 			self->notify(self);
 		
 		Signal_Alarm(cthis);
@@ -988,10 +988,10 @@ static int MdlChn_getData(Model *self, IN int aux, void *arg)
 			break;
 		case DO_output:
 			if(*(uint8_t *)arg)
-				phn_sys.DO_val |= 1 << cthis->chni.chn_NO;
+				aci_sys.DO_val |= 1 << cthis->chni.chn_NO;
 			else
-				phn_sys.DO_val &=~(1 << cthis->chni.chn_NO);
-			i = SmBus_Read_DO(phn_sys.DO_val, sbus_buf, 32);
+				aci_sys.DO_val &=~(1 << cthis->chni.chn_NO);
+			i = SmBus_Read_DO(aci_sys.DO_val, sbus_buf, 32);
 			if(I_uart3->write(I_uart3, sbus_buf, i) != RET_OK)
 				return ERR_OPT_FAILED;
 			
@@ -1003,7 +1003,7 @@ static int MdlChn_getData(Model *self, IN int aux, void *arg)
 			if(SmBus_decode(SMBUS_CMD_READ, sbus_buf, &tmp_u8, 1) != RET_OK)
 				return ERR_OPT_FAILED;
 			
-			phn_sys.DO_val = tmp_u8;
+			aci_sys.DO_val = tmp_u8;
 			if(arg)
 			{
 				if(tmp_u8 & (1 << cthis->chni.chn_NO))
@@ -1160,7 +1160,7 @@ static int MdlChn_setData(  Model *self, IN int aux, void *arg)
 			p_d = (do_out_t *)arg;
 			if(p_d->do_chn >= MAX_TOUCHSPOT)
 				break;
-			tmp_u8 = phn_sys.DO_val;
+			tmp_u8 = aci_sys.DO_val;
 			if(p_d->val)
 				tmp_u8 |= 1 << p_d->do_chn;
 			else
@@ -1176,7 +1176,7 @@ static int MdlChn_setData(  Model *self, IN int aux, void *arg)
 				return ERR_OPT_FAILED;
 			if(SmBus_decode(SMBUS_CMD_WRITE, sbub_buf, NULL, 0) != RET_OK)
 				return ERR_OPT_FAILED;
-			phn_sys.DO_val = tmp_u8;
+			aci_sys.DO_val = tmp_u8;
 			
 			break;
 			
@@ -1393,7 +1393,7 @@ static int MdlChn_modify_sconf(Model *self, IN int aux, char *s, int op, int val
 	Model_chn		*cthis = SUB_PTR( self, Model, Model_chn);
 	
 	uint8_t			tmp_u8 = 0;
-	phn_sys.save_chg_flga |= CHG_MODCHN_CONF(cthis->chni.chn_NO);
+	aci_sys.save_chg_flga |= CHG_MODCHN_CONF(cthis->chni.chn_NO);
 	switch(aux) {
 		case AUX_UNIT:
 			tmp_u8 = Operate_in_tange(cthis->chni.unit, op, 1, 0, eu_max - 1);
@@ -1487,7 +1487,7 @@ static int MdlChn_modify_sconf(Model *self, IN int aux, char *s, int op, int val
 			break;
 		default:
 			
-			phn_sys.save_chg_flga &= ~CHG_MODCHN_CONF(cthis->chni.chn_NO);
+			aci_sys.save_chg_flga &= ~CHG_MODCHN_CONF(cthis->chni.chn_NO);
 			break;
 		
 		

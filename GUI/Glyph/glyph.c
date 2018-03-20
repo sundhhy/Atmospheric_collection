@@ -1,5 +1,4 @@
 #include <stdint.h>
-#include "testGlyph.h"
 #include "Glyph.h"
 
 #include <string.h>
@@ -8,7 +7,7 @@
 #include "basis/sdhDebug.h"
 #include "sdhDef.h"
 #include "basis/sdhError.h"
-#include "APP/system.h"
+#include "system.h"
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -53,36 +52,36 @@ static void vDraw( Glyph *self, dspContent_t *cnt, vArea_t *area);
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
-void Flush_lcd(void)
+void Flush_LCD(void)
 {
-	aci_sys.flag_lcd_flush = 1;
+	flush_flag = 1;
 	
 	
 }
 
-void Stop_flush_lcd(void)
+void Stop_flush_LCD(void)
 {
-	aci_sys.flag_lcd_flush = 0;
+	flush_flag = 0;
 	
 	
 }
 
-void Lcd_run(void)
+void LCD_Run(void)
 {
-	if(aci_sys.flag_lcd_flush) {
+	if(flush_flag) {
 		dev_lcd *lcd;
 		Dev_open( LCD_DEVID, (void *)&lcd);
 		lcd->lcd_flush(0);
-		aci_sys.flag_lcd_flush = 0;
+		flush_flag = 0;
 		
 	}
 	
 }
-void Clr_lcd(void)
+void CLR_LCD(void)
 {
 	dev_lcd *lcd;
 	Dev_open( LCD_DEVID, (void *)&lcd);
-	lcd->clear(CLR_WHITE);
+	lcd->clear(0);
 	
 }
 

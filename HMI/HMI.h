@@ -15,7 +15,7 @@
 #include "assert.h"
 #endif
 
-#include "GUI/sheet/sheet.h"
+#include "sheet.h"
 #include "focus.h"
 
 #include "Component_Button.h"
@@ -58,7 +58,6 @@
 #define	ICO_ID_MENU					0x20	//主菜单
 #define	ICO_ID_BAR					0x21	//棒图
 #define	ICO_ID_DIGITAL				0x22	//数显
-#define	ICO_ID_TREND				0x23	//趋势
 #define	ICO_ID_PGUP					0x24	//向上翻页
 #define	ICO_ID_PGDN					0x25	//向下翻页
 #define	ICO_ID_ERASETOOL			0x26	//擦除工具
@@ -241,9 +240,7 @@ extern void Set_flag_show(uint8_t	*p_flag, int val);
 void STY_Duild_button(void *arg);
 
 //很多界面的处理与主界面的按键处理一样，所以就把主界面的处理开放出来
-void Main_btn_hdl(void *arg, uint8_t btn_id);
-void Main_HMI_build_button(HMI *self);
-void Main_HMI_hit( HMI *self, char *s);
+
 
 int HMI_Init(void);
 

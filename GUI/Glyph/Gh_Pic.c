@@ -79,24 +79,24 @@ END_CTOR
 
 static void GhPic_vDraw( Glyph *self, dspContent_t *cnt, vArea_t *area)
 {
-	I_dev_lcd *lcd;
-	char num;
-	Dev_open( LCD_DEVID, (void *)&lcd);
+//	dev_lcd *lcd;
+//	char num;
+//	Dev_open( LCD_DEVID, (void *)&lcd);
 
-	num = atoi( cnt->data);
-	
-	if( cnt->subType == SUBTYPE_CPIC) {
-		lcd->cutPicture( area->x0 + area->offset_x, area->y0 + area->offset_y, num, \
-		area->x0, area->y0, ( area->x1 - area->x0), ( area->y1 - area->y0));
-	} else if( cnt->subType == SUBTYPE_BPIC) {
-		lcd->bkPicture( cnt->bkc, area->x0, area->y0, num);
-	}  else if( cnt->subType == SUBTYPE_ICON) {
-		lcd->icon(area->x0, area->y0, num, area->xn, area->yn, area->n);
-	}
-	else {
-		
-		lcd->picture( area->x0, area->y0, num);
-	}
+//	num = atoi( cnt->data);
+//	
+//	if( cnt->subType == SUBTYPE_CPIC) {
+//		lcd->cutPicture( area->x0 + area->offset_x, area->y0 + area->offset_y, num, \
+//		area->x0, area->y0, ( area->x1 - area->x0), ( area->y1 - area->y0));
+//	} else if( cnt->subType == SUBTYPE_BPIC) {
+//		lcd->bkPicture( cnt->bkc, area->x0, area->y0, num);
+//	}  else if( cnt->subType == SUBTYPE_ICON) {
+//		lcd->icon(area->x0, area->y0, num, area->xn, area->yn, area->n);
+//	}
+//	else {
+//		
+//		lcd->picture( area->x0, area->y0, num);
+//	}
 	
 	
 
