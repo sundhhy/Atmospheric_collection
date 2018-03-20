@@ -218,39 +218,39 @@ static void	HMI_CFG_Show( HMI *self )
 static void	HMI_CFG_Hit( HMI *self, char *s)
 {
 
-	Button	*p = BTN_Get_Sington();
+//	Button	*p = BTN_Get_Sington();
 
-	if( !strcmp( s, HMIKEY_UP) )
-	{
+//	if( !strcmp( s, HMIKEY_UP) )
+//	{
 
-	}
-	else if( !strcmp( s, HMIKEY_DOWN) )
-	{
-		
-	}
-	else if( !strcmp( s, HMIKEY_LEFT))
-	{
-		self->btn_backward(self);
+//	}
+//	else if( !strcmp( s, HMIKEY_DOWN) )
+//	{
+//		
+//	}
+//	else if( !strcmp( s, HMIKEY_LEFT))
+//	{
+//		self->btn_backward(self);
 
-	}
-	else if( !strcmp( s, HMIKEY_RIGHT))
-	{
+//	}
+//	else if( !strcmp( s, HMIKEY_RIGHT))
+//	{
 
-		self->btn_forward(self);
-	}
-	
-	
-	
-	if( !strcmp( s, HMIKEY_ENTER))
-	{
-		p->hit();
-//		self->btn_hit(self);
-	}
-	if( !strcmp( s, HMIKEY_ESC))
-	{
-		self->switchBack(self);
-	}
-	
+//		self->btn_forward(self);
+//	}
+//	
+//	
+//	
+//	if( !strcmp( s, HMIKEY_ENTER))
+//	{
+//		p->hit();
+////		self->btn_hit(self);
+//	}
+//	if( !strcmp( s, HMIKEY_ESC))
+//	{
+//		self->switchBack(self);
+//	}
+//	
 }
 
 

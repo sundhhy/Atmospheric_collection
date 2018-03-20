@@ -98,7 +98,12 @@ focus_user_t* Focus_alloc(int rows, int columns)
 void Focus_free(focus_user_t *p_fcuu)
 {
 	short 	i = 0;
-	short	num = p_fcuu->rows * p_fcuu->columns;
+	short	num;
+	
+	if(p_fcuu == NULL)
+		return;
+	
+	num = p_fcuu->rows * p_fcuu->columns;
 	num += p_fcuu->first_idx;
 	for(i = p_fcuu->first_idx; i < num; i ++) {		
 		fcsMgr.sht_map[i >> 3] &= ~(1 << (i % 8));

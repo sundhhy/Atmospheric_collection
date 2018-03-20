@@ -86,6 +86,8 @@ static	void FM_Switch(int on_off);
 static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c);
 static	void FM_Flush(char all);
 static	void FM_Lightness(uint8_t		pct);
+static  int	 FM_Get_size(int font, uint16_t *width, uint16_t *heigh);
+static	void FM_Set_backcolor( char c);
 static  int  FM_Lcd_ctl(int cmd, ...);
 static void FM_Draw_geometry(char type_g, char attr, char clr, short x0, short y0, short x1, short y1);
 
@@ -115,6 +117,8 @@ FUNCTION_SETTING(dev_lcd.dispaly_text, FM_Text);
 FUNCTION_SETTING(dev_lcd.lcd_flush, FM_Flush);
 FUNCTION_SETTING(dev_lcd.lcd_lightness, FM_Lightness);
 FUNCTION_SETTING(dev_lcd.lcd_ctl, FM_Lcd_ctl);
+FUNCTION_SETTING(dev_lcd.get_size, FM_Get_size);
+FUNCTION_SETTING(dev_lcd.set_backcolor, FM_Set_backcolor);
 FUNCTION_SETTING(dev_lcd.draw_geometry, FM_Draw_geometry);
 
 END_CTOR
@@ -224,35 +228,42 @@ static	void FM_Switch(int on_off)
 static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c)
 {
 	char	code[32];
-	int		code_len;
+	short	code_len;
+	short	half_mask;
 	short 	vx, vy;
 	short		i, j;
 	FM_Coordinate_converter(x, y, &vx, &vy);
 	
 //	FM_Set_vxy(vx, vy);
-	while(*str)
+	while(*str && len)
 	{
 		code_len = CHD_Get_code(code, str, 32, 0, 0);
 		if(IS_CHINESE(str[0]))
+		{
 			str += 2;
+			len -= 2;
+		}
 		else
+		{
 			str ++;
+			len --;
+		}
 		
 		j = vx;
 		if(code_len <= 0)
 			continue;
-		
-		
+		//这个算法只能用于2的幂的长度，如果要支持8*16 16*16以外的字体，要换算法
+		half_mask = (code_len >> 1) - 1;
 		for(i = 0; i < code_len; i++)
 		{
 			FM_VRAM(j, vy) = code[i];
 			FM_Update_change_area(j, vy);
 //			LHI_Write_vram(&FM_VRAM(vx, vy), 1);
 			vy ++;
-			if(((i & 0x7) == 0) && ( i > 0))
+			if(((i & half_mask) == 0) && ( i > 0))
 			{
 				j += 8;
-				vy -= 8;
+				vy -= code_len >> 1;
 			}
 			
 		}
@@ -400,6 +411,19 @@ static	void FM_Lightness(uint8_t		pct)
 	if(pct > 100)
 		pct = 100;
 	LHI_Set_pwm_duty(pct);
+}
+
+
+static  int	 FM_Get_size(int font, uint16_t *width, uint16_t *heigh)
+{
+	*width = 8;
+	*heigh = 16;
+	return RET_OK;
+}
+static	void FM_Set_backcolor( char c)
+{
+	
+	
 }
 
 static int  FM_Lcd_ctl(int cmd, ...)

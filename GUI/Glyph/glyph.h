@@ -26,7 +26,7 @@
 //#define GMTR_ST_ROUNDRCT				2    //Ô²½Ç¾ØÐÎ
 //#define GMTR_ST_ROUND				3    //Ô²
 
-#define LCD_DEVID		DEVID_USARTGPULCD
+#define LCD_DEVID		DEVID_FM12864
 
 
 typedef struct {

@@ -242,9 +242,8 @@ static int	Init_cmmHmi( HMI *self, void *arg)
 		arr_p_sht_choices[i] = Sheet_alloc(p_shtctl);
 	
 
-//	Build_ChnSheets();
-	Build_icoSheets();
-	Build_otherSheets();
+//	Build_icoSheets();
+//	Build_otherSheets();
 
 	return RET_OK;
 }

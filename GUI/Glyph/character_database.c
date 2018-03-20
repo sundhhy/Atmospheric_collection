@@ -738,8 +738,8 @@ int CHD_Get_code(char *buf, char *c, short buf_size, char font, char size)
 	
 	
 	char		*p_chinese = STR_CHINESE;
-	uint8_t 	offset;
-	uint8_t		count;
+	uint16_t 	offset;
+	uint16_t		count;
 	
 	if(IS_CHINESE( *c) == 0)
 	{
@@ -763,7 +763,7 @@ int CHD_Get_code(char *buf, char *c, short buf_size, char font, char size)
 			
 		}
 		
-		//å†æ¯”è¾ƒç¬¬äºŒä¸ªç¼–ç ï¼Œä¸¤ä¸ªç¼–ç éƒ½ä¸€æ ·æ—¶ï¼Œæ‰åŒ¹é…
+		//å†æ¯”è¾ƒç¬¬äºŒä¸ªç¼–ç ï¼Œä¸¤ä¸ªç¼–ç éƒ½ä¸€æ ·æ—¶ï¼Œæ‰åŒ¹é
 		count ++;
 		if(c[1] != p_chinese[count])
 		{
@@ -771,7 +771,8 @@ int CHD_Get_code(char *buf, char *c, short buf_size, char font, char size)
 			continue;
 			
 		}
-		offset = count * 4;
+		offset = count / 2;		//È·¶¨Î»ÖÃ,Ò»¸öºº×ÖÓĞ2¸ö±àÂë
+		offset *= 4;			//³¤¶ÈÆ«ÒÆ
 		memcpy(buf, &chd_chanese_16_16[offset][0], 32);
 		return 32;
 		

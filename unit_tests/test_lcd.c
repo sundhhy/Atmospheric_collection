@@ -52,7 +52,7 @@ void Test_lcd(void)
 	Dev_open(DEVID_FM12864, (void *)&p_lcd);
 	p_lcd->clear(CLR_WHITE);
 	//点线绘制测试
-	p_lcd->lcd_lightness(60);
+//	p_lcd->lcd_lightness(60);
 	
 	p_lcd->draw_geometry(GEO_LINE, ATT_NONE, CLR_BLACK, 0, 0, 63, 0);
 	
@@ -81,7 +81,7 @@ void Test_lcd(void)
 	p_lcd->dispaly_text(0, "0123456789", 0, 0, 0, FONT_12, COLOUR_BLACK);
 	p_lcd->lcd_flush(0);
 	
-	p_lcd->dispaly_text(0, "采集", 0, 0, 16, FONT_12, COLOUR_BLACK);
+	p_lcd->dispaly_text(0, "采样℃", 0, 0, 16, FONT_12, COLOUR_BLACK);
 	p_lcd->lcd_flush(0);
 
 //	p_lcd->lcd_lightness(0);

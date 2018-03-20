@@ -49,13 +49,13 @@ HMI *g_p_mainHmi;
 	查询		维护
 3-20 14：39：00
 */
-static ro_char main_code_title[] = { "<text vx0=0 vy0=0>主菜单</>" };
-static ro_char main_code_subtitle[] = { "<text vx0=80 vy0=0><粉尘></>" };
+static ro_char main_code_title[] = { "<text vx0=0 vy0=0>主设置</>" };
+static ro_char main_code_subtitle[] = { "<text vx0=72 vy0=0>[粉尘]</>" };
 
-static ro_char main_code_choice_1_1[] = { "<text vx0=32 vy0=16>设置</>" };
-static ro_char main_code_choice_1_2[] = { "<text vx0=88 vy0=16>采样</>" };
-static ro_char main_code_choice_2_1[] = { "<text vx0=32 vy0=32>查询</>" };
-static ro_char main_code_choice_2_2[] = { "<text vx0=88 vy0=32>维护</>" };
+static ro_char main_code_choice_1_1[] = { "<text vx0=16 vy0=16>设置</>" };
+static ro_char main_code_choice_1_2[] = { "<text vx0=80 vy0=16>采样</>" };
+static ro_char main_code_choice_2_1[] = { "<text vx0=16 vy0=32>查询</>" };
+static ro_char main_code_choice_2_2[] = { "<text vx0=80 vy0=32>维护</>" };
 
 #define MAIN_CHOICE_ID(n)			(n | SHT_ID_PRIVATE)
 //------------------------------------------------------------------------------
@@ -123,24 +123,14 @@ END_CTOR
 static int	Init_mainHmi( HMI *self, void *arg)
 {
 //	HMI 					*p_cmm;
-//	Button					*p_btn;
-//	Progress_bar			*p_bar;
-//	Curve					*p_crv;
-//	CMP_tips				*p_tips;
+
 
 	
 //	p_cmm = CreateHMI( HMI_CMM);
 //	p_cmm->init( p_cmm, NULL);
 	self->flag = 0;
 	//初始化界面组件
-//	p_btn = BTN_Get_Sington();
-//	p_btn->init(p_btn);
-//	p_bar = PGB_Get_Sington();
-//	p_bar->init(p_bar);
-//	p_crv = CRV_Get_Sington();
-//	p_crv->init(p_crv, NUM_CHANNEL);
-//	p_tips = TIP_Get_Sington();
-//	p_tips->init(p_tips);
+
 	
 	self->initSheet( self);
 
@@ -241,38 +231,37 @@ static void	MainHmiShow( HMI *self )
 static void	Main_HMI_hit( HMI *self, char *s)
 {
 
-	Button	*p = BTN_Get_Sington();
+//	Button	*p = BTN_Get_Sington();
 
-	if( !strcmp( s, HMIKEY_UP) )
-	{
+//	if( !strcmp( s, HMIKEY_UP) )
+//	{
 
-	}
-	else if( !strcmp( s, HMIKEY_DOWN) )
-	{
-		
-	}
-	else if( !strcmp( s, HMIKEY_LEFT))
-	{
-		self->btn_backward(self);
+//	}
+//	else if( !strcmp( s, HMIKEY_DOWN) )
+//	{
+//		
+//	}
+//	else if( !strcmp( s, HMIKEY_LEFT))
+//	{
+//		self->btn_backward(self);
 
-	}
-	else if( !strcmp( s, HMIKEY_RIGHT))
-	{
+//	}
+//	else if( !strcmp( s, HMIKEY_RIGHT))
+//	{
 
-		self->btn_forward(self);
-	}
+//		self->btn_forward(self);
+//	}
 	
 	
 	
-	if( !strcmp( s, HMIKEY_ENTER))
-	{
-		p->hit();
-//		self->btn_hit(self);
-	}
-	if( !strcmp( s, HMIKEY_ESC))
-	{
-		self->switchBack(self);
-	}
+//	if( !strcmp( s, HMIKEY_ENTER))
+//	{
+//		p->hit();
+//	}
+//	if( !strcmp( s, HMIKEY_ESC))
+//	{
+//		self->switchBack(self);
+//	}
 	
 }
 

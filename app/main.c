@@ -111,9 +111,11 @@ int main (void) {
 	PVD_Init();
 
 	Init_device();
-
+#if TDD_ON == 1
+	unit_test();
+#endif
 	
-//	osKernelInitialize (); 
+	osKernelInitialize (); 
 //	Init_Cmd_Thread();
 //	// initialize CMSIS-RTOS
 //	//各个外设驱动模块初始化
@@ -127,7 +129,7 @@ int main (void) {
 //	
 
 //	//界面初始化
-//	HMI_Init();
+	HMI_Init();
 //	//按键初始化
 //	p_kb = GetKeyInsance();
 //	
@@ -161,46 +163,44 @@ int main (void) {
 	
 	
 //	p_tips->show_ico_tips(1, -1);
-#if TDD_ON == 1
-	unit_test();
-#endif
+
 	while(1)
 	{
 		osDelay(100);
 		main_count_1s ++;
 		
-		if(old_sys_flag != aci_sys.sys_flag)
-		{
-			if(aci_sys.sys_flag & SYSFLAG_POWEROFF)
-			{
-				p_tips->show_ico_tips(1, -1);
-				
-			}
-			else if(aci_sys.sys_flag & SYSFLAG_EFS_NOTREADY)
-			{
-				p_tips->show_ico_tips(1, -1);
-				
-			}
-			else if(aci_sys.sys_flag & SYSFLAG_ERR)
-			{
-				p_tips->show_ico_tips(2, -1);
-				
-			}
-			else
-			{
-				
-				p_tips->clear_ico_tips(1);
-				p_tips->clear_ico_tips(2);
-			}
-			old_sys_flag = aci_sys.sys_flag;
-		}
-		if(main_count_1s >= 9)
-		{
-			p_mdl_time->run(p_mdl_time);
-			g_p_curHmi->hmi_run(g_p_curHmi);
-			main_count_1s = 0;
-		}
-		USB_Run(NULL);
+//		if(old_sys_flag != aci_sys.sys_flag)
+//		{
+//			if(aci_sys.sys_flag & SYSFLAG_POWEROFF)
+//			{
+//				p_tips->show_ico_tips(1, -1);
+//				
+//			}
+//			else if(aci_sys.sys_flag & SYSFLAG_EFS_NOTREADY)
+//			{
+//				p_tips->show_ico_tips(1, -1);
+//				
+//			}
+//			else if(aci_sys.sys_flag & SYSFLAG_ERR)
+//			{
+//				p_tips->show_ico_tips(2, -1);
+//				
+//			}
+//			else
+//			{
+//				
+//				p_tips->clear_ico_tips(1);
+//				p_tips->clear_ico_tips(2);
+//			}
+//			old_sys_flag = aci_sys.sys_flag;
+//		}
+//		if(main_count_1s >= 9)
+//		{
+//			p_mdl_time->run(p_mdl_time);
+//			g_p_curHmi->hmi_run(g_p_curHmi);
+//			main_count_1s = 0;
+//		}
+//		USB_Run(NULL);
 		LCD_Run();
 //		osThreadYield (); 
 
@@ -322,16 +322,17 @@ static void 	Init_LCD(void)
 	dev_lcd *p_lcd;
 	Dev_open(DEVID_FM12864, (void *)&p_lcd);
 	p_lcd->init();
-
+	p_lcd->clear(CLR_WHITE);
+	
 }
 
 static void 	Init_device(void)
 {
 
-	if(USB_Init(NULL) != RET_OK)
-	{
-		aci_sys.sys_flag |= SYSFLAG_ERR;
-	}
+//	if(USB_Init(NULL) != RET_OK)
+//	{
+//		aci_sys.sys_flag |= SYSFLAG_ERR;
+//	}
 	
 	Init_LCD();
 }

@@ -93,6 +93,10 @@ int HMI_Init(void)
 	
 	HMI 			*p_mainHmi;
 	HMI 			*p_hmi;
+//	Button					*p_btn;
+//	Progress_bar			*p_bar;
+//	Curve					*p_crv;
+//	CMP_tips				*p_tips;
 	
 	Focus_init();
 	
@@ -108,6 +112,16 @@ int HMI_Init(void)
 	
 	p_hmi = CreateHMI(HMI_CONFIG);
 	p_hmi->init(p_hmi, NULL);
+	
+	
+//	p_btn = BTN_Get_Sington();
+//	p_btn->init(p_btn);
+//	p_bar = PGB_Get_Sington();
+//	p_bar->init(p_bar);
+//	p_crv = CRV_Get_Sington();
+//	p_crv->init(p_crv, NUM_CHANNEL);
+//	p_tips = TIP_Get_Sington();
+//	p_tips->init(p_tips);
 	
 	
 	
@@ -330,87 +344,92 @@ void	Show_focus( HMI *self, uint8_t fouse_row, uint8_t fouse_col)
 
 static void		HMI_Build_cmp(HMI *self)
 {
-	Button	*p = BTN_Get_Sington();
-	int		i;
-	for(i = 0; i < NUM_BUTTON; i++)
-	{
-		p->build_each_btn(i, BTN_TYPE_NONE, NULL, NULL);
+//	Button	*p = BTN_Get_Sington();
+//	int		i;
+//	for(i = 0; i < NUM_BUTTON; i++)
+//	{
+//		p->build_each_btn(i, BTN_TYPE_NONE, NULL, NULL);
 
 
-	}
+//	}
 
 }
 
 static void		HMI_Clean_cmp(HMI *self)
 {
 
-	Button				*p = BTN_Get_Sington();
-	Progress_bar		*p_bar = PGB_Get_Sington();
-	Curve 				*p_crv = CRV_Get_Sington();
-	CMP_tips 			*p_tips = TIP_Get_Sington();
-	
-	p->clean_btn();
-	self->flag &= ~HMIFLAG_FOCUS_IN_BTN;
-	
-	p_bar->delete_bar(HMI_CMP_ALL);
-	p_crv->free(HMI_CMP_ALL);
-	
-	p_tips->hide_ico_tips(0);		//默认提示图标允许显示
+//	Button				*p = BTN_Get_Sington();
+//	Progress_bar		*p_bar = PGB_Get_Sington();
+//	Curve 				*p_crv = CRV_Get_Sington();
+//	CMP_tips 			*p_tips = TIP_Get_Sington();
+//	
+//	p->clean_btn();
+//	self->flag &= ~HMIFLAG_FOCUS_IN_BTN;
+//	
+//	p_bar->delete_bar(HMI_CMP_ALL);
+//	p_crv->free(HMI_CMP_ALL);
+//	
+//	p_tips->hide_ico_tips(0);		//默认提示图标允许显示
 
 }
 static void		HMI_Show_cmp(HMI *self)
 {
-	Button				*p = BTN_Get_Sington();
-	Progress_bar		*p_bar = PGB_Get_Sington();
-	Curve 				*p_crv = CRV_Get_Sington();
-	CMP_tips 			*p_tips = TIP_Get_Sington();
-	int					i;
-	
-	p->show_vaild_btn();
-	p_bar->show_bar();
-	p_crv->crv_show_bkg();
-	p_tips->show_tips();
-	
-	for(i = 0; i < NUM_CHANNEL; i++)
-	{
-		if(g_arr_p_chnData[i]->update)
-			g_arr_p_chnData[i]->update(g_arr_p_chnData[i], NULL);
-		if(g_arr_p_chnUtil[i]->update)
-			g_arr_p_chnUtil[i]->update(g_arr_p_chnUtil[i], NULL);
-		if(g_arr_p_chnAlarm[i]->update)
-			g_arr_p_chnAlarm[i]->update(g_arr_p_chnAlarm[i], NULL);
-		
-		
-	}
+//	Button				*p = BTN_Get_Sington();
+//	Progress_bar		*p_bar = PGB_Get_Sington();
+//	Curve 				*p_crv = CRV_Get_Sington();
+//	CMP_tips 			*p_tips = TIP_Get_Sington();
+//	int					i;
+//	
+//	p->show_vaild_btn();
+//	p_bar->show_bar();
+//	p_crv->crv_show_bkg();
+//	p_tips->show_tips();
+//	
+//	for(i = 0; i < NUM_CHANNEL; i++)
+//	{
+//		if(g_arr_p_chnData[i]->update)
+//			g_arr_p_chnData[i]->update(g_arr_p_chnData[i], NULL);
+//		if(g_arr_p_chnUtil[i]->update)
+//			g_arr_p_chnUtil[i]->update(g_arr_p_chnUtil[i], NULL);
+//		if(g_arr_p_chnAlarm[i]->update)
+//			g_arr_p_chnAlarm[i]->update(g_arr_p_chnAlarm[i], NULL);
+//		
+//		
+//	}
 }
 
 static int		HMI_Btn_forward(HMI *self)
 {
-	Button	*p = BTN_Get_Sington();
-	int			ret;
+//	Button	*p = BTN_Get_Sington();
+//	int			ret;
 	
-	ret = p->move_focus(BTN_MOVE_FORWARD);
-	if(ret == RET_OK)
-		self->flag |= HMIFLAG_FOCUS_IN_BTN;
-	else
-		self->flag &= ~HMIFLAG_FOCUS_IN_BTN;
-	return ret;
+//	ret = p->move_focus(BTN_MOVE_FORWARD);
+//	if(ret == RET_OK)
+//		self->flag |= HMIFLAG_FOCUS_IN_BTN;
+//	else
+//		self->flag &= ~HMIFLAG_FOCUS_IN_BTN;
+//	return ret;
+	
+	
+	return RET_OK;
 }
 
 static int		HMI_Btn_backward(HMI *self)
 {
-	Button	*p = BTN_Get_Sington();
+//	Button	*p = BTN_Get_Sington();
+//	
+//	int			ret;
+//	
+//	ret = p->move_focus(BTN_MOVE_BACKWARD);
+//	
+//	if(ret == RET_OK)
+//		self->flag |= HMIFLAG_FOCUS_IN_BTN;
+//	else
+//		self->flag &= ~HMIFLAG_FOCUS_IN_BTN;
+//	
+//	return ret;
 	
-	int			ret;
-	
-	ret = p->move_focus(BTN_MOVE_BACKWARD);
-	
-	if(ret == RET_OK)
-		self->flag |= HMIFLAG_FOCUS_IN_BTN;
-	else
-		self->flag &= ~HMIFLAG_FOCUS_IN_BTN;
-	
-	return ret;
+	return RET_OK;
 }
 static void		HMI_Btn_jumpout(HMI *self)
 {
@@ -419,12 +438,7 @@ static void		HMI_Btn_jumpout(HMI *self)
 	self->flag &= ~HMIFLAG_FOCUS_IN_BTN;
 }
 
-//static void		HMI_Btn_hit(HMI *self)
-//{
-//	Button	*p = BTN_Get_Sington();
-//	p->hit();
-//	
-//}
+
 
 
 
