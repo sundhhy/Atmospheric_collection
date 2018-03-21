@@ -51,8 +51,8 @@
 static ro_char his_code_title[] = { "<text vx0=0 vy0=0>仪器设置</>" };
 
 static ro_char his_code_choice_1_1[] = { "<text vx0=16 vy0=16>时间</>" };
-static ro_char his_code_choice_1_2[] = { "<text vx0=80 vy0=16>显示</>" };
-static ro_char his_code_choice_1_3[] = { "<text vx0=16 vy0=32>密码修改</>" };
+static ro_char his_code_choice_1_2[] = { "<text vx0=16 vy0=32>显示</>" };
+static ro_char his_code_choice_1_3[] = { "<text vx0=16 vy0=48>密码修改</>" };
 
 
 //------------------------------------------------------------------------------
@@ -115,18 +115,12 @@ END_CTOR
 
 static int	HIS_Init( HMI *self, void *arg)
 {
-//	HMI 					*p_cmm;
 
 
-	
-//	p_cmm = CreateHMI( HMI_CMM);
-//	p_cmm->init( p_cmm, NULL);
+
 	self->flag = 0;
-	//初始化界面组件
 
-	
-	self->initSheet( self);
-
+//	self->initSheet( self);
 	
 	return RET_OK;
 	
@@ -162,11 +156,9 @@ static void HIS_Init_sheet( HMI *self )
 	
 	
 	Sheet_updown(arr_p_pool_shts[0], h++);
-	Sheet_updown(arr_p_pool_shts[1], h++);
 	Sheet_updown(arr_p_sht_choices[0], h++);
 	Sheet_updown(arr_p_sht_choices[1], h++);
 	Sheet_updown(arr_p_sht_choices[2], h++);
-	Sheet_updown(arr_p_sht_choices[3], h++);
 	Sheet_updown(g_p_shtTime, h++);
 //	MainHmi_Init_chnShet();
 	self->init_focus(self);
@@ -179,10 +171,9 @@ static void HIS_Hide(HMI *self)
 	int i;
 	
 	Sheet_updown(g_p_shtTime, -1);
-	for( i = 3; i >= 0; i--) {		
+	for( i = 2; i >= 0; i--) {		
 		Sheet_updown(arr_p_sht_choices[i], -1);
 	}
-	Sheet_updown(arr_p_pool_shts[1], -1);
 	Sheet_updown(arr_p_pool_shts[0], -1);;
 	
 	self->clear_focus(self, self->p_fcuu->focus_row, self->p_fcuu->focus_col);
@@ -195,13 +186,12 @@ static void HIS_Hide(HMI *self)
 
 static void	HIS_Init_focus(HMI *self) 
 {
-	self->p_fcuu = Focus_alloc(2, 2);
+	self->p_fcuu = Focus_alloc(1, 3);
 
 		
 	Focus_Set_sht(self->p_fcuu, 0, 0, arr_p_sht_choices[0]);
 	Focus_Set_sht(self->p_fcuu, 0, 1, arr_p_sht_choices[1]);
-	Focus_Set_sht(self->p_fcuu, 1, 0, arr_p_sht_choices[2]);
-	Focus_Set_sht(self->p_fcuu, 1, 1, arr_p_sht_choices[3]);
+	Focus_Set_sht(self->p_fcuu, 0, 2, arr_p_sht_choices[2]);
 		
 }
 
@@ -213,7 +203,7 @@ static void	HIS_Show( HMI *self)
 
 	
 	Sheet_refresh(arr_p_pool_shts[0]);
-
+	self->show_focus(self);
 }
 
 

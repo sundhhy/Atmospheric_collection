@@ -51,7 +51,7 @@ HMI *g_p_mainHmi;
 3-20 14：39：00
 */
 static ro_char main_code_title[] = { "<text vx0=0 vy0=0 bkc=white>主菜单</>" };
-static ro_char main_code_subtitle[] = { "<text vx0=72 vy0=0 bkc=white>[粉尘]</>" };
+static ro_char main_code_subtitle[] = { "<text vx0=72 vy0=0 bkc=white><粉尘></>" };
 
 static ro_char main_code_choice_1_1[] = { "<text vx0=16 vy0=16 bkc=white>设置</>" };
 static ro_char main_code_choice_1_2[] = { "<text vx0=80 vy0=16 bkc=white>采样</>" };
@@ -133,7 +133,7 @@ static int	Init_mainHmi( HMI *self, void *arg)
 	//初始化界面组件
 
 	
-	self->initSheet( self);
+//	self->initSheet( self);
 
 	
 	return RET_OK;
@@ -221,6 +221,7 @@ static void	Main_Init_focus(HMI *self)
 	Focus_Set_sht(self->p_fcuu, 1, 0, arr_p_sht_choices[2]);
 	Focus_Set_sht(self->p_fcuu, 1, 1, arr_p_sht_choices[3]);
 		
+	Focus_Set_focus(self->p_fcuu, 0, 1);
 }
 
 
@@ -231,7 +232,7 @@ static void	MainHmiShow( HMI *self)
 
 	
 	Sheet_refresh(arr_p_pool_shts[0]);
-
+	self->show_focus(self);
 }
 
 

@@ -49,10 +49,10 @@
 */
 static ro_char has_code_title[] = { "<text vx0=0 vy0=0>采样设置</>" };
 
-static ro_char has_code_choice_1_1[] = { "<text vx0=16 vy0=16 bkc=white>压力</>" };
-static ro_char has_code_choice_1_2[] = { "<text vx0=80 vy0=16 bkc=white>计时方式</>" };
-static ro_char has_code_choice_2_1[] = { "<text vx0=16 vy0=32 bkc=white>恒温器</>" };
-static ro_char has_code_choice_2_2[] = { "<text vx0=80 vy0=32 bkc=white>其他设置</>" };
+static ro_char has_code_choice_1_1[] = { "<text vx0=0 vy0=16 bkc=white>压力</>" };
+static ro_char has_code_choice_1_2[] = { "<text vx0=56 vy0=16 bkc=white>计时方式</>" };
+static ro_char has_code_choice_2_1[] = { "<text vx0=0 vy0=32 bkc=white>恒温器</>" };
+static ro_char has_code_choice_2_2[] = { "<text vx0=56 vy0=32 bkc=white>其他设置</>" };
 
 
 //------------------------------------------------------------------------------
@@ -115,18 +115,10 @@ END_CTOR
 
 static int	HAS_Init( HMI *self, void *arg)
 {
-//	HMI 					*p_cmm;
 
-
-	
-//	p_cmm = CreateHMI( HMI_CMM);
-//	p_cmm->init( p_cmm, NULL);
 	self->flag = 0;
-	//初始化界面组件
 
-	
-	self->initSheet( self);
-
+//	self->initSheet( self);
 	
 	return RET_OK;
 	
@@ -163,7 +155,6 @@ static void HAS_Init_sheet( HMI *self )
 	
 	
 	Sheet_updown(arr_p_pool_shts[0], h++);
-	Sheet_updown(arr_p_pool_shts[1], h++);
 	Sheet_updown(arr_p_sht_choices[0], h++);
 	Sheet_updown(arr_p_sht_choices[1], h++);
 	Sheet_updown(arr_p_sht_choices[2], h++);
@@ -183,7 +174,6 @@ static void HAS_Hide(HMI *self)
 	for( i = 3; i >= 0; i--) {		
 		Sheet_updown(arr_p_sht_choices[i], -1);
 	}
-	Sheet_updown(arr_p_pool_shts[1], -1);
 	Sheet_updown(arr_p_pool_shts[0], -1);;
 	
 	self->clear_focus(self, self->p_fcuu->focus_row, self->p_fcuu->focus_col);
@@ -204,6 +194,8 @@ static void	HAS_Init_focus(HMI *self)
 	Focus_Set_sht(self->p_fcuu, 0, 1, arr_p_sht_choices[1]);
 	Focus_Set_sht(self->p_fcuu, 1, 0, arr_p_sht_choices[2]);
 	Focus_Set_sht(self->p_fcuu, 1, 1, arr_p_sht_choices[3]);
+	
+	Focus_Set_focus(self->p_fcuu, 0, 0);
 		
 }
 
@@ -215,7 +207,7 @@ static void	HAS_Show( HMI *self)
 
 	
 	Sheet_refresh(arr_p_pool_shts[0]);
-
+	self->show_focus(self);
 }
 
 

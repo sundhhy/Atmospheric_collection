@@ -63,7 +63,7 @@ static void ConposeKeyHandle(HMI *self, char kcd_1, char kcd_2);
 
 void	Init_focus(HMI *self);
 void	Clear_focus(HMI *self, uint8_t fouse_row, uint8_t fouse_col);
-void	Show_focus( HMI *self, uint8_t fouse_row, uint8_t fouse_col);
+void	Show_focus( HMI *self);
 
 static void		HMI_Build_cmp(HMI *self);
 static void		HMI_Clean_cmp(HMI *self);
@@ -113,6 +113,12 @@ int HMI_Init(void)
 	p_hmi = CreateHMI(HMI_CONFIG);
 	p_hmi->init(p_hmi, NULL);
 	
+	p_hmi = CreateHMI(HMI_INS_SETUP);
+	p_hmi->init(p_hmi, NULL);
+	
+	p_hmi = CreateHMI(HMI_ACQ_SETUP);
+	p_hmi->init(p_hmi, NULL);
+	
 	
 //	p_btn = BTN_Get_Sington();
 //	p_btn->init(p_btn);
@@ -123,11 +129,10 @@ int HMI_Init(void)
 //	p_tips = TIP_Get_Sington();
 //	p_tips->init(p_tips);
 	
+//	p_mainHmi = CreateHMI(HMI_ACQ_SETUP);
 	
-	
-	p_mainHmi->switchHMI(p_mainHmi, p_mainHmi);
-	Cmd_Rgt_time_task(HMI_Flush, HMI_FLUSH_CYCLE_S);
-	g_p_curHmi = p_mainHmi;
+	p_mainHmi->switchHMI(NULL, p_mainHmi);
+//	Cmd_Rgt_time_task(HMI_Flush, HMI_FLUSH_CYCLE_S);
 	
 	return RET_OK;
 }
@@ -233,10 +238,15 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 	
 	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 1000) <= 0)
 		return;
+	if(self)
+	{
+		
+		Set_flag_show(&self->flag, 0);
+		self->hide(self);
+		self->clean_cmp(self);
+			
+	}
 	
-	Set_flag_show(&self->flag, 0);
-	self->hide(self);
-	self->clean_cmp(self);
 	
 	re_show:
 	p_hmi->initSheet( p_hmi);
@@ -257,6 +267,7 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 	
 	
 	Set_flag_show(&p_hmi->flag, 1);
+	
 	p_hmi->show_cmp(p_hmi);
 	
 	p_hmi->flag &= ~HMI_FLAG_KEEP;
@@ -368,7 +379,7 @@ void	Clear_focus(HMI *self, uint8_t fouse_row, uint8_t fouse_col)
 	Sheet_slide( p_sht);
 
 }
-void	Show_focus( HMI *self, uint8_t fouse_row, uint8_t fouse_col) 
+void	Show_focus( HMI *self) 
 {
 	sheet *p_sht = Focus_Get_focus(self->p_fcuu);
 	

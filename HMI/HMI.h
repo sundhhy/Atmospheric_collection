@@ -191,7 +191,7 @@ ABS_CLASS(HMI)
 	//焦点处理
 	void		(*init_focus)(HMI *self);
 	void		(*clear_focus)(HMI *self, uint8_t fouse_row, uint8_t fouse_col);
-	void		(*show_focus)( HMI *self, uint8_t fouse_row, uint8_t fouse_col);
+	void		(*show_focus)( HMI *self);
 	
 	
 		//屏幕上的按钮

@@ -51,7 +51,7 @@
 static ro_char cfg_code_title[] = { "<text vx0=0 vy0=0>配置</>" };
 
 static ro_char cfg_code_choice_1_1[] = { "<text vx0=32 vy0=16>仪器配置</>" };
-static ro_char cfg_code_choice_1_2[] = { "<text vx0=88 vy0=16>采样设置</>" };
+static ro_char cfg_code_choice_1_2[] = { "<text vx0=32 vy0=32>采样设置</>" };
 
 
 
@@ -125,7 +125,6 @@ static int	HMI_CFG_Init( HMI *self, void *arg)
 	self->flag = 0;
 
 	
-	self->initSheet( self);
 
 
 	return RET_OK;

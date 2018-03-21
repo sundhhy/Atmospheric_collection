@@ -56,6 +56,7 @@ x7
 //------------------------------------------------------------------------------
 #define FM_VRAM(x, y) fm_vram[(x) >> 3][y]
 
+#define FM12864_WIDE			64
 #define FM12864_WIDE_8			8		//8 * 8 = 64
 #define FM12864_HALF_LONG		64
 #define FM12864_LONG				128
@@ -234,7 +235,8 @@ static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c)
 	short 	vx, vy;
 	short		i, j;
 	FM_Coordinate_converter(x, y, &vx, &vy);
-	
+	if(len == 0)
+		len = strlen(str);
 //	FM_Set_vxy(vx, vy);
 	while(*str && len)
 	{
@@ -257,6 +259,16 @@ static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c)
 		half_mask = (code_len >> 1) - 1;
 		for(i = 0; i < code_len; i++)
 		{
+			if(((i & half_mask) == 0) && ( i > 0))
+			{
+				j += 8;
+				vy -= code_len >> 1;
+				
+				if(j > FM12864_WIDE)
+					break;
+				
+			}
+			
 			//todo: 反显的判断机制不是很好，但是目前够用了
 			if(c == PALLET_WHITE)
 				FM_VRAM(j, vy) = ~code[i];
@@ -265,11 +277,9 @@ static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c)
 			FM_Update_change_area(j, vy);
 //			LHI_Write_vram(&FM_VRAM(vx, vy), 1);
 			vy ++;
-			if(((i & half_mask) == 0) && ( i > 0))
-			{
-				j += 8;
-				vy -= code_len >> 1;
-			}
+			if(vy >= FM12864_LONG)
+				break;
+			
 			
 		}
 		
