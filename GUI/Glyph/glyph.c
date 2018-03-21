@@ -8,6 +8,7 @@
 #include "sdhDef.h"
 #include "basis/sdhError.h"
 #include "system.h"
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -106,62 +107,29 @@ int Set_effects(dspContent_t *p_cnt, int eff, int val)
 uint8_t ColorInvert( uint8_t clr)
 {
 	
-	if( clr == COLOUR_BLUE)
-		return COLOUR_GREN;
-	else if( clr == COLOUR_GREN)
-		return COLOUR_BLUE;
-	else if( clr == COLOUR_WHITE)
-		return COLOUR_BLACK;
+	if( clr == PALLET_WHITE)
+		return PALLET_BLACK;
 	else
-		return COLOUR_WHITE;
+		return PALLET_WHITE;
 }
 
 int String2Colour( char *s)
 {
 	int c;
-	if( strstr( s, "red"))
+
+	if( strstr( s, "white") )
 	{
-		c = COLOUR_RED;
-		
-	}
-	else if( strstr( s, "gren"))
-	{
-		c = COLOUR_GREN;
-		
-	}
-	else if( strstr( s, "blue") )
-	{
-		c = COLOUR_BLUE;
-		
-	}
-	else if( strstr( s, "yellow") )
-	{
-		c = COLOUR_YELLOW;
-		
-	}
-	else if( strstr( s, "purple") )
-	{
-		c = COLOUR_PURPLE;
-		
-	}
-	else if( strstr( s, "gray") )
-	{
-		c = COLOUR_GRAY;
-		
-	}
-	else if( strstr( s, "white") )
-	{
-		c = COLOUR_WHITE;
+		c = PALLET_WHITE;
 		
 	}
 	else if( strstr( s, "black") )
 	{
-		c = COLOUR_BLACK;
+		c = PALLET_BLACK;
 		
 	}
 	else
 	{
-		c = ERR_COLOUR;
+		c = DEF_COLOUR;
 	}
 	return c;
 }

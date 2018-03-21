@@ -19,13 +19,24 @@
 #define NUM_KEFIFO			16	//必须是2的幂
 
 //顺序与硬件上的引脚连接保持一致
-#define	KEYCODE_RIGHT	0x01
-#define	KEYCODE_LEFT	0x02
-#define	KEYCODE_UP		0x03
-#define	KEYCODE_DOWN	0x04
-#define	KEYCODE_ENTER	0x05
-#define	KEYCODE_ESC		0x06
+#define	KEYCODE_RIGHT				0x01
+#define	KEYCODE_LEFT				0x02
+#define	KEYCODE_UP					0x03
+#define	KEYCODE_DOWN				0x04
+#define	KEYCODE_ENTER				0x05
+#define	KEYCODE_ESC					0x06
+#define	KEYCODE_SWITCH			0x07
+#define IS_LEGAL_KCD(k)			(k >= KEYCODE_RIGHT && k <= KEYCODE_SWITCH)
+#define KEYCODE_NONE				0xff
 
+#define HMI_KEYCODE_UP		0
+#define HMI_KEYCODE_DN		1
+#define HMI_KEYCODE_LT		2
+#define HMI_KEYCODE_RT		3
+#define HMI_KEYCODE_ER		4
+#define HMI_KEYCODE_ESC		5
+#define HMI_KEYCODE_SWITCH	6
+#define HMI_KEYCODE_NONE		0xff
 //根据原理图来设置
 /*
 按键位置：

@@ -26,7 +26,7 @@
 
 sheet			*arr_p_pool_shts[HMI_NUM_P_SHT];
 sheet			*arr_p_sht_choices[HMI_NUM_P_CHOICE_SHT];
-
+char 			arr_choice_key[HMI_NUM_P_CHOICE_SHT];		//可以用来存放选择图层对应的界面的类型等
 
 sheet			*g_p_sht_bkpic;
 sheet			*g_p_sht_title;
@@ -41,9 +41,8 @@ sheet			*g_arr_p_chnAlarm[NUM_CHANNEL];
 
 
 
-hmiAtt_t CmmHmiAtt = { 10,1, COLOUR_BLACK, 4, 2};
 
-const char	arr_clrs[NUM_CHANNEL] = {CLR_BLACK};
+const char	arr_clrs[NUM_CHANNEL] = {PALLET_BLACK};
 
 ro_char news_cpic[] =  {"<cpic vx0=0 vx1=320 vy0=50 vy1=210>16</>" };
 
@@ -215,6 +214,9 @@ void *HMI_Ram_alloc(int bytes)
 	
 	
 }
+
+
+
 CTOR( cmmHmi)
 SUPER_CTOR( HMI);
 FUNCTION_SETTING( HMI.init, Init_cmmHmi);
@@ -334,8 +336,8 @@ static void Build_otherSheets(void)
 	g_p_cpic = Sheet_alloc( p_shtctl);
 	g_p_text = Sheet_alloc( p_shtctl);
 	g_p_boxlist = Sheet_alloc( p_shtctl);
-	g_p_boxlist->id = SHEET_BOXLIST;
-	g_p_text->id = SHEET_G_TEXT;
+	g_p_boxlist->sht_id = SHEET_BOXLIST;
+	g_p_text->sht_id = SHEET_G_TEXT;
 	
 	g_p_sht_bkpic = Sheet_alloc( p_shtctl);
 	p_exp = ExpCreate( "pic");

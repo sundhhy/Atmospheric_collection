@@ -10,4 +10,5 @@
 .\objects\gh_rectangle.o: ..\..\device\dev_cmd.h
 .\objects\gh_rectangle.o: ..\..\device\dev_char.h
 .\objects\gh_rectangle.o: ..\..\device\dev_lcd.h
+.\objects\gh_rectangle.o: ..\..\configs\lcd_conf.h
 .\objects\gh_rectangle.o: E:\sdhLib\inc\arithmetic/cycQueue.h

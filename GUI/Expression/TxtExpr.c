@@ -63,7 +63,7 @@ static void * TxtInptSht( Expr *self, void *context, sheet *p_sht)
 		if( p_sht->cnt.bkc == ERR_COLOUR)
 		{
 			
-			p_sht->cnt.bkc = COLOUR_BLUE;
+			p_sht->cnt.bkc = PALLET_BLACK;
 		}
 		if( p_sht->cnt.font < FONT_16)
 			p_sht->cnt.font = FONT_16;

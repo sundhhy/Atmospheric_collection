@@ -10,7 +10,7 @@
 #include "os/os_depend.h"
 #include "Component_tips.h"
 
-
+#include "utils/keyboard.h"
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -54,7 +54,7 @@ static ro_char cfg_code_choice_1_1[] = { "<text vx0=32 vy0=16>仪器配置</>" };
 static ro_char cfg_code_choice_1_2[] = { "<text vx0=88 vy0=16>采样设置</>" };
 
 
-#define CFG_CHOICE_ID(n)			(n | SHT_ID_PRIVATE)
+
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ static void HMI_CFG_Hide( HMI *self );
 static void HMI_CFG_Init_sheet( HMI *self );
 static void HMI_CFG_Run(HMI *self);
 static void	HMI_CFG_Init_focus(HMI *self);
-static void HMI_CFG_Hit( HMI *self, char *s);
+static void HMI_CFG_Hit( HMI *self, char kcd);
 
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
@@ -156,9 +156,10 @@ static void HMI_CFG_Init_sheet( HMI *self )
 
 	
 	//为可以被按键选择的图层分配ID
-	arr_p_sht_choices[0]->id = CFG_CHOICE_ID(0);
-	arr_p_sht_choices[1]->id = CFG_CHOICE_ID(1);
-
+	arr_p_sht_choices[0]->sht_id = CMM_CHOICE_ID(0);
+	arr_p_sht_choices[1]->sht_id = CMM_CHOICE_ID(1);
+	arr_choice_key[0] = HMI_INS_SETUP;
+	arr_choice_key[1] = HMI_ACQ_SETUP;
 	
 	h = 0;
 	
@@ -215,7 +216,7 @@ static void	HMI_CFG_Show( HMI *self )
 
 
 
-static void	HMI_CFG_Hit( HMI *self, char *s)
+static void	HMI_CFG_Hit( HMI *self, char kcd)
 {
 
 //	Button	*p = BTN_Get_Sington();
@@ -252,6 +253,8 @@ static void	HMI_CFG_Hit( HMI *self, char *s)
 //	}
 //	
 }
+
+
 
 
 

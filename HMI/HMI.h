@@ -30,19 +30,8 @@
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
-#define HMIKEY_UP				"up"
-#define HMIKEY_DOWN			"down"
-#define HMIKEY_LEFT			"left"
-#define HMIKEY_RIGHT		"right"
-#define HMIKEY_ENTER		"enter"
-#define HMIKEY_ESC			"esc"
 
-#define HMI_KEYCODE_UP		0
-#define HMI_KEYCODE_DN		1
-#define HMI_KEYCODE_LT		2
-#define HMI_KEYCODE_RT		3
-#define HMI_KEYCODE_ER		4
-#define HMI_KEYCODE_ESC		5
+
 
 
 //显示用的方向
@@ -195,10 +184,10 @@ ABS_CLASS(HMI)
 	void		(*switchBack)( HMI *self);
 	
 	//按键动作
-	void		(*hitHandle)( HMI *self, char *s_key);
-	void		(*dhitHandle)( HMI *self, char *s_key);
-	void		(*longpushHandle)( HMI *self,  char *s_key);
-	void		(*conposeKeyHandle)( HMI *self, char *s_key1, char *s_key2);
+	void		(*hitHandle)( HMI *self, char kcd);
+	void		(*dhitHandle)( HMI *self, char kcd);
+	void		(*longpushHandle)( HMI *self,  char kcd);
+	void		(*conposeKeyHandle)( HMI *self, char kcd_1, char kcd_2);
 	//焦点处理
 	void		(*init_focus)(HMI *self);
 	void		(*clear_focus)(HMI *self, uint8_t fouse_row, uint8_t fouse_col);
@@ -243,6 +232,6 @@ void STY_Duild_button(void *arg);
 
 
 int HMI_Init(void);
-
+void HMI_choice(HMI *self, uint8_t choice_id);
 
 #endif

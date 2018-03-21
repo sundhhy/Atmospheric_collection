@@ -77,6 +77,7 @@ struct {
 	short chg_x0, chg_y0;
 	short chg_x1, chg_y1;
 }fm_vram_mgr;
+
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
@@ -178,7 +179,7 @@ static	void FM_Clear(int c)
 	uint8_t  buf[64] = {0xff};
 
 	
-	if(c == CLR_BLACK)
+	if(c == PALLET_BLACK)
 	{
 		memset(buf, 0xff, 64);
 		memset(fm_vram, 0xff, sizeof(fm_vram));
@@ -256,7 +257,11 @@ static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c)
 		half_mask = (code_len >> 1) - 1;
 		for(i = 0; i < code_len; i++)
 		{
-			FM_VRAM(j, vy) = code[i];
+			//todo: 反显的判断机制不是很好，但是目前够用了
+			if(c == PALLET_WHITE)
+				FM_VRAM(j, vy) = ~code[i];
+			else
+				FM_VRAM(j, vy) = code[i];
 			FM_Update_change_area(j, vy);
 //			LHI_Write_vram(&FM_VRAM(vx, vy), 1);
 			vy ++;
@@ -420,10 +425,11 @@ static  int	 FM_Get_size(int font, uint16_t *width, uint16_t *heigh)
 	*heigh = 16;
 	return RET_OK;
 }
+
+
 static	void FM_Set_backcolor( char c)
 {
-	
-	
+
 }
 
 static int  FM_Lcd_ctl(int cmd, ...)
@@ -456,7 +462,7 @@ static void FM_Draw_line(char attr, char clr, short vx0, short vy0, short vx1, s
 //	if(vy0 == vy1)
 //	{
 //		//单色
-//		if(clr == CLR_BLACK)
+//		if(clr == PALLET_BLACK)
 //		
 //			val = 0xff;
 //			
@@ -477,7 +483,7 @@ static void FM_Draw_line(char attr, char clr, short vx0, short vy0, short vx1, s
 //	}
 	
 	//单色
-	if(clr == CLR_BLACK)
+	if(clr == PALLET_BLACK)
 		clr = 1;
 	else
 		clr = 0;

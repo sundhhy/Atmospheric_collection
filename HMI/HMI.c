@@ -4,7 +4,7 @@
 #include "os/os_depend.h"
 #include "sys_cmd.h"
 #include "HMIFactory.h"
-
+#include "utils/keyboard.h"
 //提供 按键，事件，消息，窗口，报警，时间，复选框的图层
 //这些图层可能会被其他界面所使用
 //============================================================================//
@@ -56,10 +56,10 @@ static void	HmiShow( HMI *self);
 static void	HMI_Run( HMI *self);
 static void	SwitchHMI( HMI *self, HMI *p_hmi);
 static void	SwitchBack( HMI *self);
-static void HitHandle( HMI *self, char *s_key);
-static void LngpshHandle( HMI *self, char *s_key);
-static void DHitHandle( HMI *self, char *s_key);
-static void ConposeKeyHandle(HMI *self, char *s_key1, char *s_key2);
+static void HitHandle( HMI *self, char kcd);
+static void LngpshHandle( HMI *self, char kcd);
+static void DHitHandle( HMI *self, char kcd);
+static void ConposeKeyHandle(HMI *self, char kcd_1, char kcd_2);
 
 void	Init_focus(HMI *self);
 void	Clear_focus(HMI *self, uint8_t fouse_row, uint8_t fouse_col);
@@ -139,7 +139,22 @@ int HMI_Init(void)
 //	*p_flag |= val;
 //}
 
+//切换界面的一般处理方法
+void HMI_choice(HMI *self, uint8_t choice_id)
+{
+	HMI *p_target;
+	
+	
+	if(CMM_IS_LEGAL_CID(choice_id) == 0)
+		return;
+	p_target = CreateHMI(arr_choice_key[CMM_GET_CHOICE_NUM(choice_id)]);
+	
+	if(p_target == NULL)
+		return;
+	
+	self->switchHMI(self, p_target);
 
+}	
 
 
 
@@ -280,40 +295,62 @@ static void	SwitchBack( HMI *self)
 }
 
 
-static void HitHandle( HMI *self, char *s_key)
+static void HitHandle( HMI *self, char kcd)
+{
+	sheet *p_sht;
+	switch(kcd)
+	{
+		case KEYCODE_LEFT:
+			Focus_move_left(self->p_fcuu);
+			break;
+		case KEYCODE_RIGHT:
+			Focus_move_left(self->p_fcuu);
+			break;
+		case KEYCODE_UP:
+			Focus_move_up(self->p_fcuu);
+			break;
+		case KEYCODE_DOWN:
+			Focus_move_down(self->p_fcuu);
+			break;
+		case KEYCODE_SWITCH:
+			//大气A/B 粉尘之间的切换
+			break;
+		case KEYCODE_ENTER:
+			p_sht = Focus_Get_focus(self->p_fcuu);
+			if(p_sht)
+				HMI_choice(self, p_sht->sht_id);
+			break;		
+		case KEYCODE_ESC:
+			
+		
+			break;	
+		
+	}
+}
+
+static void LngpshHandle( HMI *self, char kcd)
 {
 	
 }
 
-static void LngpshHandle( HMI *self, char *s_key)
+static void DHitHandle( HMI *self, char kcd)
 {
 	
 }
 
-static void DHitHandle( HMI *self, char *s_key)
+static void ConposeKeyHandle(HMI *self, char kcd_1, char kcd_2)
 {
-	
-}
-
-static void ConposeKeyHandle(HMI *self, char *s_key1, char *s_key2)
-{
-	if( !strcmp( s_key1, HMIKEY_LEFT) && !strcmp( s_key2, HMIKEY_RIGHT))
+	if(kcd_1 == KEYCODE_RIGHT && kcd_2 == KEYCODE_LEFT)
 	{
 
 		aci_sys.sys_flag |= SYSFLAG_SETTING;
 //		self->switchHMI(self, g_p_Setup_HMI);
 	} 
-	else if( !strcmp( s_key1, HMIKEY_RIGHT) && !strcmp( s_key2, HMIKEY_LEFT)) {
+	else if(kcd_2 == KEYCODE_RIGHT && kcd_1 == KEYCODE_LEFT) {
 		aci_sys.sys_flag |= SYSFLAG_SETTING;
 //		self->switchHMI(self, g_p_Setup_HMI);
 	}
-	else if( !strcmp( s_key1, HMIKEY_UP) && !strcmp( s_key2, HMIKEY_DOWN)) {
-		self->switchBack(self);
-	}
-	else if( !strcmp( s_key2, HMIKEY_UP) && !strcmp( s_key1, HMIKEY_DOWN)) {
-		self->switchBack(self);
-	}
-	
+
 	
 }
 

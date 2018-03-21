@@ -31,20 +31,10 @@
 #define CHECK_FONT( font) (( font <= FONT_64) && ( font >= FONT_12))
 
 
-#define COLOUR_RED			1
-#define COLOUR_GREN			2
-#define COLOUR_BLUE			3
-#define COLOUR_YELLOW		4
-#define COLOUR_BABYBLUE		5		//浅蓝色
-#define COLOUR_GRAY			8
-#define COLOUR_PURPLE		6	//紫色
-#define COLOUR_WHITE		18
-#define COLOUR_DEEPPURPLE	57
-#define COLOUR_BLACK		63
-#define COLOUR_OTHER(n)		n
 
-#define DEF_COLOUR			COLOUR_WHITE
-#define ERR_COLOUR			0
+
+
+
 
 //对齐的值要保持线性，不要乱改
 #define	ALIGN_LEFT					0		//左对齐
@@ -70,8 +60,7 @@
 #define ATT_STRONG				1		//加粗
 #define ATT_FULL_CORE			2		//实心,用于几何图形
 
-#define CLR_BLACK				0
-#define CLR_WHITE				1
+
 
 //------------------------------------------------------------------------------
 // typedef

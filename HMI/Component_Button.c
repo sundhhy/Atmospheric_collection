@@ -131,7 +131,7 @@ static void 	BTN_Init(Button *self)
 		p_exp->inptSht(p_exp, (void *)arr_btn_code[i], arr_p_btn_sht[i]) ;
 		arr_p_btn_sht[i]->area.x1 = arr_p_btn_sht[i]->area.x0 + arr_p_btn_sht[i]->bxsize;
 		arr_p_btn_sht[i]->area.y1 = arr_p_btn_sht[i]->area.y0 + arr_p_btn_sht[i]->bysize;
-		arr_p_btn_sht[i]->id = SHT_BTN_ID(i);
+		arr_p_btn_sht[i]->sht_id = SHT_BTN_ID(i);
 		arr_p_btn_sht[i]->height = -1;
 		FormatSheetSub(arr_p_btn_sht[i]);
 		
@@ -170,44 +170,44 @@ static int		BTN_Build_each_btn(uint8_t	seq, uint8_t btn_type, btn_hdl bh, void *
 
 		case BTN_TYPE_MENU:
 			btn_pic->data = BTN_ICO_MENU;
-			arr_p_btn_sht[seq]->id = ICO_ID_MENU;
+			arr_p_btn_sht[seq]->sht_id = ICO_ID_MENU;
 			break;
 		case BTN_TYPE_BAR:
 			btn_pic->data = BTN_ICO_BAR;
-			arr_p_btn_sht[seq]->id = ICO_ID_BAR;
+			arr_p_btn_sht[seq]->sht_id = ICO_ID_BAR;
 			break;
 		
 		case BTN_TYPE_DIGITAL:
 			btn_pic->data = BTN_ICO_DIGITAL;
-			arr_p_btn_sht[seq]->id = ICO_ID_DIGITAL;
+			arr_p_btn_sht[seq]->sht_id = ICO_ID_DIGITAL;
 			break;
 	
 
 		case BTN_TYPE_COPY:
 			btn_pic->data = BTN_ICO_COPY;
-			arr_p_btn_sht[seq]->id = ICO_ID_COPY;
+			arr_p_btn_sht[seq]->sht_id = ICO_ID_COPY;
 			break;
 		case BTN_TYPE_STOP:
 			btn_pic->data = BTN_ICO_STOP;
-			arr_p_btn_sht[seq]->id = ICO_ID_STOP;
+			arr_p_btn_sht[seq]->sht_id = ICO_ID_STOP;
 			break;
 		
 		case BTN_TYPE_PGDN:
 			btn_pic->data = BTN_ICO_PGDN;
-			arr_p_btn_sht[seq]->id = ICO_ID_PGDN;
+			arr_p_btn_sht[seq]->sht_id = ICO_ID_PGDN;
 			break;
 	
 		case BTN_TYPE_PGUP:
 			btn_pic->data = BTN_ICO_PGUP;
-			arr_p_btn_sht[seq]->id = ICO_ID_PGUP;
+			arr_p_btn_sht[seq]->sht_id = ICO_ID_PGUP;
 			break;
 		case BTN_TYPE_ERASE:
 			btn_pic->data = BTN_ICO_ERASE;
-			arr_p_btn_sht[seq]->id = ICO_ID_ERASETOOL;
+			arr_p_btn_sht[seq]->sht_id = ICO_ID_ERASETOOL;
 			break;
 		case BTN_TYPE_SAVE:
 			btn_pic->data = BTN_ICO_SAVE;
-			arr_p_btn_sht[seq]->id = ICO_ID_SAVE;
+			arr_p_btn_sht[seq]->sht_id = ICO_ID_SAVE;
 			break;
 //		case BTN_TYPE_SEARCH:
 //			btn_pic->data = BTN_ICO_SEARCH;
@@ -217,7 +217,7 @@ static int		BTN_Build_each_btn(uint8_t	seq, uint8_t btn_type, btn_hdl bh, void *
 			//只有匹配的上才清除
 			if(btn_type & BTN_FLAG_CLEAN)
 			{
-				if(arr_p_btn_sht[seq]->id  == (btn_type & 0x7f))
+				if(arr_p_btn_sht[seq]->sht_id  == (btn_type & 0x7f))
 				{
 					
 					//清除残留的图像
@@ -401,6 +401,6 @@ static void		BTN_Deal_hit(void)
 		return;
 	
 	p_self->arr_hdl[p_self->focus_btn_num](p_self->arr_p_arg[p_self->focus_btn_num], \
-	arr_p_btn_sht[p_self->focus_btn_num]->id);
+	arr_p_btn_sht[p_self->focus_btn_num]->sht_id);
 	
 }

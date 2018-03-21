@@ -2,6 +2,8 @@
 #include "HMI_comm.h"
 #include "HMI_main.h"
 #include "HMI_config.h"
+#include "HMI_instrument_setup.h"
+#include "HMI_acquisition_setup.h"
 
 
 //提供 按键，事件，消息，窗口，报警，时间，复选框的图层
@@ -47,10 +49,10 @@
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
-HMI *CreateHMI( int hmiType)
+HMI *CreateHMI(char hmi_type)
 {
 	HMI *p_hmi = NULL;
-	switch( hmiType)
+	switch( hmi_type)
 	{
 		case HMI_MAIN:
 			p_hmi = SUPER_PTR(Get_mainHmi(), HMI);
@@ -63,13 +65,13 @@ HMI *CreateHMI( int hmiType)
 			
 			p_hmi = SUPER_PTR(Get_hmi_config(), HMI);
 			break;
-//		case HMI_MENU:
-//			
-//			p_hmi = SUPER_PTR(GetmenuHMI(), HMI);
-//			break;
-//		case HMI_BAR:
-//			p_hmi = SUPER_PTR(Get_barGhHMI(), HMI);
-//			break;
+		case HMI_INS_SETUP:
+			
+			p_hmi = SUPER_PTR(Get_HMI_instrument_setup(), HMI);
+			break;
+		case HMI_ACQ_SETUP:
+			p_hmi = SUPER_PTR(Get_HMI_acquisition_setup(), HMI);
+			break;
 //		case HMI_DATA:
 //			p_hmi = SUPER_PTR(Get_dataHMI(), HMI);
 //			break;

@@ -3,7 +3,7 @@
 #include "lw_oopc.h"
 #include <stdint.h>
 #include "device.h"
-
+#include "lcd_conf.h"
 
 
 

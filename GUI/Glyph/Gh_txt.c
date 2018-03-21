@@ -102,7 +102,7 @@ static void GhTxt_vDraw( Glyph *self, dspContent_t *cnt, vArea_t *area)
 	dev_lcd *lcd;
 	char	m = 0xff;
 	uint8_t	c = cnt->colour;
-//	uint8_t	bkc = cnt->bkc;
+	uint8_t	bkc = cnt->bkc;
 
 	
 	if( GP_CKECK_EFF( cnt->effects , EFF_HIDE))
@@ -110,18 +110,18 @@ static void GhTxt_vDraw( Glyph *self, dspContent_t *cnt, vArea_t *area)
 	
 	if( GP_CKECK_EFF( cnt->effects , EFF_FOCUS)) {
 		c = ColorInvert( c);
-//		bkc  = ColorInvert( c);
+		bkc  = ColorInvert( c);
 	}
 	
 
 	Dev_open( LCD_DEVID, (void *)&lcd);
 
-//	if( GP_CKECK_EFF( cnt->effects , EFF_BKPIC)) {
-//		m = cnt->bkc;
-//		
-//	} else {
-//		lcd->BKColor( bkc);
-//	}
+	if( GP_CKECK_EFF( cnt->effects , EFF_BKPIC)) {
+		m = cnt->bkc;
+		
+	} else {
+		lcd->set_backcolor( bkc);
+	}
 	
 
 		

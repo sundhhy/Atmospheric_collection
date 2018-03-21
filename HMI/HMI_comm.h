@@ -26,11 +26,13 @@
 #define STRIPE_VY0				34		//第一行宽2个像素点，就单独出来
 #define STRIPE_VY1				50
 #define STRIPE_SIZE_Y			16
-#define STRIPE_CLR_1			COLOUR_GRAY
-#define STRIPE_CLR_2			COLOUR_BLACK
-#define STRIPE_CLR_FOCUSE		COLOUR_BLUE
+#define STRIPE_CLR_1			PALLET_BLACK
+#define STRIPE_CLR_2			PALLET_BLACK
+#define STRIPE_CLR_FOCUSE		PALLET_BLACK
 
-
+#define CMM_CHOICE_ID(n)			(n | SHT_ID_PRIVATE)
+#define CMM_IS_LEGAL_CID(cid)			((cid >= SHT_ID_PRIVATE) && (cid < (SHT_ID_PRIVATE | 4)))
+#define CMM_GET_CHOICE_NUM(cid)		(cid & 0xf)
  //------------------------------------------------------------------------------
 // typedef
 //------------------------------------------------------------------------------
@@ -62,6 +64,7 @@ typedef struct {
 //------------------------------------------------------------------------------
 extern sheet			*arr_p_pool_shts[HMI_NUM_P_SHT];
 extern sheet			*arr_p_sht_choices[HMI_NUM_P_CHOICE_SHT];
+extern char 			arr_choice_key[HMI_NUM_P_CHOICE_SHT];
 extern sheet			*g_p_shtTime;
 
 
@@ -83,7 +86,6 @@ extern	sheet  			*g_arr_p_check[NUM_CHANNEL]; 		//通道的勾选图标
 
 //values
 extern	const char		arr_clrs[NUM_CHANNEL];
-extern	hmiAtt_t		CmmHmiAtt;
 //extern 	keyboardHMI		*g_keyHmi;
 extern 	ro_char 		news_cpic[];
 //extern curve_ctl_t		g_curve[NUM_CHANNEL];

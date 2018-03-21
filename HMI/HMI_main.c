@@ -10,6 +10,7 @@
 #include "os/os_depend.h"
 #include "Component_tips.h"
 
+#include "utils/keyboard.h"
 
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
@@ -49,15 +50,15 @@ HMI *g_p_mainHmi;
 	查询		维护
 3-20 14：39：00
 */
-static ro_char main_code_title[] = { "<text vx0=0 vy0=0>主设置</>" };
-static ro_char main_code_subtitle[] = { "<text vx0=72 vy0=0>[粉尘]</>" };
+static ro_char main_code_title[] = { "<text vx0=0 vy0=0 bkc=white>主菜单</>" };
+static ro_char main_code_subtitle[] = { "<text vx0=72 vy0=0 bkc=white>[粉尘]</>" };
 
-static ro_char main_code_choice_1_1[] = { "<text vx0=16 vy0=16>设置</>" };
-static ro_char main_code_choice_1_2[] = { "<text vx0=80 vy0=16>采样</>" };
-static ro_char main_code_choice_2_1[] = { "<text vx0=16 vy0=32>查询</>" };
-static ro_char main_code_choice_2_2[] = { "<text vx0=80 vy0=32>维护</>" };
+static ro_char main_code_choice_1_1[] = { "<text vx0=16 vy0=16 bkc=white>设置</>" };
+static ro_char main_code_choice_1_2[] = { "<text vx0=80 vy0=16 bkc=white>采样</>" };
+static ro_char main_code_choice_2_1[] = { "<text vx0=16 vy0=32 bkc=white>查询</>" };
+static ro_char main_code_choice_2_2[] = { "<text vx0=80 vy0=32 bkc=white>维护</>" };
 
-#define MAIN_CHOICE_ID(n)			(n | SHT_ID_PRIVATE)
+
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
@@ -75,7 +76,7 @@ static void MainHmiHide( HMI *self );
 static void MaininitSheet( HMI *self );
 static void HMI_MAIN_Run(HMI *self);
 static void	Main_Init_focus(HMI *self);
-static void Main_HMI_hit( HMI *self, char *s);
+static void HMI_Main_hit( HMI *self, char kcd);
 
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
@@ -109,7 +110,7 @@ FUNCTION_SETTING( HMI.initSheet, MaininitSheet);
 FUNCTION_SETTING( HMI.hmi_run, HMI_MAIN_Run);
 
 FUNCTION_SETTING( HMI.show, MainHmiShow);
-FUNCTION_SETTING( HMI.hitHandle, Main_HMI_hit);
+FUNCTION_SETTING( HMI.hitHandle, HMI_Main_hit);
 
 FUNCTION_SETTING(HMI.init_focus, Main_Init_focus);
 
@@ -165,10 +166,14 @@ static void MaininitSheet( HMI *self )
 	p_exp->inptSht(p_exp, (void *)main_code_choice_2_2, arr_p_sht_choices[3]);
 	
 	//为可以被按键选择的图层分配ID
-	arr_p_sht_choices[0]->id = MAIN_CHOICE_ID(0);
-	arr_p_sht_choices[1]->id = MAIN_CHOICE_ID(1);
-	arr_p_sht_choices[2]->id = MAIN_CHOICE_ID(2);
-	arr_p_sht_choices[3]->id = MAIN_CHOICE_ID(3);
+	arr_p_sht_choices[0]->sht_id = CMM_CHOICE_ID(0);
+	arr_p_sht_choices[1]->sht_id = CMM_CHOICE_ID(1);
+	arr_p_sht_choices[2]->sht_id = CMM_CHOICE_ID(2);
+	arr_p_sht_choices[3]->sht_id = CMM_CHOICE_ID(3);
+	arr_choice_key[0] = HMI_CONFIG;
+	arr_choice_key[1] = HMI_NONE;
+	arr_choice_key[2] = HMI_NONE;
+	arr_choice_key[3] = HMI_NONE;
 	
 	h = 0;
 	
@@ -200,6 +205,10 @@ static void MainHmiHide(HMI *self)
 	self->clear_focus(self, self->p_fcuu->focus_row, self->p_fcuu->focus_col);
 	Focus_free(self->p_fcuu);
 	
+	arr_choice_key[0] = HMI_NONE;
+	arr_choice_key[1] = HMI_NONE;
+	arr_choice_key[2] = HMI_NONE;
+	arr_choice_key[3] = HMI_NONE;
 }	
 
 static void	Main_Init_focus(HMI *self) 
@@ -217,7 +226,7 @@ static void	Main_Init_focus(HMI *self)
 
 
 
-static void	MainHmiShow( HMI *self )
+static void	MainHmiShow( HMI *self)
 {
 
 	
@@ -228,40 +237,39 @@ static void	MainHmiShow( HMI *self )
 
 
 
-static void	Main_HMI_hit( HMI *self, char *s)
+static void	HMI_Main_hit( HMI *self, char kcd)
 {
+	sheet *p_sht;
+	switch(kcd)
+	{
+		case KEYCODE_LEFT:
+			Focus_move_left(self->p_fcuu);
+			break;
+		case KEYCODE_RIGHT:
+			Focus_move_left(self->p_fcuu);
+			break;
+		case KEYCODE_UP:
+			Focus_move_up(self->p_fcuu);
+			break;
+		case KEYCODE_DOWN:
+			Focus_move_down(self->p_fcuu);
+			break;
+		case KEYCODE_SWITCH:
+			//大气A/B 粉尘之间的切换
+			break;
+		case KEYCODE_ENTER:
+			p_sht = Focus_Get_focus(self->p_fcuu);
+			if(p_sht)
+				HMI_choice(self, p_sht->sht_id);
+			break;		
+		case KEYCODE_ESC:
+			
+		
+			break;	
+		
+	}
 
-//	Button	*p = BTN_Get_Sington();
-
-//	if( !strcmp( s, HMIKEY_UP) )
-//	{
-
-//	}
-//	else if( !strcmp( s, HMIKEY_DOWN) )
-//	{
-//		
-//	}
-//	else if( !strcmp( s, HMIKEY_LEFT))
-//	{
-//		self->btn_backward(self);
-
-//	}
-//	else if( !strcmp( s, HMIKEY_RIGHT))
-//	{
-
-//		self->btn_forward(self);
-//	}
 	
-	
-	
-//	if( !strcmp( s, HMIKEY_ENTER))
-//	{
-//		p->hit();
-//	}
-//	if( !strcmp( s, HMIKEY_ESC))
-//	{
-//		self->switchBack(self);
-//	}
 	
 }
 

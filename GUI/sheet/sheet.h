@@ -67,7 +67,7 @@ typedef struct SHEET {
 	uint8_t		flags;	
 	uint8_t		col_inv;
 	
-	uint8_t		id;
+	uint8_t		sht_id;
 	uint8_t		e_heifht;		//在调用Sheet_slide 时将其与height 相加作为是否显示的依据
 	uint8_t		none[2];
 	

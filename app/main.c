@@ -322,7 +322,7 @@ static void 	Init_LCD(void)
 	dev_lcd *p_lcd;
 	Dev_open(DEVID_FM12864, (void *)&p_lcd);
 	p_lcd->init();
-	p_lcd->clear(CLR_WHITE);
+	p_lcd->clear(PALLET_WHITE);
 	
 }
 
