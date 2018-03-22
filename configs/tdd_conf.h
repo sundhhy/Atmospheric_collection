@@ -3,6 +3,6 @@
 
 #define TDD_ON			1
 #define TDD_LCD			0
-
+#define TDD_KEY			1
 
 #endif

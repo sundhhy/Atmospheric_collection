@@ -154,7 +154,7 @@ int main (void) {
 //	p_mdl_time = ModelCreate("time");
 //	
 //	USB_Rgt_event_hdl(Main_USB_event);
-//	osKernelStart ();  
+	osKernelStart ();  
 
 //	MBA_Init();
 //	

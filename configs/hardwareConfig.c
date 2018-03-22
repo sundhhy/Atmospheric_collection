@@ -179,36 +179,14 @@ spi_conf_t arr_conf_spi[NUM_SPIS] ={
 
 
 
-
-gpio_pins pin_keyRight = {
-	GPIO_PORT_KEY_RIGHT,
-	GPIO_PIN_KEY_RIGHT,
-	GPIO_DIR_IN,
-	0,
-	GPIO_IRQ_DISABLE,
-	GPIO_PORTSOURCE_RIGHT,
-	GPIO_PINSOURCE_RIGHT
-};
-
-gpio_pins pin_keyLeft = {
-	GPIO_PORT_KEY_LEFT,
-	GPIO_PIN_KEY_LEFT,
-	GPIO_DIR_IN,
-	1,
-	GPIO_IRQ_DISABLE,
-	GPIO_PORTSOURCE_LEFT,
-	GPIO_PINSOURCE_LEFT
-	
-};
-
 gpio_pins pin_keyUp = {
 	GPIO_PORT_KEY_UP,
 	GPIO_PIN_KEY_UP,
 	GPIO_DIR_IN,
-	2,
+	0,
+	0xff,
 	GPIO_IRQ_DISABLE,
-	GPIO_PORTSOURCE_UP,
-	GPIO_PINSOURCE_UP
+
 	
 };
 
@@ -216,21 +194,45 @@ gpio_pins pin_keyDown = {
 	GPIO_PORT_KEY_DOWN,
 	GPIO_PIN_KEY_DOWN,
 	GPIO_DIR_IN,
-	3,
+	1,
+	0xff,
 	GPIO_IRQ_DISABLE,
-	GPIO_PORTSOURCE_DOWN,
-	GPIO_PINSOURCE_DOWN
+
 	
 };
+gpio_pins pin_keyLeft = {
+	GPIO_PORT_KEY_LEFT,
+	GPIO_PIN_KEY_LEFT,
+	GPIO_DIR_IN,
+	2,
+	0xff,
+	GPIO_IRQ_DISABLE,
+
+	
+};
+
+
+gpio_pins pin_keyRight = {
+	GPIO_PORT_KEY_RIGHT,
+	GPIO_PIN_KEY_RIGHT,
+	GPIO_DIR_IN,
+	3,
+	0xff,
+	GPIO_IRQ_DISABLE,
+
+};
+
+
+
 
 gpio_pins pin_keyEnter = {
 	GPIO_PORT_KEY_ENTER,
 	GPIO_PIN_KEY_ENTER,
 	GPIO_DIR_IN,
 	4,
+	0xff,
 	GPIO_IRQ_DISABLE,
-	GPIO_PORTSOURCE_ENTER,
-	GPIO_PINSOURCE_ENTER
+
 	
 };
 
@@ -239,16 +241,28 @@ gpio_pins pin_keyEsc = {
 	GPIO_PIN_KEY_ESC,
 	GPIO_DIR_IN,
 	5,
+	0xff,
 	GPIO_IRQ_DISABLE,
-	GPIO_PORTSOURCE_ESC,
-	GPIO_PINSOURCE_ESC
+
 	
 };
+gpio_pins pin_key_switch = {
+	GPIO_PORT_KEY_SWITCH,
+	GPIO_PIN_KEY_SWITCH,
+	GPIO_DIR_IN,
+	6,
+	0xff,
+	GPIO_IRQ_DISABLE,
+
+	
+};
+
 
 gpio_pins pin_UsbInt = {
 	GPIO_PORT_USBINT,
 	GPIO_PIN_USBINT,
 	GPIO_DIR_IN,
+	7,
 	10,
 	GPIO_IRQ_FAILING,
 	GPIO_PORTSOURCE_USBINT,
@@ -256,15 +270,5 @@ gpio_pins pin_UsbInt = {
 	
 };
 
-gpio_pins pin_pwr = {
-	PORT_PWR,
-	PIN_PWR,
-	GPIO_DIR_IN,
-	9,
-	GPIO_IRQ_FAILING,
-	GPIO_PortSourceGPIOD,
-	GPIO_PINSOURCE_PWR
-	
-};
 
 

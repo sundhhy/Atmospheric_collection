@@ -80,7 +80,7 @@ int	Init_Ch376(int dev_id, uplevel_intr up_irq)
 {
 	int ret = RET_OK;
 	
-	ret = Dev_open(DEVID_GPIO_A10, (void *)&ch376_int);
+	ret = Dev_open(DEVID_GPIO_USB_INIT, (void *)&ch376_int);
 	Ch376_enbale_Irq(0);
 	
 	ret = Dev_open(dev_id, (void *)&ch376_dev);

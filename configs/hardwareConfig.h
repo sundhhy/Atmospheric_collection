@@ -19,6 +19,7 @@
 #define UART_MODE_CPU		2
 
 #define PWM_TIME	TIM2
+#define NUMPIN		8
 //各种外设的引脚配置
 
 /*********** LCD *************************************************/
@@ -54,6 +55,24 @@
 #define PIN_LCD_DATA_6                           GPIO_Pin_14
 #define PORT_LCD_DATA_7                          GPIOE    					 
 #define PIN_LCD_DATA_7                           GPIO_Pin_15
+
+//*********keyboard	********************************
+#define GPIO_PORT_KEY_UP                              	GPIOD    					 
+#define GPIO_PIN_KEY_UP                               	GPIO_Pin_4
+#define GPIO_PORT_KEY_DOWN                              GPIOD    					 
+#define GPIO_PIN_KEY_DOWN                              	GPIO_Pin_5
+#define GPIO_PORT_KEY_LEFT                             	GPIOD    					 
+#define GPIO_PIN_KEY_LEFT                               GPIO_Pin_6
+#define GPIO_PORT_KEY_RIGHT                             GPIOD    					 
+#define GPIO_PIN_KEY_RIGHT                              GPIO_Pin_3
+#define GPIO_PORT_KEY_ENTER                             GPIOD    					 
+#define GPIO_PIN_KEY_ENTER                              GPIO_Pin_1
+#define GPIO_PORT_KEY_ESC                             	GPIOD    					 
+#define GPIO_PIN_KEY_ESC                              	GPIO_Pin_0
+#define GPIO_PORT_KEY_SWITCH                            GPIOD    					 
+#define GPIO_PIN_KEY_SWITCH                             GPIO_Pin_2
+
+
 
 //注意：因为是用GPIO模拟并口，因此下面两个宏要保证与上面的DATA0 ` DATA7保持匹配，程序的正确执行依赖于此
 #define PORT_LCD_DATAS                          GPIOE   
@@ -123,42 +142,7 @@
 
 #define GPIO_PORT_UART4RX                               GPIOC    					 
 #define GPIO_PIN_UART4RX                                GPIO_Pin_11
-//*********keyboard	********************************
-#define RCC_KEY_RIGHT                                    RCC_APB2Periph_GPIOD		 
-#define GPIO_PORT_KEY_RIGHT                              GPIOD    					 
-#define GPIO_PIN_KEY_RIGHT                               GPIO_Pin_0
-#define GPIO_PORTSOURCE_RIGHT                              GPIO_PortSourceGPIOD    					 
-#define GPIO_PINSOURCE_RIGHT                               GPIO_PinSource0
 
-#define RCC_KEY_LEFT                                  RCC_APB2Periph_GPIOD		 
-#define GPIO_PORT_KEY_LEFT                             GPIOD    					 
-#define GPIO_PIN_KEY_LEFT                               GPIO_Pin_1
-#define GPIO_PORTSOURCE_LEFT                               GPIO_PortSourceGPIOD    					 
-#define GPIO_PINSOURCE_LEFT                                GPIO_PinSource1
-
-#define RCC_KEY_UP                                    RCC_APB2Periph_GPIOD	
-#define GPIO_PORT_KEY_UP                              GPIOD    					 
-#define GPIO_PIN_KEY_UP                               GPIO_Pin_2
-#define GPIO_PORTSOURCE_UP                              GPIO_PortSourceGPIOD    					 
-#define GPIO_PINSOURCE_UP                               GPIO_PinSource2
-
-#define RCC_KEY_DOWN                                    RCC_APB2Periph_GPIOD		 
-#define GPIO_PORT_KEY_DOWN                              GPIOD    					 
-#define GPIO_PIN_KEY_DOWN                              GPIO_Pin_3
-#define GPIO_PORTSOURCE_DOWN                              GPIO_PortSourceGPIOD    					 
-#define GPIO_PINSOURCE_DOWN                               GPIO_PinSource3
-
-#define RCC_KEY_ENTER                                    RCC_APB2Periph_GPIOD		 
-#define GPIO_PORT_KEY_ENTER                             GPIOD    					 
-#define GPIO_PIN_KEY_ENTER                               GPIO_Pin_4
-#define GPIO_PORTSOURCE_ENTER                              GPIO_PortSourceGPIOD    					 
-#define GPIO_PINSOURCE_ENTER                              GPIO_PinSource4
-
-#define RCC_KEY_ESC                                    RCC_APB2Periph_GPIOD		 
-#define GPIO_PORT_KEY_ESC                             GPIOD    					 
-#define GPIO_PIN_KEY_ESC                              GPIO_Pin_5
-#define GPIO_PORTSOURCE_ESC                              GPIO_PortSourceGPIOD    					 
-#define GPIO_PINSOURCE_ESC                               GPIO_PinSource5
 //*********usb spi1	********************************
 #define GPIO_PORT_SPI1                              	GPIOA    					 
 #define GPIO_PIN_SPI1_MOSI                               GPIO_Pin_7
@@ -267,13 +251,18 @@ typedef struct
 	uint8_t			direction;
 
 	//etti
-	//中断线配置参考STM32中文手册 8.2.5
-	uint8_t			extiLine;
+	
+	
+	
+	//该引脚在系统中的顺序
+
+	uint8_t			gpio_num;	
+	uint8_t			exti_line;	//中断线配置参考STM32中文手册 8.2.5
 	uint8_t			irqType;	
 	uint8_t			portSource;
 	uint8_t			pinSource;
 	
-	uint8_t			none;
+	
 }gpio_pins;
 
 
@@ -288,7 +277,7 @@ extern gpio_pins pin_keyDown;
 extern gpio_pins pin_keyEnter;
 extern gpio_pins pin_keyEsc;
 extern gpio_pins pin_UsbInt;
-extern gpio_pins pin_pwr;
+extern gpio_pins pin_key_switch;
 extern spi_conf_t arr_conf_spi[NUM_SPIS];
 
 #endif

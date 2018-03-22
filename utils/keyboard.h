@@ -13,8 +13,9 @@
 // const defines
 //------------------------------------------------------------------------------
 
-
-#define NUM_KEYS			6
+#define CONF_KEYSCAN_POLL		1		//按键扫描：轮询方式,该值为0，则为中断触发式
+#define	CONF_KEYSCAN_CYCLEMS	100
+#define NUM_KEYS			7
 #define MAX_OBS				4
 #define NUM_KEFIFO			16	//必须是2的幂
 
@@ -29,40 +30,8 @@
 #define IS_LEGAL_KCD(k)			(k >= KEYCODE_RIGHT && k <= KEYCODE_SWITCH)
 #define KEYCODE_NONE				0xff
 
-#define HMI_KEYCODE_UP		0
-#define HMI_KEYCODE_DN		1
-#define HMI_KEYCODE_LT		2
-#define HMI_KEYCODE_RT		3
-#define HMI_KEYCODE_ER		4
-#define HMI_KEYCODE_ESC		5
-#define HMI_KEYCODE_SWITCH	6
-#define HMI_KEYCODE_NONE		0xff
-//根据原理图来设置
-/*
-按键位置：
-上
-下 左 右 确认 ESC
-*/
-//#define	KEYGPIOID_RIGHT		DEVID_GPIO_D2
-//#define	KEYGPIOID_LEFT		DEVID_GPIO_D3
-//#define	KEYGPIOID_UP		DEVID_GPIO_D5
-//#define	KEYGPIOID_DOWN		DEVID_GPIO_D4
-//#define	KEYGPIOID_ENTER		DEVID_GPIO_D0
-//#define	KEYGPIOID_ESC		DEVID_GPIO_D1
 
 
-/*
-按键位置：
-ESC
-上 下 左 右 确认
-*/
-
-#define	KEYGPIOID_RIGHT		DEVID_GPIO_D0
-#define	KEYGPIOID_LEFT		DEVID_GPIO_D2
-#define	KEYGPIOID_UP		DEVID_GPIO_D4
-#define	KEYGPIOID_DOWN		DEVID_GPIO_D3
-#define	KEYGPIOID_ENTER		DEVID_GPIO_D1
-#define	KEYGPIOID_ESC		DEVID_GPIO_D5
 
 
 //原始事件

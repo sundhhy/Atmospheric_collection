@@ -32,7 +32,7 @@ CLASS( driveGpio)
 {
 	uint8_t		encode[4];
 	void		*p_gpioBase;
-	void		*p_cfg;
+	gpio_pins	*p_cfg;
 	EXTI_InitTypeDef		*p_exit;
 	irqHdl		func_hdl;
 	void		*hdl_arg;

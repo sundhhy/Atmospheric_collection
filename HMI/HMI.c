@@ -234,7 +234,7 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 	aci_sys.key_weight = 1;
 	
 	g_p_curHmi = p_hmi;
-	
+	CLR_LCD();
 	
 	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 1000) <= 0)
 		return;
@@ -284,7 +284,7 @@ static void	SwitchBack( HMI *self)
 	
 	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 1000) <= 0)
 		return;
-	
+	CLR_LCD();
 	g_p_lastHmi = g_p_curHmi;
 	g_p_curHmi = nowHmi;
 	

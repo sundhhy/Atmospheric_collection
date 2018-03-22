@@ -19,8 +19,7 @@
 #define HRD_VER						10		//1位小数
 
 //系统配置类宏定义
-#define CONF_KEYSCAN_POLL		1		//按键扫描：轮询方式,该值为0，则为中断触发式
-#define	CONF_KEYSCAN_CYCLEMS	100
+
 
 
 

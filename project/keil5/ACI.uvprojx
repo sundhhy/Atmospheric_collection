@@ -653,6 +653,11 @@
               <FileType>5</FileType>
               <FilePath>..\..\drive\uart\drive_uart.h</FilePath>
             </File>
+            <File>
+              <FileName>drive_gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\drive\GPIO\drive_gpio.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -732,6 +737,11 @@
               <FileName>lcd_hardware_interfaces.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\device\dev_LCD\FM12864\lcd_hardware_interfaces.c</FilePath>
+            </File>
+            <File>
+              <FileName>device_gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\device\dev_gpio\device_gpio.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -922,6 +932,16 @@
               <FileName>HMI_acquisition_setup.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\HMI\HMI_acquisition_setup.c</FilePath>
+            </File>
+            <File>
+              <FileName>HMI_setting.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\HMI\HMI_setting.h</FilePath>
+            </File>
+            <File>
+              <FileName>HMI_setting.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\HMI\HMI_setting.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1152,6 +1172,16 @@
               <FileName>unit_test.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\unit_tests\unit_test.h</FilePath>
+            </File>
+            <File>
+              <FileName>test_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\unit_tests\test_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>test_key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\unit_tests\test_key.h</FilePath>
             </File>
           </Files>
         </Group>

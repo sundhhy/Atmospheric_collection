@@ -91,7 +91,31 @@ void Pin_init(void)
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING; 	//  …œ¿≠ ‰≥ˆ
 	GPIO_Init(PORT_LCD_DATA_7, &GPIO_InitStructure);
+
+	/*********** key pins	************************************/
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_RIGHT;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_Init( GPIO_PORT_KEY_RIGHT, &GPIO_InitStructure);
 	
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_LEFT;
+    GPIO_Init( GPIO_PORT_KEY_LEFT, &GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_UP;
+    GPIO_Init( GPIO_PORT_KEY_UP, &GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_DOWN;
+    GPIO_Init( GPIO_PORT_KEY_DOWN, &GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_ENTER;
+    GPIO_Init( GPIO_PORT_KEY_ENTER, &GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_ESC;
+    GPIO_Init( GPIO_PORT_KEY_ESC, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_SWITCH;
+    GPIO_Init( GPIO_PORT_KEY_SWITCH, &GPIO_InitStructure);
+
 //	/*** pwr ***/
 //	GPIO_InitStructure.GPIO_Pin = PIN_PWR;
 //    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
@@ -231,37 +255,7 @@ void Pin_init(void)
 //    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 //    GPIO_Init( GPIO_PORT_UART4RX, &GPIO_InitStructure);
 //	
-//	/*********** key pins	************************************/
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_RIGHT;
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
-//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-//    GPIO_Init( GPIO_PORT_KEY_RIGHT, &GPIO_InitStructure);
-//	
-//	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_LEFT;
-////    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
-////    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-//    GPIO_Init( GPIO_PORT_KEY_LEFT, &GPIO_InitStructure);
-//	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_UP;
-////    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
-////    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-//    GPIO_Init( GPIO_PORT_KEY_UP, &GPIO_InitStructure);
-//	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_DOWN;
-////    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
-////    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-//    GPIO_Init( GPIO_PORT_KEY_DOWN, &GPIO_InitStructure);
-//	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_ENTER;
-////    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
-////    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-//    GPIO_Init( GPIO_PORT_KEY_ENTER, &GPIO_InitStructure);
-//	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_ESC;
-////    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
-////    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-//    GPIO_Init( GPIO_PORT_KEY_ESC, &GPIO_InitStructure);
+
 	
 	
 	

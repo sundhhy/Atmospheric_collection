@@ -85,25 +85,9 @@ extern	sheet  			*g_arr_p_check[NUM_CHANNEL]; 		//通道的勾选图标
 
 
 //values
-extern	const char		arr_clrs[NUM_CHANNEL];
 //extern 	keyboardHMI		*g_keyHmi;
 extern 	ro_char 		news_cpic[];
-//extern curve_ctl_t		g_curve[NUM_CHANNEL];
 
-//HMI
-extern 	HMI 			*g_p_mainHmi;
-extern 	HMI 			*g_p_HMI_menu;
-extern  HMI 			*g_p_dataHmi;
-extern 	HMI 			*g_p_barGhHmi;
-
-//extern 	HMI 			*g_p_News_Alarm_HMI;
-//extern	HMI 			*g_p_News_PwrDn_HMI;
-extern	HMI 			*g_p_History_HMI;
-extern	HMI 			*g_p_Accm_HMI;
-
-//extern 	HMI 			*g_p_Setup_HMI;
-extern 	HMI 			*g_p_HMI_striped;
-//extern 	HMI 			*g_p_winHmi;
 
 //------------------------------------------------------------------------------
 // function prototypes

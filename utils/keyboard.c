@@ -14,16 +14,17 @@
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
-#define KEYCODE_STR_RIGHT		"key_right"
-#define KEYCODE_STR_LEFT		"key_left"
-#define KEYCODE_STR_UP			"key_up"
-#define KEYCODE_STR_DOWN		"key_down"
-#define KEYCODE_STR_ENTER		"key_ENTER"
-#define KEYCODE_STR_ESC			"key_ESC"
+#define KEYCODE_STR_RIGHT		"right"
+#define KEYCODE_STR_LEFT		"left"
+#define KEYCODE_STR_UP			"up"
+#define KEYCODE_STR_DOWN		"down"
+#define KEYCODE_STR_ENTER		"enter"
+#define KEYCODE_STR_ESC			"esc"
+#define KEYCODE_STR_SWI			"switch"
 
 #define KEYEVENT_STR_HIT		"hit"
-#define KEYEVENT_STR_DHIT		"double hit"
-#define KEYEVENT_STR_LPUSH		"long push"
+#define KEYEVENT_STR_DHIT		"dhit"
+#define KEYEVENT_STR_LPUSH		"lhit"
 
 //------------------------------------------------------------------------------
 // module global vars
@@ -51,11 +52,13 @@
 #define  DOUBLEHIT_TIME_MS		160
 #define  REPORT_TIME_MS			200
 
-const uint32_t	arr_keyGpioID[ NUM_KEYS] = { KEYGPIOID_RIGHT, KEYGPIOID_LEFT, \
-	KEYGPIOID_UP, KEYGPIOID_DOWN, KEYGPIOID_ENTER, KEYGPIOID_ESC};
 
-const uint8_t	arr_keyCode[ NUM_KEYS] = { KEYCODE_RIGHT, KEYCODE_LEFT, \
-	KEYCODE_UP, KEYCODE_DOWN, KEYCODE_ENTER, KEYCODE_ESC};
+
+const uint32_t	arr_keyGpioID[ NUM_KEYS] = { DEVID_KEY_UP, DEVID_KEY_DOWN, \
+	DEVID_KEY_LEFT, DEVID_KEY_RIGHT, DEVID_KEY_ENTER, DEVID_KEY_ESC, DEVID_KEY_SWITCH};
+
+const uint8_t	arr_keyCode[ NUM_KEYS] = { KEYCODE_UP, KEYCODE_DOWN, KEYCODE_LEFT, KEYCODE_RIGHT,  \
+	 KEYCODE_ENTER, KEYCODE_ESC, KEYCODE_SWITCH};
 
 #if CONF_KEYSCAN_POLL == 0
 static keyMsg_t arr_keyMsg[ NUM_KEYS];
@@ -143,6 +146,9 @@ void Keycode2Str( uint8_t keycode, int buflen, char *buf)
 			break;
 		case KEYCODE_ESC:
 			strncpy( buf, KEYCODE_STR_ESC, buflen);
+			break;
+		case KEYCODE_SWITCH:
+			strncpy( buf, KEYCODE_STR_SWI, buflen);
 			break;
 		default:
 			strncpy( buf, "key ukown", buflen);

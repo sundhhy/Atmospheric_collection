@@ -9,6 +9,7 @@
 #include "basis/sdhError.h"
 #include "system.h"
 
+#include "lcd_conf.h"
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -82,7 +83,7 @@ void CLR_LCD(void)
 {
 	dev_lcd *lcd;
 	Dev_open( LCD_DEVID, (void *)&lcd);
-	lcd->clear(0);
+	lcd->clear(PALLET_WHITE);
 	
 }
 

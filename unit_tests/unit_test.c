@@ -4,6 +4,7 @@
 #include "configs/tdd_conf.h"
 #include "unit_test.h"
 #include "test_lcd.h"
+#include "test_key.h"
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
@@ -48,6 +49,8 @@ void unit_test(void)
 {
 #if TDD_LCD == 1
 	Test_lcd();
+#elif TDD_KEY == 1
+	Test_key();
 #endif
 }
 

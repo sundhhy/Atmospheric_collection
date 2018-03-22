@@ -88,7 +88,7 @@ static int KeyUpdate( keyObservice *self,  uint8_t num, keyMsg_t arr_msg[])
 //	CtlKey *cthis = SUB_PTR(self, keyObservice, CtlKey);
 	
 	int i = 0;
-	char  k[2] = {HMI_KEYCODE_NONE, HMI_KEYCODE_NONE};
+	uint8_t  k[2] = {KEYCODE_NONE, KEYCODE_NONE};
 	uint8_t eventCode;
 	
 	
@@ -107,7 +107,7 @@ static int KeyUpdate( keyObservice *self,  uint8_t num, keyMsg_t arr_msg[])
 		
 	}
 	
-	if(k[0] == HMI_KEYCODE_NONE)
+	if(k[0] == KEYCODE_NONE)
 		goto exit;
 	if(num == 2) {
 		g_p_curHmi->conposeKeyHandle(g_p_curHmi, k[0], k[1]);

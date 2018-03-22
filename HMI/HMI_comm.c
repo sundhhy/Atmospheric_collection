@@ -42,7 +42,6 @@ sheet			*g_arr_p_chnAlarm[NUM_CHANNEL];
 
 
 
-const char	arr_clrs[NUM_CHANNEL] = {PALLET_BLACK};
 
 ro_char news_cpic[] =  {"<cpic vx0=0 vx1=320 vy0=50 vy1=210>16</>" };
 

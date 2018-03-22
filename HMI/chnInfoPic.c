@@ -121,7 +121,7 @@ void Bulid_ChnData(sheet **pp_shts, void *code, int ( *update)( void *p_sht, voi
 		p_exp = ExpCreate("text");
 		pp_shts[i] = Sheet_alloc( p_shtctl);
 		p_exp->inptSht( p_exp, code, pp_shts[i]) ;
-		pp_shts[i]->cnt.colour = arr_clrs[i];
+//		pp_shts[i]->cnt.colour = arr_clrs[i];
 		pp_shts[i]->sht_id = i;
 //		pp_shts[i]->cnt.mdl_aux = AUX_DATA;
 		

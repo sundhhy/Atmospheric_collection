@@ -139,6 +139,7 @@ typedef enum {
 
 typedef struct {
 	
+	
 	//将pp_data指定的行号和列号的显示字符串指针，并返回字符串的长度
 	//长度为0时表示没有数据
 	//所有的显示应该是对齐的，不考虑出现空洞的情况
@@ -150,12 +151,19 @@ typedef struct {
 	int	(*key_hit_lt)(void	*arg);
 	int	(*key_hit_rt)(void	*arg);
 	int	(*key_hit_er)(void	*arg);
+	void (*reset_focus)(void);
 	int	(*get_focus_data)(void *pp_data,  strategy_focus_t *p_in_syf);		//成功返回大于0，失败返回-1
 	int	(*commit)(void	*arg);
 	void	(*sty_exit)(void);
-	strategy_focus_t	sf;
-	void				*p_cmd_rcv;
-	stategy_cmd			cmd_hdl;
+	strategy_focus_t		sf;
+	char								*p_stg_title;
+	void								*p_cmd_rcv;
+	stategy_cmd					cmd_hdl;
+	uint8_t							stg_num_rows;			//总共的行数
+	
+	//被显示在屏幕上的行的范围，用于策略类在执行焦点移动时，判定焦点何时跳出策略范围
+	uint8_t							row_in_lcd[2];		
+	uint8_t							none;
 }strategy_t;
 
 
