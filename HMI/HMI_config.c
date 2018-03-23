@@ -1,5 +1,4 @@
 #include "HMI_config.h"
-#include "HMIFactory.h"
 #include "sdhDef.h"
 #include "ExpFactory.h"
 #include "format.h"
@@ -11,10 +10,19 @@
 #include "Component_tips.h"
 
 #include "utils/keyboard.h"
+
+#include "HMIFactory.h"
+#include "Component_option.h"
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
 
+/*
+设置入口画面，
+会向设置选择画面传递选项类型来确定切换的画面的功能
+
+*/
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
@@ -43,10 +51,9 @@
 
 
 /*
-主菜单		<粉尘>
-	设置		采样
-	查询		维护
-3-20 14：39：00
+配置
+		仪器配置
+		采样设置
 */
 static ro_char cfg_code_title[] = { "<text vx0=0 vy0=0>配置</>" };
 
@@ -73,6 +80,9 @@ static void HMI_CFG_Init_sheet( HMI *self );
 static void HMI_CFG_Run(HMI *self);
 static void	HMI_CFG_Init_focus(HMI *self);
 static void HMI_CFG_Hit( HMI *self, char kcd);
+
+
+static void HMI_CFG_choice(HMI *self, uint8_t choice_id);
 
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
@@ -157,8 +167,7 @@ static void HMI_CFG_Init_sheet( HMI *self )
 	//为可以被按键选择的图层分配ID
 	arr_p_sht_choices[0]->sht_id = CMM_CHOICE_ID(0);
 	arr_p_sht_choices[1]->sht_id = CMM_CHOICE_ID(1);
-	arr_choice_key[0] = HMI_INS_SETUP;
-	arr_choice_key[1] = HMI_ACQ_SETUP;
+
 	
 	h = 0;
 	
@@ -217,41 +226,51 @@ static void	HMI_CFG_Show( HMI *self )
 
 static void	HMI_CFG_Hit( HMI *self, char kcd)
 {
+	sheet *p_sht;
+	switch(kcd)
+	{
 
-//	Button	*p = BTN_Get_Sington();
-
-//	if( !strcmp( s, HMIKEY_UP) )
-//	{
-
-//	}
-//	else if( !strcmp( s, HMIKEY_DOWN) )
-//	{
-//		
-//	}
-//	else if( !strcmp( s, HMIKEY_LEFT))
-//	{
-//		self->btn_backward(self);
-
-//	}
-//	else if( !strcmp( s, HMIKEY_RIGHT))
-//	{
-
-//		self->btn_forward(self);
-//	}
-//	
-//	
-//	
-//	if( !strcmp( s, HMIKEY_ENTER))
-//	{
-//		p->hit();
-////		self->btn_hit(self);
-//	}
-//	if( !strcmp( s, HMIKEY_ESC))
-//	{
-//		self->switchBack(self);
-//	}
-//	
+		case KEYCODE_UP:
+			Focus_move_up(self->p_fcuu);
+			break;
+		case KEYCODE_DOWN:
+			Focus_move_down(self->p_fcuu);
+			break;
+		case KEYCODE_ENTER:
+			p_sht = Focus_Get_focus(self->p_fcuu);
+			if(p_sht)
+				HMI_CFG_choice(self, p_sht->sht_id);
+			break;		
+		case KEYCODE_ESC:
+			
+		
+			break;	
+		
+	}
+	
 }
+
+
+//切换界面的一般处理方法
+static void HMI_CFG_choice(HMI *self, uint8_t choice_id)
+{
+	HMI 				*p_target;
+	
+	if(CMM_IS_LEGAL_CID(choice_id) == 0)
+		return;
+	p_target = CreateHMI(HMI_SELECT_SETTING);
+	
+	if(p_target == NULL)
+		return;
+	
+	if(choice_id == CMM_CHOICE_ID(0))
+		p_target->arg[0] = OPTION_INSTRUMENT_SETUP;
+	else
+		p_target->arg[0] = OPTION_ACQUISITION_SETUP;
+	
+	self->switchHMI(self, p_target);
+
+}	
 
 
 

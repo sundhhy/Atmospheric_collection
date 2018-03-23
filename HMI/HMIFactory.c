@@ -4,7 +4,7 @@
 #include "HMI_config.h"
 #include "HMI_instrument_setup.h"
 #include "HMI_acquisition_setup.h"
-
+#include "HMI_select_setting.h"
 
 //提供 按键，事件，消息，窗口，报警，时间，复选框的图层
 //这些图层可能会被其他界面所使用
@@ -64,6 +64,10 @@ HMI *CreateHMI(char hmi_type)
 		case HMI_CONFIG:
 			
 			p_hmi = SUPER_PTR(Get_hmi_config(), HMI);
+			break;
+		case HMI_SELECT_SETTING:
+			
+			p_hmi = SUPER_PTR(Get_HMI_select_setting(), HMI);
 			break;
 		case HMI_INS_SETUP:
 			

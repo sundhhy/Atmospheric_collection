@@ -14,11 +14,12 @@
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
-#define HMI_MAIN				1
-#define HMI_CMM					2
-#define	HMI_CONFIG			3
-#define	HMI_INS_SETUP		4
-#define	HMI_ACQ_SETUP		5
+#define HMI_MAIN									1
+#define HMI_CMM										2
+#define	HMI_CONFIG								3
+#define HMI_SELECT_SETTING				4
+#define	HMI_INS_SETUP							5
+#define	HMI_ACQ_SETUP							6
 
 #define	HMI_NONE				0xff
 //#define HMI_MENU				4

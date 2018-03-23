@@ -454,20 +454,6 @@ static void	HST_Hit(HMI *self, char kcd)
 			break;	
 		
 	}
-	
-	
-	
-	
-	
-	
-
-	
-	
-
-	
-	
-
-	
 	if(sy_chgFouse == 1) {
 		HST_Show_strategy_focus(&old_sf, 0);
 		HST_Show_strategy_focus(&p_sy->sf, 1);
