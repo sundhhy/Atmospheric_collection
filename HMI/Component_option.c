@@ -164,9 +164,13 @@ static void INS_Init(cmp_options_t *p_opt)
 	p_exp->inptSht(p_exp, (void *)his_code_choice_1_2, arr_p_sht_choices[1]);
 	p_exp->inptSht(p_exp, (void *)his_code_choice_1_3, arr_p_sht_choices[2]);
 	
-//	arr_p_sht_choices[0]->sht_id = CMM_CHOICE_ID(0);
-//	arr_p_sht_choices[1]->sht_id = CMM_CHOICE_ID(1);
-//	arr_p_sht_choices[2]->sht_id = CMM_CHOICE_ID(2);
+
+	
+	p_opt->p_titl = arr_p_pool_shts[0];
+	p_opt->p_optionals[0][0] = arr_p_sht_choices[0];
+	p_opt->p_optionals[1][0] = arr_p_sht_choices[1];
+	p_opt->p_optionals[2][0] = arr_p_sht_choices[2];
+	
 	
 	p_opt->num_col = 1;
 	p_opt->num_row = 3;
@@ -193,10 +197,13 @@ static void ACQ_Init(cmp_options_t *p_opt)
 	p_exp->inptSht(p_exp, (void *)has_code_choice_2_2, arr_p_sht_choices[3]);
 	
 	
-//	arr_p_sht_choices[0]->sht_id = CMM_CHOICE_ID(0);
-//	arr_p_sht_choices[1]->sht_id = CMM_CHOICE_ID(1);
-//	arr_p_sht_choices[2]->sht_id = CMM_CHOICE_ID(2);
-//	arr_p_sht_choices[3]->sht_id = CMM_CHOICE_ID(3);
+
+	
+	p_opt->p_titl = arr_p_pool_shts[0];
+	p_opt->p_optionals[0][0] = arr_p_sht_choices[0];
+	p_opt->p_optionals[0][1] = arr_p_sht_choices[1];
+	p_opt->p_optionals[1][0] = arr_p_sht_choices[2];
+	p_opt->p_optionals[1][1] = arr_p_sht_choices[3];
 	
 	p_opt->num_col = 2;
 	p_opt->num_row = 2;

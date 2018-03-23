@@ -113,11 +113,11 @@ int HMI_Init(void)
 	p_hmi = CreateHMI(HMI_CONFIG);
 	p_hmi->init(p_hmi, NULL);
 	
-	p_hmi = CreateHMI(HMI_INS_SETUP);
+	p_hmi = CreateHMI(HMI_SELECT_SETTING);
 	p_hmi->init(p_hmi, NULL);
-	
-	p_hmi = CreateHMI(HMI_ACQ_SETUP);
-	p_hmi->init(p_hmi, NULL);
+//	
+//	p_hmi = CreateHMI(HMI_ACQ_SETUP);
+//	p_hmi->init(p_hmi, NULL);
 	
 	
 //	p_btn = BTN_Get_Sington();
@@ -231,6 +231,8 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 //		g_p_lastHmi = g_p_curHmi;
 //		
 //	}
+	
+	
 	aci_sys.key_weight = 1;
 	
 	g_p_curHmi = p_hmi;
@@ -244,7 +246,7 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 		Set_flag_show(&self->flag, 0);
 		self->hide(self);
 		self->clean_cmp(self);
-			
+		g_p_lastHmi = self;	
 	}
 	
 	
@@ -309,6 +311,12 @@ static void	SwitchBack( HMI *self)
 static void HitHandle( HMI *self, char kcd)
 {
 	sheet *p_sht;
+	char	change = 1;
+	char	old_fcuu_row;
+	char	old_fcuu_col;
+	
+	old_fcuu_row = self->p_fcuu->focus_row;
+	old_fcuu_col = self->p_fcuu->focus_col;
 	switch(kcd)
 	{
 		case KEYCODE_LEFT:
@@ -323,19 +331,28 @@ static void HitHandle( HMI *self, char kcd)
 		case KEYCODE_DOWN:
 			Focus_move_down(self->p_fcuu);
 			break;
-		case KEYCODE_SWITCH:
-			//大气A/B 粉尘之间的切换
-			break;
 		case KEYCODE_ENTER:
+			change = 0;
 			p_sht = Focus_Get_focus(self->p_fcuu);
 			if(p_sht)
 				HMI_choice(self, p_sht->sht_id);
-			break;		
+			break;	
 		case KEYCODE_ESC:
+			change = 0;
+			self->switchBack(self);
+			break;			
+		default:
 			
-		
+			change = 0;
 			break;	
 		
+	}
+	
+	if(change)
+	{
+		
+		self->clear_focus(self, old_fcuu_row, old_fcuu_col);
+		self->show_focus(self);
 	}
 }
 

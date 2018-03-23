@@ -69,13 +69,13 @@ HMI *CreateHMI(char hmi_type)
 			
 			p_hmi = SUPER_PTR(Get_HMI_select_setting(), HMI);
 			break;
-		case HMI_INS_SETUP:
-			
-			p_hmi = SUPER_PTR(Get_HMI_instrument_setup(), HMI);
-			break;
-		case HMI_ACQ_SETUP:
-			p_hmi = SUPER_PTR(Get_HMI_acquisition_setup(), HMI);
-			break;
+//		case HMI_INS_SETUP:
+//			
+//			p_hmi = SUPER_PTR(Get_HMI_instrument_setup(), HMI);
+//			break;
+//		case HMI_ACQ_SETUP:
+//			p_hmi = SUPER_PTR(Get_HMI_acquisition_setup(), HMI);
+//			break;
 //		case HMI_DATA:
 //			p_hmi = SUPER_PTR(Get_dataHMI(), HMI);
 //			break;

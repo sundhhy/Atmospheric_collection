@@ -206,7 +206,7 @@ static void	HMI_CFG_Init_focus(HMI *self)
 		
 	Focus_Set_sht(self->p_fcuu, 0, 0, arr_p_sht_choices[0]);
 	Focus_Set_sht(self->p_fcuu, 1, 0, arr_p_sht_choices[1]);
-
+//	Focus_Set_focus(self->p_fcuu, 0, 0);
 		
 }
 
@@ -218,7 +218,7 @@ static void	HMI_CFG_Show( HMI *self )
 
 	
 	Sheet_refresh(arr_p_pool_shts[0]);
-
+	self->show_focus(self);
 }
 
 
@@ -227,6 +227,12 @@ static void	HMI_CFG_Show( HMI *self )
 static void	HMI_CFG_Hit( HMI *self, char kcd)
 {
 	sheet *p_sht;
+	char	change = 1;
+	char	old_fcuu_row;
+	char	old_fcuu_col;
+	
+	old_fcuu_row = self->p_fcuu->focus_row;
+	old_fcuu_col = self->p_fcuu->focus_col;
 	switch(kcd)
 	{
 
@@ -237,15 +243,28 @@ static void	HMI_CFG_Hit( HMI *self, char kcd)
 			Focus_move_down(self->p_fcuu);
 			break;
 		case KEYCODE_ENTER:
+			
+			change = 0;
 			p_sht = Focus_Get_focus(self->p_fcuu);
 			if(p_sht)
 				HMI_CFG_choice(self, p_sht->sht_id);
-			break;		
+			break;
 		case KEYCODE_ESC:
-			
+			change = 0;
+			self->switchBack(self);
+			break;
+		default:
+			change = 0;
 		
 			break;	
 		
+	}
+	
+	if(change)
+	{
+		
+		self->clear_focus(self, old_fcuu_row, old_fcuu_col);
+		self->show_focus(self);
 	}
 	
 }

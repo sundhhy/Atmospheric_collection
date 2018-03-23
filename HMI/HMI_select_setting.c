@@ -164,7 +164,7 @@ static void HSS_Hide(HMI *self)
 	
 	for(i = p_opt->num_row - 1; i >= 0; i--)
 	{
-		for(j = p_opt->num_col - 1; j >= 0; i++)
+		for(j = p_opt->num_col - 1; j >= 0; j --)
 		{
 			
 			Sheet_updown(p_opt->p_optionals[i][j], -1);
@@ -212,7 +212,13 @@ static void	HSS_Show( HMI *self)
 static void HSS_Hit( HMI *self, char kcd)
 {
 	sheet 					*p_sht;
-	cmp_options_t 	*p_opt = CMP_Get_option(self->arg[0]);
+	cmp_options_t 			*p_opt = CMP_Get_option(self->arg[0]);
+	char					change = 1;
+	char					old_fcuu_row;
+	char					old_fcuu_col;
+	
+	old_fcuu_row = self->p_fcuu->focus_row;
+	old_fcuu_col = self->p_fcuu->focus_col;
 	
 	if(p_opt == NULL)
 		return;
@@ -232,15 +238,27 @@ static void HSS_Hit( HMI *self, char kcd)
 			Focus_move_down(self->p_fcuu);
 			break;
 		case KEYCODE_ENTER:
+			change = 0;
 			p_sht = Focus_Get_focus(self->p_fcuu);
 			if(p_sht)
 				CMP_OPT_Select(p_opt, p_sht->sht_id);
 			break;		
 		case KEYCODE_ESC:
-			
-		
+			change = 0;
+			self->switchBack(self);
 			break;	
+		default:
+			change = 0;
+			break;
 		
+	}
+	
+	
+	if(change)
+	{
+		
+		self->clear_focus(self, old_fcuu_row, old_fcuu_col);
+		self->show_focus(self);
 	}
 }
 

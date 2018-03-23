@@ -93,8 +93,8 @@ static void 	Init_device(void);
 
 
 int main (void) {
-//	Keyboard		*p_kb;
-//	Controller		*p_control;
+	Keyboard		*p_kb;
+	Controller		*p_control;
 	
 	Model 			*p_mdl_time;
 	CMP_tips 		*p_tips;
@@ -131,16 +131,16 @@ int main (void) {
 //	//界面初始化
 	HMI_Init();
 //	//按键初始化
-//	p_kb = GetKeyInsance();
+	p_kb = GetKeyInsance();
 //	
-//	//借用一下内存:&aci_sys.lcd_cmd_bytes
-//	aci_sys.lcd_cmd_bytes = CONF_KEYSCAN_CYCLEMS;
-//	p_kb->init( p_kb, &aci_sys.lcd_cmd_bytes);
-//	aci_sys.lcd_cmd_bytes  = 0;
+	//借用一下内存:&aci_sys.lcd_cmd_bytes
+	aci_sys.lcd_cmd_bytes = CONF_KEYSCAN_CYCLEMS;
+	p_kb->init( p_kb, &aci_sys.lcd_cmd_bytes);
+	aci_sys.lcd_cmd_bytes  = 0;
 
 //	//创建控制器
-//	p_control = SUPER_PTR( Get_CtlKey(), Controller);
-//	p_control->init(p_control, p_kb);
+	p_control = SUPER_PTR( Get_CtlKey(), Controller);
+	p_control->init(p_control, p_kb);
 //	
 //	p_control = SUPER_PTR(CtlTimer_new(), Controller);
 //	if(p_control == NULL) while(1);
@@ -148,8 +148,8 @@ int main (void) {
 //	
 ////	创建线程
 //	
-//	tid_Thread_key = osThreadCreate (osThread(ThrdKeyRun), p_kb);
-//	if (!tid_Thread_key) return(-1);
+	tid_Thread_key = osThreadCreate (osThread(ThrdKeyRun), p_kb);
+	if (!tid_Thread_key) return(-1);
 //	
 //	p_mdl_time = ModelCreate("time");
 //	

@@ -75,7 +75,7 @@ static void MainHmiHide( HMI *self );
 static void MaininitSheet( HMI *self );
 static void HMI_MAIN_Run(HMI *self);
 static void	Main_Init_focus(HMI *self);
-static void HMI_Main_hit( HMI *self, char kcd);
+//static void HMI_Main_hit( HMI *self, char kcd);
 
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
@@ -108,7 +108,7 @@ FUNCTION_SETTING( HMI.initSheet, MaininitSheet);
 FUNCTION_SETTING( HMI.hmi_run, HMI_MAIN_Run);
 
 FUNCTION_SETTING( HMI.show, MainHmiShow);
-FUNCTION_SETTING( HMI.hitHandle, HMI_Main_hit);
+//FUNCTION_SETTING( HMI.hitHandle, HMI_Main_hit);
 
 FUNCTION_SETTING(HMI.init_focus, Main_Init_focus);
 
@@ -219,7 +219,7 @@ static void	Main_Init_focus(HMI *self)
 	Focus_Set_sht(self->p_fcuu, 1, 0, arr_p_sht_choices[2]);
 	Focus_Set_sht(self->p_fcuu, 1, 1, arr_p_sht_choices[3]);
 		
-	Focus_Set_focus(self->p_fcuu, 0, 1);
+//	Focus_Set_focus(self->p_fcuu, 0, 0);
 }
 
 
@@ -236,41 +236,41 @@ static void	MainHmiShow( HMI *self)
 
 
 
-static void	HMI_Main_hit( HMI *self, char kcd)
-{
-	sheet *p_sht;
-	switch(kcd)
-	{
-		case KEYCODE_LEFT:
-			Focus_move_left(self->p_fcuu);
-			break;
-		case KEYCODE_RIGHT:
-			Focus_move_left(self->p_fcuu);
-			break;
-		case KEYCODE_UP:
-			Focus_move_up(self->p_fcuu);
-			break;
-		case KEYCODE_DOWN:
-			Focus_move_down(self->p_fcuu);
-			break;
-		case KEYCODE_SWITCH:
-			//大气A/B 粉尘之间的切换
-			break;
-		case KEYCODE_ENTER:
-			p_sht = Focus_Get_focus(self->p_fcuu);
-			if(p_sht)
-				HMI_choice(self, p_sht->sht_id);
-			break;		
-		case KEYCODE_ESC:
-			
-		
-			break;	
-		
-	}
+//static void	HMI_Main_hit( HMI *self, char kcd)
+//{
+//	sheet *p_sht;
+//	switch(kcd)
+//	{
+//		case KEYCODE_LEFT:
+//			Focus_move_left(self->p_fcuu);
+//			break;
+//		case KEYCODE_RIGHT:
+//			Focus_move_left(self->p_fcuu);
+//			break;
+//		case KEYCODE_UP:
+//			Focus_move_up(self->p_fcuu);
+//			break;
+//		case KEYCODE_DOWN:
+//			Focus_move_down(self->p_fcuu);
+//			break;
+//		case KEYCODE_SWITCH:
+//			//大气A/B 粉尘之间的切换
+//			break;
+//		case KEYCODE_ENTER:
+//			p_sht = Focus_Get_focus(self->p_fcuu);
+//			if(p_sht)
+//				HMI_choice(self, p_sht->sht_id);
+//			break;		
+//		case KEYCODE_ESC:
+//			
+//		
+//			break;	
+//		
+//	}
 
-	
-	
-}
+//	
+//	
+//}
 
 
 
