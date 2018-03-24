@@ -78,6 +78,7 @@
 #define	HMI_FLAG_DEAL_HIT		3	
 #define	HMI_FLAG_KEEP			4			//有些画面切换时，要求画面不要重新初始化状态
 #define	HMI_FLAG_ERR			0x10
+#define HMI_FLAG_ONCE_USE_ARG_1	0x20		//要求使用界面参数1，只有效一次
 
 //窗口界面来负责对该位的操作
 //表示界面接下来要跟窗口进行交互，因此在窗口切换回界面的时候，会处理一些额外的交互信息
@@ -234,12 +235,16 @@ extern HMI *g_p_curHmi, *g_p_lastHmi, *g_p_win_last;
 //------------------------------------------------------------------------------
 extern void Set_flag_show(uint8_t	*p_flag, int val);
 //extern void Set_flag_keyhandle(uint8_t	*p_flag, int val);
-void STY_Duild_button(void *arg);
+void STG_Duild_button(void *arg);
 
 //很多界面的处理与主界面的按键处理一样，所以就把主界面的处理开放出来
 
 
 int HMI_Init(void);
 void HMI_choice(HMI *self, uint8_t choice_id);
+
+extern void HMI_Ram_init(void);
+extern void *HMI_Ram_alloc(int bytes);
+extern uint16_t HMI_Ram_free_bytes(void);
 
 #endif

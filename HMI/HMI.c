@@ -38,7 +38,7 @@ keyboard_commit	kbr_cmt = NULL;
 // const defines
 //------------------------------------------------------------------------------
 
-
+#define KEEP_NUM_HMI		8			//记录的历史HMI数量，当超过的时候，把最后一个替换掉，用于返回操作
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ keyboard_commit	kbr_cmt = NULL;
 // local vars
 //------------------------------------------------------------------------------
 
-
+static HMI *arr_him_histroy[KEEP_NUM_HMI];
  
 //------------------------------------------------------------------------------
 // local function prototypes
@@ -73,6 +73,10 @@ static int		HMI_Btn_backward(HMI *self);
 static void		HMI_Btn_jumpout(HMI *self);
 //static void		HMI_Btn_hit(HMI *self);
 static void HMI_Flush(void);		//定期刷屏
+
+
+static void HMI_Push_hmi(HMI *h);
+static HMI* HMI_Pop_hmi(void);
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
@@ -161,7 +165,11 @@ void HMI_choice(HMI *self, uint8_t choice_id)
 
 }	
 
-
+void STG_Duild_button(void *arg)
+{
+	
+	
+}
 
 
 ABS_CTOR( HMI)
@@ -236,6 +244,8 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 	aci_sys.key_weight = 1;
 	
 	g_p_curHmi = p_hmi;
+		
+	
 	CLR_LCD();
 	
 	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 1000) <= 0)
@@ -246,7 +256,11 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 		Set_flag_show(&self->flag, 0);
 		self->hide(self);
 		self->clean_cmp(self);
-		g_p_lastHmi = self;	
+		if(self != p_hmi)  //有时候一个界面只是想重新显示一下，如设置界面的设置项目变化时，会重新显示自身
+		{
+			g_p_lastHmi = self;	
+			HMI_Push_hmi(self);
+		}
 	}
 	
 	
@@ -280,8 +294,10 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 
 static void	SwitchBack( HMI *self)
 {
-	HMI *nowHmi = g_p_lastHmi;
-	if(g_p_lastHmi == NULL)
+//	HMI *nowHmi = g_p_lastHmi;
+	
+	HMI *nowHmi = HMI_Pop_hmi();
+	if(nowHmi == NULL)
 		return;
 	
 	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 1000) <= 0)
@@ -501,6 +517,49 @@ static void		HMI_Btn_jumpout(HMI *self)
 	Button	*p = BTN_Get_Sington();
 	p->move_focus(BTN_MOVE_JUMPOUT);
 	self->flag &= ~HMIFLAG_FOCUS_IN_BTN;
+}
+
+
+static void HMI_Push_hmi(HMI *h)
+{
+	int i = 0;
+	while(i < KEEP_NUM_HMI)
+	{
+		
+		if(arr_him_histroy[i] == NULL)
+			break;
+		i ++;
+	}
+	
+	if(i == KEEP_NUM_HMI)
+		i = KEEP_NUM_HMI - 1;
+	
+	arr_him_histroy[i] = h;
+}
+static HMI* HMI_Pop_hmi(void)
+{
+	HMI	*r = NULL;
+	int i = 0;
+	while(i < KEEP_NUM_HMI)
+	{
+		
+		if(arr_him_histroy[i] == NULL)
+			break;
+		i ++;
+	}
+	
+	
+	
+	if(i > 0)
+	{
+		i --;
+		r = arr_him_histroy[i];
+		
+		arr_him_histroy[i] = NULL;
+	}
+	
+	return r;
+	
 }
 
 

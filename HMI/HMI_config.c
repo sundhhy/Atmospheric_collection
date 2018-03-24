@@ -283,9 +283,9 @@ static void HMI_CFG_choice(HMI *self, uint8_t choice_id)
 		return;
 	
 	if(choice_id == CMM_CHOICE_ID(0))
-		p_target->arg[0] = OPTION_INSTRUMENT_SETUP;
+		p_target->arg[0] = e_I_instrument_setup;
 	else
-		p_target->arg[0] = OPTION_ACQUISITION_SETUP;
+		p_target->arg[0] = e_I_acquisition_setup;
 	
 	self->switchHMI(self, p_target);
 

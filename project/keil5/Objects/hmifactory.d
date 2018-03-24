@@ -66,3 +66,4 @@
 .\objects\hmifactory.o: ..\..\HMI\HMI_instrument_setup.h
 .\objects\hmifactory.o: ..\..\HMI\HMI_acquisition_setup.h
 .\objects\hmifactory.o: ..\..\HMI\HMI_select_setting.h
+.\objects\hmifactory.o: ..\..\HMI\HMI_configuring.h

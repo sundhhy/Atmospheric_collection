@@ -314,42 +314,42 @@ uint32_t    Time_2_u32(struct  tm	*tm_2_sec)
 int  Str_time_2_tm(char *s_time, struct  tm	*time)
 {
 	char *p = s_time;
-	struct  tm	t = {0};
+//	struct  tm	t = {0};
 	uint8_t		err = 0;
 	uint16_t	i;
-	t.tm_year = Get_str_data(p, "/", 0, &err);
+	time->tm_year = Get_str_data(p, "/", 0, &err);
 	if(err)
 		return ERR_PARAM_BAD;
-	t.tm_mon = Get_str_data(p, "/", 1, &err);
+	time->tm_mon = Get_str_data(p, "/", 1, &err);
 	if(err)
 		return ERR_PARAM_BAD;
-	t.tm_mday = Get_str_data(p, "/", 2, &err);
+	time->tm_mday = Get_str_data(p, "/", 2, &err);
 	if(err)
 		return ERR_PARAM_BAD;
-	if(t.tm_mday > g_moth_day[t.tm_mon])
+	if(time->tm_mday > g_moth_day[time->tm_mon])
 		return ERR_PARAM_BAD;
 		
 	
 	i = strcspn(p, " ");
 	p += i;
 	
-	t.tm_hour = Get_str_data(p, ":", 0, &err);
+	time->tm_hour = Get_str_data(p, ":", 0, &err);
 	if(err)
 		return ERR_PARAM_BAD;
-	t.tm_min = Get_str_data(p, ":", 1, &err);
+	time->tm_min = Get_str_data(p, ":", 1, &err);
 	if(err)
 		return ERR_PARAM_BAD;
-	t.tm_sec = Get_str_data(p, ":", 2, &err);
+	time->tm_sec = Get_str_data(p, ":", 2, &err);
 	if(err)
 		return ERR_PARAM_BAD;
 	
 	
-	time->tm_year = t.tm_year;
-	time->tm_mon = t.tm_mon;
-	time->tm_mday = t.tm_mday;
-	time->tm_hour = t.tm_hour;
-	time->tm_min = t.tm_min;
-	time->tm_sec = t.tm_sec;
+//	time->tm_year = t.tm_year;
+//	time->tm_mon = t.tm_mon;
+//	time->tm_mday = t.tm_mday;
+//	time->tm_hour = t.tm_hour;
+//	time->tm_min = t.tm_min;
+//	time->tm_sec = t.tm_sec;
 	
 	return RET_OK;
 }

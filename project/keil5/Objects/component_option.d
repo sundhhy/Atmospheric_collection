@@ -69,3 +69,4 @@
 .\objects\component_option.o: ..\..\HMI\format.h
 .\objects\component_option.o: E:\sdhLib\inc\basis/assert.h
 .\objects\component_option.o: ..\..\HMI\chnInfoPic.h
+.\objects\component_option.o: ..\..\HMI\configure_strategy.h

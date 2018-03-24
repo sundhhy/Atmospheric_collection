@@ -943,6 +943,31 @@
               <FileType>1</FileType>
               <FilePath>..\..\HMI\Component_option.c</FilePath>
             </File>
+            <File>
+              <FileName>HMI_configuring.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\HMI\HMI_configuring.h</FilePath>
+            </File>
+            <File>
+              <FileName>HMI_configuring .c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\HMI\HMI_configuring .c</FilePath>
+            </File>
+            <File>
+              <FileName>configure_strategy.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\HMI\configure_strategy.h</FilePath>
+            </File>
+            <File>
+              <FileName>CST_set_time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\HMI\CST_set_time.c</FilePath>
+            </File>
+            <File>
+              <FileName>configure_strategy.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\HMI\configure_strategy.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

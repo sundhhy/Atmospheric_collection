@@ -77,7 +77,7 @@ static ro_char timeCode[] = { "<time vx0=220 vy0=0 bx=60  by=24 f=24 xali=r m=0 
 typedef struct {
 	uint16_t		used_bytes;		//已经被使用
 	uint16_t		free_bytes;
-	uint8_t			vram_buf[1448];		//NUM_CHANNEL * (CURVE_POINT + 1)
+	uint8_t			vram_buf[1024];		//NUM_CHANNEL * (CURVE_POINT + 1)
 }hmi_ram_mgr_t;
 //------------------------------------------------------------------------------
 // local vars

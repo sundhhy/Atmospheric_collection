@@ -41,8 +41,8 @@ I (..\..\device\dev_char.h)(0x5A9A30F7)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
 I (..\..\device\dev_lcd.h)(0x5AB2045D)
-I (..\..\..\Atmospheric_collection\HMI/HMIFactory.h)(0x5AB50B53)
-I (..\..\..\Atmospheric_collection\HMI/HMI.h)(0x5AB38B76)
+I (..\..\..\Atmospheric_collection\HMI/HMIFactory.h)(0x5AB61666)
+I (..\..\..\Atmospheric_collection\HMI/HMI.h)(0x5AB60CC3)
 I (E:\sdhLib\inc\sdhDef.h)(0x5A5CA707)
 I (..\..\APP\sdhlibConf.h)(0x5A9A30F7)
 I (E:\sdhLib\inc\basis\sdhDebug.h)(0x5A5CA707)
@@ -81,10 +81,10 @@ I (E:\sdhLib\inc\os\os_depend.h)(0x5A5CA707)
 I (E:\sdhLib\inc\os\rtx\rtx_depend.h)(0x5A5CA707)
 F (..\..\APP\osObjects.h)(0x5A9A30F7)()
 F (..\..\APP\sdhlibConf.h)(0x5A9A30F7)()
-F (..\..\APP\system.c)(0x5AB0D386)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\system.o --omf_browse .\objects\system.crf --depend .\objects\system.d)
-I (..\..\..\Atmospheric_collection\HMI/HMIFactory.h)(0x5AB50B53)
+F (..\..\APP\system.c)(0x5AB67298)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\system.o --omf_browse .\objects\system.crf --depend .\objects\system.d)
+I (..\..\..\Atmospheric_collection\HMI/HMIFactory.h)(0x5AB61666)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
-I (..\..\..\Atmospheric_collection\HMI/HMI.h)(0x5AB38B76)
+I (..\..\..\Atmospheric_collection\HMI/HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
@@ -1346,7 +1346,7 @@ F (..\..\utils\PHN_string.h)(0x5A9FA31E)()
 F (..\..\utils\FM25.h)(0x5AA639F9)()
 F (..\..\HMI\chnInfoPic.c)(0x5AB352F1)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\chninfopic.o --omf_browse .\objects\chninfopic.crf --depend .\objects\chninfopic.d)
 I (..\..\HMI\chnInfoPic.h)(0x5A9A30F7)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
@@ -1403,13 +1403,13 @@ I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
-I (..\..\HMI\HMIFactory.h)(0x5AB50B53)
+I (..\..\HMI\HMIFactory.h)(0x5AB61666)
 I (..\..\GUI\Expression\ExpFactory.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\expression.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\Reader.h)(0x5A9A30F7)
 I (..\..\HMI\format.h)(0x5A9A30F7)
 I (E:\sdhLib\inc\mem\CiiMem.h)(0x5A5CA707)
-I (..\..\HMI\HMI_comm.h)(0x5AB352F1)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
 I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
 F (..\..\HMI\Component_Button.c)(0x5AB21758)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\component_button.o --omf_browse .\objects\component_button.crf --depend .\objects\component_button.d)
 I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
@@ -1467,7 +1467,7 @@ I (..\..\configs\model_conf.h)(0x5AB0D16C)
 I (..\..\model\ModelTime.h)(0x5A9F9C76)
 I (..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h)(0x5A9A30F7)
 I (..\..\..\Atmospheric_collection\utils/rtc.h)(0x5A9A30F7)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (..\..\HMI\focus.h)(0x5A9A30F7)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
@@ -1529,7 +1529,7 @@ I (..\..\..\Atmospheric_collection\utils/rtc.h)(0x5A9A30F7)
 F (..\..\HMI\format.c)(0x5A9A30F7)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\format.o --omf_browse .\objects\format.crf --depend .\objects\format.d)
 I (..\..\HMI\format.h)(0x5A9A30F7)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
@@ -1585,8 +1585,8 @@ I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
-F (..\..\HMI\HMI.c)(0x5AB50BA5)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmi.o --omf_browse .\objects\hmi.crf --depend .\objects\hmi.d)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+F (..\..\HMI\HMI.c)(0x5AB60CDB)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmi.o --omf_browse .\objects\hmi.crf --depend .\objects\hmi.d)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
@@ -1643,18 +1643,18 @@ I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
-I (..\..\HMI\HMI_comm.h)(0x5AB352F1)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
 I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
 I (E:\sdhLib\inc\os\os_depend.h)(0x5A5CA707)
 I (E:\sdhLib\inc\os\rtx\rtx_depend.h)(0x5A5CA707)
 I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x582539E0)
 I (..\..\APP\sys_cmd.h)(0x5A9A3A89)
-I (..\..\HMI\HMIFactory.h)(0x5AB50B53)
+I (..\..\HMI\HMIFactory.h)(0x5AB61666)
 I (..\..\..\Atmospheric_collection\utils/keyboard.h)(0x5AB3BA2B)
-F (..\..\HMI\HMIFactory.c)(0x5AB50B53)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmifactory.o --omf_browse .\objects\hmifactory.crf --depend .\objects\hmifactory.d)
-I (..\..\HMI\HMIFactory.h)(0x5AB50B53)
+F (..\..\HMI\HMIFactory.c)(0x5AB61894)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmifactory.o --omf_browse .\objects\hmifactory.crf --depend .\objects\hmifactory.d)
+I (..\..\HMI\HMIFactory.h)(0x5AB61666)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
@@ -1710,15 +1710,16 @@ I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
-I (..\..\HMI\HMI_comm.h)(0x5AB352F1)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
 I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
 I (..\..\HMI\HMI_main.h)(0x5A9E7182)
 I (..\..\HMI\HMI_config.h)(0x5AB0C958)
 I (..\..\HMI\HMI_instrument_setup.h)(0x5AB2249E)
 I (..\..\HMI\HMI_acquisition_setup.h)(0x5AB226EF)
 I (..\..\HMI\HMI_select_setting.h)(0x5AB4EC9B)
-F (..\..\HMI\HMI.h)(0x5AB38B76)()
-F (..\..\HMI\HMIFactory.h)(0x5AB50B53)()
+I (..\..\HMI\HMI_configuring.h)(0x5AB60C7A)
+F (..\..\HMI\HMI.h)(0x5AB60CC3)()
+F (..\..\HMI\HMIFactory.h)(0x5AB61666)()
 F (..\..\HMI\Component_Button.h)(0x5AB0A96D)()
 F (..\..\HMI\Component_progress_bar.c)(0x5A9A30F7)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\component_progress_bar.o --omf_browse .\objects\component_progress_bar.crf --depend .\objects\component_progress_bar.d)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
@@ -1776,7 +1777,7 @@ I (..\..\configs\model_conf.h)(0x5AB0D16C)
 I (..\..\model\ModelTime.h)(0x5A9F9C76)
 I (..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h)(0x5A9A30F7)
 I (..\..\..\Atmospheric_collection\utils/rtc.h)(0x5A9A30F7)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (..\..\HMI\focus.h)(0x5A9A30F7)
 I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
@@ -1840,12 +1841,12 @@ I (..\..\configs\model_conf.h)(0x5AB0D16C)
 I (..\..\model\ModelTime.h)(0x5A9F9C76)
 I (..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h)(0x5A9A30F7)
 I (..\..\..\Atmospheric_collection\utils/rtc.h)(0x5A9A30F7)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (..\..\HMI\focus.h)(0x5A9A30F7)
 I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
-I (..\..\HMI\HMI_comm.h)(0x5AB352F1)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
 I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
 I (E:\sdhLib\inc\arithmetic\bit.h)(0x5A5CB6FA)
 I (E:\sdhLib\inc\mem\CiiMem.h)(0x5A5CA707)
@@ -1905,16 +1906,16 @@ I (..\..\configs\model_conf.h)(0x5AB0D16C)
 I (..\..\model\ModelTime.h)(0x5A9F9C76)
 I (..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h)(0x5A9A30F7)
 I (..\..\..\Atmospheric_collection\utils/rtc.h)(0x5A9A30F7)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (..\..\HMI\focus.h)(0x5A9A30F7)
 I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (E:\sdhLib\inc\arithmetic\bit.h)(0x5A5CB6FA)
 F (..\..\HMI\Component_tips.h)(0x5AA5C8F0)()
-F (..\..\HMI\HMI_comm.c)(0x5AB352F1)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmi_comm.o --omf_browse .\objects\hmi_comm.crf --depend .\objects\hmi_comm.d)
-I (..\..\HMI\HMI_comm.h)(0x5AB352F1)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+F (..\..\HMI\HMI_comm.c)(0x5AB60C59)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmi_comm.o --omf_browse .\objects\hmi_comm.crf --depend .\objects\hmi_comm.d)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
@@ -1975,12 +1976,12 @@ I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
 I (..\..\GUI\Expression\ExpFactory.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\expression.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\Reader.h)(0x5A9A30F7)
-I (..\..\HMI\HMIFactory.h)(0x5AB50B53)
+I (..\..\HMI\HMIFactory.h)(0x5AB61666)
 I (..\..\HMI\format.h)(0x5A9A30F7)
 I (..\..\HMI\chnInfoPic.h)(0x5A9A30F7)
 F (..\..\HMI\HMI_main.c)(0x5AB50503)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmi_main.o --omf_browse .\objects\hmi_main.crf --depend .\objects\hmi_main.d)
 I (..\..\HMI\HMI_main.h)(0x5A9E7182)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
@@ -2037,9 +2038,9 @@ I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
-I (..\..\HMI\HMI_comm.h)(0x5AB352F1)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
 I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
-I (..\..\HMI\HMIFactory.h)(0x5AB50B53)
+I (..\..\HMI\HMIFactory.h)(0x5AB61666)
 I (..\..\GUI\Expression\ExpFactory.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\expression.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\Reader.h)(0x5A9A30F7)
@@ -2050,9 +2051,9 @@ I (E:\sdhLib\inc\os\rtx\rtx_depend.h)(0x5A5CA707)
 I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x582539E0)
 I (..\..\..\Atmospheric_collection\utils/keyboard.h)(0x5AB3BA2B)
 F (..\..\HMI\HMI_config.h)(0x5AB0C958)()
-F (..\..\HMI\HMI_config.c)(0x5AB5088D)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmi_config.o --omf_browse .\objects\hmi_config.crf --depend .\objects\hmi_config.d)
+F (..\..\HMI\HMI_config.c)(0x5AB5AFF5)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmi_config.o --omf_browse .\objects\hmi_config.crf --depend .\objects\hmi_config.d)
 I (..\..\HMI\HMI_config.h)(0x5AB0C958)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
@@ -2109,7 +2110,7 @@ I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
-I (..\..\HMI\HMI_comm.h)(0x5AB352F1)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
 I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
 I (..\..\GUI\Expression\ExpFactory.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\expression.h)(0x5A9A30F7)
@@ -2120,14 +2121,14 @@ I (E:\sdhLib\inc\os\os_depend.h)(0x5A5CA707)
 I (E:\sdhLib\inc\os\rtx\rtx_depend.h)(0x5A5CA707)
 I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x582539E0)
 I (..\..\..\Atmospheric_collection\utils/keyboard.h)(0x5AB3BA2B)
-I (..\..\HMI\HMIFactory.h)(0x5AB50B53)
-I (..\..\HMI\Component_option.h)(0x5AB4EC9B)
+I (..\..\HMI\HMIFactory.h)(0x5AB61666)
+I (..\..\HMI\Component_option.h)(0x5AB5FE3D)
 F (..\..\HMI\focus.h)(0x5A9A30F7)()
-F (..\..\HMI\HMI_comm.h)(0x5AB352F1)()
+F (..\..\HMI\HMI_comm.h)(0x5AB60C7A)()
 F (..\..\HMI\HMI_setting.h)(0x5AB36B5A)()
 F (..\..\HMI\HMI_setting.c)(0x5AB4EC9B)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmi_setting.o --omf_browse .\objects\hmi_setting.crf --depend .\objects\hmi_setting.d)
 I (..\..\HMI\HMI_setting.h)(0x5AB36B5A)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
@@ -2184,9 +2185,9 @@ I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
-I (..\..\HMI\HMI_comm.h)(0x5AB352F1)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
 I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
-I (..\..\HMI\HMIFactory.h)(0x5AB50B53)
+I (..\..\HMI\HMIFactory.h)(0x5AB61666)
 I (..\..\GUI\Expression\ExpFactory.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\expression.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\Reader.h)(0x5A9A30F7)
@@ -2196,9 +2197,9 @@ I (E:\sdhLib\inc\os\os_depend.h)(0x5A5CA707)
 I (E:\sdhLib\inc\os\rtx\rtx_depend.h)(0x5A5CA707)
 I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x582539E0)
 I (..\..\..\Atmospheric_collection\utils/keyboard.h)(0x5AB3BA2B)
-F (..\..\HMI\HMI_select_setting.c)(0x5AB50A55)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmi_select_setting.o --omf_browse .\objects\hmi_select_setting.crf --depend .\objects\hmi_select_setting.d)
+F (..\..\HMI\HMI_select_setting.c)(0x5AB616A1)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\hmi_select_setting.o --omf_browse .\objects\hmi_select_setting.crf --depend .\objects\hmi_select_setting.d)
 I (..\..\HMI\HMI_select_setting.h)(0x5AB4EC9B)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
@@ -2255,9 +2256,9 @@ I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
-I (..\..\HMI\HMI_comm.h)(0x5AB352F1)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
 I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
-I (..\..\HMI\HMIFactory.h)(0x5AB50B53)
+I (..\..\HMI\HMIFactory.h)(0x5AB61666)
 I (..\..\GUI\Expression\ExpFactory.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\expression.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\Reader.h)(0x5A9A30F7)
@@ -2267,12 +2268,12 @@ I (E:\sdhLib\inc\os\os_depend.h)(0x5A5CA707)
 I (E:\sdhLib\inc\os\rtx\rtx_depend.h)(0x5A5CA707)
 I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x582539E0)
 I (..\..\..\Atmospheric_collection\utils/keyboard.h)(0x5AB3BA2B)
-I (..\..\HMI\Component_option.h)(0x5AB4EC9B)
+I (..\..\HMI\Component_option.h)(0x5AB5FE3D)
 F (..\..\HMI\HMI_select_setting.h)(0x5AB4EC9B)()
-F (..\..\HMI\Component_option.h)(0x5AB4EC9B)()
-F (..\..\HMI\Component_option.c)(0x5AB5082A)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\component_option.o --omf_browse .\objects\component_option.crf --depend .\objects\component_option.d)
-I (..\..\HMI\Component_option.h)(0x5AB4EC9B)
-I (..\..\HMI\HMI.h)(0x5AB38B76)
+F (..\..\HMI\Component_option.h)(0x5AB5FE3D)()
+F (..\..\HMI\Component_option.c)(0x5AB61630)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\component_option.o --omf_browse .\objects\component_option.crf --depend .\objects\component_option.d)
+I (..\..\HMI\Component_option.h)(0x5AB5FE3D)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
@@ -2329,14 +2330,207 @@ I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
 I (..\..\HMI\Component_curve.h)(0x5AA79924)
 I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
 I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
-I (..\..\HMI\HMI_comm.h)(0x5AB352F1)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
 I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
-I (..\..\HMI\HMIFactory.h)(0x5AB50B53)
+I (..\..\HMI\HMIFactory.h)(0x5AB61666)
 I (..\..\GUI\Expression\ExpFactory.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\expression.h)(0x5A9A30F7)
 I (..\..\GUI\Expression\Reader.h)(0x5A9A30F7)
 I (..\..\HMI\format.h)(0x5A9A30F7)
 I (..\..\HMI\chnInfoPic.h)(0x5A9A30F7)
+I (..\..\HMI\configure_strategy.h)(0x5AB65DB5)
+F (..\..\HMI\HMI_configuring.h)(0x5AB60C7A)()
+F (..\..\HMI\HMI_configuring .c)(0x5AB66E60)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o ".\objects\hmi_configuring .o" --omf_browse ".\objects\hmi_configuring .crf" --depend ".\objects\hmi_configuring .d")
+I (..\..\HMI\HMI_configuring.h)(0x5AB60C7A)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
+I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
+I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
+I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
+I (E:\sdhLib\inc\sdhDef.h)(0x5A5CA707)
+I (..\..\APP\sdhlibConf.h)(0x5A9A30F7)
+I (E:\sdhLib\inc\basis\sdhDebug.h)(0x5A5CA707)
+I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
+I (E:\sdhLib\inc\basis\sdhError.h)(0x5A914F65)
+I (E:\sdhLib\inc\basis\macros.h)(0x5A76BF9A)
+I (E:\sdhLib\inc\basis\assert.h)(0x5A5CA707)
+I (E:\sdhLib\inc\basis\except.h)(0x5A5CA707)
+I (D:\Keil_v5\ARM\ARMCC\include\setjmp.h)(0x5475F300)
+I (..\..\GUI\sheet\sheet.h)(0x5AB216B9)
+I (..\..\GUI\Glyph\glyph.h)(0x5AB1F728)
+I (..\..\device\device.h)(0x5A9A30F7)
+I (..\..\device\deviceId.h)(0x5AB3B7E9)
+I (..\..\device\dev_cmd.h)(0x5A9A30F7)
+I (..\..\device\dev_char.h)(0x5A9A30F7)
+I (..\..\device\dev_lcd.h)(0x5AB2045D)
+I (..\..\configs\lcd_conf.h)(0x5AB203CB)
+I (..\..\model\ModelFactory.h)(0x5A9FA3C4)
+I (..\..\model\Model.h)(0x5A9F9A43)
+I (E:\sdhLib\inc\arithmetic\list.h)(0x5A5CA707)
+I (..\..\model\Model_channel.h)(0x5AB0D145)
+I (..\..\APP\system.h)(0x5AB3BA33)
+I (..\..\..\Atmospheric_collection\utils/time.h)(0x5A9A30F7)
+I (E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC\stm32f10x_conf.h)(0x5A9A30F7)
+I (E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\RTE_Components.h)(0x5AB080C8)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_dma.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include\stm32f10x.h)(0x53BA0D60)
+I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm3.h)(0x582539DE)
+I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\cmsis_compiler.h)(0x582539DE)
+I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\cmsis_armcc.h)(0x582539DE)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include\system_stm32f10x.h)(0x4F1E2E3C)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_exti.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_flash.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_gpio.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_i2c.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_pwr.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_rcc.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_spi.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_tim.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h)(0x52F9EB20)
+I (..\..\..\Atmospheric_collection\utils/PHN_string.h)(0x5A9FA31E)
+I (..\..\configs\model_conf.h)(0x5AB0D16C)
+I (..\..\model\ModelTime.h)(0x5A9F9C76)
+I (..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h)(0x5A9A30F7)
+I (..\..\..\Atmospheric_collection\utils/rtc.h)(0x5A9A30F7)
+I (..\..\HMI\focus.h)(0x5A9A30F7)
+I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
+I (..\..\HMI\Component_curve.h)(0x5AA79924)
+I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
+I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
+I (..\..\HMI\HMI_comm.h)(0x5AB60C7A)
+I (..\..\configs\hmi_conf.h)(0x5AB36AD0)
+I (..\..\HMI\HMIFactory.h)(0x5AB61666)
+I (..\..\GUI\Expression\ExpFactory.h)(0x5A9A30F7)
+I (..\..\GUI\Expression\expression.h)(0x5A9A30F7)
+I (..\..\GUI\Expression\Reader.h)(0x5A9A30F7)
+I (..\..\HMI\format.h)(0x5A9A30F7)
+I (..\..\HMI\chnInfoPic.h)(0x5A9A30F7)
+I (E:\sdhLib\inc\os\os_depend.h)(0x5A5CA707)
+I (E:\sdhLib\inc\os\rtx\rtx_depend.h)(0x5A5CA707)
+I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x582539E0)
+I (..\..\..\Atmospheric_collection\utils/keyboard.h)(0x5AB3BA2B)
+I (..\..\HMI\configure_strategy.h)(0x5AB65DB5)
+F (..\..\HMI\configure_strategy.h)(0x5AB65DB5)()
+F (..\..\HMI\CST_set_time.c)(0x5AB671AF)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\cst_set_time.o --omf_browse .\objects\cst_set_time.crf --depend .\objects\cst_set_time.d)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (..\..\HMI\configure_strategy.h)(0x5AB65DB5)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
+I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
+I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
+I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
+I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
+I (E:\sdhLib\inc\sdhDef.h)(0x5A5CA707)
+I (..\..\APP\sdhlibConf.h)(0x5A9A30F7)
+I (E:\sdhLib\inc\basis\sdhDebug.h)(0x5A5CA707)
+I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
+I (E:\sdhLib\inc\basis\sdhError.h)(0x5A914F65)
+I (E:\sdhLib\inc\basis\macros.h)(0x5A76BF9A)
+I (E:\sdhLib\inc\basis\assert.h)(0x5A5CA707)
+I (E:\sdhLib\inc\basis\except.h)(0x5A5CA707)
+I (D:\Keil_v5\ARM\ARMCC\include\setjmp.h)(0x5475F300)
+I (..\..\GUI\sheet\sheet.h)(0x5AB216B9)
+I (..\..\GUI\Glyph\glyph.h)(0x5AB1F728)
+I (..\..\device\device.h)(0x5A9A30F7)
+I (..\..\device\deviceId.h)(0x5AB3B7E9)
+I (..\..\device\dev_cmd.h)(0x5A9A30F7)
+I (..\..\device\dev_char.h)(0x5A9A30F7)
+I (..\..\device\dev_lcd.h)(0x5AB2045D)
+I (..\..\configs\lcd_conf.h)(0x5AB203CB)
+I (..\..\model\ModelFactory.h)(0x5A9FA3C4)
+I (..\..\model\Model.h)(0x5A9F9A43)
+I (E:\sdhLib\inc\arithmetic\list.h)(0x5A5CA707)
+I (..\..\model\Model_channel.h)(0x5AB0D145)
+I (..\..\APP\system.h)(0x5AB3BA33)
+I (..\..\..\Atmospheric_collection\utils/time.h)(0x5A9A30F7)
+I (E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC\stm32f10x_conf.h)(0x5A9A30F7)
+I (E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\RTE_Components.h)(0x5AB080C8)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_dma.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include\stm32f10x.h)(0x53BA0D60)
+I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm3.h)(0x582539DE)
+I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\cmsis_compiler.h)(0x582539DE)
+I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\cmsis_armcc.h)(0x582539DE)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include\system_stm32f10x.h)(0x4F1E2E3C)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_exti.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_flash.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_gpio.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_i2c.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_pwr.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_rcc.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_spi.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_tim.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h)(0x52F9EB20)
+I (..\..\..\Atmospheric_collection\utils/PHN_string.h)(0x5A9FA31E)
+I (..\..\configs\model_conf.h)(0x5AB0D16C)
+I (..\..\model\ModelTime.h)(0x5A9F9C76)
+I (..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h)(0x5A9A30F7)
+I (..\..\..\Atmospheric_collection\utils/rtc.h)(0x5A9A30F7)
+I (..\..\HMI\focus.h)(0x5A9A30F7)
+I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
+I (..\..\HMI\Component_curve.h)(0x5AA79924)
+I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
+I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
+F (..\..\HMI\configure_strategy.c)(0x5AB61A5F)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\configure_strategy.o --omf_browse .\objects\configure_strategy.crf --depend .\objects\configure_strategy.d)
+I (..\..\HMI\configure_strategy.h)(0x5AB65DB5)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (..\..\HMI\HMI.h)(0x5AB60CC3)
+I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
+I (E:\sdhLib\inc\lw_oopc.h)(0x5A5CA707)
+I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
+I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5475F300)
+I (E:\sdhLib\inc\sdhDef.h)(0x5A5CA707)
+I (..\..\APP\sdhlibConf.h)(0x5A9A30F7)
+I (E:\sdhLib\inc\basis\sdhDebug.h)(0x5A5CA707)
+I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
+I (E:\sdhLib\inc\basis\sdhError.h)(0x5A914F65)
+I (E:\sdhLib\inc\basis\macros.h)(0x5A76BF9A)
+I (E:\sdhLib\inc\basis\assert.h)(0x5A5CA707)
+I (E:\sdhLib\inc\basis\except.h)(0x5A5CA707)
+I (D:\Keil_v5\ARM\ARMCC\include\setjmp.h)(0x5475F300)
+I (..\..\GUI\sheet\sheet.h)(0x5AB216B9)
+I (..\..\GUI\Glyph\glyph.h)(0x5AB1F728)
+I (..\..\device\device.h)(0x5A9A30F7)
+I (..\..\device\deviceId.h)(0x5AB3B7E9)
+I (..\..\device\dev_cmd.h)(0x5A9A30F7)
+I (..\..\device\dev_char.h)(0x5A9A30F7)
+I (..\..\device\dev_lcd.h)(0x5AB2045D)
+I (..\..\configs\lcd_conf.h)(0x5AB203CB)
+I (..\..\model\ModelFactory.h)(0x5A9FA3C4)
+I (..\..\model\Model.h)(0x5A9F9A43)
+I (E:\sdhLib\inc\arithmetic\list.h)(0x5A5CA707)
+I (..\..\model\Model_channel.h)(0x5AB0D145)
+I (..\..\APP\system.h)(0x5AB3BA33)
+I (..\..\..\Atmospheric_collection\utils/time.h)(0x5A9A30F7)
+I (E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC\stm32f10x_conf.h)(0x5A9A30F7)
+I (E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\RTE_Components.h)(0x5AB080C8)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_dma.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include\stm32f10x.h)(0x53BA0D60)
+I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\core_cm3.h)(0x582539DE)
+I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\cmsis_compiler.h)(0x582539DE)
+I (d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include\cmsis_armcc.h)(0x582539DE)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include\system_stm32f10x.h)(0x4F1E2E3C)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_exti.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_flash.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_gpio.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_i2c.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_pwr.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_rcc.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_spi.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_tim.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h)(0x52F9EB20)
+I (d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h)(0x52F9EB20)
+I (..\..\..\Atmospheric_collection\utils/PHN_string.h)(0x5A9FA31E)
+I (..\..\configs\model_conf.h)(0x5AB0D16C)
+I (..\..\model\ModelTime.h)(0x5A9F9C76)
+I (..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h)(0x5A9A30F7)
+I (..\..\..\Atmospheric_collection\utils/rtc.h)(0x5A9A30F7)
+I (..\..\HMI\focus.h)(0x5A9A30F7)
+I (..\..\HMI\Component_Button.h)(0x5AB0A96D)
+I (..\..\HMI\Component_curve.h)(0x5AA79924)
+I (..\..\HMI\Component_progress_bar.h)(0x5A9A30F7)
+I (..\..\HMI\Component_tips.h)(0x5AA5C8F0)
 F (..\..\model\Model.c)(0x5A9F9A43)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\model.o --omf_browse .\objects\model.crf --depend .\objects\model.d)
 I (..\..\model\Model.h)(0x5A9F9A43)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -2539,7 +2733,7 @@ I (..\..\device\dev_char.h)(0x5A9A30F7)
 I (..\..\device\dev_lcd.h)(0x5AB2045D)
 I (..\..\APP\system.h)(0x5AB3BA33)
 I (..\..\..\Atmospheric_collection\utils/PHN_string.h)(0x5A9FA31E)
-I (..\..\..\Atmospheric_collection\HMI/HMI.h)(0x5AB38B76)
+I (..\..\..\Atmospheric_collection\HMI/HMI.h)(0x5AB60CC3)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\sdhLib\inc\sdhDef.h)(0x5A5CA707)
 I (..\..\APP\sdhlibConf.h)(0x5A9A30F7)
@@ -3308,7 +3502,7 @@ I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 F (..\..\GUI\sheet\sheetMemento.c)(0x5A9A30F7)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\sheetmemento.o --omf_browse .\objects\sheetmemento.crf --depend .\objects\sheetmemento.d)
 I (..\..\GUI\sheet\sheetMemento.h)(0x5A9A30F7)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
-F (..\..\GUI\Glyph\character_database.c)(0x5AB3201B)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\character_database.o --omf_browse .\objects\character_database.crf --depend .\objects\character_database.d)
+F (..\..\GUI\Glyph\character_database.c)(0x5AB62042)(-c --cpu Cortex-M3 -D__RTX -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I..\..\configs -I..\..\BSP -IE:\sdhLib\inc -I..\..\device\dev_LCD\nokia_5110 -I..\..\..\Atmospheric_collection -I..\..\drive -I..\..\device -I..\..\GUI\Glyph -I..\..\GUI\Expression -I..\..\Views -I..\..\REEC -I..\..\model -I..\..\GUI\sheet -I..\..\usb -I..\..\APP --diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE-I E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\Include-I d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc-D__UVISION_VERSION="513" -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_HD -DUSE_STM3210B_EVAL -DHSE_VALUE="8000000" -D_MCU_ENDIAN="1"-o .\objects\character_database.o --omf_browse .\objects\character_database.crf --depend .\objects\character_database.d)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5475F300)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
