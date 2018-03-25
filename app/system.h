@@ -102,7 +102,28 @@ typedef struct {
 //-----------HMI -----------------------------------------------
 typedef struct {
 	int			hmi_sem;
+	uint16_t		lightness;		//1位小数
+	uint16_t		gray_levels;	//1位小数
+	uint8_t		time_switch;		//定时
+	uint8_t		none[3];
 }hmi_mgr_t;
+
+/*********************大气压****************************************/
+typedef enum {
+	ea_method = 0,
+	ea_prtct_dust,
+	ea_prtct_atmsphr_A,
+	ea_prtct_atmsphr_B,
+	ea_numm,
+}e_atmosphere_t;
+typedef struct {
+	int		prtct_dust;
+	int		prtct_atmsphr_A;
+	int		prtct_atmsphr_B;
+	char	method;		//0 实时测量值 1 手动
+	char	none[3];
+	
+}atmosphere_conf_t;
 //---------- flash驱动的定义 --------------------------------------
 
 typedef struct {
@@ -223,7 +244,8 @@ typedef struct {
 	uint16_t				hit_count;
 	
 	hmi_mgr_t				hmi_mgr;
-	system_conf_t		sys_conf;
+	atmosphere_conf_t		atm_conf;
+	system_conf_t			sys_conf;
 	flash_t					arr_fsh[NUM_FSH];
 	fs_t						fs;
 }system_t;
@@ -242,7 +264,7 @@ extern system_t			aci_sys;
 // function prototypes
 //------------------------------------------------------------------------------
 int	Operate_in_tange(int	arg1, int op, int arg2, int rangel, int rangeh);
-
+int	Operate_in_tange_keep(int	arg1, int op, int arg2, int rangel, int rangeh);
 void System_init(void);
 void System_power_off(void);
 

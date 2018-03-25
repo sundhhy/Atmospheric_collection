@@ -117,6 +117,7 @@ typedef struct {
 typedef struct {
 	uint8_t		f_row, f_col;
 	uint8_t		start_byte, num_byte;
+	
 }strategy_focus_t;
 
 

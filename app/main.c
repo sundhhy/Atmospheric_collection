@@ -322,6 +322,9 @@ static void 	Init_LCD(void)
 	dev_lcd *p_lcd;
 	Dev_open(DEVID_FM12864, (void *)&p_lcd);
 	p_lcd->init();
+	if(aci_sys.hmi_mgr.lightness == 0)
+		aci_sys.hmi_mgr.lightness = 600; 
+	p_lcd->lcd_lightness(aci_sys.hmi_mgr.lightness);
 	p_lcd->clear(PALLET_WHITE);
 	
 }

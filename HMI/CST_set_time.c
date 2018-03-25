@@ -150,19 +150,17 @@ static void TIM_Exit(void)
 static int TIM_commit(void *arg)
 {
 	char	*p;
-	struct tm tmp_t;
-	
+	uint8_t		err;
 	p = arr_p_vram[STG_RAM_NUM(0, 1)];
-	Str_time_2_tm(p, &tmp_t);
-	aci_sys.sys_time.tm_year = tmp_t.tm_year;
-	aci_sys.sys_time.tm_mon = tmp_t.tm_mon;
-	aci_sys.sys_time.tm_mday = tmp_t.tm_mon;
 	
-	p = arr_p_vram[STG_RAM_NUM(0, 1)];
-	Str_time_2_tm(p, &tmp_t);
-	aci_sys.sys_time.tm_hour = tmp_t.tm_hour;
-	aci_sys.sys_time.tm_min = tmp_t.tm_min;
-	aci_sys.sys_time.tm_sec = tmp_t.tm_sec;
+	aci_sys.sys_time.tm_year = Get_str_data(p, "/", 0, &err);
+	aci_sys.sys_time.tm_mon = Get_str_data(p, "/", 1, &err);
+	aci_sys.sys_time.tm_mday = Get_str_data(p, "/", 2, &err);
+	
+	p = arr_p_vram[STG_RAM_NUM(1, 1)];
+	aci_sys.sys_time.tm_hour = Get_str_data(p, ":", 0, &err);
+	aci_sys.sys_time.tm_min = Get_str_data(p, ":", 1, &err);
+	aci_sys.sys_time.tm_sec = Get_str_data(p, ":", 2, &err);
 	
 	return RET_OK;
 
@@ -181,7 +179,6 @@ static int TIM_get_focusdata(void *pp_data, strategy_focus_t *p_in_syf)
 {
 	strategy_focus_t *p_syf = &THIS_STG.sf;
 	char		**pp_vram = (char **)pp_data;
-	int ret = 0;
 	
 	if(p_syf->f_row > 1) {
 		return -1;
@@ -189,19 +186,18 @@ static int TIM_get_focusdata(void *pp_data, strategy_focus_t *p_in_syf)
 	
 	if(p_in_syf)
 		p_syf = p_in_syf;
-	ret = p_syf->num_byte;
 	
 	
 	
 	*pp_vram = arr_p_vram[STG_RAM_NUM(p_syf->f_row, p_syf->f_col)];
 
-	return ret;
+	return strlen(*pp_vram);
 	
 }
 
 static int TIM_key_up(void *arg)
 {
-	int ret = RET_OK;
+	int ret = CST_RET_RECOVERY_OLD_FOCUS;
 	strategy_focus_t *p_syf = &THIS_STG.sf;
 	
 	//ÐÐµÄÇÐ»»
@@ -370,5 +366,5 @@ static int TIM_modify(void *arg, int op)
 	
 	Str_Calculations(p + p_syf->start_byte, 1,  op, 1, 0, 9);
 	
-	return RET_OK;
+	return CST_RET_CLEAN_OLD_FOCUS;
 }

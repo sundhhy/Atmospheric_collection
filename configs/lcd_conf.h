@@ -16,8 +16,8 @@
 #define LCD_PIX_BIT			1				//每个像素需要的缓存bit数
 #define LCD_BUF_SIZE		(1024)		
 
-#define DEFAULT_LIGHTNESS		60		//默认亮度
-
+#define DEFAULT_LIGHTNESS		600		//默认亮度
+#define MIN_LIGHTNESS		450		//默认亮度
 
 
 //调色板颜色定义， 与LCD无关

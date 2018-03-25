@@ -203,6 +203,60 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 	
 	
 }
+//p_data == NULL时则使用系统的配置数据来打印
+void Print_atmosphere_param(void *p_data, char	*p_s, int len, int aux)
+{
+	uint8_t *p_u8;
+	int		*p_int;
+	
+	
+	switch(aux)
+	{
+		case ea_method:
+			if(p_data)
+				p_u8 = (uint8_t *)p_data;
+			else 
+				return;
+			if(*p_u8 == 0)
+				sprintf(p_s, "[实时测量]");
+			else
+				sprintf(p_s, "[手动]");
+			break;
+		case ea_prtct_dust:
+			if(p_data)
+				p_int = (int *)p_data;
+			else 
+				p_int = &aci_sys.atm_conf.prtct_dust;
+			
+				Print_float(*p_int, 4, 2, p_s);
+				strcat(p_s, "KPa");
+			
+			break;	
+		case ea_prtct_atmsphr_A:
+			if(p_data)
+				p_int = (int *)p_data;
+			else 
+				p_int = &aci_sys.atm_conf.prtct_atmsphr_A;
+			
+				Print_float(*p_int, 4, 2, p_s);
+				strcat(p_s, "KPa");
+			
+			break;	
+		case ea_prtct_atmsphr_B:
+			if(p_data)
+				p_int = (int *)p_data;
+			else 
+				p_int = &aci_sys.atm_conf.prtct_atmsphr_B;
+			
+				Print_float(*p_int, 4, 2, p_s);
+				strcat(p_s, "KPa");
+			
+			break;	
+		}
+	
+		
+		
+}
 
 void Str_set_sys_param(char	*p_s, int aux, int op, int val)
 {
@@ -337,20 +391,22 @@ void Password_modify(char	*p_s_psd, int idx, int op)
 	
 }
 
-//"** ** **"
+//0000
 void Str_set_password(char	*p_s_psd)
 {
-	short	i, data;
+	short	data;
+	char	s_data[3] = {0};
 	
-	for(i = 0; i < 3; i++) {
-		data = atoi(p_s_psd);
+	s_data[0] = p_s_psd[0];
+	s_data[1] = p_s_psd[1];
+	data = atoi(s_data);
+	aci_sys.sys_conf.password[0] = data;
+	s_data[0] = p_s_psd[2];
+	s_data[1] = p_s_psd[3];
+	data = atoi(s_data);
+	aci_sys.sys_conf.password[1] = data;
 	
-		aci_sys.sys_conf.password[i] = data;
-		
-		p_s_psd += 3;
-	}
-	
-	
+
 }
 
 //对时间显示的字符上移动
@@ -411,11 +467,13 @@ int Str_Password_match(char *p_s_psd)
 
 // model.c
 
-void Print_float(int data, short int_len, short prec, char *str)
+void Print_float(int data, short int_len, short decimal_Places, char *str)
 {
 	int		d1, d2;
 	short		sign = 1;
 	char		i;		//用于对齐
+	memset(str, 0, int_len + 1);	//还有个结束符
+	
 	if(data < 0)
 	{
 		sign = -1;
@@ -423,7 +481,7 @@ void Print_float(int data, short int_len, short prec, char *str)
 		
 	}
 	
-	if(prec == 1) {
+	if(decimal_Places == 1) {
 		d1 = data/10;
 		d2 = data%10;
 		
@@ -434,7 +492,7 @@ void Print_float(int data, short int_len, short prec, char *str)
 		
 		
 	}
-	else if(prec == 2)  {
+	else if(decimal_Places == 2)  {
 		d1 = data/100;
 		d2 = data%100;
 		
@@ -461,7 +519,7 @@ void Print_float(int data, short int_len, short prec, char *str)
 //		else if(int_len == 4)
 //			sprintf(str, "%2d.%d", d1, d2);
 //		else
-		if(prec)
+		if(decimal_Places)
 			sprintf(str, "%d.%d", d1, d2);
 		else
 			sprintf(str, "%d", data);
@@ -473,7 +531,7 @@ void Print_float(int data, short int_len, short prec, char *str)
 //		else if(int_len == 4)
 //			sprintf(str, "-%2d.%d", d1, d2);
 //		else
-		if(prec)
+		if(decimal_Places)
 			sprintf(str, "-%d.%d", d1, d2);
 		else
 			sprintf(str, "-%d", data);

@@ -87,7 +87,7 @@ static	void FM_Clear(int c);
 static	void FM_Switch(int on_off);
 static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c);
 static	void FM_Flush(char all);
-static	void FM_Lightness(uint8_t		pct);
+static	void FM_Lightness(uint16_t		pct);
 static  int	 FM_Get_size(int font, uint16_t *width, uint16_t *heigh);
 static	void FM_Set_backcolor( char c);
 static  int  FM_Lcd_ctl(int cmd, ...);
@@ -269,6 +269,9 @@ static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c)
 				
 			}
 			
+			if(vy >= FM12864_LONG)
+				break;
+			
 			//todo: 反显的判断机制不是很好，但是目前够用了
 			if(c == PALLET_WHITE)
 				FM_VRAM(j, vy) = ~code[i];
@@ -277,8 +280,7 @@ static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c)
 			FM_Update_change_area(j, vy);
 //			LHI_Write_vram(&FM_VRAM(vx, vy), 1);
 			vy ++;
-			if(vy >= FM12864_LONG)
-				break;
+			
 			
 			
 		}
@@ -421,10 +423,10 @@ static void FM_Update_change_area(short chg_vx, short chg_vy)
 	
 	
 }
-static	void FM_Lightness(uint8_t		pct)
+static	void FM_Lightness(uint16_t		pct)
 {
-	if(pct > 100)
-		pct = 100;
+	if(pct > 1000)
+		pct = 1000;
 	LHI_Set_pwm_duty(pct);
 }
 

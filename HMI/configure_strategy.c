@@ -10,7 +10,10 @@
 // module global vars
 //------------------------------------------------------------------------------
 extern strategy_t	cst_set_time;
-
+extern strategy_t	cst_set_display;
+extern strategy_t	cst_set_password;
+extern strategy_t	cst_set_pressure;
+extern strategy_t	cst_set_prs_protect;
 //------------------------------------------------------------------------------
 // global function prototypes
 //------------------------------------------------------------------------------
@@ -47,6 +50,14 @@ strategy_t	*Get_strategy(uint8_t t)
 	{
 		case e_stg_set_time:
 			return &cst_set_time;
+		case e_stg_set_display:
+			return &cst_set_display;
+		case e_stg_set_password:
+			return &cst_set_password;
+		case e_stg_set_pressuure:
+			return &cst_set_pressure;
+		case e_stg_set_prs_protect:
+			return &cst_set_prs_protect;
 		default:
 			return NULL;
 		

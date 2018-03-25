@@ -26,6 +26,7 @@
 
 //system.c
 void Print_sys_param(void *p_data, char	*p_s, int len, int aux);
+void Print_atmosphere_param(void *p_data, char	*p_s, int len, int aux);
 void Str_set_sys_param(char	*p_s, int aux, int op, int val);
 
 int Get_str_data(char *s_data, char* separator, int num, uint8_t	*err);
@@ -37,7 +38,7 @@ int Password_iteartor(char	*p_time_text, int idx, int director);
 
 //model.c
 void Print_unit( char unit, char *buf, int len);
-void Print_float(int data, short int_len, short prec, char *str);
+void Print_float(int data, short int_len, short decimal_Places, char *str);
 void Print_frefix_float(int data, int prec, char *prefix, char *str);
 
 //mode_channel

@@ -248,6 +248,7 @@ static void CNF_Show_strategy_focus(strategy_focus_t *p_syf, int opt)
 	int 							f_data_len = 0;
 	sheet 						*p_sht_text = arr_p_pool_shts[CNF_TEXT_SHT];
 	uint16_t					txt_xsize, txt_ysize;
+	char						str_clean[16];
 	
 	if(p_cfg_stg == NULL)
 		return;
@@ -258,18 +259,47 @@ static void CNF_Show_strategy_focus(strategy_focus_t *p_syf, int opt)
 	//获得焦点位于的内容与位置
 	f_data_len = p_cfg_stg->get_focus_data(&p_sht_text->cnt.data, p_syf);
 	
-	//根据焦点的位置计算在屏幕上的坐标
-	
-	p_sht_text->cnt.len = f_data_len;
-	
 	//焦点可能只是字符串的一部分，因此要进行偏移
-	p_sht_text->cnt.data += p_syf->start_byte;
-	p_sht_text->area.x0 = cthis->col_vx0[p_syf->f_col] + txt_xsize * p_syf->start_byte;
+	p_sht_text->area.x0 = cthis->col_vx0[p_syf->f_col];
 	p_sht_text->area.y0 = CNF_Get_row_vy(p_syf->f_row - cthis->entry_start_row);
-	
 	//显示
-	if(opt)
+	
+	
+	if(opt == 0)
+	{
+		//显示全部数据
+		p_sht_text->cnt.len = f_data_len;
+		
+		
+		
+	}
+	if(opt == 1)
+	{
+		
+		
+		
+		//根据焦点的位置计算在屏幕上的坐标
+		
+		
+		
+		//焦点可能只是字符串的一部分，因此要进行偏移
+		p_sht_text->cnt.len = p_syf->num_byte;
+		p_sht_text->cnt.data += p_syf->start_byte;
+		p_sht_text->area.x0 +=  txt_xsize * p_syf->start_byte;
 		p_sht_text->cnt.effects = GP_SET_EFF(p_sht_text->cnt.effects, EFF_FOCUS);
+		
+	}
+	
+	if(opt == 2)		
+	{
+		//清除内容
+		memset(str_clean, ' ', sizeof(str_clean));
+		p_sht_text->cnt.data = str_clean;
+		p_sht_text->cnt.len = sizeof(str_clean);
+		
+		
+	}
+	
 	p_sht_text->p_gp->vdraw(p_sht_text->p_gp, &p_sht_text->cnt, &p_sht_text->area);
 	p_sht_text->cnt.effects = GP_CLR_EFF(p_sht_text->cnt.effects, EFF_FOCUS);
 	
@@ -383,7 +413,7 @@ static void	CNF_Hit(HMI *self, char kcd)
 	HMI_configuring				*cthis = SUB_PTR( self, HMI, HMI_configuring);
 	strategy_t				*p_sy = p_cfg_stg;
 	strategy_focus_t	old_sf;
-
+	int					ret = 0;
 	//1 焦点在策略内部发送变化 2 焦点跳出策略 3 策略的焦点内容发生了变化
 	uint8_t		sy_chgFouse = 0;
 
@@ -429,13 +459,24 @@ static void	CNF_Hit(HMI *self, char kcd)
 				aci_sys.hit_count ++;
 			else
 				aci_sys.hit_count = 0;
+			ret = p_sy->key_hit_up(NULL);
 
-
-			if(p_sy->key_hit_up(NULL) == RET_OK) {
+			if(ret == CST_RET_RECOVERY_OLD_FOCUS) {
 				//编辑区内的上下操作是用来修改参数的
 				//因此在修改参数成功之后，要重新显示被选中区的值
 				sy_chgFouse = 1;
 			} 
+			else if(ret == CST_RET_CLEAN_OLD_FOCUS)
+			{
+				
+				sy_chgFouse = 3;
+			}
+			else if(ret == CST_RET_FOCUS_HOLD)
+			{
+				
+				sy_chgFouse = 0;
+			}
+			
 			else {
 				CNF_Turn_page(self, 0);
 
@@ -451,10 +492,23 @@ static void	CNF_Hit(HMI *self, char kcd)
 
 
 
-			if(p_sy->key_hit_dn(NULL) == RET_OK) {
-
+			ret = p_sy->key_hit_dn(NULL);
+			
+			if(ret == CST_RET_RECOVERY_OLD_FOCUS) {
+				
 				sy_chgFouse = 1;
 			} 
+			else if(ret == CST_RET_CLEAN_OLD_FOCUS)
+			{
+				//编辑区内的上下操作是用来修改参数的
+				//因此在修改参数成功之后，要重新显示被选中区的值
+				sy_chgFouse = 3;
+			}
+			else if(ret == CST_RET_FOCUS_HOLD)
+			{
+				
+				sy_chgFouse = 0;
+			}
 			else {
 
 				CNF_Turn_page(self, 1);
@@ -484,8 +538,10 @@ static void	CNF_Hit(HMI *self, char kcd)
 	}
 
 	//选中区域的内容被修改了，更新内容
+	//要清除原来的内容，然后在重新显示新的内容
 	else if(sy_chgFouse ==3){
-
+		CNF_Show_strategy_focus(&old_sf, 2);
+		CNF_Show_strategy_focus(&p_sy->sf, 0);
 		CNF_Show_strategy_focus(&p_sy->sf, 1);
 	}
 	

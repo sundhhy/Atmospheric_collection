@@ -191,7 +191,7 @@ static int LHI_Pulse(int duty)
 {
 	
 	
-	return duty* PWM_100 / 100;	
+	return duty* PWM_100 / 1000;	
 }
 
 //因为用GPIO模拟并口，因此在输出时要确保不会导致其他GPIO引脚的输出被破坏

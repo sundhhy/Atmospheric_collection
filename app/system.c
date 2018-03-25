@@ -314,7 +314,7 @@ uint32_t    Time_2_u32(struct  tm	*tm_2_sec)
 int  Str_time_2_tm(char *s_time, struct  tm	*time)
 {
 	char *p = s_time;
-//	struct  tm	t = {0};
+	struct  tm	t = {0};
 	uint8_t		err = 0;
 	uint16_t	i;
 	time->tm_year = Get_str_data(p, "/", 0, &err);
@@ -326,6 +326,7 @@ int  Str_time_2_tm(char *s_time, struct  tm	*time)
 	time->tm_mday = Get_str_data(p, "/", 2, &err);
 	if(err)
 		return ERR_PARAM_BAD;
+	
 	if(time->tm_mday > g_moth_day[time->tm_mon])
 		return ERR_PARAM_BAD;
 		
@@ -344,12 +345,12 @@ int  Str_time_2_tm(char *s_time, struct  tm	*time)
 		return ERR_PARAM_BAD;
 	
 	
-//	time->tm_year = t.tm_year;
-//	time->tm_mon = t.tm_mon;
-//	time->tm_mday = t.tm_mday;
-//	time->tm_hour = t.tm_hour;
-//	time->tm_min = t.tm_min;
-//	time->tm_sec = t.tm_sec;
+	time->tm_year = t.tm_year;
+	time->tm_mon = t.tm_mon;
+	time->tm_mday = t.tm_mday;
+	time->tm_hour = t.tm_hour;
+	time->tm_min = t.tm_min;
+	time->tm_sec = t.tm_sec;
 	
 	return RET_OK;
 }

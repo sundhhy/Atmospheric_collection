@@ -249,6 +249,16 @@ static int INS_Select(uint8_t s_id)
 		return OPTION_SELECT_CONFIG(e_stg_set_time);
 		
 	}
+	if((s_row == 1) && (s_col == 0))
+	{
+		return OPTION_SELECT_CONFIG(e_stg_set_display);
+		
+	}
+	if((s_row == 2) && (s_col == 0))
+	{
+		return OPTION_SELECT_CONFIG(e_stg_set_password);
+		
+	}
 		
 	
 	return -1;
@@ -304,6 +314,8 @@ static int ACQ_Select(uint8_t s_id)
 		return OPTION_SELECT_SETUP(e_II_other_setup);
 		
 	}
+	
+	return -1;
 }
 
 /**********************—π¡¶…Ë÷√********************************************/
@@ -334,6 +346,20 @@ static void PRS_Init(cmp_options_t *p_opt)
 
 static int PRS_Select(uint8_t s_id)
 {
+	uint8_t		 s_row;
+	
+	s_row = OPTION_GET_ROW(s_id);
+	
+	if(s_row == 0)
+	{
+		return OPTION_SELECT_CONFIG(e_stg_set_pressuure);
+		
+	}
+	if(s_row == 1)
+	{
+		return OPTION_SELECT_CONFIG(e_stg_set_prs_protect);
+		
+	}
 	
 	return -1;
 }

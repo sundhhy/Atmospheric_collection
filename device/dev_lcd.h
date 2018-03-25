@@ -87,7 +87,7 @@ ABS_CLASS(dev_lcd)
 	
 	
 	void (*lcd_flush)(char );
-	void (*lcd_lightness)(uint8_t		pct);
+	void (*lcd_lightness)(uint16_t		pct);		//1位小数
 	
 	//未实现
 	int	(*get_size)(int font, uint16_t *width, uint16_t *heigh);
