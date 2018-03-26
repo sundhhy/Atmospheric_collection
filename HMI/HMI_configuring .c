@@ -92,6 +92,7 @@ static void CNF_Turn_page(HMI *self, int up_or_dn);
 //设置画面的焦点操作，都转到策略类的焦点操作
 static void CNF_Show_strategy_focus(strategy_focus_t *p_syf, int opt);
 
+static int CNF_Exec_Sy_cmd(void *p_rcv, int cmd,  void *arg);
 static uint8_t	CNF_Get_row_vy(uint8_t row);
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
@@ -178,6 +179,8 @@ static void CNF_Init_sheet( HMI *self )
 		return;
 		
 	}
+	p_stg->cmd_hdl = CNF_Exec_Sy_cmd;
+	p_stg->p_cmd_rcv = self;
 	
 	p_stg->init(NULL);
 	p_cfg_stg = p_stg;
@@ -322,7 +325,7 @@ static void CNF_Show_strategy(void)
 	uint16_t	txt_xsize = 0;
 	uint16_t	txt_ysize = 0;
 	uint8_t		col_vx0 = 0;
-	uint8_t		col_space = 2;				//列间距：单位 字符的宽度
+	uint8_t		col_space = 1;				//列间距：单位 字符的宽度
 	
 		
 	if(p_cfg_stg == NULL)
@@ -372,6 +375,50 @@ static void CNF_Show_strategy(void)
 	
 	Flush_LCD();
 }
+
+static int CNF_Exec_Sy_cmd(void *p_rcv, int cmd,  void *arg)
+{
+	HMI								*self = (HMI *)p_rcv;
+	HMI_configuring					*cthis = SUB_PTR( self, HMI, HMI_configuring);
+	sheet 							*p_sht_text = arr_p_pool_shts[CNF_TEXT_SHT];
+	strategy_focus_t				*p_pos;
+	int 							ret = RET_OK;
+	
+	switch(cmd) {
+		case sycmd_reflush:
+			p_sht_text->cnt.colour = PALLET_BLACK;
+			cthis->entry_start_row = 0;
+			self->show(self);
+			self->show_cmp(self);
+
+			break;
+		case sycmd_reflush_position:
+			p_pos = (strategy_focus_t		*)arg;
+		
+			p_sht_text->cnt.len = \
+				p_cfg_stg->entry_txt(p_pos->f_row, p_pos->f_col, &p_sht_text->cnt.data);
+			if(p_sht_text->cnt.len == 0)
+				break;
+			p_sht_text->cnt.colour = PALLET_BLACK;
+			p_sht_text->area.x0 = cthis->col_vx0[p_pos->f_col];
+			p_sht_text->area.y0 = CNF_Get_row_vy(p_pos->f_row);
+			
+			p_sht_text->p_gp->vdraw(p_sht_text->p_gp, &p_sht_text->cnt, &p_sht_text->area);
+		
+		
+			break;
+		
+		
+		
+	
+		
+	}
+	
+	return ret;
+	
+	
+}
+
 
 
 //切换页面时，将光标重新至于编辑区
@@ -429,29 +476,42 @@ static void	CNF_Hit(HMI *self, char kcd)
 		case KEYCODE_LEFT:
 
 
-			if(p_sy->key_hit_lt(NULL) == RET_OK) {
-
+			ret = p_sy->key_hit_lt(NULL);
+			if(ret == CST_RET_RECOVERY_OLD_FOCUS) {
+				
 				sy_chgFouse = 1;
-			} else {
-				sy_chgFouse = 2;
-
+			} 
+			else if(ret == CST_RET_CLEAN_OLD_FOCUS)
+			{
+				
+				sy_chgFouse = 3;
 			}
+			else if(ret == CST_RET_FOCUS_HOLD)
+			{
+				
+				sy_chgFouse = 0;
+			}
+			
 
 
 			break;
 		case KEYCODE_RIGHT:
 
-
-			if(p_sy->key_hit_rt(NULL) == RET_OK) {
-
+			ret = p_sy->key_hit_rt(NULL);
+			if(ret == CST_RET_RECOVERY_OLD_FOCUS) {
+				
 				sy_chgFouse = 1;
-			}  else {
-				sy_chgFouse = 2;
-
-
-
+			} 
+			else if(ret == CST_RET_CLEAN_OLD_FOCUS)
+			{
+				
+				sy_chgFouse = 3;
 			}
-
+			else if(ret == CST_RET_FOCUS_HOLD)
+			{
+				
+				sy_chgFouse = 0;
+			}
 			break;
 		case KEYCODE_UP:
 			aci_sys.key_weight = 1;
@@ -610,7 +670,6 @@ static uint8_t	CNF_Get_row_vy(uint8_t row)
 	
 	return (row + 1)* 16;
 }
-
 
 
 

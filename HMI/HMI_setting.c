@@ -274,7 +274,7 @@ static void HST_Show_strategy(void)
 	uint16_t	txt_xsize = 0;
 	uint16_t	txt_ysize = 0;
 	uint8_t		col_vx0 = 0;
-	uint8_t		col_space = 2;				//列间距：单位 字符的宽度
+	uint8_t		col_space = 1;				//列间距：单位 字符的宽度
 	
 		
 	if(p_hst_stg == NULL)

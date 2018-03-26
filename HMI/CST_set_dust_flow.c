@@ -54,9 +54,10 @@ strategy_t	cst_set_dust_flow = {
 
 #define		THIS_NUM_ROWS		1
 #define		THIS_MAX_ROW		0
+#define		THIS_MAX_COL		1
 
-#define		NEED_NUM_RAM			2
-#define 	CACHE_BUF_NUM			1
+#define		NEED_NUM_RAM			3
+#define 	CACHE_BUF_NUM			2
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
@@ -91,50 +92,35 @@ static int DSF_entry(int row, int col, void *pp_text)
 	system_conf_t	*p_s;
 	if(row > THIS_MAX_ROW)
 		return 0;
-	if(col > 0)
+	if(col > THIS_MAX_COL)
 		return 0;
-	
-	p_s->dust_flow = aci_sys.sys_conf.dust_flow;
-	Print_float(p_s->dust_flow, 4, 1, arr_p_vram[STG_RAM_NUM(0, 0)]);
-	strcat(arr_p_vram[STG_RAM_NUM(0, 0)], "L/min");
-	*pp = arr_p_vram[STG_RAM_NUM(row, 1)];
+	if(col == 0)
+	{
+		*pp = arr_p_vram[STG_RAM_NUM(0, 0)];
+		
+	}
+	else 
+	{
+		
+		p_s =(system_conf_t *)arr_p_vram[CACHE_BUF_NUM];
+		Print_float(p_s->dust_flow, 0, 1, arr_p_vram[STG_RAM_NUM(0, col)]);
+		strcat(arr_p_vram[STG_RAM_NUM(0, col)], "L/min");
+		*pp = arr_p_vram[STG_RAM_NUM(row, col)];
+	}
 	return strlen(*pp);
 	
-//	if(col == 0) {
-//		strcpy(arr_p_vram[STG_RAM_NUM(row, col)], set_dust_flow_entrys[row]);
-//		
-//		*pp = arr_p_vram[STG_RAM_NUM(row, col)];
-//		return strlen(*pp);
-//	} else if(col == 1) {
-//		
-//		p_s = (system_conf_t *)arr_p_vram[CACHE_BUF_NUM];
-//		switch(row)
-//		{
-//			case 0:
-//				p_s->dust_flow = aci_sys.sys_conf.dust_flow;
-//				Print_float(p_s->dust_flow, 4, 1, arr_p_vram[STG_RAM_NUM(0, 0)]);
-//				strcat(arr_p_vram[STG_RAM_NUM(0, 1)], "L/min");
-//				break;
-//		
-//		
-//			
-//		}
-//		
-//		
-//		*pp = arr_p_vram[STG_RAM_NUM(row, 1)];
-//		return strlen(*pp);
-//	}
-//	return 0;
+
 }
 
 static int DSF_init(void *arg)
 {
 	int i = 0;
+	system_conf_t	*p_s;
 	memset(&THIS_STG.sf, 0, sizeof(THIS_STG.sf));
 	
 	THIS_STG.p_stg_title = "粉尘流量";
 	
-	DSF_Reset_focus();
+	
 	
 	THIS_STG.stg_num_rows = THIS_NUM_ROWS;
 	HMI_Ram_init();
@@ -143,7 +129,12 @@ static int DSF_init(void *arg)
 		arr_p_vram[i] = HMI_Ram_alloc(48);
 		memset(arr_p_vram[i], 0, 48);
 	}
+	p_s =(system_conf_t *)arr_p_vram[CACHE_BUF_NUM];
+	p_s->dust_flow = aci_sys.sys_conf.dust_flow;
 	
+	sprintf(arr_p_vram[STG_RAM_NUM(0, 0)], "  ");		//让显示配置的位置往右移动一点
+	
+	DSF_Reset_focus();
 	aci_sys.key_weight = 1;
 	
 	return RET_OK;
@@ -171,22 +162,36 @@ static int DSF_modify(void *arg, int op)
 	
 	strategy_focus_t *p_syf = &THIS_STG.sf;
 	system_conf_t	*p_s;
-	int						weight = 1;
+	short						weight = 1;
+	short						limit = 1;
 	short						i, j;
 	p_s = (system_conf_t *)arr_p_vram[CACHE_BUF_NUM];
 	
-	j = strlen(arr_p_vram[STG_RAM_NUM(0, 0)]) - 6; //100.0L/min	排除L/min	和 小数点
-	for(i = p_syf->start_byte; i < j; i ++)
-		weight *= 10;
+	i = p_syf->start_byte;
+	while(arr_p_vram[STG_RAM_NUM(0, p_syf->f_col)][i] != 'L')
+	{
+		if(arr_p_vram[STG_RAM_NUM(0, p_syf->f_col)][i] != '.')
+			weight *= 10;
+		i ++;
+	}
+	weight /= 10;
 	
+	i = 0;
+	while(arr_p_vram[STG_RAM_NUM(0, p_syf->f_col)][i] != 'L')
+	{
+		if(arr_p_vram[STG_RAM_NUM(0, p_syf->f_col)][i] != '.')
+			limit *= 10;
+		i++;
+		
+	}
 	switch(p_syf->f_row)
 	{
 		
 		case 0:
 			
-			p_s->dust_flow = Operate_in_tange(p_s->dust_flow, op, weight, 0, weight * 10 - 1);
-			Print_float(p_s->dust_flow, 4, 1, arr_p_vram[STG_RAM_NUM(0, 0)]);
-			strcat(arr_p_vram[STG_RAM_NUM(0, 0)], "L/min");
+			p_s->dust_flow = Operate_in_tange(p_s->dust_flow, op, weight, 0, limit);
+			Print_float(p_s->dust_flow, 0, 1, arr_p_vram[STG_RAM_NUM(0, p_syf->f_col)]);
+			strcat(arr_p_vram[STG_RAM_NUM(0, p_syf->f_col)], "L/min");
 				
 			break;
 		
@@ -214,15 +219,18 @@ static int DSF_Col_1(int pos)
 	
 	switch(pos)
 	{
-		
+		case CST_POS_HOLD:
+			if(p[p_syf->start_byte] == '.')
+				p_syf->start_byte --;
+			break;
 		case CST_POS_FIRST:
 			p_syf->start_byte = 0;
 			break;
 		case CST_POS_LAST:
-			p_syf->start_byte = strlen(p) - 5; //100.0L/min	排除L/min
+			p_syf->start_byte = strlen(p) - 6; //100.0L/min	排除L/min
 			break;
 		case CST_POS_ADD:
-			if(p_syf->start_byte < (strlen(p) - 5))
+			if(p_syf->start_byte < (strlen(p) - 6))
 				p_syf->start_byte ++;
 			else
 				p_syf->start_byte = 0;
@@ -233,7 +241,7 @@ static int DSF_Col_1(int pos)
 			if(p_syf->start_byte)
 				p_syf->start_byte --;
 			else
-				p_syf->start_byte = strlen(p) - 5;
+				p_syf->start_byte = strlen(p) - 6;
 			if(p[p_syf->start_byte] == '.')
 				p_syf->start_byte --;
 			break;		
@@ -249,7 +257,7 @@ static int DSF_Col_1(int pos)
 
 static void DSF_Reset_focus(void)
 {
-	THIS_STG.sf.f_col = 0;
+	THIS_STG.sf.f_col = 1;
 	THIS_STG.sf.f_row = 0;
 	THIS_STG.sf.start_byte = 0;
 	THIS_STG.sf.num_byte = 1;
@@ -328,7 +336,7 @@ static int DSF_key_dn(void *arg)
 static int DSF_key_lt(void *arg)
 {
 //	strategy_focus_t *p_syf = &THIS_STG.sf;
-	int ret = CST_RET_RECOVERY_OLD_FOCUS;
+//	int ret = CST_RET_RECOVERY_OLD_FOCUS;
 	
 //	if(p_syf->f_col == 0)
 //	{
@@ -355,13 +363,13 @@ static int DSF_key_lt(void *arg)
 //	}
 	
 	DSF_Col_1(CST_POS_SUB);
-	return ret;
+	return CST_RET_RECOVERY_OLD_FOCUS;
 }
 
 static int DSF_key_rt(void *arg)
 {
 //	strategy_focus_t *p_syf = &THIS_STG.sf;
-	int ret = RET_OK;
+//	int ret = RET_OK;
 	
 //	if(p_syf->f_col == 0)
 //	{
@@ -388,7 +396,7 @@ static int DSF_key_rt(void *arg)
 //	}
 	
 	DSF_Col_1(CST_POS_ADD);
-	return ret;
+	return CST_RET_RECOVERY_OLD_FOCUS;
 }
 static int DSF_key_er(void *arg)
 {

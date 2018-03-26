@@ -72,9 +72,9 @@ strategy_t	cst_set_case_temperature = {
 //用行号作为第一个下标索引
 //用aci_sys.sys_conf.case_tmp作为第二个下标索引
 static char *const csm_text[3][3] = { \
-		{{"→  0℃(273K)"}, {"    0℃(273K)"}, {"   0℃(273K)"}},
-		{{"  20℃(293K)"}, {"→  20℃(293K)"}, {"  20℃(293K)"}},
-		{{"  25℃(298K)"}, {"   25℃(298K)"}, {"→ 25℃(298K)"}},
+		{"→  0℃(273K)", "    0℃(273K)", "    0℃(273K)"},
+		{"   20℃(293K)", "→ 20℃(293K)", "   20℃(293K)"},
+		{"   25℃(298K)", "   25℃(298K)", "→ 25℃(298K)"},
 	};
 //------------------------------------------------------------------------------
 // local types
@@ -112,9 +112,8 @@ static int CSM_entry(int row, int col, void *pp_text)
 	
 	
 	p_s = (system_conf_t *)arr_p_vram[CACHE_BUF_NUM];
-	if(aci_sys.sys_conf.case_tmp > 2)
-		aci_sys.sys_conf.case_tmp = 2;
-	p_s->case_tmp = aci_sys.sys_conf.case_tmp;
+	
+//	p_s->case_tmp = aci_sys.sys_conf.case_tmp;
 	*pp = csm_text[row][p_s->case_tmp];
 	return strlen(*pp);
 
@@ -140,7 +139,10 @@ static int CSM_init(void *arg)
 		memset(arr_p_vram[i], 0, 48);
 	}
 	p_s = (system_conf_t *)arr_p_vram[CACHE_BUF_NUM];
+	if(aci_sys.sys_conf.case_tmp > 2)
+		aci_sys.sys_conf.case_tmp = 2;
 	p_s->case_tmp = aci_sys.sys_conf.case_tmp;
+	
 	CSM_Reset_focus();
 	
 	aci_sys.key_weight = 1;
@@ -176,9 +178,14 @@ static int CSM_modify(void *arg, int op)
 	
 	p_s->case_tmp = p_syf->f_row;
 	
+	p_syf->start_byte = 0;
+//	p_syf->num_byte = 3;
+	THIS_STG.cmd_hdl(THIS_STG.p_cmd_rcv, sycmd_reflush_position, p_syf);
 	
 	//更新一下焦点的长度
 	CSM_Col_1(CST_POS_HOLD);
+	
+	
 	return CST_RET_RECOVERY_OLD_FOCUS;
 }
 
@@ -198,7 +205,7 @@ static int CSM_Col_1(int pos)
 	
 	//跳过→ 
 	p_syf->start_byte = 3;
-	p_syf->num_byte = strlen("→  20℃(293K)") - 3; 
+	p_syf->num_byte = strlen("→ 20℃(293K)")- 3; 
 	
 	
 	return ret;

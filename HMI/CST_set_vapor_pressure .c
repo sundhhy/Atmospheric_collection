@@ -71,8 +71,8 @@ strategy_t	cst_set_vapor = {
 //用行号作为第一个下标索引
 //用aci_sys.sys_conf.vapor_calculate作为第二个下标索引
 static char *const vpp_texts[2][2] = { \
-		{{"→ [不 计 算]"}, {"   [不 计 算]"}},
-		{{"  [参与计算]"}, {"→  [参与计算]"}},
+		{"→ [不 计 算]", "   [不 计 算]"},
+		{"   [参与计算]", "→ [参与计算]"},
 	};
 //------------------------------------------------------------------------------
 // local types
@@ -109,9 +109,7 @@ static int VPP_entry(int row, int col, void *pp_text)
 	
 	
 	p_s = (system_conf_t *)arr_p_vram[CACHE_BUF_NUM];
-	if(aci_sys.sys_conf.vapor_calculate > 1)
-		aci_sys.sys_conf.vapor_calculate = 1;
-	p_s->vapor_calculate = aci_sys.sys_conf.vapor_calculate;
+	
 	*pp = vpp_texts[row][p_s->vapor_calculate];
 	return strlen(*pp);
 
@@ -137,6 +135,8 @@ static int VPP_init(void *arg)
 		memset(arr_p_vram[i], 0, 48);
 	}
 	p_s = (system_conf_t *)arr_p_vram[CACHE_BUF_NUM];
+	if(aci_sys.sys_conf.vapor_calculate > 1)
+		aci_sys.sys_conf.vapor_calculate = 1;
 	p_s->vapor_calculate = aci_sys.sys_conf.vapor_calculate;
 	VPP_Reset_focus();
 	
@@ -175,6 +175,8 @@ static int VPP_modify(void *arg, int op)
 	
 	p_s->vapor_calculate = p_syf->f_row;
 	
+	p_syf->start_byte = 0;
+	THIS_STG.cmd_hdl(THIS_STG.p_cmd_rcv, sycmd_reflush_position, p_syf);
 	
 	//更新一下焦点的长度
 	VPP_Col_1(CST_POS_HOLD);
@@ -194,8 +196,8 @@ static int VPP_Col_1(int pos)
 //	char				*p = arr_p_vram[STG_RAM_NUM(p_syf->f_row, p_syf->f_col)];
 	
 	//跳过→ [ ]
-	p_syf->start_byte = 5;
-	p_syf->num_byte = strlen("→  [参与计算]") - 6; 
+	p_syf->start_byte = 4;
+	p_syf->num_byte = strlen("→ [参与计算]") - 5; 
 	
 	
 	return ret;

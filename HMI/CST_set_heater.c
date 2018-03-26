@@ -53,7 +53,7 @@ strategy_t	cst_set_heater = {
 #define		THIS_STG	cst_set_heater
 
 #define		THIS_NUM_ROWS		2
-#define		THIS_MAX_ROW		2
+#define		THIS_MAX_ROW		1
 
 #define		NEED_NUM_RAM			5
 #define 	CACHE_BUF_NUM			4

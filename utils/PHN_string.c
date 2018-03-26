@@ -1238,9 +1238,9 @@ void Print_able(char *p, int able)
 {
 	
 	if(able == 0)
-		sprintf(p, "½ûÖ¹");
+		sprintf(p, "[½ûÖ¹]");
 	else 
-		sprintf(p, "ÆôÓÃ");
+		sprintf(p, "[ÆôÓÃ]");
 	
 }
 
