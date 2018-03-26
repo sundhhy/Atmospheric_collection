@@ -44,6 +44,10 @@ typedef enum
 	e_stg_set_password,
 	e_stg_set_pressuure,
 	e_stg_set_prs_protect,
+	e_stg_set_heater,
+	e_stg_set_dust_flow,
+	e_stg_set_vapor,
+	e_stg_set_case_tmp,
 }strategy_type;
  //------------------------------------------------------------------------------
 // typedef

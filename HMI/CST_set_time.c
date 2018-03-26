@@ -119,7 +119,7 @@ static int TIM_entry(int row, int col, void *pp_text)
 		*pp = arr_p_vram[STG_RAM_NUM(row, col)];
 		return strlen(*pp);
 	}
-	
+	return 0;
 }
 
 static int TIM_init(void *arg)

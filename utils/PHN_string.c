@@ -88,7 +88,7 @@ static const char *su_ug_L = "ug/L";
 // local function prototypes
 //------------------------------------------------------------------------------
 static void Break_deal_string(char *p, int deal);
-static void Disable_string(char *p, int able);
+
 
 
 //============================================================================//
@@ -144,7 +144,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			else 
 				p_u8 = &aci_sys.sys_conf.disable_modify_adjust_paramter;
 			
-			Disable_string(p_s, *p_u8);
+			Print_able(p_s, *p_u8);
 			break;
 			
 		case es_CJC:
@@ -189,7 +189,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			else 
 				p_u8 = &aci_sys.sys_conf.disable_view_chn_status;
 			
-			Disable_string(p_s, *p_u8);
+			Print_able(p_s, *p_u8);
 			break;
 		case es_beep:
 			if(p_data)
@@ -197,7 +197,7 @@ void Print_sys_param(void *p_data, char	*p_s, int len, int aux)
 			else 
 				p_u8 = &aci_sys.sys_conf.enable_beep;
 			
-			Disable_string(p_s, *p_u8);
+			Print_able(p_s, *p_u8);
 			break;
 	}
 	
@@ -257,7 +257,14 @@ void Print_atmosphere_param(void *p_data, char	*p_s, int len, int aux)
 		
 		
 }
-
+void Print_select(char *p, int s)
+{
+	if(s)
+		sprintf(p, "¡ú");
+	else
+		sprintf(p, "  ");
+	
+}
 void Str_set_sys_param(char	*p_s, int aux, int op, int val)
 {
 	switch(aux)
@@ -294,7 +301,7 @@ void Str_set_sys_param(char	*p_s, int aux, int op, int val)
 		case es_mdfy_prm:
 		
 			aci_sys.sys_conf.disable_modify_adjust_paramter = Operate_in_tange(aci_sys.sys_conf.disable_modify_adjust_paramter, op, val, 0, 1);
-			Disable_string(p_s, aci_sys.sys_conf.disable_modify_adjust_paramter );
+			Print_able(p_s, aci_sys.sys_conf.disable_modify_adjust_paramter );
 			break;
 		case es_cold_end_way:
 			aci_sys.sys_conf.cold_end_way = Operate_in_tange(aci_sys.sys_conf.cold_end_way, op, val, 0, 1);
@@ -309,11 +316,11 @@ void Str_set_sys_param(char	*p_s, int aux, int op, int val)
 			
 		case es_vcs:
 			aci_sys.sys_conf.disable_view_chn_status = Operate_in_tange(aci_sys.sys_conf.disable_view_chn_status, op, val, 0, 1);
-			Disable_string(p_s, aci_sys.sys_conf.disable_view_chn_status);
+			Print_able(p_s, aci_sys.sys_conf.disable_view_chn_status);
 			break;
 		case es_beep:
 			aci_sys.sys_conf.enable_beep = Operate_in_tange(aci_sys.sys_conf.enable_beep, op, val, 0, 1);
-			Disable_string(p_s, aci_sys.sys_conf.enable_beep);
+			Print_able(p_s, aci_sys.sys_conf.enable_beep);
 			break;
 		default:
 			
@@ -1227,6 +1234,16 @@ void Str_Calculations(char *p_str, int len, int op, int val, int rangel, int ran
 	}
 }
 
+void Print_able(char *p, int able)
+{
+	
+	if(able == 0)
+		sprintf(p, "½ûÖ¹");
+	else 
+		sprintf(p, "ÆôÓÃ");
+	
+}
+
 //=========================================================================//
 //                                                                         //
 //          P R I V A T E   D E F I N I T I O N S                          //
@@ -1256,14 +1273,5 @@ static void Break_deal_string(char *p, int deal)
 	
 }
 
-static void Disable_string(char *p, int able)
-{
-	
-	if(able == 0)
-		sprintf(p, "½ûÖ¹");
-	else 
-		sprintf(p, "ÔÊÐí");
-	
-}
 
 

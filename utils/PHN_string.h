@@ -27,6 +27,8 @@
 //system.c
 void Print_sys_param(void *p_data, char	*p_s, int len, int aux);
 void Print_atmosphere_param(void *p_data, char	*p_s, int len, int aux);
+void Print_able(char *p, int able);
+void Print_select(char *p, int s);
 void Str_set_sys_param(char	*p_s, int aux, int op, int val);
 
 int Get_str_data(char *s_data, char* separator, int num, uint8_t	*err);

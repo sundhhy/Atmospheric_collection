@@ -119,7 +119,7 @@ static int PSD_entry(int row, int col, void *pp_text)
 		*pp = arr_p_vram[STG_RAM_NUM(0, 1)];
 		return strlen(*pp);
 	}
-	
+	return 0;
 }
 
 static int PSD_init(void *arg)
@@ -233,7 +233,7 @@ static int PSD_Col_1(int pos)
 {
 	int  ret = 0;
 	strategy_focus_t *p_syf = &THIS_STG.sf;
-	char				*p = arr_p_vram[STG_RAM_NUM(p_syf->f_row, p_syf->f_col)];
+//	char				*p = arr_p_vram[STG_RAM_NUM(p_syf->f_row, p_syf->f_col)];
 	p_syf->num_byte = 1;
 	
 	switch(pos)

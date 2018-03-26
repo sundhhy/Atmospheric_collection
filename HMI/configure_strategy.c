@@ -14,6 +14,10 @@ extern strategy_t	cst_set_display;
 extern strategy_t	cst_set_password;
 extern strategy_t	cst_set_pressure;
 extern strategy_t	cst_set_prs_protect;
+extern strategy_t	cst_set_heater;
+extern strategy_t	cst_set_dust_flow;
+extern strategy_t	cst_set_vapor;
+extern strategy_t cst_set_case_temperature;
 //------------------------------------------------------------------------------
 // global function prototypes
 //------------------------------------------------------------------------------
@@ -58,6 +62,15 @@ strategy_t	*Get_strategy(uint8_t t)
 			return &cst_set_pressure;
 		case e_stg_set_prs_protect:
 			return &cst_set_prs_protect;
+		case e_stg_set_heater:
+			return &cst_set_heater;
+		case e_stg_set_dust_flow:
+			return &cst_set_dust_flow;
+		case e_stg_set_vapor:
+			return &cst_set_vapor;
+		case e_stg_set_case_tmp:
+			return &cst_set_case_temperature;
+		
 		default:
 			return NULL;
 		

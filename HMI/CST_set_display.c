@@ -135,7 +135,7 @@ static int DSP_entry(int row, int col, void *pp_text)
 		*pp = arr_p_vram[STG_RAM_NUM(row, col)];
 		return strlen(*pp);
 	}
-	
+	return 0;
 }
 
 static int DSP_init(void *arg)

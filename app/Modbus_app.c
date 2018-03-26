@@ -447,18 +447,18 @@ static int MBA_Acc_param_system(uint16_t	offset, char rd_or_wr, uint16_t *p)
 			}
 			break;
 		case 9:
-			if(rd_or_wr == MBA_ACC_READ)
-			{
+//			if(rd_or_wr == MBA_ACC_READ)
+//			{
 
-				*p = p_sys_conf->num_chn;
-			}
-			else 
-			{
-				
-				ret = ERR_NOT_SUPPORT;		
-					
-				
-			}
+//				*p = p_sys_conf->num_chn;
+//			}
+//			else 
+//			{
+//				
+//				ret = ERR_NOT_SUPPORT;		
+//					
+//				
+//			}
 			break;
 		default:
 			ret = ERR_NOT_SUPPORT;		

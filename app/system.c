@@ -164,7 +164,7 @@ void System_default(void)
 	
 	memset(p_sc, 0, sizeof(system_conf_t));
 	p_sc->sys_flag = 0;
-	p_sc->num_chn = NUM_CHANNEL;
+//	p_sc->num_chn = NUM_CHANNEL;
 	p_sc->cold_end_way = 0;
 	stg->wr_stored_data(stg, STG_SYS_CONF, &aci_sys.sys_conf, sizeof(aci_sys.sys_conf));
 	

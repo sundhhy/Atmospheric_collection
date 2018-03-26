@@ -73,8 +73,16 @@ typedef enum {
 }e_system_t;
 
 typedef struct {
-	uint8_t		num_chn;
-	uint8_t		password[3];
+	
+	uint8_t		password[2];
+	short			heater_temperature;	//加热器温度 1位小数
+	short			dust_flow;					//1位小数
+	char			heater_switch;		//加热器开关
+	char			vapor_calculate;	//计算水汽压 0 不参与运算  1 参与运算
+	char			case_tmp;					//0:0℃ 1:20℃ 2:25℃
+	//@Deprecated
+	uint8_t		num_chn[4];
+	
 	
 	//record_gap_s:sec 0:1 1:2 2:4 3:8 4:12 5:24 6:36 7:60 8:120 9:180 10:240 
 	uint8_t		record_gap_s;		

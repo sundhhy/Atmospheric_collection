@@ -202,7 +202,8 @@ int CMP_OPT_Select(cmp_options_t *p_opt, uint8_t		sht_id)
 	if(p_opt == NULL)
 		return -1;
 	
-	arr_op[p_opt->opt_type].func_select(sht_id);
+	return arr_op[p_opt->opt_type].func_select(sht_id);
+	
 }
 
 
@@ -307,6 +308,11 @@ static int ACQ_Select(uint8_t s_id)
 	if(s_row == 0 && s_col == 1)
 	{
 		return OPTION_SELECT_SETUP(e_II_timing_setup);
+		
+	}
+	if(s_row == 1 && s_col == 0)
+	{
+		return OPTION_SELECT_CONFIG(e_stg_set_heater);
 		
 	}
 	if(s_row == 1 && s_col == 1)
@@ -427,8 +433,27 @@ static void OTH_Init(cmp_options_t *p_opt)
 static int OTH_Select(uint8_t s_id)
 {
 	
+	uint8_t		 s_row;
+	
+	s_row = OPTION_GET_ROW(s_id);
+	
+	if(s_row == 0)
+	{
+		return OPTION_SELECT_CONFIG(e_stg_set_case_tmp);
+		
+	}
+	if(s_row == 1)
+	{
+		return OPTION_SELECT_CONFIG(e_stg_set_vapor);
+		
+	}
+	if(s_row == 2)
+	{
+		return OPTION_SELECT_CONFIG(e_stg_set_dust_flow);
+		
+	}
+	
 	return -1;
-
 
 
 }

@@ -360,7 +360,7 @@ static void HST_Turn_page(HMI *self, int up_or_dn)
 static void	HST_Hit(HMI *self, char kcd)
 {
 	
-	HMI_setting				*cthis = SUB_PTR( self, HMI, HMI_setting);
+//	HMI_setting				*cthis = SUB_PTR( self, HMI, HMI_setting);
 	strategy_t				*p_sy = p_hst_stg;
 	strategy_focus_t	old_sf;
 	
@@ -477,7 +477,7 @@ static void	HST_Hit(HMI *self, char kcd)
 
 static void	HST_Long_hit( HMI *self, char kcd)
 {
-	HMI_setting			*cthis = SUB_PTR( self, HMI, HMI_setting);
+//	HMI_setting			*cthis = SUB_PTR( self, HMI, HMI_setting);
 	strategy_keyval_t	skt = {SY_KEYTYPE_LONGPUSH};
 	strategy_t			*p_sy = p_hst_stg;
 	

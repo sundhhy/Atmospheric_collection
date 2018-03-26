@@ -117,7 +117,7 @@ static int ATP_entry(int row, int col, void *pp_text)
 		*pp = arr_p_vram[STG_RAM_NUM(0, 1)];
 		return strlen(*pp);
 	}
-	
+	return 0;
 }
 
 static int ATP_init(void *arg)
