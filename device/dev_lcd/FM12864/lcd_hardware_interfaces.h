@@ -49,7 +49,7 @@
 //------------------------------------------------------------------------------
 
 void LHI_Init_pwm(TIM_TypeDef* timx, short chx, short default_duty);
-void LHI_Set_pwm_duty(TIM_TypeDef* timx, short duty);
+void LHI_Set_pwm_duty(TIM_TypeDef* timx, short chx, short duty);
 void LHI_Reset_lcd(void);
 int  LHI_Wait(int us);
 

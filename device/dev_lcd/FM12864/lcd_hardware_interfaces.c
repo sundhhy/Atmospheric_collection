@@ -35,7 +35,7 @@
 #define DIR_OUT		1
 
 
-#define PWM_100   99
+#define PWM_100   999
 
 #define SET_LCD_E		GPIO_SetBits(PORT_LCD_E,PIN_LCD_E)	
 #define CLR_LCD_E		GPIO_ResetBits(PORT_LCD_E,PIN_LCD_E)	
@@ -52,11 +52,11 @@
 //------------------------------------------------------------------------------
 typedef void (*init_oc1)(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct);
 typedef void (*config_preload)(TIM_TypeDef* TIMx, uint16_t TIM_OCPreload);
-
+typedef void (*set_compare)(TIM_TypeDef* TIMx, uint16_t Compare1);
 typedef struct {
 	init_oc1					init;
 	config_preload		config;
-
+	set_compare			compare;
 
 }pwm_init_func;	
 //------------------------------------------------------------------------------
@@ -67,18 +67,22 @@ static  const pwm_init_func arr_pwm_func[4] = {
 		{
 			TIM_OC1Init,
 			TIM_OC1PreloadConfig,
+			TIM_SetCompare1,
 		}, 
 		{
 			TIM_OC2Init,
 			TIM_OC2PreloadConfig,
+			TIM_SetCompare2,
 		}, 
 		{
 			TIM_OC3Init,
 			TIM_OC3PreloadConfig,
+			TIM_SetCompare3,
 		}, 
 		{
 			TIM_OC4Init,
 			TIM_OC4PreloadConfig,
+			TIM_SetCompare4,
 		}, 
 	
 	
@@ -103,7 +107,7 @@ void LHI_Init_pwm(TIM_TypeDef* timx, short chx, short default_duty)
 	TIM_OCInitTypeDef TIM_OCInitStructure;
 		
 	//初始化定时器
-	//72 * 10^6 / (99 + 1) / (6 + 1) = 100k
+	//72 * 10^6 / (999 + 1) / (6 + 1) = 10k
 	TIM_TimeBaseStructure.TIM_Period = PWM_100; //自动装载寄存器的值
 	TIM_TimeBaseStructure.TIM_Prescaler = 6; //TIMX预分频的值
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0; //时钟分割
@@ -120,7 +124,7 @@ void LHI_Init_pwm(TIM_TypeDef* timx, short chx, short default_duty)
 	PWM_FUNC(chx).init(timx, &TIM_OCInitStructure);//????????????
 	PWM_FUNC(chx).config(timx, TIM_OCPreload_Enable);  //?????TIM2?CCR2??????
 	TIM_Cmd(timx, ENABLE);
-	TIM_SetCompare1(timx,LHI_Pulse(default_duty));//??????50%?pwm??
+	PWM_FUNC(chx).compare(timx,LHI_Pulse(default_duty));//??????50%?pwm??
 }
 
 int  LHI_Wait(int us)
@@ -136,10 +140,10 @@ int  LHI_Wait(int us)
 	return RET_OK;
 	
 }
-void LHI_Set_pwm_duty(TIM_TypeDef* timx, short duty)
+void LHI_Set_pwm_duty(TIM_TypeDef* timx, short chx,  short duty)
 {
 	
-	TIM_SetCompare1(timx,LHI_Pulse(duty));//??????50%?pwm??
+	PWM_FUNC(chx).compare(timx,LHI_Pulse(duty));//??????50%?pwm??
 }
 
 void LHI_Reset_lcd(void)

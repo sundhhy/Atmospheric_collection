@@ -158,14 +158,18 @@ typedef struct {
 	int	(*commit)(void	*arg);
 	void	(*sty_exit)(void);
 	strategy_focus_t		sf;
-	char								*p_stg_title;
-	void								*p_cmd_rcv;
-	stategy_cmd					cmd_hdl;
+	char							*p_stg_title;
+	void							*p_cmd_rcv;
+	stategy_cmd						cmd_hdl;
 	uint8_t							stg_num_rows;			//总共的行数
+	
+	//一页能够显示的行数，一般没有要求，设置成0xff即可
+	//只有某些行必须显示在同一页的时候，才需要指定一个大于0的正数（不能是0xff）
+	uint8_t							row_in_page;			
 	
 	//被显示在屏幕上的行的范围，用于策略类在执行焦点移动时，判定焦点何时跳出策略范围
 	uint8_t							row_in_lcd[2];		
-	uint8_t							none;
+	
 }strategy_t;
 
 

@@ -73,6 +73,8 @@ static ro_char qry_code_text[] = { "<text vx0=0 vy0=16> </>" };
 #define QRY_PAGE_SHT			2
 #define QRY_TEXT_SHT			3
 
+#define QRY_SIG_TYPE			aci_sys.hmi_mgr.hand_signal_type
+
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
@@ -101,7 +103,8 @@ static void QRY_Turn_page(HMI *self, int up_or_dn);
 
 static int QRY_Exec_Sy_cmd(void *p_rcv, int cmd,  void *arg);
 static uint8_t	QRY_Get_row_vy(uint8_t row);
-static uint8_t	QRY_switch_signal(uint8_t	old_sig);
+static uint8_t	QRY_Switch_signal(uint8_t	old_sig);
+static void	QRY_Get_rows_in_page(HMI_query		*cthis, uint8_t stg_row);
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
@@ -148,11 +151,11 @@ END_CTOR
 static int	QRY_Init( HMI *self, void *arg)
 {
 
-
+	
 
 	self->flag = 0;
 
-	self->arg[0] = e_qry_atmosphere_A;
+	QRY_SIG_TYPE = e_qry_atmosphere_A;
 	return RET_OK;
 	
 
@@ -180,7 +183,7 @@ static void QRY_Init_sheet( HMI *self )
 
 	
 	
-	p_stg = Get_strategy(self->arg[0]);
+	p_stg = Get_strategy(QRY_SIG_TYPE);
 	if(p_stg == NULL)
 	{
 		self->flag |= HMI_FLAG_ERR;
@@ -190,8 +193,9 @@ static void QRY_Init_sheet( HMI *self )
 	p_stg->cmd_hdl = QRY_Exec_Sy_cmd;
 	p_stg->p_cmd_rcv = self;
 	
-	p_stg->init(self->arg);		//大气类型用于区分是大气A还是大气B
+	p_stg->init(&QRY_SIG_TYPE);		//大气类型用于区分是大气A还是大气B
 	
+	QRY_Get_rows_in_page(cthis, p_stg->row_in_page);
 	h = 0;
 	p_query_stg = p_stg;
 	if(p_stg->p_stg_title)
@@ -295,7 +299,9 @@ static void QRY_Show_strategy(void)
 		
 		
 		for(row = 0; row < SETTING_ROW_MAX; row ++) {
-			
+			QRY_Get_rows_in_page(cthis, p_query_stg->row_in_page);
+			if(row >= cthis->max_row_in_page)
+				continue;
 			text_len = p_query_stg->entry_txt(row + cthis->entry_start_row, col, &p_sht_text->cnt.data);
 			if(text_len == 0)
 				continue;
@@ -303,8 +309,13 @@ static void QRY_Show_strategy(void)
 			if(col_maxlen < text_len)
 				col_maxlen = text_len;
 			
-			p_sht_text->area.x0 = col_vx0;
+			p_sht_text->area.x0 = col_vx0; 
 			p_sht_text->area.y0 = QRY_Get_row_vy(row);
+			
+			//对x轴进行判断，如果放不下，就把x轴进行左移
+			//这是因为有些情况下，某一行时无法进行对齐的，因此在程序的编写的时候要保证x轴左移不会覆盖前一列的内容
+			if((p_sht_text->area.x0 + p_sht_text->cnt.len * txt_xsize) >= LCD_LONG)
+				p_sht_text->area.x0 = LCD_LONG - p_sht_text->cnt.len * txt_xsize;
 
 			
 			p_sht_text->p_gp->vdraw(p_sht_text->p_gp, &p_sht_text->cnt, &p_sht_text->area);
@@ -317,8 +328,12 @@ static void QRY_Show_strategy(void)
 	
 	//更新页数
 	if(p_query_stg->stg_num_rows >  SETTING_ROW_MAX)
+	{
 		sprintf(arr_p_pool_shts[QRY_PAGE_SHT]->cnt.data, "[%d/%d]", \
-			cthis->entry_start_row / SETTING_ROW_MAX + 1, p_query_stg->stg_num_rows / SETTING_ROW_MAX + 1);
+			cthis->entry_start_row / cthis->max_row_in_page + 1, p_query_stg->stg_num_rows / SETTING_ROW_MAX + 1);
+		arr_p_pool_shts[QRY_PAGE_SHT]->p_gp->vdraw(arr_p_pool_shts[QRY_PAGE_SHT]->p_gp, \
+			&arr_p_pool_shts[QRY_PAGE_SHT]->cnt, &arr_p_pool_shts[QRY_PAGE_SHT]->area);
+	}
 	
 	Flush_LCD();
 }
@@ -378,11 +393,25 @@ static void QRY_Turn_page(HMI *self, int up_or_dn)
 	
 	if(up_or_dn == 0) 
 	{
-		cthis->entry_start_row -= SETTING_ROW_MAX;
+		if(cthis->entry_start_row >= cthis->max_row_in_page)
+			cthis->entry_start_row -= cthis->max_row_in_page;
+		else 
+		{
+			return;
+			
+		}
 	}
 	else
 	{
-		cthis->entry_start_row += SETTING_ROW_MAX;
+		if((cthis->entry_start_row + cthis->max_row_in_page) < p_query_stg->stg_num_rows)
+		{
+			cthis->entry_start_row += cthis->max_row_in_page;
+		}
+		else
+		{
+			return;
+			
+		}
 	} 
 	
 	CLR_LCD();
@@ -399,7 +428,7 @@ static void QRY_Turn_page(HMI *self, int up_or_dn)
 static void	QRY_Hit(HMI *self, char kcd)
 {
 	
-
+	HMI_query		*cthis = SUB_PTR( self, HMI, HMI_query);
 
 	switch(kcd)
 	{
@@ -420,7 +449,8 @@ static void	QRY_Hit(HMI *self, char kcd)
 			break;
 		case KEYCODE_SWITCH:
 			//大气A/B 粉尘之间的切换
-			self->arg[0] = QRY_switch_signal(self->arg[0]);
+			QRY_SIG_TYPE = QRY_Switch_signal(QRY_SIG_TYPE);
+			cthis->entry_start_row = 0;
 			self->switchHMI(self, self);
 			break;
 		case KEYCODE_ENTER:
@@ -446,25 +476,32 @@ static uint8_t	QRY_Get_row_vy(uint8_t row)
 	return (row + 1)* 16;
 }
 
-static uint8_t	QRY_switch_signal(uint8_t	old_sig)
+static uint8_t	QRY_Switch_signal(uint8_t	old_sig)
 {
 	if(old_sig == e_qry_atmosphere_A)
 	{
 		return e_qry_atmosphere_B;
 		
 	}
-	if(old_sig == e_qry_atmosphere_B)
-	{
-		return e_qry_dust;
-		
-	}
+//	if(old_sig == e_qry_atmosphere_B)
+//	{
+//		return e_qry_dust;
+//		
+//	}
 	
 	return e_qry_atmosphere_A;
 	
 	
 }
 
-
+static void	QRY_Get_rows_in_page(HMI_query		*cthis, uint8_t stg_row)
+{
+	if((stg_row > SETTING_ROW_MAX) || stg_row == 0)
+		cthis->max_row_in_page = SETTING_ROW_MAX;
+	else
+		cthis->max_row_in_page = stg_row;
+	
+}
 
 
 

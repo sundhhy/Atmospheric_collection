@@ -169,8 +169,8 @@ static void MaininitSheet( HMI *self )
 	arr_p_sht_choices[2]->sht_id = CMM_CHOICE_ID(2);
 	arr_p_sht_choices[3]->sht_id = CMM_CHOICE_ID(3);
 	arr_choice_key[0] = HMI_CONFIG;
-	arr_choice_key[1] = HMI_QUERY;
-	arr_choice_key[2] = HMI_NONE;
+	arr_choice_key[1] = HMI_NONE;
+	arr_choice_key[2] = HMI_QUERY;
 	arr_choice_key[3] = HMI_NONE;
 	
 	h = 0;

@@ -440,14 +440,14 @@ static	void FM_Lightness(uint16_t		pct)
 {
 	if(pct > 1000)
 		pct = 1000;
-	LHI_Set_pwm_duty(LCD_PWM_LIGHTNESS, pct);
+	LHI_Set_pwm_duty(LCD_PWM_LIGHTNESS, 3, pct);
 }
 
 static	void FM_Contrast(uint16_t		pct)
 {
 	if(pct > 1000)
 		pct = 1000;
-	LHI_Set_pwm_duty(LCD_PWM_CONTRAST, pct);
+	LHI_Set_pwm_duty(LCD_PWM_CONTRAST, 1, pct);
 }
 
 static  int	 FM_Get_size(int font, uint16_t *width, uint16_t *heigh)

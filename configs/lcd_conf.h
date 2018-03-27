@@ -17,10 +17,10 @@
 #define LCD_BUF_SIZE		(1024)		
 
 #define DEFAULT_LIGHTNESS		600		//默认亮度
-#define MIN_LIGHTNESS		450		//默认亮度
+#define MIN_LIGHTNESS		0		//默认亮度
 
-#define DEFAULT_CONTRAST		600		//默认亮度
-#define MIN_CONTRAST		450		//默认亮度
+#define DEFAULT_CONTRAST		600		//对比度
+#define MIN_CONTRAST		450		
 
 
 //调色板颜色定义， 与LCD无关

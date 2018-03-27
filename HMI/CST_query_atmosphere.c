@@ -71,19 +71,19 @@ strategy_t	cst_qry_atmosphere = {
 
 
 static char *const qat_entry_code[13] = { \
-		"开始", \
-		"采样次数", \
-		"设置次数",\
-		"湿度", \
-		"压力", \
-		"大气压", \
+	"开始:", \
+	"采样次数:", \
+	"设置次数:",\
+	"湿度:", \
+	"压力:", \
+	"大气压:", \
 		"工况", \
 		"标况", \
 		"设置", \
-		"工体",	\
-		"标体",		\
-		"累计时长",		\
-		"设置时长"		\
+	"工体:",	\
+	"标体:",		\
+	"累计时长:",		\
+	"设置时长:"		\
 	};
 //------------------------------------------------------------------------------
 // local types
@@ -115,8 +115,8 @@ static int QAT_entry(int row, int col, void *pp_text)
 {
 	char **pp = (char **)pp_text;
 	qry_atm_t	*p_cache;
-	uint32_t			sec_u32;
-	mdl_data_t		mdd;
+	uint32_t			sec_u32 = 100;
+	mdl_data_t		mdd = {1000, 2};
 	struct tm		t;
 						
 	if(row > THIS_MAX_ROW)
@@ -124,6 +124,10 @@ static int QAT_entry(int row, int col, void *pp_text)
 	if(col > THIS_MAX_COL)
 		return 0;
 	
+	THIS_STG.row_in_page = 0xff;
+	if((row >= 9) && (row <= 12)) 
+		THIS_STG.row_in_page = 2;
+		
 	if(col == 0)
 	{
 		*pp = qat_entry_code[row];
@@ -139,7 +143,7 @@ static int QAT_entry(int row, int col, void *pp_text)
 			case 0:
 				MDL_Get_value(p_cache->sig_type, em_start_time_sec, &sec_u32);
 				Sec_2_tm(sec_u32, &t);
-				sprintf(arr_p_vram[row], "%d-%d %d:%d", t.tm_mday, t.tm_mon, t.tm_mday, t.tm_min);
+				sprintf(arr_p_vram[row], "%02d-%02d %02d:%02d", t.tm_mday, t.tm_mon, t.tm_mday, t.tm_min);
 				break;
 			case 1:
 				MDL_Get_value(p_cache->sig_type, em_sample_count, &sec_u32);
@@ -179,6 +183,7 @@ static int QAT_entry(int row, int col, void *pp_text)
 				strcat(arr_p_vram[row], "L/min");
 				break;
 			case 9:
+				
 				MDL_Get_value(p_cache->sig_type, em_condition_volume, &mdd);
 				Print_float(mdd.mdl_val, 5, mdd.num_point, arr_p_vram[row]);
 				strcat(arr_p_vram[row], "L/min");
@@ -222,7 +227,7 @@ static int QAT_init(void *arg)
 	else
 		THIS_STG.p_stg_title = "大气B";
 	
-	
+	THIS_STG.row_in_page = 0xff;
 	
 	THIS_STG.stg_num_rows = THIS_NUM_ROWS;
 	HMI_Ram_init();

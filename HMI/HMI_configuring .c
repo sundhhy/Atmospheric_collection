@@ -58,11 +58,9 @@
 	密码修改
 */
 static ro_char hst_code_title[] = { "<text vx0=0 vy0=0> </>" };
-static ro_char hst_code_page[] = { "<text vx0=88 vy0=0>[1/4]</>" };		//显示页码
 static ro_char hst_code_text[] = { "<text vx0=0 vy0=16> </>" };
 
-#define CNF_PAGE_SHT			1
-#define CNF_TEXT_SHT			2
+#define CNF_TEXT_SHT			1
 
 //------------------------------------------------------------------------------
 // local types
@@ -165,9 +163,7 @@ static void CNF_Init_sheet( HMI *self )
 	p_exp = ExpCreate( "text");
 	
 	p_exp->inptSht(p_exp, (void *)hst_code_title, arr_p_pool_shts[0]);
-	p_exp->inptSht(p_exp, (void *)hst_code_page, arr_p_pool_shts[CNF_PAGE_SHT]);
 	p_exp->inptSht(p_exp, (void *)hst_code_text, arr_p_pool_shts[CNF_TEXT_SHT]);
-	arr_p_pool_shts[CNF_PAGE_SHT]->cnt.data = cthis->page_buf;
 	
 
 	
@@ -368,10 +364,6 @@ static void CNF_Show_strategy(void)
 		col_maxlen += col_space;
 	}
 	
-	//更新页数
-	if(p_cfg_stg->stg_num_rows >  SETTING_ROW_MAX)
-		sprintf(arr_p_pool_shts[CNF_PAGE_SHT]->cnt.data, "[%d/%d]", \
-			cthis->entry_start_row / SETTING_ROW_MAX + 1, p_cfg_stg->stg_num_rows / SETTING_ROW_MAX + 1);
 	
 	Flush_LCD();
 }

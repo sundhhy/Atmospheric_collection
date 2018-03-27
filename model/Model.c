@@ -70,7 +70,18 @@ static void DoUpdate(void **x, void *cl)
 
 void MDL_Get_value(uint8_t	st, uint8_t aux, void	*out_val)
 {
-	
+//	switch(aux)
+//	{
+//		case em_sample_count:
+//		case em_set_up_count:
+//		case em_start_time_sec:
+//		case em_add_up_time_sec:
+//		case em_set_up_time_sec:
+//			*(uint32_t *)out_val = 0;
+//			break;
+//		
+//	}
+
 	
 	
 }

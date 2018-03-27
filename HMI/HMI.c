@@ -120,8 +120,8 @@ int HMI_Init(void)
 	p_hmi = CreateHMI(HMI_SELECT_SETTING);
 	p_hmi->init(p_hmi, NULL);
 //	
-//	p_hmi = CreateHMI(HMI_ACQ_SETUP);
-//	p_hmi->init(p_hmi, NULL);
+	p_hmi = CreateHMI(HMI_QUERY);
+	p_hmi->init(p_hmi, NULL);
 	
 	
 //	p_btn = BTN_Get_Sington();
