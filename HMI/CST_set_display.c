@@ -386,6 +386,7 @@ static int DSP_modify(void *arg, int op)
 		case 1:
 			p_h->gray_levels = Operate_in_tange_keep(p_h->gray_levels, op, aci_sys.key_weight, 0, 1000);
 			Print_float(p_h->gray_levels, 4, 1, arr_p_vram[STG_RAM_NUM(p_syf->f_row, p_syf->f_col)]);
+			p_lcd->lcd_contrast(p_h->gray_levels);
 			break;
 		case 2:
 			p_h->time_switch = Operate_in_tange(p_h->time_switch, op, aci_sys.key_weight, 0, 99);

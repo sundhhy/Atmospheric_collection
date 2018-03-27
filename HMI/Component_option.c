@@ -151,7 +151,7 @@ static int TIM_Select(uint8_t s_id);
 static void OTH_Init(cmp_options_t *p_opt);
 static int OTH_Select(uint8_t s_id);
 
-static opt_op_t 					arr_op[e_num_options] = \
+static const opt_op_t 					arr_op[e_num_options] = \
 	{ \
 		{\
 			INS_Init,\

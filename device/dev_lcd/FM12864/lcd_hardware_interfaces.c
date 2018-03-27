@@ -45,14 +45,44 @@
 #define CLR_LCD_RW		GPIO_ResetBits(PORT_LCD_RW,PIN_LCD_RW)	
 #define SET_LCD_DI		GPIO_SetBits(PORT_LCD_DI,PIN_LCD_DI)	
 #define CLR_LCD_DI		GPIO_ResetBits(PORT_LCD_DI,PIN_LCD_DI)
+
+#define PWM_FUNC(chx)		arr_pwm_func[chx - 1]
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
+typedef void (*init_oc1)(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct);
+typedef void (*config_preload)(TIM_TypeDef* TIMx, uint16_t TIM_OCPreload);
 
+typedef struct {
+	init_oc1					init;
+	config_preload		config;
+
+
+}pwm_init_func;	
 //------------------------------------------------------------------------------
 // local vars
 //------------------------------------------------------------------------------
 
+static  const pwm_init_func arr_pwm_func[4] = { 
+		{
+			TIM_OC1Init,
+			TIM_OC1PreloadConfig,
+		}, 
+		{
+			TIM_OC2Init,
+			TIM_OC2PreloadConfig,
+		}, 
+		{
+			TIM_OC3Init,
+			TIM_OC3PreloadConfig,
+		}, 
+		{
+			TIM_OC4Init,
+			TIM_OC4PreloadConfig,
+		}, 
+	
+	
+};
 
 //------------------------------------------------------------------------------
 // local function prototypes
@@ -67,7 +97,7 @@ static void LHI_Lcd_E_edge(char edge);		//edge 0 下降沿 1 上升沿
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
 
-void LHI_Init_pwm(short default_duty)
+void LHI_Init_pwm(TIM_TypeDef* timx, short chx, short default_duty)
 {
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
 	TIM_OCInitTypeDef TIM_OCInitStructure;
@@ -78,7 +108,7 @@ void LHI_Init_pwm(short default_duty)
 	TIM_TimeBaseStructure.TIM_Prescaler = 6; //TIMX预分频的值
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0; //时钟分割
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  //向上计数
-	TIM_TimeBaseInit(PWM_TIME, &TIM_TimeBaseStructure); 
+	TIM_TimeBaseInit(timx, &TIM_TimeBaseStructure); 
 	
 	//设置时钟的通道1为PWM输出
 	//选择哪路通道是通过TIM_OC1Init,TIM_OC1PreloadConfig, TIM_SetCompare1中的数字来决定的...
@@ -87,10 +117,10 @@ void LHI_Init_pwm(short default_duty)
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;//??????
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low;//输出比较极性低
 	
-	TIM_OC1Init(PWM_TIME, &TIM_OCInitStructure);//????????????
-	TIM_OC1PreloadConfig(PWM_TIME, TIM_OCPreload_Enable);  //?????TIM2?CCR2??????
-	TIM_Cmd(PWM_TIME, ENABLE);
-	TIM_SetCompare1(PWM_TIME,LHI_Pulse(default_duty));//??????50%?pwm??
+	PWM_FUNC(chx).init(timx, &TIM_OCInitStructure);//????????????
+	PWM_FUNC(chx).config(timx, TIM_OCPreload_Enable);  //?????TIM2?CCR2??????
+	TIM_Cmd(timx, ENABLE);
+	TIM_SetCompare1(timx,LHI_Pulse(default_duty));//??????50%?pwm??
 }
 
 int  LHI_Wait(int us)
@@ -106,10 +136,10 @@ int  LHI_Wait(int us)
 	return RET_OK;
 	
 }
-void LHI_Set_pwm_duty(short duty)
+void LHI_Set_pwm_duty(TIM_TypeDef* timx, short duty)
 {
 	
-	TIM_SetCompare1(PWM_TIME,LHI_Pulse(duty));//??????50%?pwm??
+	TIM_SetCompare1(timx,LHI_Pulse(duty));//??????50%?pwm??
 }
 
 void LHI_Reset_lcd(void)

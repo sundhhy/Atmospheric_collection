@@ -46,8 +46,10 @@ typedef enum {
 
 #define 	OPTION_SELECT_SETUP(s)				(s | 0x100)
 #define 	OPTION_SELECT_CONFIG(c)				(c | 0x200)
+#define 	OPTION_SELECT_QUERY(c)				(c | 0x300)
 #define 	IS_SETUP(r)							((r & 0xf00) == 0x100)
 #define 	IS_CONFIG(r)						((r & 0xf00) == 0x200)
+#define 	IS_QUERY(r)							((r & 0xf00) == 0x300)
 #define 	GET_SELECT_DATA(r)					(r & 0xff)
  //------------------------------------------------------------------------------
 // typedef

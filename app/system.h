@@ -109,11 +109,12 @@ typedef struct {
 
 //-----------HMI -----------------------------------------------
 typedef struct {
-	int			hmi_sem;
+	int					hmi_sem;
 	uint16_t		lightness;		//1Î»Ğ¡Êı
 	uint16_t		gray_levels;	//1Î»Ğ¡Êı
-	uint8_t		time_switch;		//¶¨Ê±
-	uint8_t		none[3];
+	uint8_t			time_switch;		//¶¨Ê±
+	uint8_t			hand_signal_type;		//½çÃæÕıÔÚ´¦ÀíµÄĞÅºÅÀàĞÍ
+	uint8_t		none[2];
 }hmi_mgr_t;
 
 /*********************´óÆøÑ¹****************************************/
@@ -228,6 +229,23 @@ typedef struct {
 	uint8_t				minor_ver;
 	uint8_t				save_chg_flga;		//¿É´æ´¢µÄÅäÖÃĞÅÏ¢µÄ±ä»¯±êÖ¾
 	uint8_t				usb_device;		//0 ÎŞusbÉè±¸ 1 ÓĞusbÉè±
+	
+	
+	hmi_mgr_t				hmi_mgr;
+	atmosphere_conf_t		atm_conf;
+	system_conf_t			sys_conf;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	uint8_t				sys_flag;
 	uint8_t				pwr_rcd_index;
 	
@@ -251,9 +269,7 @@ typedef struct {
 	uint16_t				key_weight;
 	uint16_t				hit_count;
 	
-	hmi_mgr_t				hmi_mgr;
-	atmosphere_conf_t		atm_conf;
-	system_conf_t			sys_conf;
+	
 	flash_t					arr_fsh[NUM_FSH];
 	fs_t						fs;
 }system_t;

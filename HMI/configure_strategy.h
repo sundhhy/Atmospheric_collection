@@ -48,6 +48,9 @@ typedef enum
 	e_stg_set_dust_flow,
 	e_stg_set_vapor,
 	e_stg_set_case_tmp,
+	e_qry_atmosphere_A,
+	e_qry_atmosphere_B,
+	e_qry_dust,
 }strategy_type;
  //------------------------------------------------------------------------------
 // typedef

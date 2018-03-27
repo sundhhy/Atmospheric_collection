@@ -60,6 +60,7 @@ x7
 #define FM12864_WIDE_8			8		//8 * 8 = 64
 #define FM12864_HALF_LONG		64
 #define FM12864_LONG				128
+
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
@@ -88,6 +89,8 @@ static	void FM_Switch(int on_off);
 static	void FM_Text(char m, char *str,  int len, int x, int y, int font, char c);
 static	void FM_Flush(char all);
 static	void FM_Lightness(uint16_t		pct);
+static	void FM_Contrast(uint16_t		pct);
+
 static  int	 FM_Get_size(int font, uint16_t *width, uint16_t *heigh);
 static	void FM_Set_backcolor( char c);
 static  int  FM_Lcd_ctl(int cmd, ...);
@@ -118,6 +121,8 @@ FUNCTION_SETTING(dev_lcd.display_control_switch, FM_Switch);
 FUNCTION_SETTING(dev_lcd.dispaly_text, FM_Text);
 FUNCTION_SETTING(dev_lcd.lcd_flush, FM_Flush);
 FUNCTION_SETTING(dev_lcd.lcd_lightness, FM_Lightness);
+FUNCTION_SETTING(dev_lcd.lcd_contrast, FM_Contrast);
+
 FUNCTION_SETTING(dev_lcd.lcd_ctl, FM_Lcd_ctl);
 FUNCTION_SETTING(dev_lcd.get_size, FM_Get_size);
 FUNCTION_SETTING(dev_lcd.set_backcolor, FM_Set_backcolor);
@@ -142,7 +147,8 @@ static	int FM_Init(void)
 	
 	LHI_SELECT_NONE;
 	
-	LHI_Init_pwm(DEFAULT_LIGHTNESS);
+	LHI_Init_pwm(LCD_PWM_CONTRAST, 1, DEFAULT_CONTRAST);
+	LHI_Init_pwm(LCD_PWM_LIGHTNESS, 3, DEFAULT_LIGHTNESS);
 	LHI_Reset_lcd();
 	
 	LHI_SELECT_LEFT;
@@ -169,7 +175,7 @@ static	int FM_Init(void)
 //	if((s & FM_STATUS_UNLOCK) == 0)
 //		goto err;
 	LHI_SELECT_NONE;
-	LHI_LCD_ON;
+//	LHI_LCD_ON;
 	return RET_OK;
 //err:
 //	return RET_FAILED;
@@ -220,10 +226,17 @@ static	void FM_Clear(int c)
 
 static	void FM_Switch(int on_off)
 {
-	if(on_off)
-		LHI_LCD_ON;
-	else
-		LHI_LCD_OFF;
+//	if(on_off)
+//	{
+////		LHI_LCD_ON;
+//		FM_Lightness(on_off);
+//	}
+//	else
+//	{
+//		FM_Lightness(0);
+////		LHI_LCD_OFF;
+//		
+//	}
 	
 	
 }
@@ -427,9 +440,15 @@ static	void FM_Lightness(uint16_t		pct)
 {
 	if(pct > 1000)
 		pct = 1000;
-	LHI_Set_pwm_duty(pct);
+	LHI_Set_pwm_duty(LCD_PWM_LIGHTNESS, pct);
 }
 
+static	void FM_Contrast(uint16_t		pct)
+{
+	if(pct > 1000)
+		pct = 1000;
+	LHI_Set_pwm_duty(LCD_PWM_CONTRAST, pct);
+}
 
 static  int	 FM_Get_size(int font, uint16_t *width, uint16_t *heigh)
 {

@@ -18,6 +18,8 @@ extern strategy_t	cst_set_heater;
 extern strategy_t	cst_set_dust_flow;
 extern strategy_t	cst_set_vapor;
 extern strategy_t cst_set_case_temperature;
+
+extern strategy_t cst_qry_atmosphere;
 //------------------------------------------------------------------------------
 // global function prototypes
 //------------------------------------------------------------------------------
@@ -70,7 +72,9 @@ strategy_t	*Get_strategy(uint8_t t)
 			return &cst_set_vapor;
 		case e_stg_set_case_tmp:
 			return &cst_set_case_temperature;
-		
+		case e_qry_atmosphere_A:
+		case e_qry_atmosphere_B:
+			return &cst_qry_atmosphere;
 		default:
 			return NULL;
 		

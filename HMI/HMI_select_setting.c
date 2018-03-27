@@ -309,6 +309,7 @@ static void HSS_Hit( HMI *self, char kcd)
 				self->switchHMI(self, p_configure);
 			}
 			
+			
 			break;		
 		case KEYCODE_ESC:
 			change = 0;

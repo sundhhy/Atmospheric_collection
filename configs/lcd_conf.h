@@ -19,6 +19,9 @@
 #define DEFAULT_LIGHTNESS		600		//默认亮度
 #define MIN_LIGHTNESS		450		//默认亮度
 
+#define DEFAULT_CONTRAST		600		//默认亮度
+#define MIN_CONTRAST		450		//默认亮度
+
 
 //调色板颜色定义， 与LCD无关
 #define PALLET_BLACK				0

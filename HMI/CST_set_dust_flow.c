@@ -164,7 +164,7 @@ static int DSF_modify(void *arg, int op)
 	system_conf_t	*p_s;
 	short						weight = 1;
 	short						limit = 1;
-	short						i, j;
+	short						i;
 	p_s = (system_conf_t *)arr_p_vram[CACHE_BUF_NUM];
 	
 	i = p_syf->start_byte;

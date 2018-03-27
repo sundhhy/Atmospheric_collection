@@ -18,6 +18,32 @@
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
+typedef enum {
+	em_start_time_sec,
+	em_add_up_time_sec,
+	em_set_up_time_sec,
+	em_sample_count,
+	em_set_up_count,
+	em_humidity,
+	em_pressure,
+	em_atm_pressure,
+	em_condition,
+	em_standard_conditions,
+	em_set_up_condition,
+	em_condition_volume,
+	em_standard_condition_volume,
+	em_aux_num
+}mdl_aux_t;
+
+typedef enum {
+	em_atmosphere_A,
+	em_atmosphere_B,
+	em_dust,
+	em_signal_num
+}mdl_signal_t;
+
+
+/************@Deprecated**********************************/
 //aux : 0 ~ 0x10  公用的功能
 //0x20 ~ 0x40 :给通道用的 其他不要使用
 #define AUX_DATA			0
@@ -29,10 +55,16 @@
 
 #define MDLID_TEST			0
 #define MDLID_CHN(n)				(8 + n)			// 8 ~ 13
+/***********************************************************/
 //------------------------------------------------------------------------------
 // typedef
 //------------------------------------------------------------------------------
 
+typedef struct {
+	int		mdl_val;
+	char	num_point;		//小数点位数
+	char	none[3];
+}mdl_data_t;
 //因为不能在定义时使用/,故用_代替/
 typedef enum {
 	eu_Nm3_h = 0,
@@ -131,7 +163,7 @@ extern const	char	g_moth_day[12];
 // function prototypes
 //------------------------------------------------------------------------------
 
-
+void MDL_Get_value(uint8_t	st, uint8_t aux, void	*out_val);
 
 
 

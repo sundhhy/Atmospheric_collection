@@ -18,7 +18,8 @@
 #define UART_MODE_DMA		1
 #define UART_MODE_CPU		2
 
-#define PWM_TIME	TIM2
+#define LCD_PWM_LIGHTNESS	TIM3
+#define LCD_PWM_CONTRAST	TIM2
 #define NUMPIN		8
 //各种外设的引脚配置
 

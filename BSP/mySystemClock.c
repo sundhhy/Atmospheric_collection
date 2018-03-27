@@ -28,11 +28,9 @@ void OpenPrpClock( void)
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2, ENABLE); // ??DMA1??
 
 		//ÓÃÓÚPWMÊä³ö
-	if(PWM_TIME	== TIM5)
-		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);	
-	else if(PWM_TIME == TIM2)
-		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);	
-	
+
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);	
 }
 
 

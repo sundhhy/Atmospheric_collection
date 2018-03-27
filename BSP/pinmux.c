@@ -34,18 +34,20 @@ void Pin_init(void)
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_PWM; 				//PA.0
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; 	//  上拉输出
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; 	//  pwm输出 对比度控制
 	GPIO_Init(PORT_LCD_PWM, &GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin = PIN_LCD_BACKEN; 				//PB.0
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; 	//  pwm输出 亮度空值
+	GPIO_Init(PORT_LCD_BACKEN, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_RST; 				//PD.14
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
 	GPIO_Init(PORT_LCD_RST, &GPIO_InitStructure);
 
-	GPIO_InitStructure.GPIO_Pin = PIN_LCD_BACKEN; 				//PB.0
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 	//  上拉输出
-	GPIO_Init(PORT_LCD_BACKEN, &GPIO_InitStructure);
+
 
 	GPIO_InitStructure.GPIO_Pin = PIN_LCD_CS2; 				//PD.15
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
