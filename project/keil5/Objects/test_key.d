@@ -1,9 +1,9 @@
 .\objects\test_key.o: ..\..\unit_tests\test_key.c
 .\objects\test_key.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\test_key.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\test_key.o: E:\sdhLib\inc\os/os_depend.h
+.\objects\test_key.o: ..\..\sdhLib\inc\os/os_depend.h
 .\objects\test_key.o: ..\..\APP\sdhlibConf.h
-.\objects\test_key.o: E:\sdhLib\inc\os/rtx/rtx_depend.h
+.\objects\test_key.o: ..\..\sdhLib\inc\os/rtx/rtx_depend.h
 .\objects\test_key.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\test_key.o: d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
 .\objects\test_key.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
@@ -14,11 +14,11 @@
 .\objects\test_key.o: ..\..\device\deviceId.h
 .\objects\test_key.o: ..\..\device\dev_cmd.h
 .\objects\test_key.o: ..\..\device\dev_char.h
-.\objects\test_key.o: E:\sdhLib\inc\lw_oopc.h
+.\objects\test_key.o: ..\..\sdhLib\inc\lw_oopc.h
 .\objects\test_key.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\test_key.o: ..\..\device\dev_lcd.h
 .\objects\test_key.o: ..\..\..\Atmospheric_collection\utils/keyboard.h
-.\objects\test_key.o: E:\sdhLib\inc\basis/macros.h
+.\objects\test_key.o: ..\..\sdhLib\inc\basis/macros.h
 .\objects\test_key.o: ..\..\..\Atmospheric_collection\utils/time.h
 .\objects\test_key.o: E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC\stm32f10x_conf.h
 .\objects\test_key.o: E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\RTE_Components.h

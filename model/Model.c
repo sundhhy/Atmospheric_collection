@@ -98,6 +98,12 @@ void MDL_Get_value(uint8_t	st, uint8_t aux, void	*out_val)
 	
 }
 
+void MDL_Run(uint8_t	st)
+{
+	
+	
+}
+
 
 
 

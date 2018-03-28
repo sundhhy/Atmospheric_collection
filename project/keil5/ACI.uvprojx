@@ -365,7 +365,7 @@
               <MiscControls>--diag_suppress=1295;--diag_suppress=1;--diag_suppress=177-D</MiscControls>
               <Define>USE_STDPERIPH_DRIVER, STM32F10X_HD, USE_STM3210B_EVAL,HSE_VALUE=8000000,_MCU_ENDIAN=1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\configs;..\..\BSP;E:\sdhLib\inc;..\..\device\dev_LCD\nokia_5110;..\..\..\Atmospheric_collection;..\..\drive;..\..\device;..\..\GUI\Glyph;..\..\GUI\Expression;..\..\Views;..\..\REEC;..\..\model;..\..\GUI\sheet;..\..\usb;..\..\APP</IncludePath>
+              <IncludePath>..\..\configs;..\..\BSP;..\..\sdhLib\inc;..\..\device\dev_LCD\nokia_5110;..\..\..\Atmospheric_collection;..\..\drive;..\..\device;..\..\GUI\Glyph;..\..\GUI\Expression;..\..\Views;..\..\REEC;..\..\model;..\..\GUI\sheet;..\..\usb;..\..\APP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -449,16 +449,6 @@
               <FilePath>..\..\APP\sys_cmd.h</FilePath>
             </File>
             <File>
-              <FileName>Modbus_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\APP\Modbus_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>Modbus_app.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\APP\Modbus_app.h</FilePath>
-            </File>
-            <File>
               <FileName>channel_accumulated.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\APP\channel_accumulated.c</FilePath>
@@ -467,11 +457,6 @@
               <FileName>channel_accumulated.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\APP\channel_accumulated.h</FilePath>
-            </File>
-            <File>
-              <FileName>ACI_slave.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\APP\ACI_slave.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -546,87 +531,57 @@
             <File>
               <FileName>marco.c</FileName>
               <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\basis\marco.c</FilePath>
-            </File>
-            <File>
-              <FileName>assert.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\basis\assert.c</FilePath>
+              <FilePath>..\..\sdhLib\src\basis\marco.c</FilePath>
             </File>
             <File>
               <FileName>except.c</FileName>
               <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\basis\except.c</FilePath>
+              <FilePath>..\..\sdhLib\src\basis\except.c</FilePath>
+            </File>
+            <File>
+              <FileName>assert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\sdhLib\src\basis\assert.c</FilePath>
             </File>
             <File>
               <FileName>cycQueue.c</FileName>
               <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\arithmetic\cycQueue.c</FilePath>
-            </File>
-            <File>
-              <FileName>smart_bus.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\Communication\smart_bus.c</FilePath>
+              <FilePath>..\..\sdhLib\src\arithmetic\cycQueue.c</FilePath>
             </File>
             <File>
               <FileName>list.c</FileName>
               <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\arithmetic\list.c</FilePath>
-            </File>
-            <File>
-              <FileName>rtx_depend.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\os\RTX\rtx_depend.c</FilePath>
-            </File>
-            <File>
-              <FileName>mem.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\mem\mem.c</FilePath>
-            </File>
-            <File>
-              <FileName>Ping_PongBuf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\mem\Ping_PongBuf.c</FilePath>
+              <FilePath>..\..\sdhLib\src\arithmetic\list.c</FilePath>
             </File>
             <File>
               <FileName>bit.c</FileName>
               <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\arithmetic\bit.c</FilePath>
-            </File>
-            <File>
-              <FileName>bit.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>E:\sdhLib\inc\arithmetic\bit.h</FilePath>
-            </File>
-            <File>
-              <FileName>assert.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>E:\sdhLib\inc\basis\assert.h</FilePath>
-            </File>
-            <File>
-              <FileName>sdhError.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>E:\sdhLib\inc\basis\sdhError.h</FilePath>
-            </File>
-            <File>
-              <FileName>modbusRTU_cli.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\Communication\modbusRTU_cli.c</FilePath>
-            </File>
-            <File>
-              <FileName>modbusRTU_cli.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>E:\sdhLib\inc\Communication\modbusRTU_cli.h</FilePath>
+              <FilePath>..\..\sdhLib\src\arithmetic\bit.c</FilePath>
             </File>
             <File>
               <FileName>crc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>E:\sdhLib\src\arithmetic\crc.c</FilePath>
+              <FilePath>..\..\sdhLib\src\arithmetic\crc.c</FilePath>
             </File>
             <File>
-              <FileName>crc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>E:\sdhLib\inc\arithmetic\crc.h</FilePath>
+              <FileName>smart_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\sdhLib\src\Communication\smart_bus.c</FilePath>
+            </File>
+            <File>
+              <FileName>mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\sdhLib\src\mem\mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>Ping_PongBuf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\sdhLib\src\mem\Ping_PongBuf.c</FilePath>
+            </File>
+            <File>
+              <FileName>rtx_depend.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\sdhLib\src\os\RTX\rtx_depend.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1087,6 +1042,11 @@
               <FileName>model_atmosphere.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\model\model_atmosphere.h</FilePath>
+            </File>
+            <File>
+              <FileName>slave_data.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\model\slave_data.h</FilePath>
             </File>
           </Files>
         </Group>

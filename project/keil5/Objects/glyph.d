@@ -1,7 +1,7 @@
 .\objects\glyph.o: ..\..\GUI\Glyph\glyph.c
 .\objects\glyph.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\glyph.o: ..\..\GUI\Glyph\Glyph.h
-.\objects\glyph.o: E:\sdhLib\inc\lw_oopc.h
+.\objects\glyph.o: ..\..\sdhLib\inc\lw_oopc.h
 .\objects\glyph.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\glyph.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\glyph.o: ..\..\device\device.h
@@ -11,12 +11,12 @@
 .\objects\glyph.o: ..\..\device\dev_lcd.h
 .\objects\glyph.o: ..\..\configs\lcd_conf.h
 .\objects\glyph.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\glyph.o: E:\sdhLib\inc\basis/sdhDebug.h
+.\objects\glyph.o: ..\..\sdhLib\inc\basis/sdhDebug.h
 .\objects\glyph.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\glyph.o: E:\sdhLib\inc\sdhDef.h
+.\objects\glyph.o: ..\..\sdhLib\inc\sdhDef.h
 .\objects\glyph.o: ..\..\APP\sdhlibConf.h
-.\objects\glyph.o: E:\sdhLib\inc\basis/sdhError.h
-.\objects\glyph.o: E:\sdhLib\inc\basis/macros.h
+.\objects\glyph.o: ..\..\sdhLib\inc\basis/sdhError.h
+.\objects\glyph.o: ..\..\sdhLib\inc\basis/macros.h
 .\objects\glyph.o: ..\..\APP\system.h
 .\objects\glyph.o: ..\..\..\Atmospheric_collection\utils/time.h
 .\objects\glyph.o: E:\Atmospheric_collection_instruments\mycode\Atmospheric_collection\project\keil5\RTE\Device\STM32F103VC\stm32f10x_conf.h

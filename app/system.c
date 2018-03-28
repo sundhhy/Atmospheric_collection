@@ -240,7 +240,7 @@ int SYS_Commit(void)
 	Ctime_Allco_time(aci_sys.sys_conf.record_gap_s, NUM_CHANNEL);
 	
 	//Modbus的串口参数也可能被修改了，所有要重新初始化MODBUS的串口
-	MBA_Init_uart(aci_sys.sys_conf.baud_rate);
+//	MBA_Init_uart(aci_sys.sys_conf.baud_rate);
 	return RET_OK;
 }
 void System_time(struct  tm *stime)

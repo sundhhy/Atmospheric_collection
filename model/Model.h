@@ -9,6 +9,7 @@
 #include "basis/macros.h"
 #include "lw_oopc.h"
 #include "model_conf.h"
+#include "slave_data.h"
 #include "sdhDef.h"
 #ifdef NO_ASSERT
 #include "basis/assert.h"
@@ -119,6 +120,10 @@ typedef struct {
 	uint8_t		sample_delay_hour, sample_delay_min;
 	uint16_t	sample_max_count;
 	
+	char		is_zero;
+	char		is_start;
+	char		none[2];
+	
 }sample_conf_t;
 
 INTERFACE( Observer)
@@ -173,6 +178,7 @@ extern const	char	g_moth_day[12];
 extern const char *str_signal[em_signal_num];
 
 extern sample_conf_t	arr_sample_conf[NUM_CHANNEL];
+extern struct _AI_Module_	arr_AI[NUM_CHANNEL];
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
@@ -181,5 +187,6 @@ void MDL_Get_value(uint8_t	st, uint8_t aux, void	*out_val);
 
 void MDL_Clone_samp_conf(sample_conf_t *p_dst, sample_conf_t *p_src);
 
+void MDL_Run(uint8_t	st);
 
 #endif

@@ -69,8 +69,8 @@ static ro_char sts_code_choice_2_2[] = { "<text vx0=80 vy0=48 bkc=white>启动</>"
 #define STS_DELAY_SHT						arr_p_sht_choices[0]
 #define STS_DELAY_TIM_SHT					arr_p_sht_choices[1]
 
-#define STS_ID_DELAY_TIM_TEXT			0
-#define STS_ID_DELAY_TIM					1
+//#define STS_ID_DELAY_TIM_TEXT			0
+//#define STS_ID_DELAY_TIM					1
 #define STS_ID_ZERO					2
 #define STS_ID_START				3
 //------------------------------------------------------------------------------
@@ -200,8 +200,8 @@ static void STS_initSheet( HMI *self )
 	//为可以被按键选择的图层分配ID
 	
 
-	arr_p_sht_choices[0]->sht_id = STS_ID_DELAY_TIM_TEXT;
-	arr_p_sht_choices[1]->sht_id = STS_ID_DELAY_TIM;
+//	arr_p_sht_choices[0]->sht_id = STS_ID_DELAY_TIM_TEXT;
+//	arr_p_sht_choices[1]->sht_id = STS_ID_DELAY_TIM;
 	arr_p_sht_choices[2]->sht_id = STS_ID_ZERO;
 	arr_p_sht_choices[3]->sht_id = STS_ID_START;
 
@@ -534,20 +534,23 @@ static int STS_Delay_time_hit(HMI *self, char kcd)
 
 static void STS_choice(HMI *self, uint8_t cid)
 {
-
+	sts_delay_time_t		*p_d;
+	p_d = (sts_delay_time_t *)arr_p_vram[STS_TEMP_RAM_NUM];
 	switch(cid)
 	{
-		case STS_ID_DELAY_TIM_TEXT:
-			
-			break;
-		case STS_ID_DELAY_TIM:
-			
-			break;
+//		case STS_ID_DELAY_TIM_TEXT:
+//			
+//			break;
+//		case STS_ID_DELAY_TIM:
+//			
+//			break;
 		case STS_ID_ZERO:
-			
+			arr_sample_conf[p_d->handle_signal_type].is_zero = 1;
+			arr_sample_conf[p_d->handle_signal_type].is_start = 0;
 			break;
 		case STS_ID_START:
-			
+			arr_sample_conf[p_d->handle_signal_type].is_zero = 0;
+			arr_sample_conf[p_d->handle_signal_type].is_start = 1;
 			break;
 	}
 	
