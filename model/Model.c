@@ -10,11 +10,12 @@
 // const defines
 //------------------------------------------------------------------------------
 const Except_T model_Failed = { "MDL Failed" };
+const char *str_signal[em_signal_num] = {"<大气A>", "<大气B>", "<粉尘>"};
 //------------------------------------------------------------------------------
 // module global vars
 //------------------------------------------------------------------------------
 
-
+sample_conf_t	arr_sample_conf[NUM_CHANNEL];
 //------------------------------------------------------------------------------
 // global function prototypes
 //------------------------------------------------------------------------------
@@ -60,9 +61,20 @@ static void DoUpdate(void **x, void *cl)
 
 
 
+	
 
 
-
+void MDL_Clone_samp_conf(sample_conf_t *p_dst, sample_conf_t *p_src)
+{
+	p_dst->sample_hour = p_src->sample_hour;
+	p_dst->sample_min = p_src->sample_min;
+	p_dst->sample_gap_hour = p_src->sample_gap_hour;
+	p_dst->sample_gap_min = p_src->sample_gap_min;
+	p_dst->sample_delay_hour = p_src->sample_delay_hour;
+	p_dst->sample_delay_min = p_src->sample_delay_min;
+	p_dst->sample_max_count = p_src->sample_max_count;
+	
+}
 
 
 

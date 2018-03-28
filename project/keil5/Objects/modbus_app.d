@@ -42,11 +42,11 @@
 .\objects\modbus_app.o: ..\..\model\ModelFactory.h
 .\objects\modbus_app.o: ..\..\model\Model.h
 .\objects\modbus_app.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\modbus_app.o: ..\..\configs\model_conf.h
 .\objects\modbus_app.o: E:\sdhLib\inc\basis/assert.h
 .\objects\modbus_app.o: E:\sdhLib\inc\basis/except.h
 .\objects\modbus_app.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\setjmp.h
 .\objects\modbus_app.o: ..\..\model\Model_channel.h
-.\objects\modbus_app.o: ..\..\configs\model_conf.h
 .\objects\modbus_app.o: ..\..\model\ModelTime.h
 .\objects\modbus_app.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\modbus_app.o: ..\..\..\Atmospheric_collection\utils/rtc.h

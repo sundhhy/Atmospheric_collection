@@ -7,6 +7,7 @@
 .\objects\modelfactory.o: ..\..\model\Model.h
 .\objects\modelfactory.o: E:\sdhLib\inc\arithmetic/list.h
 .\objects\modelfactory.o: E:\sdhLib\inc\basis/macros.h
+.\objects\modelfactory.o: ..\..\configs\model_conf.h
 .\objects\modelfactory.o: E:\sdhLib\inc\sdhDef.h
 .\objects\modelfactory.o: ..\..\APP\sdhlibConf.h
 .\objects\modelfactory.o: E:\sdhLib\inc\basis/sdhDebug.h
@@ -38,7 +39,6 @@
 .\objects\modelfactory.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\modelfactory.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\modelfactory.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\modelfactory.o: ..\..\configs\model_conf.h
 .\objects\modelfactory.o: ..\..\model\ModelTime.h
 .\objects\modelfactory.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\modelfactory.o: ..\..\..\Atmospheric_collection\utils/rtc.h

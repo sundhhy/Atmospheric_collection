@@ -31,6 +31,7 @@
 .\objects\phn_string.o: E:\sdhLib\inc\lw_oopc.h
 .\objects\phn_string.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\phn_string.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\phn_string.o: ..\..\configs\model_conf.h
 .\objects\phn_string.o: E:\sdhLib\inc\sdhDef.h
 .\objects\phn_string.o: ..\..\APP\sdhlibConf.h
 .\objects\phn_string.o: E:\sdhLib\inc\basis/sdhDebug.h
@@ -39,4 +40,3 @@
 .\objects\phn_string.o: E:\sdhLib\inc\basis/except.h
 .\objects\phn_string.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\setjmp.h
 .\objects\phn_string.o: ..\..\model\Model_channel.h
-.\objects\phn_string.o: ..\..\configs\model_conf.h

@@ -26,6 +26,7 @@
 .\objects\hmifactory.o: ..\..\model\ModelFactory.h
 .\objects\hmifactory.o: ..\..\model\Model.h
 .\objects\hmifactory.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\hmifactory.o: ..\..\configs\model_conf.h
 .\objects\hmifactory.o: E:\sdhLib\inc\basis/assert.h
 .\objects\hmifactory.o: ..\..\model\Model_channel.h
 .\objects\hmifactory.o: ..\..\APP\system.h
@@ -50,7 +51,6 @@
 .\objects\hmifactory.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\hmifactory.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\hmifactory.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\hmifactory.o: ..\..\configs\model_conf.h
 .\objects\hmifactory.o: ..\..\model\ModelTime.h
 .\objects\hmifactory.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\hmifactory.o: ..\..\..\Atmospheric_collection\utils/rtc.h
@@ -68,3 +68,4 @@
 .\objects\hmifactory.o: ..\..\HMI\HMI_select_setting.h
 .\objects\hmifactory.o: ..\..\HMI\HMI_configuring.h
 .\objects\hmifactory.o: ..\..\HMI\HMI_query.h
+.\objects\hmifactory.o: ..\..\HMI\HMI_start_sample.h

@@ -7,6 +7,7 @@
 .\objects\modeltime.o: E:\sdhLib\inc\lw_oopc.h
 .\objects\modeltime.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\modeltime.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\modeltime.o: ..\..\configs\model_conf.h
 .\objects\modeltime.o: E:\sdhLib\inc\sdhDef.h
 .\objects\modeltime.o: ..\..\APP\sdhlibConf.h
 .\objects\modeltime.o: E:\sdhLib\inc\basis/sdhDebug.h

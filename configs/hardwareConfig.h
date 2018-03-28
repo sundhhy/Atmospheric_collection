@@ -67,9 +67,9 @@
 #define GPIO_PORT_KEY_RIGHT                             GPIOD    					 
 #define GPIO_PIN_KEY_RIGHT                              GPIO_Pin_3
 #define GPIO_PORT_KEY_ENTER                             GPIOD    					 
-#define GPIO_PIN_KEY_ENTER                              GPIO_Pin_1
+#define GPIO_PIN_KEY_ENTER                              GPIO_Pin_0
 #define GPIO_PORT_KEY_ESC                             	GPIOD    					 
-#define GPIO_PIN_KEY_ESC                              	GPIO_Pin_0
+#define GPIO_PIN_KEY_ESC                              	GPIO_Pin_1
 #define GPIO_PORT_KEY_SWITCH                            GPIOD    					 
 #define GPIO_PIN_KEY_SWITCH                             GPIO_Pin_2
 

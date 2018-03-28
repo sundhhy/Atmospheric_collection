@@ -5,5 +5,6 @@
 
 
 #define NUM_CHANNEL								3
+#define RECORD_MAX_NUM			10000
 
 #endif

@@ -26,6 +26,7 @@
 .\objects\geometricsexpr.o: ..\..\model\ModelFactory.h
 .\objects\geometricsexpr.o: ..\..\model\Model.h
 .\objects\geometricsexpr.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\geometricsexpr.o: ..\..\configs\model_conf.h
 .\objects\geometricsexpr.o: E:\sdhLib\inc\basis/assert.h
 .\objects\geometricsexpr.o: ..\..\model\Model_channel.h
 .\objects\geometricsexpr.o: ..\..\APP\system.h
@@ -50,7 +51,6 @@
 .\objects\geometricsexpr.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\geometricsexpr.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\geometricsexpr.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\geometricsexpr.o: ..\..\configs\model_conf.h
 .\objects\geometricsexpr.o: ..\..\model\ModelTime.h
 .\objects\geometricsexpr.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\geometricsexpr.o: ..\..\..\Atmospheric_collection\utils/rtc.h

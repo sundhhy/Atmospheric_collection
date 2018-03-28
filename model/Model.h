@@ -8,7 +8,7 @@
 #include "arithmetic/list.h"
 #include "basis/macros.h"
 #include "lw_oopc.h"
-
+#include "model_conf.h"
 #include "sdhDef.h"
 #ifdef NO_ASSERT
 #include "basis/assert.h"
@@ -41,6 +41,8 @@ typedef enum {
 	em_dust,
 	em_signal_num
 }mdl_signal_t;
+
+
 
 
 /************@Deprecated**********************************/
@@ -110,6 +112,15 @@ typedef enum {
 	eu_ug_L,
 	eu_max
 }e_unit_t;
+
+typedef struct {
+	uint8_t		sample_hour, sample_min;
+	uint8_t		sample_gap_hour, sample_gap_min;
+	uint8_t		sample_delay_hour, sample_delay_min;
+	uint16_t	sample_max_count;
+	
+}sample_conf_t;
+
 INTERFACE( Observer)
 {
 	int ( *update)( Observer *self, void *p_srcMdl);
@@ -159,12 +170,16 @@ ABS_CLASS( Model)
 //------------------------------------------------------------------------------
 extern const Except_T model_Failed;
 extern const	char	g_moth_day[12];
+extern const char *str_signal[em_signal_num];
+
+extern sample_conf_t	arr_sample_conf[NUM_CHANNEL];
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
 
 void MDL_Get_value(uint8_t	st, uint8_t aux, void	*out_val);
 
+void MDL_Clone_samp_conf(sample_conf_t *p_dst, sample_conf_t *p_src);
 
 
 #endif

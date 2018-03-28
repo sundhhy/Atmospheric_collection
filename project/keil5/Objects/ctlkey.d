@@ -50,9 +50,9 @@
 .\objects\ctlkey.o: ..\..\model\ModelFactory.h
 .\objects\ctlkey.o: ..\..\model\Model.h
 .\objects\ctlkey.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\ctlkey.o: ..\..\configs\model_conf.h
 .\objects\ctlkey.o: E:\sdhLib\inc\basis/assert.h
 .\objects\ctlkey.o: ..\..\model\Model_channel.h
-.\objects\ctlkey.o: ..\..\configs\model_conf.h
 .\objects\ctlkey.o: ..\..\model\ModelTime.h
 .\objects\ctlkey.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\ctlkey.o: ..\..\..\Atmospheric_collection\utils/rtc.h

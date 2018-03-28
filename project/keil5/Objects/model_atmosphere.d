@@ -7,6 +7,7 @@
 .\objects\model_atmosphere.o: E:\sdhLib\inc\lw_oopc.h
 .\objects\model_atmosphere.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\model_atmosphere.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\model_atmosphere.o: ..\..\configs\model_conf.h
 .\objects\model_atmosphere.o: E:\sdhLib\inc\sdhDef.h
 .\objects\model_atmosphere.o: ..\..\APP\sdhlibConf.h
 .\objects\model_atmosphere.o: E:\sdhLib\inc\basis/sdhDebug.h

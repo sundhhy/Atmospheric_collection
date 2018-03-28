@@ -26,6 +26,7 @@
 .\objects\ntbutton.o: ..\..\model\ModelFactory.h
 .\objects\ntbutton.o: ..\..\model\Model.h
 .\objects\ntbutton.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\ntbutton.o: ..\..\configs\model_conf.h
 .\objects\ntbutton.o: E:\sdhLib\inc\basis/assert.h
 .\objects\ntbutton.o: ..\..\model\Model_channel.h
 .\objects\ntbutton.o: ..\..\APP\system.h
@@ -50,7 +51,6 @@
 .\objects\ntbutton.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\ntbutton.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\ntbutton.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\ntbutton.o: ..\..\configs\model_conf.h
 .\objects\ntbutton.o: ..\..\model\ModelTime.h
 .\objects\ntbutton.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\ntbutton.o: ..\..\..\Atmospheric_collection\utils/rtc.h

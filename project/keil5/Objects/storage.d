@@ -28,6 +28,7 @@
 .\objects\storage.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\storage.o: ..\..\model\Model.h
 .\objects\storage.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\storage.o: ..\..\configs\model_conf.h
 .\objects\storage.o: E:\sdhLib\inc\sdhDef.h
 .\objects\storage.o: ..\..\APP\sdhlibConf.h
 .\objects\storage.o: E:\sdhLib\inc\basis/sdhDebug.h
@@ -39,7 +40,6 @@
 .\objects\storage.o: ..\..\model\Model_channel.h
 .\objects\storage.o: ..\..\APP\system.h
 .\objects\storage.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\storage.o: ..\..\configs\model_conf.h
 .\objects\storage.o: ..\..\model\ModelTime.h
 .\objects\storage.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\storage.o: ..\..\..\Atmospheric_collection\utils/rtc.h

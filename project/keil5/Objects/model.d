@@ -6,6 +6,7 @@
 .\objects\model.o: E:\sdhLib\inc\lw_oopc.h
 .\objects\model.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\model.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\model.o: ..\..\configs\model_conf.h
 .\objects\model.o: E:\sdhLib\inc\sdhDef.h
 .\objects\model.o: ..\..\APP\sdhlibConf.h
 .\objects\model.o: E:\sdhLib\inc\basis/sdhDebug.h

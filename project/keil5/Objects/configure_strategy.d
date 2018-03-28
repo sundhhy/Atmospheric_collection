@@ -26,6 +26,7 @@
 .\objects\configure_strategy.o: ..\..\model\ModelFactory.h
 .\objects\configure_strategy.o: ..\..\model\Model.h
 .\objects\configure_strategy.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\configure_strategy.o: ..\..\configs\model_conf.h
 .\objects\configure_strategy.o: E:\sdhLib\inc\basis/assert.h
 .\objects\configure_strategy.o: ..\..\model\Model_channel.h
 .\objects\configure_strategy.o: ..\..\APP\system.h
@@ -50,7 +51,6 @@
 .\objects\configure_strategy.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\configure_strategy.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\configure_strategy.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\configure_strategy.o: ..\..\configs\model_conf.h
 .\objects\configure_strategy.o: ..\..\model\ModelTime.h
 .\objects\configure_strategy.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\configure_strategy.o: ..\..\..\Atmospheric_collection\utils/rtc.h

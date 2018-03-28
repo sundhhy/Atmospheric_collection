@@ -26,6 +26,7 @@
 .\objects\cst_set_display.o: ..\..\model\ModelFactory.h
 .\objects\cst_set_display.o: ..\..\model\Model.h
 .\objects\cst_set_display.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\cst_set_display.o: ..\..\configs\model_conf.h
 .\objects\cst_set_display.o: E:\sdhLib\inc\basis/assert.h
 .\objects\cst_set_display.o: ..\..\model\Model_channel.h
 .\objects\cst_set_display.o: ..\..\APP\system.h
@@ -50,7 +51,6 @@
 .\objects\cst_set_display.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\cst_set_display.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\cst_set_display.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\cst_set_display.o: ..\..\configs\model_conf.h
 .\objects\cst_set_display.o: ..\..\model\ModelTime.h
 .\objects\cst_set_display.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\cst_set_display.o: ..\..\..\Atmospheric_collection\utils/rtc.h

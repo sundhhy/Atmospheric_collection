@@ -15,6 +15,7 @@
 .\objects\sheet.o: ..\..\model\Model.h
 .\objects\sheet.o: E:\sdhLib\inc\arithmetic/list.h
 .\objects\sheet.o: E:\sdhLib\inc\basis/macros.h
+.\objects\sheet.o: ..\..\configs\model_conf.h
 .\objects\sheet.o: E:\sdhLib\inc\sdhDef.h
 .\objects\sheet.o: ..\..\APP\sdhlibConf.h
 .\objects\sheet.o: E:\sdhLib\inc\basis/sdhDebug.h
@@ -46,7 +47,6 @@
 .\objects\sheet.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\sheet.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\sheet.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\sheet.o: ..\..\configs\model_conf.h
 .\objects\sheet.o: ..\..\model\ModelTime.h
 .\objects\sheet.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\sheet.o: ..\..\..\Atmospheric_collection\utils/rtc.h

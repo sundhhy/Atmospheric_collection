@@ -40,6 +40,7 @@
 .\objects\usb.o: E:\sdhLib\inc\arithmetic/list.h
 .\objects\usb.o: E:\sdhLib\inc\lw_oopc.h
 .\objects\usb.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\usb.o: ..\..\configs\model_conf.h
 .\objects\usb.o: E:\sdhLib\inc\basis/assert.h
 .\objects\usb.o: E:\sdhLib\inc\basis/except.h
 .\objects\usb.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\setjmp.h

@@ -5,6 +5,7 @@
 #include "sys_cmd.h"
 #include "HMIFactory.h"
 #include "utils/keyboard.h"
+#include "Model.h"
 //提供 按键，事件，消息，窗口，报警，时间，复选框的图层
 //这些图层可能会被其他界面所使用
 //============================================================================//
@@ -26,7 +27,7 @@ const Except_T Hmi_Failed = { "HMI Failed" };
 // global function prototypes
 //------------------------------------------------------------------------------
 HMI *g_p_curHmi;
-HMI *g_p_lastHmi;
+
 HMI *g_p_win_last;
 
 keyboard_commit	kbr_cmt = NULL;
@@ -48,7 +49,7 @@ keyboard_commit	kbr_cmt = NULL;
 //------------------------------------------------------------------------------
 
 static HMI *arr_him_histroy[KEEP_NUM_HMI];
- 
+static HMI *change_hmi;			
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
@@ -74,6 +75,7 @@ static void		HMI_Btn_jumpout(HMI *self);
 //static void		HMI_Btn_hit(HMI *self);
 static void HMI_Flush(void);		//定期刷屏
 
+static void HMI_Reset_pub_sht(void);
 
 static void HMI_Push_hmi(HMI *h);
 static HMI* HMI_Pop_hmi(void);
@@ -141,12 +143,29 @@ int HMI_Init(void)
 	return RET_OK;
 }
 
-//void Set_flag_keyhandle(uint8_t	*p_flag, int val)
-//{
-//	val &= 2;
-//	*p_flag &= 0xfd;
-//	*p_flag |= val;
-//}
+uint8_t	HMI_Switch_signal(uint8_t	old_sig)
+{
+	if(old_sig == em_atmosphere_A)
+	{
+		return em_atmosphere_B;
+		
+	}
+//	if(old_sig == e_qry_atmosphere_B)
+//	{
+//		return e_qry_dust;
+//		
+//	}
+	
+	return em_atmosphere_A;
+	
+	
+}
+
+void HMI_Change_last_HMI(HMI *p)
+{
+	
+	change_hmi = p;
+}
 
 //切换界面的一般处理方法
 void HMI_choice(HMI *self, uint8_t choice_id)
@@ -228,7 +247,7 @@ static void	HMI_Run( HMI *self)
 
 static void	SwitchHMI( HMI *self, HMI *p_hmi)
 {
-	HMI		*save_last_case_err = NULL;		//如果切换发生错误，就要恢复之前的旧画面
+//	HMI		*save_last_case_err = NULL;		//如果切换发生错误，就要恢复之前的旧画面
 	if( p_hmi == NULL)
 		return;
 //	if(p_hmi ==  g_p_winHmi ) {
@@ -258,9 +277,17 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 		self->clean_cmp(self);
 		if(self != p_hmi)  //有时候一个界面只是想重新显示一下，如设置界面的设置项目变化时，会重新显示自身
 		{
-			g_p_lastHmi = self;	
-			HMI_Push_hmi(self);
+			if(change_hmi)
+			{
+				HMI_Push_hmi(change_hmi);
+				change_hmi = NULL;
+				
+			}
+			else
+				HMI_Push_hmi(self);
 		}
+		
+		HMI_Reset_pub_sht();
 	}
 	
 	
@@ -268,7 +295,6 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 	p_hmi->initSheet( p_hmi);
 	if(p_hmi->flag & HMI_FLAG_ERR)		//切换发生错误，就切回原画面
 	{
-		g_p_lastHmi = save_last_case_err;
 		g_p_curHmi = self;
 		p_hmi = self;
 		p_hmi->flag |= HMI_FLAG_KEEP;
@@ -292,6 +318,23 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 	
 }
 
+static void HMI_Reset_pub_sht(void)
+{
+	int i = 0;
+	for(i = 0; i < HMI_NUM_P_SHT; i++)
+	{
+		
+		arr_p_pool_shts[i]->cnt.effects = GP_CLR_EFF(arr_p_pool_shts[i]->cnt.effects, EFF_FOCUS);
+	}
+	
+	for(i = 0; i < HMI_NUM_P_CHOICE_SHT; i++)
+	{
+		
+		arr_p_sht_choices[i]->cnt.effects = GP_CLR_EFF(arr_p_sht_choices[i]->cnt.effects, EFF_FOCUS);
+	}
+	
+}
+
 static void	SwitchBack( HMI *self)
 {
 //	HMI *nowHmi = g_p_lastHmi;
@@ -303,8 +346,6 @@ static void	SwitchBack( HMI *self)
 	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 1000) <= 0)
 		return;
 	CLR_LCD();
-	g_p_lastHmi = g_p_curHmi;
-	g_p_curHmi = nowHmi;
 	
 	aci_sys.key_weight = 1;
 	Set_flag_show(&self->flag, 0);
@@ -321,6 +362,7 @@ static void	SwitchBack( HMI *self)
 	nowHmi->show_cmp(nowHmi);
 	
 	Sem_post(&aci_sys.hmi_mgr.hmi_sem);
+	g_p_curHmi = nowHmi;
 }
 
 

@@ -55,12 +55,12 @@
 .\objects\main.o: ..\..\model\ModelFactory.h
 .\objects\main.o: ..\..\model\Model.h
 .\objects\main.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\main.o: ..\..\configs\model_conf.h
 .\objects\main.o: E:\sdhLib\inc\basis/assert.h
 .\objects\main.o: ..\..\model\Model_channel.h
 .\objects\main.o: ..\..\APP\system.h
 .\objects\main.o: ..\..\..\Atmospheric_collection\utils/time.h
 .\objects\main.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\main.o: ..\..\configs\model_conf.h
 .\objects\main.o: ..\..\model\ModelTime.h
 .\objects\main.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\main.o: ..\..\..\Atmospheric_collection\utils/rtc.h

@@ -468,6 +468,11 @@
               <FileType>5</FileType>
               <FilePath>..\..\APP\channel_accumulated.h</FilePath>
             </File>
+            <File>
+              <FileName>ACI_slave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\APP\ACI_slave.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1022,6 +1027,21 @@
               <FileName>CST_query_atmosphere.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\HMI\CST_query_atmosphere.c</FilePath>
+            </File>
+            <File>
+              <FileName>HMI_start_sample.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\HMI\HMI_start_sample.h</FilePath>
+            </File>
+            <File>
+              <FileName>CST_set_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\HMI\CST_set_sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>HMI_start_sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\HMI\HMI_start_sample.c</FilePath>
             </File>
           </Files>
         </Group>

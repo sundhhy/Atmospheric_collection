@@ -103,8 +103,9 @@ static void QRY_Turn_page(HMI *self, int up_or_dn);
 
 static int QRY_Exec_Sy_cmd(void *p_rcv, int cmd,  void *arg);
 static uint8_t	QRY_Get_row_vy(uint8_t row);
+
+
 static uint8_t	QRY_Switch_signal(uint8_t	old_sig);
-static void	QRY_Get_rows_in_page(HMI_query		*cthis, uint8_t stg_row);
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
@@ -151,10 +152,9 @@ END_CTOR
 static int	QRY_Init( HMI *self, void *arg)
 {
 
-	
 
 	self->flag = 0;
-
+	
 	QRY_SIG_TYPE = e_qry_atmosphere_A;
 	return RET_OK;
 	
@@ -195,7 +195,8 @@ static void QRY_Init_sheet( HMI *self )
 	
 	p_stg->init(&QRY_SIG_TYPE);		//大气类型用于区分是大气A还是大气B
 	
-	QRY_Get_rows_in_page(cthis, p_stg->row_in_page);
+	cthis->cur_page = 0;
+	
 	h = 0;
 	p_query_stg = p_stg;
 	if(p_stg->p_stg_title)
@@ -286,6 +287,12 @@ static void QRY_Show_strategy(void)
 	
 	p_sht_text->p_gp->getSize(p_sht_text->p_gp, p_sht_text->cnt.font, &txt_xsize, &txt_ysize);
 	
+	if(cthis->cur_page < QRY_MAX_PAGES)
+	{
+		
+		cthis->arr_start_row[cthis->cur_page] = cthis->entry_start_row;
+	}
+	
 	//按列显示，这是为了能够获得前一列的最大宽度，来决定下一列的x轴位置
 	for(col = 0; col < SETTING_COL_MAX; col ++) {
 		
@@ -299,8 +306,7 @@ static void QRY_Show_strategy(void)
 		
 		
 		for(row = 0; row < SETTING_ROW_MAX; row ++) {
-			QRY_Get_rows_in_page(cthis, p_query_stg->row_in_page);
-			if(row >= cthis->max_row_in_page)
+			if((p_query_stg->row_in_page > 0) && (row >= p_query_stg->row_in_page))
 				continue;
 			text_len = p_query_stg->entry_txt(row + cthis->entry_start_row, col, &p_sht_text->cnt.data);
 			if(text_len == 0)
@@ -330,7 +336,7 @@ static void QRY_Show_strategy(void)
 	if(p_query_stg->stg_num_rows >  SETTING_ROW_MAX)
 	{
 		sprintf(arr_p_pool_shts[QRY_PAGE_SHT]->cnt.data, "[%d/%d]", \
-			cthis->entry_start_row / cthis->max_row_in_page + 1, p_query_stg->stg_num_rows / SETTING_ROW_MAX + 1);
+			cthis->cur_page + 1, p_query_stg->stg_num_rows / SETTING_ROW_MAX + 1);
 		arr_p_pool_shts[QRY_PAGE_SHT]->p_gp->vdraw(arr_p_pool_shts[QRY_PAGE_SHT]->p_gp, \
 			&arr_p_pool_shts[QRY_PAGE_SHT]->cnt, &arr_p_pool_shts[QRY_PAGE_SHT]->area);
 	}
@@ -387,14 +393,22 @@ static int QRY_Exec_Sy_cmd(void *p_rcv, int cmd,  void *arg)
 static void QRY_Turn_page(HMI *self, int up_or_dn)
 {
 	HMI_query		*cthis = SUB_PTR( self, HMI, HMI_query);
-	
+	int				max_row = p_query_stg->row_in_page ;
 	if(p_query_stg == NULL)
 		return;
 	
+	if((max_row > SETTING_ROW_MAX) || (max_row == 0))
+		max_row = SETTING_ROW_MAX;
 	if(up_or_dn == 0) 
 	{
-		if(cthis->entry_start_row >= cthis->max_row_in_page)
-			cthis->entry_start_row -= cthis->max_row_in_page;
+		//在向上翻页的时候，把记录中的起始行数取出来
+		if(cthis->cur_page > 0)
+		{
+			cthis->cur_page --;
+			cthis->entry_start_row = cthis->arr_start_row[cthis->cur_page];
+			
+			
+		}
 		else 
 		{
 			return;
@@ -403,9 +417,18 @@ static void QRY_Turn_page(HMI *self, int up_or_dn)
 	}
 	else
 	{
-		if((cthis->entry_start_row + cthis->max_row_in_page) < p_query_stg->stg_num_rows)
+		//在向下翻页的时候，记录下每一页的起始行数
+		if((cthis->entry_start_row + max_row) < p_query_stg->stg_num_rows)
 		{
-			cthis->entry_start_row += cthis->max_row_in_page;
+			cthis->arr_start_row[cthis->cur_page] = cthis->entry_start_row;
+			cthis->entry_start_row += max_row;
+			if(cthis->cur_page < QRY_MAX_PAGES)
+			{
+				
+				cthis->cur_page ++;
+				
+			}
+			
 		}
 		else
 		{
@@ -451,7 +474,9 @@ static void	QRY_Hit(HMI *self, char kcd)
 			//大气A/B 粉尘之间的切换
 			QRY_SIG_TYPE = QRY_Switch_signal(QRY_SIG_TYPE);
 			cthis->entry_start_row = 0;
+			
 			self->switchHMI(self, self);
+			
 			break;
 		case KEYCODE_ENTER:
 			break;		
@@ -494,14 +519,7 @@ static uint8_t	QRY_Switch_signal(uint8_t	old_sig)
 	
 }
 
-static void	QRY_Get_rows_in_page(HMI_query		*cthis, uint8_t stg_row)
-{
-	if((stg_row > SETTING_ROW_MAX) || stg_row == 0)
-		cthis->max_row_in_page = SETTING_ROW_MAX;
-	else
-		cthis->max_row_in_page = stg_row;
-	
-}
+
 
 
 

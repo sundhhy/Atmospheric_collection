@@ -44,11 +44,11 @@
 .\objects\channel_accumulated.o: ..\..\model\ModelFactory.h
 .\objects\channel_accumulated.o: ..\..\model\Model.h
 .\objects\channel_accumulated.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\channel_accumulated.o: ..\..\configs\model_conf.h
 .\objects\channel_accumulated.o: E:\sdhLib\inc\basis/assert.h
 .\objects\channel_accumulated.o: E:\sdhLib\inc\basis/except.h
 .\objects\channel_accumulated.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\setjmp.h
 .\objects\channel_accumulated.o: ..\..\model\Model_channel.h
-.\objects\channel_accumulated.o: ..\..\configs\model_conf.h
 .\objects\channel_accumulated.o: ..\..\model\ModelTime.h
 .\objects\channel_accumulated.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\channel_accumulated.o: ..\..\..\Atmospheric_collection\utils/rtc.h

@@ -26,6 +26,7 @@
 .\objects\expfactory.o: ..\..\model\ModelFactory.h
 .\objects\expfactory.o: ..\..\model\Model.h
 .\objects\expfactory.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\expfactory.o: ..\..\configs\model_conf.h
 .\objects\expfactory.o: E:\sdhLib\inc\basis/assert.h
 .\objects\expfactory.o: ..\..\model\Model_channel.h
 .\objects\expfactory.o: ..\..\APP\system.h
@@ -50,7 +51,6 @@
 .\objects\expfactory.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\expfactory.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\expfactory.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\expfactory.o: ..\..\configs\model_conf.h
 .\objects\expfactory.o: ..\..\model\ModelTime.h
 .\objects\expfactory.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\expfactory.o: ..\..\..\Atmospheric_collection\utils/rtc.h

@@ -16,6 +16,7 @@
 .\objects\focus.o: ..\..\model\Model.h
 .\objects\focus.o: E:\sdhLib\inc\arithmetic/list.h
 .\objects\focus.o: E:\sdhLib\inc\basis/macros.h
+.\objects\focus.o: ..\..\configs\model_conf.h
 .\objects\focus.o: E:\sdhLib\inc\sdhDef.h
 .\objects\focus.o: ..\..\APP\sdhlibConf.h
 .\objects\focus.o: E:\sdhLib\inc\basis/sdhDebug.h
@@ -47,7 +48,6 @@
 .\objects\focus.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\focus.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\focus.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\focus.o: ..\..\configs\model_conf.h
 .\objects\focus.o: ..\..\model\ModelTime.h
 .\objects\focus.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\focus.o: ..\..\..\Atmospheric_collection\utils/rtc.h

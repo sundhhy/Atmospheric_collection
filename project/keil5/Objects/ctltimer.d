@@ -37,11 +37,11 @@
 .\objects\ctltimer.o: ..\..\model\ModelFactory.h
 .\objects\ctltimer.o: ..\..\model\Model.h
 .\objects\ctltimer.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\ctltimer.o: ..\..\configs\model_conf.h
 .\objects\ctltimer.o: E:\sdhLib\inc\basis/assert.h
 .\objects\ctltimer.o: E:\sdhLib\inc\basis/except.h
 .\objects\ctltimer.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\setjmp.h
 .\objects\ctltimer.o: ..\..\model\Model_channel.h
-.\objects\ctltimer.o: ..\..\configs\model_conf.h
 .\objects\ctltimer.o: ..\..\model\ModelTime.h
 .\objects\ctltimer.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\ctltimer.o: ..\..\..\Atmospheric_collection\utils/rtc.h

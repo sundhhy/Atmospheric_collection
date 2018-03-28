@@ -28,6 +28,7 @@
 .\objects\component_curve.o: ..\..\model\ModelFactory.h
 .\objects\component_curve.o: ..\..\model\Model.h
 .\objects\component_curve.o: E:\sdhLib\inc\arithmetic/list.h
+.\objects\component_curve.o: ..\..\configs\model_conf.h
 .\objects\component_curve.o: E:\sdhLib\inc\basis/assert.h
 .\objects\component_curve.o: ..\..\model\Model_channel.h
 .\objects\component_curve.o: ..\..\APP\system.h
@@ -52,7 +53,6 @@
 .\objects\component_curve.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\component_curve.o: d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\component_curve.o: ..\..\..\Atmospheric_collection\utils/PHN_string.h
-.\objects\component_curve.o: ..\..\configs\model_conf.h
 .\objects\component_curve.o: ..\..\model\ModelTime.h
 .\objects\component_curve.o: ..\..\..\Atmospheric_collection\utils/rtc_pcf8563.h
 .\objects\component_curve.o: ..\..\..\Atmospheric_collection\utils/rtc.h

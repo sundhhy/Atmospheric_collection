@@ -178,7 +178,8 @@ static void CNF_Init_sheet( HMI *self )
 	p_stg->cmd_hdl = CNF_Exec_Sy_cmd;
 	p_stg->p_cmd_rcv = self;
 	
-	p_stg->init(NULL);
+	aci_sys.hmi_mgr.hand_signal_type = HMI_Switch_signal(aci_sys.hmi_mgr.hand_signal_type);
+	p_stg->init(&aci_sys.hmi_mgr.hand_signal_type);		//对于采样设置的算法，需要知道当前被处理的信号类型是啥
 	p_cfg_stg = p_stg;
 	if(p_stg->p_stg_title)
 	{

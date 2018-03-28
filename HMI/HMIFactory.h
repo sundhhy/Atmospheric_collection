@@ -23,7 +23,7 @@
 #		define	HMI_CONFIGURE							0x20
 
 #define	HMI_QUERY									4
-
+#define	HMI_START_SAMPLE					5
 
 
 

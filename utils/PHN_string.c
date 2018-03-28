@@ -332,15 +332,15 @@ void Str_set_sys_param(char	*p_s, int aux, int op, int val)
 
 //从字符串中返回指定顺序的数字
 //如果有错误，设置err为1
-int Get_str_data(char *s_data, char* separator, int num, uint8_t	*err)
+int Get_str_data(char *s_data, char* str_separator, int num, uint8_t	*err)
 {
 	int 		tmp;
 	int			rst = 0;
 	char		*p;
 	uint16_t	num_spt = 0;
 
-	
-	*err = 1;
+	if(err)
+		*err = 1;
 	
 	tmp = strcspn(s_data, "0123456789");
 	if((tmp == 0) && (s_data[0] > '9' || s_data[0] <'0'))
@@ -348,14 +348,15 @@ int Get_str_data(char *s_data, char* separator, int num, uint8_t	*err)
 	p = tmp + s_data;
 	if(num == 0)
 	{
-		*err = 0;
+		if(err)
+			*err = 0;
 		rst = atoi(p);
 		goto exit;
 	}
 	
 	while(1)
 	{
-		tmp = strcspn(p, separator);
+		tmp = strcspn(p, str_separator);
 		if(tmp)
 		{
 			p += tmp + 1;
@@ -364,7 +365,8 @@ int Get_str_data(char *s_data, char* separator, int num, uint8_t	*err)
 		
 		if(num_spt == num)		//分隔符与序号相等说明当前的数字符合要求
 		{
-			*err = 0;
+			if(err)
+				*err = 0;
 			rst = atoi(p);
 			goto exit;
 		}
@@ -473,6 +475,8 @@ int Str_Password_match(char *p_s_psd)
 
 
 // model.c
+
+
 
 void Print_float(int data, short int_len, short decimal_Places, char *str)
 {

@@ -234,7 +234,7 @@ extern keyboard_commit	kbr_cmt;
 extern const Except_T Hmi_Failed;
 //extern  ro_char str_endRow[];
 //extern	ro_char str_endCol[];
-extern HMI *g_p_curHmi, *g_p_lastHmi, *g_p_win_last;
+extern HMI *g_p_curHmi, *g_p_win_last;
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
@@ -242,8 +242,9 @@ extern void Set_flag_show(uint8_t	*p_flag, int val);
 //extern void Set_flag_keyhandle(uint8_t	*p_flag, int val);
 void STG_Duild_button(void *arg);
 
-//很多界面的处理与主界面的按键处理一样，所以就把主界面的处理开放出来
-
+//有时候本界面被切换之后，希望把ESC返回时的界面变成另外一个界面时调用
+//要在本界面切换到其他界面之前调用
+void HMI_Change_last_HMI(HMI *p);			
 
 int HMI_Init(void);
 void HMI_choice(HMI *self, uint8_t choice_id);
@@ -251,5 +252,7 @@ void HMI_choice(HMI *self, uint8_t choice_id);
 extern void HMI_Ram_init(void);
 extern void *HMI_Ram_alloc(int bytes);
 extern uint16_t HMI_Ram_free_bytes(void);
+
+uint8_t	HMI_Switch_signal(uint8_t	old_sig);
 
 #endif
