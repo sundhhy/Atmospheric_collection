@@ -19,7 +19,7 @@
 
 CLASS( devGpio)
 {
-	IMPLEMENTS( I_dev_Char);
+	IMPLEMENTS( dev_Char);
 	driveGpio		*dri;
 	
 	uint8_t		minor;

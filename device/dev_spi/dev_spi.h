@@ -25,7 +25,7 @@
 
 CLASS(Dev_spi)
 {
-	IMPLEMENTS( I_dev_Char);
+	IMPLEMENTS( dev_Char);
 	void			*p_spi;
 	uint8_t		minor;
 	uint8_t		none[3];

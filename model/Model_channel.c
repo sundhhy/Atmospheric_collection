@@ -551,7 +551,7 @@ static int MdlChn_init(Model *self, IN void *arg)
 	mdl_chn_save_t				save;
 	uint8_t						chn_num = *((uint8_t *)arg);
 	
-	I_dev_Char 		*I_uart3 = NULL;
+	dev_Char 		*I_uart3 = NULL;
 	
 	Dev_open(DEVID_UART3, ( void *)&I_uart3);
 	I_uart3->ioctol(I_uart3, DEVCMD_SET_TXWAITTIME_MS, 100);
@@ -635,7 +635,7 @@ static int MdlChn_self_check( Model *self)
 	Model_chn		*cthis = SUB_PTR(self, Model, Model_chn);
 	
 	uint8_t			chk_buf[32] = {0};
-	I_dev_Char 		*I_uart3 = NULL;
+	dev_Char 		*I_uart3 = NULL;
 	int				ret  = RET_OK;
 	uint16_t		tmp_u16[2];
 	uint8_t 			i, j;
@@ -752,7 +752,7 @@ static void MdlChn_run(Model *self)
 	SmBus_result_t		rst;
 //	do_out_t			d = {0};
 	
-	I_dev_Char 			*I_uart3 = NULL;
+	dev_Char 			*I_uart3 = NULL;
 	uint8_t 			i;
 //	uint8_t				old_do;
 	
@@ -905,7 +905,7 @@ static int MdlChn_getData(Model *self, IN int aux, void *arg)
 	Model_chn		*cthis = SUB_PTR( self, Model, Model_chn);
 	int16_t			*p_s16;
 	uint8_t			*p_u8;
-	I_dev_Char 			*I_uart3 = NULL;	
+	dev_Char 			*I_uart3 = NULL;	
 	uint8_t			sbus_buf[32];
 	uint16_t		tmp_u16;
 	uint8_t			tmp_u8, i;
@@ -1040,7 +1040,7 @@ static int MdlChn_setData(  Model *self, IN int aux, void *arg)
 	do_out_t		*p_d;
 	SmBus_conf_t	sb_conf ;
 	uint8_t			sbub_buf[32] = {0};
-	I_dev_Char 			*I_uart3 = NULL;
+	dev_Char 			*I_uart3 = NULL;
 	uint8_t 			i, tmp_u8;
 	
 	

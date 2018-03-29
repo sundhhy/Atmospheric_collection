@@ -58,10 +58,10 @@ ro_char news_cpic[] =  {"<cpic vx0=0 vx1=320 vy0=50 vy1=210>16</>" };
 //------------------------------------------------------------------------------
 #define TIME_BUF_LEN		16
 
-static ro_char code_bkPic[] =  {"<bpic vx0=0 vy0=0 m=0 >23</>" };
-static ro_char code_title[] =  {"<text vx0=0 vy0=4 m=0 clr=white f=24> </>" };
+//static ro_char code_bkPic[] =  {"<bpic vx0=0 vy0=0 m=0 >23</>" };
+//static ro_char code_title[] =  {"<text vx0=0 vy0=4 m=0 clr=white f=24> </>" };
 
-static ro_char timeCode[] = { "<time vx0=220 vy0=0 bx=60  by=24 f=24 xali=r m=0 clr=yellow spr=/> </time>" };
+static ro_char timeCode[] = { "<text vx0=8 vy0=48> </>" };
 
 
 
@@ -261,7 +261,7 @@ static int	Init_cmmHmi( HMI *self, void *arg)
 	
 
 //	Build_icoSheets();
-//	Build_otherSheets();
+	Build_otherSheets();
 
 	return RET_OK;
 }
@@ -342,13 +342,13 @@ static int	Init_cmmHmi( HMI *self, void *arg)
 	
 //}
 
-//static void Build_otherSheets(void)
-//{
-//	shtctl 		*p_shtctl = NULL;
-//	Expr 		*p_exp ;
-//		
-//	p_shtctl = GetShtctl();
-//	
+static void Build_otherSheets(void)
+{
+	shtctl 		*p_shtctl = NULL;
+	Expr 		*p_exp ;
+		
+	p_shtctl = GetShtctl();
+	
 //	g_p_cpic = Sheet_alloc( p_shtctl);
 //	g_p_text = Sheet_alloc( p_shtctl);
 //	g_p_boxlist = Sheet_alloc( p_shtctl);
@@ -358,25 +358,25 @@ static int	Init_cmmHmi( HMI *self, void *arg)
 //	g_p_sht_bkpic = Sheet_alloc( p_shtctl);
 //	p_exp = ExpCreate( "pic");
 //	p_exp->inptSht( p_exp, (void *)code_bkPic, g_p_sht_bkpic) ;
-//	
-//	
-//	
-//	//title
+	
+	
+	
+	//title
 //	g_p_sht_title = Sheet_alloc( p_shtctl);
 //	p_exp = ExpCreate( "text");
 //	p_exp->inptSht( p_exp, (void *)code_title, g_p_sht_title) ;
-//	
-//	//timer
-//	g_p_shtTime = Sheet_alloc( p_shtctl);
-//	p_exp = ExpCreate( "text");
-//	p_exp->inptSht( p_exp, (void *)timeCode, g_p_shtTime) ;
-//	
-//	g_p_shtTime->p_mdl = ModelCreate("time");
-//	g_p_shtTime->p_mdl->attach( g_p_shtTime->p_mdl, (Observer *)g_p_shtTime);
-//	g_p_shtTime->cnt.data = g_p_shtTime->p_mdl->to_string(g_p_shtTime->p_mdl, 0, NULL);
-//	g_p_shtTime->cnt.len = strlen(g_p_shtTime->cnt.data);
-//	
-//}
+	
+	//timer
+	g_p_shtTime = Sheet_alloc( p_shtctl);
+	p_exp = ExpCreate( "text");
+	p_exp->inptSht( p_exp, (void *)timeCode, g_p_shtTime) ;
+	
+	g_p_shtTime->p_mdl = ModelCreate("time");
+	g_p_shtTime->p_mdl->attach( g_p_shtTime->p_mdl, (Observer *)g_p_shtTime);
+	g_p_shtTime->cnt.data = g_p_shtTime->p_mdl->to_string(g_p_shtTime->p_mdl, 0, NULL);
+	g_p_shtTime->cnt.len = strlen(g_p_shtTime->cnt.data);
+	
+}
 
 
 

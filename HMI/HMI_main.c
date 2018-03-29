@@ -65,30 +65,30 @@ static ro_char main_code_choice_2_2[] = { "<text vx0=80 vy0=32 bkc=white>Î¬»¤</>
 //------------------------------------------------------------------------------
 // local vars
 //------------------------------------------------------------------------------
-static mainHmi *signal_mainHmi;
+static HMI_main *signal_HMI_main;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
-static int	Init_mainHmi( HMI *self, void *arg);
-static void	MainHmiShow( HMI *self);
-static void MainHmiHide( HMI *self );
-static void MaininitSheet( HMI *self );
-static void HMI_MAIN_Run(HMI *self);
-static void	Main_Init_focus(HMI *self);
+static int	HMN_Init( HMI *self, void *arg);
+static void	HMN_Show( HMI *self);
+static void HMN_Hide( HMI *self );
+static void HMN_Init_sheet( HMI *self );
+static void HMN_Run(HMI *self);
+static void	HMN_Init_focus(HMI *self);
 //static void HMI_Main_hit( HMI *self, char kcd);
 
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
-mainHmi *Get_mainHmi(void) 
+HMI_main *Get_HMI_main(void) 
 {
-	if( signal_mainHmi == NULL)
+	if( signal_HMI_main == NULL)
 	{
-		signal_mainHmi = mainHmi_new();
-		if(signal_mainHmi  == NULL) while(1);
+		signal_HMI_main = HMI_main_new();
+		if(signal_HMI_main  == NULL) while(1);
 	}
 	
-	return signal_mainHmi;
+	return signal_HMI_main;
 }
 
 
@@ -100,17 +100,17 @@ mainHmi *Get_mainHmi(void)
 
 
 
-CTOR( mainHmi)
+CTOR( HMI_main)
 SUPER_CTOR( HMI);
-FUNCTION_SETTING( HMI.init, Init_mainHmi);
-FUNCTION_SETTING( HMI.hide, MainHmiHide);
-FUNCTION_SETTING( HMI.initSheet, MaininitSheet);
-FUNCTION_SETTING( HMI.hmi_run, HMI_MAIN_Run);
+FUNCTION_SETTING( HMI.init, HMN_Init);
+FUNCTION_SETTING( HMI.hide, HMN_Hide);
+FUNCTION_SETTING( HMI.initSheet, HMN_Init_sheet);
+FUNCTION_SETTING( HMI.hmi_run, HMN_Run);
 
-FUNCTION_SETTING( HMI.show, MainHmiShow);
+FUNCTION_SETTING( HMI.show, HMN_Show);
 //FUNCTION_SETTING( HMI.hitHandle, HMI_Main_hit);
 
-FUNCTION_SETTING(HMI.init_focus, Main_Init_focus);
+FUNCTION_SETTING(HMI.init_focus, HMN_Init_focus);
 
 END_CTOR
 //=========================================================================//
@@ -119,7 +119,7 @@ END_CTOR
 //                                                                         //
 //=========================================================================//
 
-static int	Init_mainHmi( HMI *self, void *arg)
+static int	HMN_Init( HMI *self, void *arg)
 {
 //	HMI 					*p_cmm;
 
@@ -140,16 +140,16 @@ static int	Init_mainHmi( HMI *self, void *arg)
 }
 
 
-static void HMI_MAIN_Run(HMI *self)
+static void HMN_Run(HMI *self)
 {
 	
 	
 	
 }
 
-static void MaininitSheet( HMI *self )
+static void HMN_Init_sheet( HMI *self )
 {
-//	mainHmi		*cthis = SUB_PTR( self, HMI, mainHmi);
+//	HMI_main		*cthis = SUB_PTR( self, HMI, HMI_main);
 	Expr 		*p_exp ;
 	int 		h = 0;
 	
@@ -189,7 +189,7 @@ static void MaininitSheet( HMI *self )
 }
 
 
-static void MainHmiHide(HMI *self)
+static void HMN_Hide(HMI *self)
 {
 	int i;
 	
@@ -209,7 +209,7 @@ static void MainHmiHide(HMI *self)
 	arr_choice_key[3] = HMI_NONE;
 }	
 
-static void	Main_Init_focus(HMI *self) 
+static void	HMN_Init_focus(HMI *self) 
 {
 	self->p_fcuu = Focus_alloc(2, 2);
 
@@ -225,7 +225,7 @@ static void	Main_Init_focus(HMI *self)
 
 
 
-static void	MainHmiShow( HMI *self)
+static void	HMN_Show( HMI *self)
 {
 
 	

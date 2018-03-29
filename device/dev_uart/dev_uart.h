@@ -13,7 +13,7 @@
 
 CLASS( Dev_Uart)
 {
-	IMPLEMENTS( I_dev_Char);
+	IMPLEMENTS( dev_Char);
 	driveUart		*dri;
 	int			txsem, rxsem;
 //	void		*p_lock;

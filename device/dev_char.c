@@ -14,7 +14,7 @@
 int DevChar_open( int major, int minor, void **dev)
 {
 	int ret = 0;
-//	I_dev_Char	*pdev = NULL;
+//	dev_Char	*pdev = NULL;
 	switch( major)
 	{
 		case DEVMAJOR_UART:

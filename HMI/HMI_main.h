@@ -18,17 +18,10 @@
  //------------------------------------------------------------------------------
 // typedef
 //------------------------------------------------------------------------------
-CLASS( mainHmi)
+CLASS( HMI_main)
 {
 	EXTENDS( HMI);
-	
-//	sheet  		*p_bkg;
-//	sheet  		*p_title;
-//	sheet  		*arr_p_sht_data[NUM_CHANNEL];
-//	sheet  			**pp_shts;
-//	uint8_t		focusRow;
-//	uint8_t		focusCol;
-//	uint8_t		none[2];
+
 	
 	
 };
@@ -40,5 +33,5 @@ CLASS( mainHmi)
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
-mainHmi *Get_mainHmi(void) ;
+HMI_main *Get_HMI_main(void) ;
 #endif

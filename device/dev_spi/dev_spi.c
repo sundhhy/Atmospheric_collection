@@ -45,12 +45,12 @@ static Dev_spi *d_spi[NUM_SPIS] = {NULL};
 // local function prototypes
 //------------------------------------------------------------------------------
 
-static int Open_devSpi(I_dev_Char *self, void *conf);
-static int Close_devSpi(I_dev_Char *self);
-static int Read_devSpi(I_dev_Char *self, void *buf, int rd_len);
-static int Write_devSpi(I_dev_Char *self, void *buf, int wr_len);
-static int Ioctol_devSpi(I_dev_Char *self, int cmd, ...);
-static int Test_devSpi(I_dev_Char *self, void *testBuf, int len);
+static int Open_devSpi(dev_Char *self, void *conf);
+static int Close_devSpi(dev_Char *self);
+static int Read_devSpi(dev_Char *self, void *buf, int rd_len);
+static int Write_devSpi(dev_Char *self, void *buf, int wr_len);
+static int Ioctol_devSpi(dev_Char *self, int cmd, ...);
+static int Test_devSpi(dev_Char *self, void *testBuf, int len);
 
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
@@ -58,7 +58,7 @@ static int Test_devSpi(I_dev_Char *self, void *testBuf, int len);
 
 Dev_spi *Get_DevSpi(int minor)
 {
-	I_dev_Char *devChar;
+	dev_Char *devChar;
 	if(minor >= NUM_SPIS)
 			return NULL;
 	if(d_spi[minor] == NULL) 
@@ -66,7 +66,7 @@ Dev_spi *Get_DevSpi(int minor)
 		d_spi[minor] = Dev_spi_new();
 		if(d_spi[ minor]  == NULL) while(1);
 		d_spi[minor]->minor = minor;
-		devChar = SUPER_PTR(d_spi[minor], I_dev_Char);
+		devChar = SUPER_PTR(d_spi[minor], dev_Char);
 		
 		devChar->open(devChar, &arr_conf_spi[minor]);
 			
@@ -79,12 +79,12 @@ Dev_spi *Get_DevSpi(int minor)
 
 
 CTOR( Dev_spi)
-FUNCTION_SETTING( I_dev_Char.open, Open_devSpi);
-FUNCTION_SETTING( I_dev_Char.close, Close_devSpi);
-FUNCTION_SETTING( I_dev_Char.read, Read_devSpi);
-FUNCTION_SETTING( I_dev_Char.write, Write_devSpi);
-FUNCTION_SETTING( I_dev_Char.ioctol, Ioctol_devSpi);
-FUNCTION_SETTING( I_dev_Char.test, Test_devSpi);
+FUNCTION_SETTING( dev_Char.open, Open_devSpi);
+FUNCTION_SETTING( dev_Char.close, Close_devSpi);
+FUNCTION_SETTING( dev_Char.read, Read_devSpi);
+FUNCTION_SETTING( dev_Char.write, Write_devSpi);
+FUNCTION_SETTING( dev_Char.ioctol, Ioctol_devSpi);
+FUNCTION_SETTING( dev_Char.test, Test_devSpi);
 END_CTOR
 //=========================================================================//
 //                                                                         //
@@ -93,22 +93,22 @@ END_CTOR
 //=========================================================================//
 /// \name Private Functions
 /// \{
-static int Open_devSpi(I_dev_Char *self, void *conf)
+static int Open_devSpi(dev_Char *self, void *conf)
 {
-	Dev_spi		*cthis = SUB_PTR( self, I_dev_Char, Dev_spi);
+	Dev_spi		*cthis = SUB_PTR( self, dev_Char, Dev_spi);
 	
 	return Init_spi(cthis->minor, conf);
 }
 
-static int Close_devSpi(I_dev_Char *self)
+static int Close_devSpi(dev_Char *self)
 {
 
 	return RET_OK;
 }
 
-static int Read_devSpi(I_dev_Char *self, void *buf, int rd_len)
+static int Read_devSpi(dev_Char *self, void *buf, int rd_len)
 {
-	Dev_spi		*cthis = SUB_PTR( self, I_dev_Char, Dev_spi);
+	Dev_spi		*cthis = SUB_PTR( self, dev_Char, Dev_spi);
 	int				len = 0;
 	int				ret;
 	while(len < rd_len) 
@@ -121,9 +121,9 @@ static int Read_devSpi(I_dev_Char *self, void *buf, int rd_len)
 	return len;
 }
 
-static int Write_devSpi(I_dev_Char *self, void *buf, int wr_len)
+static int Write_devSpi(dev_Char *self, void *buf, int wr_len)
 {
-	Dev_spi		*cthis = SUB_PTR( self, I_dev_Char, Dev_spi);
+	Dev_spi		*cthis = SUB_PTR( self, dev_Char, Dev_spi);
 	int				len = 0;
 	int 			ret = 0;
 	while(len < wr_len)
@@ -139,12 +139,12 @@ static int Write_devSpi(I_dev_Char *self, void *buf, int wr_len)
 
 }
 
-static int Ioctol_devSpi(I_dev_Char *self, int cmd, ...)
+static int Ioctol_devSpi(dev_Char *self, int cmd, ...)
 {
 
 	return RET_OK;
 }
-static int Test_devSpi(I_dev_Char *self, void *testBuf, int len)
+static int Test_devSpi(dev_Char *self, void *testBuf, int len)
 {
 
 	

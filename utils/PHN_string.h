@@ -42,6 +42,9 @@ void Print_unit( char unit, char *buf, int len);
 void Print_float(int data, short int_len, short decimal_Places, char *str);
 void Print_frefix_float(int data, int prec, char *prefix, char *str);
 
+void Print_flow(char *buf, uint16_t f);
+void Print_pressure(char *buf, uint16_t f);
+void Print_temperature(char *buf, uint16_t f);
 //mode_channel
 void Print_singnaltype(int sgt, char *str);
 void Print_touch_spot(int spot, char *str);

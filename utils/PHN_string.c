@@ -559,6 +559,26 @@ void Print_float(int data, short int_len, short decimal_Places, char *str)
 	
 }
 
+//流量是1位小数，单位是L/min
+void Print_flow(char *buf, uint16_t f)
+{
+	
+	
+	
+}
+
+//2位小数，单位KPa
+void Print_pressure(char *buf, uint16_t f)
+{
+	
+	
+}
+//温度 单位℃
+void Print_temperature(char *buf, uint16_t f)
+{
+	
+	
+}
 void Print_frefix_float(int data, int prec, char *prefix, char *str)
 {
 	

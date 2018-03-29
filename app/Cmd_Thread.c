@@ -161,7 +161,7 @@ static void Cmd_Thread (void const *argument) {
 //	char	pwr_val = 1;
 //	char	j;
 	uint32_t cur_s ;
-//	I_dev_Char		*gpio_pwr;
+//	dev_Char		*gpio_pwr;
 //	Dev_open(DEVID_GPIO_PWR, ( void *)&gpio_pwr);
 	
 	while (1) {

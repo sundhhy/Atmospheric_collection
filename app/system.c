@@ -201,33 +201,37 @@ void System_init(void)
 	
 	
 	
-	w25q_init();
-	FM25_init();
-	EFS_init(NUM_FSH);
-	
-#if TDD_ON	== 0
-	stg->init(stg);
-	
-	System_power_on();
-	
-	stg->rd_stored_data(stg, STG_SYS_CONF, &aci_sys.sys_conf, sizeof(aci_sys.sys_conf));
-	if(aci_sys.sys_conf.num_chn != NUM_CHANNEL)
-		System_default();
+//	w25q_init();
+//	FM25_init();
+//	EFS_init(NUM_FSH);
+//	
+//#if TDD_ON	== 0
+//	stg->init(stg);
+//	
+//	System_power_on();
+//	
+//	stg->rd_stored_data(stg, STG_SYS_CONF, &aci_sys.sys_conf, sizeof(aci_sys.sys_conf));
+//	if(aci_sys.sys_conf.num_chn != NUM_CHANNEL)
+//		System_default();
 
-	
-	CNA_Init();
-	for(i = 0; i < NUM_CHANNEL; i++)
-	{
+//	
+//	CNA_Init();
+//	for(i = 0; i < NUM_CHANNEL; i++)
+//	{
 
-		sprintf(chn_name,"chn_%d", i);
-		m = ModelCreate(chn_name);
-		m->init(m, &i);
-		
-	}
-	
-	MdlChn_Read_code_end_temperature();
-//	System_power_off();
-#endif	
+//		sprintf(chn_name,"chn_%d", i);
+//		m = ModelCreate(chn_name);
+//		m->init(m, &i);
+//		
+//	}
+//	
+//	MdlChn_Read_code_end_temperature();
+//#endif	
+
+
+	MDL_Init(em_atmosphere_A);
+	MDL_Init(em_atmosphere_B);
+	MDL_Init(em_dust);
 	
 }
 

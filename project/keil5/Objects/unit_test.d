@@ -3,3 +3,4 @@
 .\objects\unit_test.o: ..\..\unit_tests\unit_test.h
 .\objects\unit_test.o: ..\..\unit_tests\test_lcd.h
 .\objects\unit_test.o: ..\..\unit_tests\test_key.h
+.\objects\unit_test.o: ..\..\unit_tests\test_smart_bus.h

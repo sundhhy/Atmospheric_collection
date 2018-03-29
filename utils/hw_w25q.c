@@ -76,7 +76,7 @@ Modification:
 // const defines
 //------------------------------------------------------------------------------
 
-static	I_dev_Char	*w25q_spi;
+static	dev_Char	*w25q_spi;
 
 #define W25Q_FLAG_READED		1
 #define W25Q_FLAG_DATA_CHANGED	2

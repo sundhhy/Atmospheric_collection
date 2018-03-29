@@ -118,6 +118,59 @@ void Pin_init(void)
 	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_SWITCH;
     GPIO_Init( GPIO_PORT_KEY_SWITCH, &GPIO_InitStructure);
 
+
+	/******* IIC *******************************************/
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_IIC_SDA;                   
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
+	GPIO_Init( GPIO_PORT_IIC_SDA, &GPIO_InitStructure);	
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_IIC_SCL;        
+	GPIO_Init( GPIO_PORT_IIC_SCL, &GPIO_InitStructure);	
+	GPIO_PinRemapConfig(GPIO_Remap_I2C1,ENABLE);
+	
+	/***********************UART**********************************/
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART1TX;        //tx
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
+    GPIO_Init( GPIO_PORT_UART1TX, &GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART1RX;                   //rx
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_Init( GPIO_PORT_UART1RX, &GPIO_InitStructure);
+	GPIO_PinRemapConfig(GPIO_Remap_USART1,ENABLE);
+	
+//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART2TX;        //tx
+//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+//    GPIO_Init( GPIO_PORT_UART2TX, &GPIO_InitStructure);
+
+//    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART2RX;                   //rx
+//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+//    GPIO_Init( GPIO_PORT_UART2RX, &GPIO_InitStructure);
+//	
+//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART3TX;        //tx
+//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+//    GPIO_Init( GPIO_PORT_UART3TX, &GPIO_InitStructure);
+//	
+//    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART3RX;                   //rx
+//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+//    GPIO_Init( GPIO_PORT_UART3RX, &GPIO_InitStructure);
+//	
+//	
+//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART4TX;        //tx
+//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+//    GPIO_Init( GPIO_PORT_UART4TX, &GPIO_InitStructure);
+//	
+//    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART4RX;                   //rx
+//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+//    GPIO_Init( GPIO_PORT_UART4RX, &GPIO_InitStructure);
+	
+
+
 //	/*** pwr ***/
 //	GPIO_InitStructure.GPIO_Pin = PIN_PWR;
 //    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
@@ -169,17 +222,7 @@ void Pin_init(void)
 //    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 //    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
 //    GPIO_Init(PORT_FM25_SCK, &GPIO_InitStructure);
-//	/******* IIC *******************************************/
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_IIC_SDA;                   
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
-//    GPIO_Init( GPIO_PORT_IIC_SDA, &GPIO_InitStructure);	
-//	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_IIC_SCL;        
-//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
-//    GPIO_Init( GPIO_PORT_IIC_SCL, &GPIO_InitStructure);
-//	
-//	GPIO_PinRemapConfig(GPIO_Remap_I2C1,ENABLE);
+
 //	/*********** usb 	************************************/
 //	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_USBRESET;                   
 //    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
@@ -216,47 +259,7 @@ void Pin_init(void)
 //    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 //    GPIO_Init( GPIO_PORT_SPI1, &GPIO_InitStructure);
 //	
-//	/*********************************************************/
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART1TX;        //tx
-//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
-//    GPIO_Init( GPIO_PORT_UART1TX, &GPIO_InitStructure);
-//	GPIO_PinRemapConfig(GPIO_Remap_USART1,ENABLE);
 
-//    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART1RX;                   //rx
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-//    GPIO_Init( GPIO_PORT_UART1RX, &GPIO_InitStructure);
-//	GPIO_PinRemapConfig(GPIO_Remap_USART1,ENABLE);
-//	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART2TX;        //tx
-//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-//    GPIO_Init( GPIO_PORT_UART2TX, &GPIO_InitStructure);
-
-//    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART2RX;                   //rx
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-//    GPIO_Init( GPIO_PORT_UART2RX, &GPIO_InitStructure);
-////		GPIO_PinRemapConfig(GPIO_Remap_USART2,ENABLE);
-//	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART3TX;        //tx
-//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-//    GPIO_Init( GPIO_PORT_UART3TX, &GPIO_InitStructure);
-//	
-//    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART3RX;                   //rx
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-//    GPIO_Init( GPIO_PORT_UART3RX, &GPIO_InitStructure);
-//	
-//	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART4TX;        //tx
-//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-//    GPIO_Init( GPIO_PORT_UART4TX, &GPIO_InitStructure);
-//	
-//    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART4RX;                   //rx
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-//    GPIO_Init( GPIO_PORT_UART4RX, &GPIO_InitStructure);
-//	
 
 	
 	

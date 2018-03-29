@@ -112,7 +112,7 @@ static int SSM_entry(int row, int col, void *pp_text)
 		{
 			case 0:
 				
-				sprintf(arr_p_vram[row], "%02d:%02d", p_s->tmp_smp.sample_hour,  p_s->tmp_smp.sample_min);
+				sprintf(arr_p_vram[row], "%02d:%02d", p_s->tmp_smp.sample_setup_hour,  p_s->tmp_smp.sample_setup_min);
 				break;
 			case 1:
 				
@@ -221,15 +221,15 @@ static int SSM_modify(void *arg, int op)
 		
 			if(p_syf->start_byte < 3)
 			{
-				p_s->tmp_smp.sample_hour = Get_str_data(p,":", 0, NULL);
-//				p_s->tmp_smp.sample_hour = Operate_in_tange(p_s->tmp_smp.sample_hour, op, weight, 0, up_limit);
-//				sprintf(arr_p_vram[p_syf->f_row], "%02d:%02d", p_s->tmp_smp.sample_hour,p_s->tmp_smp.sample_min);
+				p_s->tmp_smp.sample_setup_hour = Get_str_data(p,":", 0, NULL);
+//				p_s->tmp_smp.sample_setup_hour = Operate_in_tange(p_s->tmp_smp.sample_setup_hour, op, weight, 0, up_limit);
+//				sprintf(arr_p_vram[p_syf->f_row], "%02d:%02d", p_s->tmp_smp.sample_setup_hour,p_s->tmp_smp.sample_setup_min);
 			}
 			else
 			{
-				p_s->tmp_smp.sample_min = Get_str_data(p,":", 1, NULL);
-//				p_s->tmp_smp.sample_min = Operate_in_tange(p_s->tmp_smp.sample_min, op, weight, 0, up_limit);
-//				sprintf(arr_p_vram[p_syf->f_row], "%02d:%02d", p_s->tmp_smp.sample_hour,p_s->tmp_smp.sample_min);
+				p_s->tmp_smp.sample_setup_min = Get_str_data(p,":", 1, NULL);
+//				p_s->tmp_smp.sample_setup_min = Operate_in_tange(p_s->tmp_smp.sample_setup_min, op, weight, 0, up_limit);
+//				sprintf(arr_p_vram[p_syf->f_row], "%02d:%02d", p_s->tmp_smp.sample_setup_hour,p_s->tmp_smp.sample_setup_min);
 				
 			}
 				

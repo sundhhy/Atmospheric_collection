@@ -23,7 +23,7 @@ Dev_Uart *Get_DevUart( int minor)
 {
 //	uint8_t	*prxSem, *ptxSem;
 //	uint8_t	*p_lock;
-	I_dev_Char *devChar;
+	dev_Char *devChar;
 	if( ( minor +1) > NUM_UARTS)
 		return NULL;
 	
@@ -31,7 +31,7 @@ Dev_Uart *Get_DevUart( int minor)
 	{
 		devUart[ minor] = Dev_Uart_new();
 		if(devUart[ minor]  == NULL) while(1);
-		devChar = ( I_dev_Char *)devUart[ minor];
+		devChar = ( dev_Char *)devUart[ minor];
 		
 		devUart[ minor]->dri = driveUart_new();
 		if(devUart[ minor]  == NULL) while(1);
@@ -98,7 +98,7 @@ Dev_Uart *Get_DevUart( int minor)
 //	return NULL;
 }
 
-int Dev_Uart_open( I_dev_Char *self, void *conf)
+int Dev_Uart_open( dev_Char *self, void *conf)
 {
 	Dev_Uart *cthis = ( Dev_Uart *)self;
 	driveUart *driUart = cthis->dri;
@@ -124,7 +124,7 @@ int Dev_Uart_open( I_dev_Char *self, void *conf)
 		return ERR_OSRSU_UNAVAILABLE; 
 }
 
-int Dev_Uart_close( I_dev_Char *self)
+int Dev_Uart_close( dev_Char *self)
 {
 	Dev_Uart *cthis = ( Dev_Uart *)self;
 	driveUart *driUart = cthis->dri;
@@ -138,14 +138,14 @@ int Dev_Uart_close( I_dev_Char *self)
 	return RET_OK; 
 }
 
-int Dev_Uart_read( I_dev_Char *self, void *buf, int rdLen)
+int Dev_Uart_read( dev_Char *self, void *buf, int rdLen)
 {
 	Dev_Uart *cthis = ( Dev_Uart *)self;
 	driveUart *driUart = cthis->dri;
 	return driUart->read( driUart, buf, rdLen);
 }
 
-int Dev_Uart_write( I_dev_Char *self, void *buf, int wrLen)
+int Dev_Uart_write( dev_Char *self, void *buf, int wrLen)
 {
 	Dev_Uart *cthis = ( Dev_Uart *)self;
 	driveUart *driUart = cthis->dri;
@@ -157,7 +157,7 @@ int Dev_Uart_write( I_dev_Char *self, void *buf, int wrLen)
 	return ret;
 }
 
-int Dev_Uart_ioctol( I_dev_Char *self ,int cmd, ...)
+int Dev_Uart_ioctol( dev_Char *self ,int cmd, ...)
 {
 	
 	Dev_Uart *cthis = ( Dev_Uart *)self;
@@ -234,7 +234,7 @@ int Dev_Uart_ioctol( I_dev_Char *self ,int cmd, ...)
 	
 }
 
-int Dev_Uart_test( I_dev_Char *self, void *testBuf, int len)
+int Dev_Uart_test( dev_Char *self, void *testBuf, int len)
 {
 	Dev_Uart *cthis = ( Dev_Uart *)self;
 	driveUart *driUart = cthis->dri;
@@ -326,11 +326,11 @@ static void UartLedTxHdl( void *self)
 
 
 CTOR( Dev_Uart)
-FUNCTION_SETTING( I_dev_Char.open, Dev_Uart_open);
-FUNCTION_SETTING( I_dev_Char.close, Dev_Uart_close);
-FUNCTION_SETTING( I_dev_Char.read, Dev_Uart_read);
-FUNCTION_SETTING( I_dev_Char.write, Dev_Uart_write);
-FUNCTION_SETTING( I_dev_Char.ioctol, Dev_Uart_ioctol);
-FUNCTION_SETTING( I_dev_Char.test, Dev_Uart_test);
+FUNCTION_SETTING( dev_Char.open, Dev_Uart_open);
+FUNCTION_SETTING( dev_Char.close, Dev_Uart_close);
+FUNCTION_SETTING( dev_Char.read, Dev_Uart_read);
+FUNCTION_SETTING( dev_Char.write, Dev_Uart_write);
+FUNCTION_SETTING( dev_Char.ioctol, Dev_Uart_ioctol);
+FUNCTION_SETTING( dev_Char.test, Dev_Uart_test);
 END_CTOR
 

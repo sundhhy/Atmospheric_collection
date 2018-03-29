@@ -56,6 +56,9 @@
 #define PIN_LCD_DATA_6                           GPIO_Pin_14
 #define PORT_LCD_DATA_7                          GPIOE    					 
 #define PIN_LCD_DATA_7                           GPIO_Pin_15
+//注意：因为是用GPIO模拟并口，因此下面两个宏要保证与上面的DATA0 ` DATA7保持匹配，程序的正确执行依赖于此
+#define PORT_LCD_DATAS                          GPIOE   
+#define PIN_LCD_DATAS_OFFSET                     8  
 
 //*********keyboard	********************************
 #define GPIO_PORT_KEY_UP                              	GPIOD    					 
@@ -73,11 +76,47 @@
 #define GPIO_PORT_KEY_SWITCH                            GPIOD    					 
 #define GPIO_PIN_KEY_SWITCH                             GPIO_Pin_2
 
+//********************* PCF 8563 IIC *************************************************
+#define GPIO_PORT_IIC_SDA                              	GPIOB    					 
+#define GPIO_PIN_IIC_SDA                              GPIO_Pin_9
+//#define GPIO_PORTSOURCE_IIC_SDA                              GPIO_PortSourceGPIOB   					 
+//#define GPIO_PINSOURCE_IIC_SDA                              GPIO_PinSource9
+
+#define GPIO_PORT_IIC_SCL                              	GPIOB    					 
+#define GPIO_PIN_IIC_SCL                              GPIO_Pin_8
 
 
-//注意：因为是用GPIO模拟并口，因此下面两个宏要保证与上面的DATA0 ` DATA7保持匹配，程序的正确执行依赖于此
-#define PORT_LCD_DATAS                          GPIOE   
-#define PIN_LCD_DATAS_OFFSET                     8  
+/*************************************************************************/
+
+#define GPIO_PORT_UART1TX                               GPIOB    					 
+#define GPIO_PIN_UART1TX                                GPIO_Pin_6					 
+
+#define GPIO_PORT_UART1RX                               GPIOB    					 
+#define GPIO_PIN_UART1RX                                GPIO_Pin_7	
+
+#define GPIO_PORT_UART2TX                               GPIOA    					 
+#define GPIO_PIN_UART2TX                                GPIO_Pin_2					 
+
+#define GPIO_PORT_UART2RX                               GPIOA    					 
+#define GPIO_PIN_UART2RX                                GPIO_Pin_3
+
+
+
+
+//#define GPIO_PORT_UART3TX                               GPIOB    					 
+//#define GPIO_PIN_UART3TX                                GPIO_Pin_10					 
+
+//#define GPIO_PORT_UART3RX                               GPIOB    					 
+//#define GPIO_PIN_UART3RX                                GPIO_Pin_11
+
+//#define GPIO_PORT_UART4TX                               GPIOC    					 
+//#define GPIO_PIN_UART4TX                                GPIO_Pin_10					 
+
+//#define GPIO_PORT_UART4RX                               GPIOC    					 
+//#define GPIO_PIN_UART4RX                                GPIO_Pin_11
+
+
+
 
 /************* PWR	*********************************************/
 #define PORT_PWR                               GPIOA    					 
@@ -111,38 +150,7 @@
 
 
 
-/*************************************************************************/
 
-#define GPIO_PORT_UART1TX                               GPIOB    					 
-#define GPIO_PIN_UART1TX                                GPIO_Pin_6					 
-
-#define GPIO_PORT_UART1RX                               GPIOB    					 
-#define GPIO_PIN_UART1RX                                GPIO_Pin_7	
-
-#define GPIO_PORT_UART2TX                               GPIOA    					 
-#define GPIO_PIN_UART2TX                                GPIO_Pin_2					 
-
-#define GPIO_PORT_UART2RX                               GPIOA    					 
-#define GPIO_PIN_UART2RX                                GPIO_Pin_3
-
-//#define GPIO_PORT_UART2TX                               GPIOC    					 
-//#define GPIO_PIN_UART2TX                                GPIO_Pin_10					 
-
-//#define GPIO_PORT_UART2RX                               GPIOC    					 
-//#define GPIO_PIN_UART2RX                                GPIO_Pin_11
-
-
-#define GPIO_PORT_UART3TX                               GPIOB    					 
-#define GPIO_PIN_UART3TX                                GPIO_Pin_10					 
-
-#define GPIO_PORT_UART3RX                               GPIOB    					 
-#define GPIO_PIN_UART3RX                                GPIO_Pin_11
-
-#define GPIO_PORT_UART4TX                               GPIOC    					 
-#define GPIO_PIN_UART4TX                                GPIO_Pin_10					 
-
-#define GPIO_PORT_UART4RX                               GPIOC    					 
-#define GPIO_PIN_UART4RX                                GPIO_Pin_11
 
 //*********usb spi1	********************************
 #define GPIO_PORT_SPI1                              	GPIOA    					 
@@ -162,14 +170,7 @@
 #define GPIO_PORTSOURCE_USBINT                              GPIO_PortSourceGPIOA    					 
 #define GPIO_PINSOURCE_USBINT                               GPIO_PinSource10
 
-//********************* PCF 8563 IIC *************************************************
-#define GPIO_PORT_IIC_SDA                              	GPIOB    					 
-#define GPIO_PIN_IIC_SDA                              GPIO_Pin_9
-//#define GPIO_PORTSOURCE_IIC_SDA                              GPIO_PortSourceGPIOB   					 
-//#define GPIO_PINSOURCE_IIC_SDA                              GPIO_PinSource9
 
-#define GPIO_PORT_IIC_SCL                              	GPIOB    					 
-#define GPIO_PIN_IIC_SCL                              GPIO_Pin_8
 
 
 /////stm32的外设的DMA请求与DMA通道的对应关系是固定的，不是随便配置的。参考STM32的参考手册

@@ -45,12 +45,12 @@ static Dev_IIC *d_IIC[NUM_IICS] = {NULL};
 // local function prototypes
 //------------------------------------------------------------------------------
 
-static int Open_dev_IIC(I_dev_Char *self, void *conf);
-static int Close_dev_IIC(I_dev_Char *self);
-static int Read_dev_IIC(I_dev_Char *self, void *buf, int rd_len);
-static int Write_dev_IIC(I_dev_Char *self, void *buf, int wr_len);
-static int Ioctol_dev_IIC(I_dev_Char *self, int cmd, ...);
-static int Test_dev_IIC(I_dev_Char *self, void *testBuf, int len);
+static int Open_dev_IIC(dev_Char *self, void *conf);
+static int Close_dev_IIC(dev_Char *self);
+static int Read_dev_IIC(dev_Char *self, void *buf, int rd_len);
+static int Write_dev_IIC(dev_Char *self, void *buf, int wr_len);
+static int Ioctol_dev_IIC(dev_Char *self, int cmd, ...);
+static int Test_dev_IIC(dev_Char *self, void *testBuf, int len);
 
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
@@ -58,7 +58,7 @@ static int Test_dev_IIC(I_dev_Char *self, void *testBuf, int len);
 
 Dev_IIC *Get_Dev_IIC(int minor)
 {
-	I_dev_Char *devChar;
+	dev_Char *devChar;
 	if(minor >= NUM_IICS)
 		return NULL;
 	if(d_IIC[minor] == NULL) 
@@ -66,7 +66,7 @@ Dev_IIC *Get_Dev_IIC(int minor)
 		d_IIC[minor] = Dev_IIC_new();
 		if(d_IIC[ minor]  == NULL) while(1);
 		d_IIC[minor]->minor = minor;
-		devChar = SUPER_PTR(d_IIC[minor], I_dev_Char);
+		devChar = SUPER_PTR(d_IIC[minor], dev_Char);
 		
 		devChar->open(devChar, &arr_conf_IIC[minor]);
 			
@@ -79,12 +79,12 @@ Dev_IIC *Get_Dev_IIC(int minor)
 
 
 CTOR( Dev_IIC)
-FUNCTION_SETTING( I_dev_Char.open, Open_dev_IIC);
-FUNCTION_SETTING( I_dev_Char.close, Close_dev_IIC);
-FUNCTION_SETTING( I_dev_Char.read, Read_dev_IIC);
-FUNCTION_SETTING( I_dev_Char.write, Write_dev_IIC);
-FUNCTION_SETTING( I_dev_Char.ioctol, Ioctol_dev_IIC);
-FUNCTION_SETTING( I_dev_Char.test, Test_dev_IIC);
+FUNCTION_SETTING( dev_Char.open, Open_dev_IIC);
+FUNCTION_SETTING( dev_Char.close, Close_dev_IIC);
+FUNCTION_SETTING( dev_Char.read, Read_dev_IIC);
+FUNCTION_SETTING( dev_Char.write, Write_dev_IIC);
+FUNCTION_SETTING( dev_Char.ioctol, Ioctol_dev_IIC);
+FUNCTION_SETTING( dev_Char.test, Test_dev_IIC);
 END_CTOR
 //=========================================================================//
 //                                                                         //
@@ -93,22 +93,22 @@ END_CTOR
 //=========================================================================//
 /// \name Private Functions
 /// \{
-static int Open_dev_IIC(I_dev_Char *self, void *conf)
+static int Open_dev_IIC(dev_Char *self, void *conf)
 {
-	Dev_IIC		*cthis = SUB_PTR( self, I_dev_Char, Dev_IIC);
+	Dev_IIC		*cthis = SUB_PTR( self, dev_Char, Dev_IIC);
 	
 	return Init_IIC(cthis->minor, conf);
 }
 
-static int Close_dev_IIC(I_dev_Char *self)
+static int Close_dev_IIC(dev_Char *self)
 {
 
 	return RET_OK;
 }
 
-static int Read_dev_IIC(I_dev_Char *self, void *buf, int rd_len)
+static int Read_dev_IIC(dev_Char *self, void *buf, int rd_len)
 {
-	Dev_IIC		*cthis = SUB_PTR( self, I_dev_Char, Dev_IIC);
+	Dev_IIC		*cthis = SUB_PTR( self, dev_Char, Dev_IIC);
 	I2C_slave_t 	*sl = cthis->p_i2c_slaver;
 	int				len = 0;
 	int				ret;
@@ -124,9 +124,9 @@ static int Read_dev_IIC(I_dev_Char *self, void *buf, int rd_len)
 	return len;
 }
 
-static int Write_dev_IIC(I_dev_Char *self, void *buf, int wr_len)
+static int Write_dev_IIC(dev_Char *self, void *buf, int wr_len)
 {
-	Dev_IIC		*cthis = SUB_PTR( self, I_dev_Char, Dev_IIC);
+	Dev_IIC		*cthis = SUB_PTR( self, dev_Char, Dev_IIC);
 	I2C_slave_t 	*sl = cthis->p_i2c_slaver;
 	int				len = 0;
 	int 			ret = 0;
@@ -145,9 +145,9 @@ static int Write_dev_IIC(I_dev_Char *self, void *buf, int wr_len)
 
 }
 
-static int Ioctol_dev_IIC(I_dev_Char *self, int cmd, ...)
+static int Ioctol_dev_IIC(dev_Char *self, int cmd, ...)
 {
-	Dev_IIC		*cthis = SUB_PTR( self, I_dev_Char, Dev_IIC);
+	Dev_IIC		*cthis = SUB_PTR( self, dev_Char, Dev_IIC);
 	va_list 	arg_ptr; 
 	I2C_slave_t 	*sl;
 
@@ -168,7 +168,7 @@ static int Ioctol_dev_IIC(I_dev_Char *self, int cmd, ...)
 	}
 	return RET_OK;
 }
-static int Test_dev_IIC(I_dev_Char *self, void *testBuf, int len)
+static int Test_dev_IIC(dev_Char *self, void *testBuf, int len)
 {
 
 	

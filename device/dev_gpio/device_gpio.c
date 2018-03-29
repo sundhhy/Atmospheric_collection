@@ -106,7 +106,7 @@ destoryQuit0:
 
 
 
-static int DevGpioOpen( I_dev_Char *self, void *conf)
+static int DevGpioOpen( dev_Char *self, void *conf)
 {
 	
 	
@@ -122,13 +122,13 @@ static int DevGpioOpen( I_dev_Char *self, void *conf)
 	
 }
 
-static int DevGpioClose( I_dev_Char *self)
+static int DevGpioClose( dev_Char *self)
 {
 	
 	return RET_OK; 
 }
 
-static int DevGpioRead( I_dev_Char *self, void *buf, int rdLen)
+static int DevGpioRead( dev_Char *self, void *buf, int rdLen)
 {
 	char val;
 	devGpio *cthis = ( devGpio *)self;
@@ -142,12 +142,12 @@ static int DevGpioRead( I_dev_Char *self, void *buf, int rdLen)
 	return ERR_FAIL; 
 }
 
-static int DevGpioWrite( I_dev_Char *self, void *buf, int wrLen)
+static int DevGpioWrite( dev_Char *self, void *buf, int wrLen)
 {
 	return RET_OK; 
 }
 
-static int DevGpioIoctol( I_dev_Char *self ,int cmd, ...)
+static int DevGpioIoctol( dev_Char *self ,int cmd, ...)
 {
 	devGpio *cthis = ( devGpio *)self;
 	irqHdl		hdl;
@@ -183,7 +183,7 @@ static int DevGpioIoctol( I_dev_Char *self ,int cmd, ...)
 	return RET_OK; 
 }
 
-static int DevGpioTest( I_dev_Char *self, void *testBuf, int len)
+static int DevGpioTest( dev_Char *self, void *testBuf, int len)
 {
 	
 	return RET_OK; 
@@ -194,11 +194,11 @@ static int DevGpioTest( I_dev_Char *self, void *testBuf, int len)
 
 
 CTOR( devGpio)
-FUNCTION_SETTING( I_dev_Char.open, DevGpioOpen);
-FUNCTION_SETTING( I_dev_Char.close, DevGpioClose);
-FUNCTION_SETTING( I_dev_Char.read, DevGpioRead);
-FUNCTION_SETTING( I_dev_Char.write, DevGpioWrite);
-FUNCTION_SETTING( I_dev_Char.ioctol, DevGpioIoctol);
-FUNCTION_SETTING( I_dev_Char.test, DevGpioTest);
+FUNCTION_SETTING( dev_Char.open, DevGpioOpen);
+FUNCTION_SETTING( dev_Char.close, DevGpioClose);
+FUNCTION_SETTING( dev_Char.read, DevGpioRead);
+FUNCTION_SETTING( dev_Char.write, DevGpioWrite);
+FUNCTION_SETTING( dev_Char.ioctol, DevGpioIoctol);
+FUNCTION_SETTING( dev_Char.test, DevGpioTest);
 END_CTOR
 

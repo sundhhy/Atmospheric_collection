@@ -23,6 +23,7 @@ typedef enum {
 	em_start_time_sec,
 	em_add_up_time_sec,
 	em_set_up_time_sec,
+	em_sample_time_sec,
 	em_sample_count,
 	em_set_up_count,
 	em_humidity,
@@ -114,15 +115,24 @@ typedef enum {
 	eu_max
 }e_unit_t;
 
+//因为采样的时间信息应该是要存储的，因此就都放在一起了
 typedef struct {
-	uint8_t		sample_hour, sample_min;
+	uint32_t	add_up_sample_time_sec;
+	uint8_t		sample_setup_hour, sample_setup_min;					//设置的采样时间
 	uint8_t		sample_gap_hour, sample_gap_min;
 	uint8_t		sample_delay_hour, sample_delay_min;
-	uint16_t	sample_max_count;
 	
-	char		is_zero;
-	char		is_start;
-	char		none[2];
+	//动态变化的时间
+	uint8_t		first_sample_hour, first_sample_min;
+	uint8_t		sample_hour, sample_min;
+	char			is_zero;
+	char			is_start;
+	
+	
+	
+	uint16_t	sample_max_count;
+	uint16_t	sample_count;
+
 	
 }sample_conf_t;
 
@@ -162,6 +172,9 @@ ABS_CLASS( Model)
 	int  (*to_percentage)( Model *self, void *arg);		//数值转换成百分比
 };
 
+
+
+typedef void (*mdl_cb)(void *arg);
 //------------------------------------------------------------------------------
 // Type definitions
 //------------------------------------------------------------------------------
@@ -178,7 +191,9 @@ extern const	char	g_moth_day[12];
 extern const char *str_signal[em_signal_num];
 
 extern sample_conf_t	arr_sample_conf[NUM_CHANNEL];
-extern struct _AI_Module_	arr_AI[NUM_CHANNEL];
+extern struct slave_sample_data_t	arr_AI[NUM_CHANNEL];
+
+extern slave_sample_data_t arr_sample_val[em_signal_num];
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
@@ -187,6 +202,10 @@ void MDL_Get_value(uint8_t	st, uint8_t aux, void	*out_val);
 
 void MDL_Clone_samp_conf(sample_conf_t *p_dst, sample_conf_t *p_src);
 
-void MDL_Run(uint8_t	st);
+void MDL_Run(int cycle_ms);
+void MDL_Init(uint8_t	st);
+
+void MDL_Attach(uint8_t	st, void *arg, mdl_cb cb);
+
 
 #endif

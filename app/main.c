@@ -119,7 +119,7 @@ int main (void) {
 //	Init_Cmd_Thread();
 //	// initialize CMSIS-RTOS
 //	//各个外设驱动模块初始化
-//	System_init();
+	System_init();
 //	
 //		
 //	//控制器初始化
@@ -151,7 +151,7 @@ int main (void) {
 	tid_Thread_key = osThreadCreate (osThread(ThrdKeyRun), p_kb);
 	if (!tid_Thread_key) return(-1);
 //	
-//	p_mdl_time = ModelCreate("time");
+	p_mdl_time = ModelCreate("time");
 //	
 //	USB_Rgt_event_hdl(Main_USB_event);
 	osKernelStart ();  
@@ -194,12 +194,11 @@ int main (void) {
 //			}
 //			old_sys_flag = aci_sys.sys_flag;
 //		}
-//		if(main_count_1s >= 9)
-//		{
-//			p_mdl_time->run(p_mdl_time);
-//			g_p_curHmi->hmi_run(g_p_curHmi);
-//			main_count_1s = 0;
-//		}
+		if(main_count_1s >= 9)
+		{
+			p_mdl_time->run(p_mdl_time);
+			main_count_1s = 0;
+		}
 //		USB_Run(NULL);
 		LCD_Run();
 //		osThreadYield (); 
@@ -333,7 +332,8 @@ static void 	Init_LCD(void)
 
 static void 	Init_device(void)
 {
-
+	dev_Char 		*p_dev_char;
+		Dev_open(DEVID_UART1, ( void *)&p_dev_char);
 //	if(USB_Init(NULL) != RET_OK)
 //	{
 //		aci_sys.sys_flag |= SYSFLAG_ERR;

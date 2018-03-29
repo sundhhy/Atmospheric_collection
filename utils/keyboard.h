@@ -123,7 +123,7 @@ typedef struct {
 CLASS( Keyboard)
 {
 	keyObM_t 		arr_p_obm[MAX_OBS] ;
-	I_dev_Char		*arr_p_devGpio[ NUM_KEYS];
+	dev_Char		*arr_p_devGpio[ NUM_KEYS];
 #if CONF_KEYSCAN_POLL == 0
 	keyStatus_t		arr_ks[ NUM_KEYS];
 	KEFifo_t		kef;

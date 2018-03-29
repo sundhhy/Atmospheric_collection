@@ -27,8 +27,8 @@
 // const defines
 //------------------------------------------------------------------------------
 
-static	I_dev_Char	*ch376_dev;
-static	I_dev_Char			*ch376_int;
+static	dev_Char	*ch376_dev;
+static	dev_Char			*ch376_int;
 
 
 //#define	xReadCH376Status( )		( CH376_CMD_PORT )  // ´ÓCH376¶Á×´Ì¬

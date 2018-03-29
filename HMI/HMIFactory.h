@@ -24,7 +24,7 @@
 
 #define	HMI_QUERY									4
 #define	HMI_START_SAMPLE					5
-
+#define	HMI_WAIT_SAMPLE						6
 
 
 #define	HMI_NONE				0xff

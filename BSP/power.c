@@ -49,7 +49,7 @@
 //============================================================================//
 int PVD_Init(void)
 {
-//	I_dev_Char		*gpio_pwr;
+//	dev_Char		*gpio_pwr;
 //	int			pwr_code = PWR_PIN_CODE;
 	
 	EXTI_InitTypeDef exti_param;

@@ -90,8 +90,7 @@ static char *const qat_entry_code[13] = { \
 //------------------------------------------------------------------------------
 typedef struct {
 	uint8_t		sig_type;		//0 : A 1:B
-	uint8_t		last_show_row;		//上一次显示的行，用于最后4行的2 * 2显示
-	uint8_t		none;
+	uint8_t		none[3];
 }qry_atm_t;
 //------------------------------------------------------------------------------
 // local vars
@@ -242,7 +241,6 @@ static int QAT_init(void *arg)
 		p_cache->sig_type = em_atmosphere_A;
 	else
 		p_cache->sig_type = em_atmosphere_B;
-	p_cache->last_show_row = 0;
 	
 	
 	aci_sys.key_weight = 1;

@@ -5,6 +5,7 @@
 #include "unit_test.h"
 #include "test_lcd.h"
 #include "test_key.h"
+#include "test_smart_bus.h"
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
@@ -51,6 +52,9 @@ void unit_test(void)
 	Test_lcd();
 #elif TDD_KEY == 1
 	Test_key();
+#elif TDD_SMARTBUS == 1
+	
+	Test_smart_bus();
 #endif
 }
 

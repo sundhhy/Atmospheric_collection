@@ -6,14 +6,14 @@
 //∞¸¿®uart…Ë±∏
 
 
-INTERFACE(I_dev_Char)
+INTERFACE(dev_Char)
 {
-	int ( *open)( I_dev_Char *self, void *conf);
-	int ( *close)( I_dev_Char *self);
-	int ( *read)( I_dev_Char *self, void *buf, int rdLen);
-	int ( *write)( I_dev_Char *self, void *buf, int wrLen);
-	int ( *ioctol)( I_dev_Char *self, int cmd, ...);
-	int ( *test)( I_dev_Char *self, void *testBuf, int len);
+	int ( *open)( dev_Char *self, void *conf);
+	int ( *close)( dev_Char *self);
+	int ( *read)( dev_Char *self, void *buf, int rdLen);
+	int ( *write)( dev_Char *self, void *buf, int wrLen);
+	int ( *ioctol)( dev_Char *self, int cmd, ...);
+	int ( *test)( dev_Char *self, void *testBuf, int len);
 	
 };
 

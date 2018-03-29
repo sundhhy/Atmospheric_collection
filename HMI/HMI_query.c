@@ -508,11 +508,11 @@ static uint8_t	QRY_Switch_signal(uint8_t	old_sig)
 		return e_qry_atmosphere_B;
 		
 	}
-//	if(old_sig == e_qry_atmosphere_B)
-//	{
-//		return e_qry_dust;
-//		
-//	}
+	if(old_sig == e_qry_atmosphere_B)
+	{
+		return e_qry_dust;
+		
+	}
 	
 	return e_qry_atmosphere_A;
 	
