@@ -114,6 +114,8 @@ static int KeyUpdate( keyObservice *self,  uint8_t num, keyMsg_t arr_msg[])
 		goto exit;
 	}
 	
+	SYS_Lcd_on();
+	
 	eventCode = arr_msg[0].eventCode & ( ~KEYEVENT_UP);
 	switch( eventCode)
 	{

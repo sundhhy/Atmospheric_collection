@@ -19,6 +19,8 @@
 #include "Modbus_app.h"
 #include "channel_accumulated.h"
 #include "tdd_conf.h"
+
+#include "sys_cmd.h"
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
@@ -70,7 +72,7 @@ system_t		aci_sys;
 // local function prototypes
 //------------------------------------------------------------------------------
 
-
+static void SYS_Lcd_off(void);
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
@@ -175,6 +177,29 @@ void System_default(void)
 //	p_sc->disable_view_chn_status = 0;
 }
 
+
+void SYS_Tim_lcd_off(int after_min)
+{
+	if(after_min <= 0)
+		return;
+	
+	aci_sys.hmi_mgr.fd_time_task =  Cmd_Rgt_time_task(SYS_Lcd_off, after_min * 60);
+}
+
+void SYS_Lcd_on(void)
+{
+	dev_lcd *p_lcd;
+	
+	
+	Cmd_del_time_task(aci_sys.hmi_mgr.fd_time_task);
+
+	
+	Dev_open(DEVID_FM12864, (void *)&p_lcd);
+	p_lcd->lcd_lightness(aci_sys.hmi_mgr.lightness);
+	
+	SYS_Tim_lcd_off(aci_sys.hmi_mgr.off_lcd_min);
+}
+
 void System_init(void)
 {
 //	struct  tm stm;
@@ -199,7 +224,7 @@ void System_init(void)
 	m = ModelCreate("time");
 	m->init(m, NULL);
 	
-	
+	SYS_Tim_lcd_off(aci_sys.hmi_mgr.off_lcd_min);
 	
 //	w25q_init();
 //	FM25_init();
@@ -463,7 +488,15 @@ int  System_set_time(struct  tm *stime)
 /// \name Private Functions
 /// \{
 
-
+static void SYS_Lcd_off(void)
+{
+	dev_lcd *p_lcd;
+	
+	SYS_Tim_lcd_off(aci_sys.hmi_mgr.off_lcd_min);
+	Dev_open(DEVID_FM12864, (void *)&p_lcd);
+	
+	p_lcd->lcd_lightness(0);
+}
 
 
 

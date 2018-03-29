@@ -2,7 +2,7 @@
 #define _INC_HMI_start_sample_H_
 #include "HMI.h"
 #include "HMI_comm.h"
-
+#include "Model.h"
 //------------------------------------------------------------------------------
 // includes
 //------------------------------------------------------------------------------
@@ -21,7 +21,7 @@
 CLASS(HMI_start_sample)
 {
 	EXTENDS( HMI);
-	
+	IMPLEMENTS(mdl_observer);
 };
 //------------------------------------------------------------------------------
 // global variable declarations

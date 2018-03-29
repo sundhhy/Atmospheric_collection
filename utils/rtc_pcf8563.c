@@ -166,7 +166,7 @@ int	Pcf8563_writeReg( UtlRtc *self, IN uint8_t	reg, IN uint8_t val[], uint8_t nu
 
 CTOR( Pcf8563)
 SUPER_CTOR( UtlRtc);
-FUNCTION_SETTING( UtlRtc.init, Pcf8563_init);
+FUNCTION_SETTING( UtlRtc.init, Pcf8563_init);		//test
 FUNCTION_SETTING( UtlRtc.get, Pcf8563_get);
 FUNCTION_SETTING( UtlRtc.set, Pcf8563_set);
 FUNCTION_SETTING( UtlRtc.readReg, Pcf8563_readReg);

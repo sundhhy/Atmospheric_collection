@@ -160,7 +160,8 @@ static void TSB_Display(void *arg)
 	char		tsb_buf[64];
 	
 	p_lcd->clear(PALLET_WHITE);
-	p_lcd->dispaly_text(0, "test smart bus", 0, 0, 0, FONT_12, PALLET_BLACK);
+	sprintf(tsb_buf, "AI [%d/%d]", mdl_test.test_page + 1, TSB_PAGE_MAX_NUM + 1);
+	p_lcd->dispaly_text(0, tsb_buf, 0, 0, 0, FONT_12, PALLET_BLACK);
 	p_lcd->dispaly_text(0, (char *)str_signal[mdl_test.test_sig_type], 0, 72, 0, FONT_12, PALLET_BLACK);
 	
 	switch(mdl_test.test_page)
@@ -178,7 +179,7 @@ static void TSB_Display(void *arg)
 			sprintf(tsb_buf, "%x",arr_sample_val[mdl_test.test_sig_type].Status);
 			p_lcd->dispaly_text(0, "Status", 0, 0, 48, FONT_12, PALLET_BLACK);
 			p_lcd->dispaly_text(0, tsb_buf, 0, 80, 48, FONT_12, PALLET_BLACK);
-		
+			break;
 		case 1:
 		
 			sprintf(tsb_buf, "%x",arr_sample_val[mdl_test.test_sig_type].CMD);

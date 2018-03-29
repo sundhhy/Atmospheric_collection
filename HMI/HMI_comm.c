@@ -372,7 +372,7 @@ static void Build_otherSheets(void)
 	p_exp->inptSht( p_exp, (void *)timeCode, g_p_shtTime) ;
 	
 	g_p_shtTime->p_mdl = ModelCreate("time");
-	g_p_shtTime->p_mdl->attach( g_p_shtTime->p_mdl, (Observer *)g_p_shtTime);
+	g_p_shtTime->p_mdl->attach( g_p_shtTime->p_mdl, (mdl_observer *)g_p_shtTime);
 	g_p_shtTime->cnt.data = g_p_shtTime->p_mdl->to_string(g_p_shtTime->p_mdl, 0, NULL);
 	g_p_shtTime->cnt.len = strlen(g_p_shtTime->cnt.data);
 	

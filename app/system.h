@@ -112,9 +112,10 @@ typedef struct {
 	int					hmi_sem;
 	uint16_t		lightness;		//1位小数
 	uint16_t		gray_levels;	//1位小数
-	uint8_t			time_switch;		//定时
+	uint8_t			off_lcd_min;		//定时
 	uint8_t			hand_signal_type;		//界面正在处理的信号类型
-	uint8_t		none[2];
+	uint8_t			fd_time_task;		//lcd定时关闭的任务句柄
+	uint8_t			none;
 }hmi_mgr_t;
 
 /*********************大气压****************************************/
@@ -291,6 +292,9 @@ int	Operate_in_tange(int	arg1, int op, int arg2, int rangel, int rangeh);
 int	Operate_in_tange_keep(int	arg1, int op, int arg2, int rangel, int rangeh);
 void System_init(void);
 void System_power_off(void);
+
+void SYS_Tim_lcd_off(int after_min);
+void SYS_Lcd_on(void);
 
 void 			System_time(struct  tm *stime);
 uint32_t  SYS_time_sec(void);

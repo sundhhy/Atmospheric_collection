@@ -69,7 +69,6 @@ struct {
 /* Cycle/Sync Callback functions */
 
 static int MDL_Need_sample(uint8_t st);
-static void DoUpdate(void **x, void *cl);
 static void MDL_Update_slave_data(uint8_t *buf, short buf_size, uint8_t st);
 
 //============================================================================//
@@ -249,17 +248,34 @@ void MDL_Attach(uint8_t	st, void *arg, mdl_cb cb)
 
 
 
-void Mdl_attach(  Model *self, Observer *s)
+int Mdl_attach(  Model *self, mdl_observer *s)
 {
-	
-	self->tObs = List_push( self->tObs, s);
+	int i = 0;
+	while(i < MDL_OBS_NUM)
+	{
+		if(self->arr_obs[i] == NULL)
+		{
+			
+			self->arr_obs[i] = s;
+			return i;
+		}
+		
+		i ++;
+		
+	}
+		
+	return -1;
 	
 	
 }
 
-void Mdl_detach(  Model *self, Observer *s)
+void Mdl_detach(  Model *self, int fd)
 {
-	
+	if(fd < MDL_OBS_NUM)
+	{
+		
+		self->arr_obs[fd] = NULL;
+	}
 	
 	
 }
@@ -277,18 +293,9 @@ int Mdl_setData(  Model *self, IN int aux,  void *arg)
 }
 
 
-int	Mdl_addTmMdl( Model *self, Model *m)
-{
-	self->teamMdl = m;
-	return RET_OK;
 
-}	
 
-int Mdl_delTmMdl( Model *self, Model *m)
-{
-	self->teamMdl = NULL;
-	return RET_OK;
-}
+
 //int Mdl_installDataSource( Model *self, void *dsr)
 //{
 //	self->dataSource = dsr;
@@ -298,9 +305,19 @@ int Mdl_delTmMdl( Model *self, Model *m)
 void Mdl_notify (Model *self)
 {
 	
+	int i = 0;
+	while(i < MDL_OBS_NUM)
+	{
+		if(self->arr_obs[i] != NULL)
+		{
+			
+			self->arr_obs[i]->update(self->arr_obs[i], self);
+		}
+		
+		i ++;
+		
+	}
 	
-	
-	List_map(self->tObs, DoUpdate, self);
 }
 
 ABS_CTOR( Model)
@@ -308,8 +325,7 @@ FUNCTION_SETTING( attach, Mdl_attach);
 FUNCTION_SETTING( detach, Mdl_detach);
 FUNCTION_SETTING( getMdlData, Mdl_getData);
 FUNCTION_SETTING( setMdlData, Mdl_setData);
-FUNCTION_SETTING( addTmMdl, Mdl_addTmMdl);
-FUNCTION_SETTING( delTmMdl, Mdl_delTmMdl);
+
 //FUNCTION_SETTING( installDataSource, Mdl_installDataSource);
 FUNCTION_SETTING( notify, Mdl_notify);
 
@@ -389,11 +405,6 @@ static void MDL_Update_slave_data(uint8_t *buf, short buf_size, uint8_t st)
 }
 
 
-static void DoUpdate(void **x, void *cl)
-{
-	Observer *s = ( Observer *)*x;
-	s->update(s, cl);
-	
-}
+
 
 

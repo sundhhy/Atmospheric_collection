@@ -336,7 +336,7 @@ static void QRY_Show_strategy(void)
 	if(p_query_stg->stg_num_rows >  SETTING_ROW_MAX)
 	{
 		sprintf(arr_p_pool_shts[QRY_PAGE_SHT]->cnt.data, "[%d/%d]", \
-			cthis->cur_page + 1, p_query_stg->stg_num_rows / SETTING_ROW_MAX + 1);
+			cthis->cur_page + 1, (p_query_stg->stg_num_rows - 1) / SETTING_ROW_MAX + 1);
 		arr_p_pool_shts[QRY_PAGE_SHT]->p_gp->vdraw(arr_p_pool_shts[QRY_PAGE_SHT]->p_gp, \
 			&arr_p_pool_shts[QRY_PAGE_SHT]->cnt, &arr_p_pool_shts[QRY_PAGE_SHT]->area);
 	}

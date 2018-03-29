@@ -116,7 +116,7 @@ int main (void) {
 #endif
 	
 	osKernelInitialize (); 
-//	Init_Cmd_Thread();
+	Init_Cmd_Thread();
 //	// initialize CMSIS-RTOS
 //	//各个外设驱动模块初始化
 	System_init();
@@ -194,7 +194,7 @@ int main (void) {
 //			}
 //			old_sys_flag = aci_sys.sys_flag;
 //		}
-		if(main_count_1s >= 9)
+		if(main_count_1s >= 5)
 		{
 			p_mdl_time->run(p_mdl_time);
 			main_count_1s = 0;

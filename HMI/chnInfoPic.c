@@ -134,7 +134,7 @@ void Bulid_ChnData(sheet **pp_shts, void *code, int ( *update)( void *p_sht, voi
 		
 		//todo: 改成通道
 		p_mdl = pp_shts[i]->p_mdl;
-		p_mdl->attach(p_mdl, (Observer *)pp_shts[i]);
+		p_mdl->attach(p_mdl, (mdl_observer *)pp_shts[i]);
 	}
 }
 

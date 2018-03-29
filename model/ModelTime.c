@@ -28,7 +28,7 @@ const	char	g_moth_day[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
-
+#define MTM_SIMU_RTC			1		//模拟RTC的时钟走动
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
@@ -49,18 +49,22 @@ static int MdlTime_set_by_string( Model *self, IN int aux, void *arg);
 //============================================================================//
 int MdlTime_init( Model *self, IN void *arg)
 {
-//	UtlRtc *rtc = ( UtlRtc *)Pcf8563_new();
-//	struct  tm	*tm = CALLOC( 1, sizeof( *tm));
+
 	struct  tm	*tm = &aci_sys.sys_time;
-//	self->dataSource = Pcf8563_new();
-//	rtc->init( rtc, NULL);
-//	
-//	rtc->get( rtc, tm);
-	
-	
-	
-//	self->dataSource = rtc;
+
+#if MTM_SIMU_RTC == 1	
+	uint8_t	h,m,s;
+	tm->tm_year = GetCompileYear();
+	tm->tm_mon =  GetCompileMoth();
+	tm->tm_mday = GetCompileDay();
+	GetCompileTime(&h, &m, &s);
+	tm->tm_hour = h;
+	tm->tm_min = m;
+	tm->tm_sec = h;
+#else	
 	System_time(tm);
+	
+#endif
 	
 	self->coreData = tm;
 	self->crDt_len = sizeof( *tm);
@@ -72,8 +76,32 @@ void MdlTime_run(Model *self)
 {
 	struct  tm	*tm = ( struct  tm	*) self->coreData;
 
+#if MTM_SIMU_RTC == 1
+	if(tm->tm_sec < 59)
+		tm->tm_sec ++;
+	else
+	{
+		
+		tm->tm_sec = 0;
+		tm->tm_min ++;
+	}
 	
+	if(tm->tm_min >= 60)
+	{
+		tm->tm_min = 0;
+		tm->tm_hour ++;
+		
+	}
+	
+	if(tm->tm_hour >= 24)
+	{
+		tm->tm_hour = 0;
+		tm->tm_mday ++;
+		
+	}
+#else
 	System_time(tm);
+#endif
 	
 	//180121 时钟更新的话 允许失败
 	aci_sys.lcd_sem_wait_ms = 200;

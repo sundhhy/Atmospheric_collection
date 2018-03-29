@@ -44,7 +44,7 @@ typedef enum {
 	em_signal_num
 }mdl_signal_t;
 
-
+#define MDL_OBS_NUM			4
 
 
 /************@Deprecated**********************************/
@@ -136,19 +136,23 @@ typedef struct {
 	
 }sample_conf_t;
 
-INTERFACE( Observer)
+INTERFACE(mdl_observer)
 {
-	int ( *update)( Observer *self, void *p_srcMdl);
+	int ( *update)( mdl_observer *self, void *p_srcMdl);
 	
 	
 };
 
 ABS_CLASS( Model)
 {
-	List_T tObs;
+
+
+	
 	void	*coreData;
 	void	*dataSource;
-	Model	*teamMdl;
+	
+	mdl_observer	*arr_obs[MDL_OBS_NUM];
+	
 	short	crDt_len;
 	char	uint;
 	uint8_t	mdl_id;
@@ -156,12 +160,10 @@ ABS_CLASS( Model)
 	abstract int (*init)( Model *self, IN void *arg);
 	void	(*run)(Model *self);
 	int (*self_check)( Model *self);
-	void (*attach)( Model *self, IN Observer *s);
-	void (*detach)( Model *self, IN Observer *s);
+	int (*attach)( Model *self, IN mdl_observer *s);
+	void (*detach)( Model *self, IN int fd);
 	int	(*getMdlData)( Model *self, IN int aux, OUT void *arg);
 	int	(*setMdlData)( Model *self, IN int aux, IN void *arg);
-	int	(*addTmMdl)( Model *self, Model *m);
-	int (*delTmMdl)( Model *self, Model *m);
 	int (*modify_str_conf)( Model *self, IN int aux, char *s, int op, int val);		//在设置时修改配置使用
 	int (*set_by_string)( Model *self,IN int aux, void *arg);
 //	int (*installDataSource)( Model *self, void *dsr);

@@ -132,6 +132,16 @@ int	Cmd_Rgt_time_task(cmd_recv	crv, int time_s)
 	return -1;
 	
 }
+
+void Cmd_del_time_task(int	cmd_fd)
+{
+	if(cmd_fd >= NUM_RUN)
+		return;
+	run_mgr.arr_tts[cmd_fd].run_times = 0xffffffff;
+	run_mgr.arr_tts[cmd_fd].task = NULL;
+	Set_bit(&run_mgr.set_free_tts, cmd_fd);
+	
+}
 int	Cmd_Rgt_idle_task(cmd_recv	crv)
 {
 	run_mgr.cmd_idle_run = crv;

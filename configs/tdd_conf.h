@@ -4,5 +4,5 @@
 #define TDD_ON			1
 #define TDD_LCD			0
 #define TDD_KEY			0
-#define TDD_SMARTBUS			1
+#define TDD_SMARTBUS			0
 #endif

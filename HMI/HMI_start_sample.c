@@ -13,6 +13,8 @@
 #include "utils/keyboard.h"
 #include "configure_strategy.h"
 
+#include "ModelFactory.h"
+
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
@@ -62,7 +64,7 @@ static ro_char	sts_code_choice_1_2[] = {"<text vx0=80 vy0=32 bkc=white>00:00</>"
 static ro_char sts_code_choice_2_1[] = { "<text vx0=16 vy0=48 bkc=white>调零</>" };
 static ro_char sts_code_choice_2_2[] = { "<text vx0=80 vy0=48 bkc=white>启动</>" };
 
-#define STS_TEMP_RAM_NUM					1
+#define STS_TEMP_RAM_NUM					2
 
 #define STS_SING_TYPE_SHT					arr_p_pool_shts[1]
 #define STS_TIM_SHT							arr_p_pool_shts[3]
@@ -76,12 +78,15 @@ static ro_char sts_code_choice_2_2[] = { "<text vx0=80 vy0=48 bkc=white>启动</>"
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
+
+
+
 typedef struct {
 	char 		is_edit;		//当前焦点是否在编辑区内
 	char		focus_byte;
 	char		handle_signal_type;
 	
-	char		none;
+	char		mdl_obs_fd;
 	
 }sts_delay_time_t;
 //------------------------------------------------------------------------------
@@ -102,6 +107,8 @@ static void STS_hit( HMI *self, char kcd);
 
 static void STS_choice(HMI *self, uint8_t cid);
 static int STS_Delay_time_hit(HMI *self, char kcd);
+
+static int STS_Tim_update( mdl_observer *self, void *p_srcMdl);
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
@@ -136,6 +143,8 @@ FUNCTION_SETTING( HMI.show, STS_Show);
 FUNCTION_SETTING( HMI.hitHandle, STS_hit);
 
 FUNCTION_SETTING(HMI.init_focus, STS_Init_focus);
+
+FUNCTION_SETTING(mdl_observer.update, STS_Tim_update);
 
 END_CTOR
 //=========================================================================//
@@ -176,11 +185,12 @@ static int	STS_Init( HMI *self, void *arg)
 
 static void STS_initSheet( HMI *self )
 {
-//	HMI_start_sample		*cthis = SUB_PTR( self, HMI, HMI_start_sample);
+	HMI_start_sample		*cthis = SUB_PTR( self, HMI, HMI_start_sample);
 	Expr 		*p_exp ;
 	sts_delay_time_t	*p_d;
 	int 		h = 0;
-	
+	Model		*p_mdl;
+	struct		tm		t;
 	
 	p_exp = ExpCreate( "text");
 	
@@ -217,7 +227,6 @@ static void STS_initSheet( HMI *self )
 	Sheet_updown(arr_p_sht_choices[1], h++);
 	Sheet_updown(arr_p_sht_choices[2], h++);
 	Sheet_updown(arr_p_sht_choices[3], h++);
-	Sheet_updown(g_p_shtTime, h++);
 	self->init_focus(self);
 	
 	
@@ -229,10 +238,20 @@ static void STS_initSheet( HMI *self )
 	HMI_Ram_init();
 	arr_p_vram[0] = HMI_Ram_alloc(48);
 	arr_p_vram[1] = HMI_Ram_alloc(48);
+	arr_p_vram[2] = HMI_Ram_alloc(48);
 	
 	p_d = (sts_delay_time_t *)arr_p_vram[STS_TEMP_RAM_NUM];
 	p_d->is_edit = 0;
 	p_d->handle_signal_type = em_atmosphere_A;
+	p_mdl = ModelCreate("time");
+	p_d->mdl_obs_fd = p_mdl->attach(p_mdl, &cthis->mdl_observer);
+	
+	STS_TIM_SHT->cnt.data = arr_p_vram[1];
+	STS_TIM_SHT->cnt.len = 0;
+	p_mdl->getMdlData(p_mdl, 0, &t);
+	sprintf(STS_TIM_SHT->cnt.data, "%02d:%02d", \
+		t.tm_hour,t.tm_min
+	);
 	
 	STS_DELAY_TIM_SHT->cnt.data = arr_p_vram[0];
 	STS_DELAY_TIM_SHT->cnt.len = 0;
@@ -248,8 +267,10 @@ static void STS_initSheet( HMI *self )
 static void STS_Hide(HMI *self)
 {
 	int i;
+	Model *p_tim =  ModelCreate("time");
+	sts_delay_time_t	*p_d = (sts_delay_time_t *)arr_p_vram[STS_TEMP_RAM_NUM];
 	
-	Sheet_updown(g_p_shtTime, -1);
+	p_tim->detach(p_tim, p_d->mdl_obs_fd);
 	for( i = 3; i >= 0; i--) {		
 		Sheet_updown(arr_p_sht_choices[i], -1);
 	}
@@ -286,6 +307,24 @@ static void	STS_Show( HMI *self)
 	
 	Sheet_refresh(arr_p_pool_shts[0]);
 	self->show_focus(self);
+}
+
+static int STS_Tim_update( mdl_observer *self, void *p_srcMdl)
+{
+	Model		*p_mdl;
+	struct		tm		t;
+	
+	p_mdl = ModelCreate("time");
+	
+	
+	p_mdl->getMdlData(p_mdl, 0, &t);
+	sprintf(STS_TIM_SHT->cnt.data, "%02d:%02d", \
+		t.tm_hour,t.tm_min
+	);
+	
+	STS_TIM_SHT->p_gp->vdraw(STS_TIM_SHT->p_gp, &STS_TIM_SHT->cnt, &STS_TIM_SHT->area);
+	Flush_LCD();
+	return RET_OK;
 }
 
 

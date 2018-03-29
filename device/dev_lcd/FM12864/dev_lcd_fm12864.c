@@ -80,6 +80,8 @@ struct {
 	short chg_x1, chg_y1;
 }fm_vram_mgr;
 
+static short fm_cur_lightness;
+static short fm_none;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
@@ -150,7 +152,7 @@ static	int FM_Init(void)
 	LHI_Init_pwm(LCD_PWM_CONTRAST, 1, DEFAULT_CONTRAST);
 	LHI_Init_pwm(LCD_PWM_LIGHTNESS, 3, DEFAULT_LIGHTNESS);
 	LHI_Reset_lcd();
-	
+	fm_cur_lightness = DEFAULT_LIGHTNESS;
 	LHI_SELECT_LEFT;
 //	s = LHI_Read_status();
 
@@ -440,6 +442,11 @@ static	void FM_Lightness(uint16_t		pct)
 {
 	if(pct > 1000)
 		pct = 1000;
+	
+	if(fm_cur_lightness == pct)
+		return;
+	
+	fm_cur_lightness = pct;
 	LHI_Set_pwm_duty(LCD_PWM_LIGHTNESS, 3, pct);
 }
 

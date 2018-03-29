@@ -128,8 +128,8 @@ static int DSP_entry(int row, int col, void *pp_text)
 		} 
 		else
 		{
-			p_h->time_switch = aci_sys.hmi_mgr.time_switch;
-			sprintf(arr_p_vram[STG_RAM_NUM(row, col)], "[%2d分]", aci_sys.hmi_mgr.time_switch);
+			p_h->off_lcd_min = aci_sys.hmi_mgr.off_lcd_min;
+			sprintf(arr_p_vram[STG_RAM_NUM(row, col)], "[%2d分]", aci_sys.hmi_mgr.off_lcd_min);
 			
 		}
 		*pp = arr_p_vram[STG_RAM_NUM(row, col)];
@@ -169,7 +169,11 @@ static int DSP_commit(void *arg)
 	
 	p_h = (hmi_mgr_t	*)arr_p_vram[CACHE_BUF_NUM];
 	
-	aci_sys.hmi_mgr.time_switch = p_h->time_switch;
+	if(aci_sys.hmi_mgr.off_lcd_min != p_h->off_lcd_min)
+	{
+		aci_sys.hmi_mgr.off_lcd_min = p_h->off_lcd_min;
+		SYS_Tim_lcd_off(aci_sys.hmi_mgr.off_lcd_min);
+	}
 	aci_sys.hmi_mgr.gray_levels = p_h->gray_levels;
 	aci_sys.hmi_mgr.lightness = p_h->lightness;
 	
@@ -389,8 +393,8 @@ static int DSP_modify(void *arg, int op)
 			p_lcd->lcd_contrast(p_h->gray_levels);
 			break;
 		case 2:
-			p_h->time_switch = Operate_in_tange(p_h->time_switch, op, aci_sys.key_weight, 0, 99);
-			sprintf(arr_p_vram[STG_RAM_NUM(p_syf->f_row, p_syf->f_col)], "[%2d分]", p_h->time_switch);
+			p_h->off_lcd_min = Operate_in_tange(p_h->off_lcd_min, op, aci_sys.key_weight, 0, 99);
+			sprintf(arr_p_vram[STG_RAM_NUM(p_syf->f_row, p_syf->f_col)], "[%2d分]", p_h->off_lcd_min);
 			break;
 	}
 	//更新一下焦点的长度
