@@ -10,6 +10,8 @@
 #include "chnInfoPic.h"
 #include "hmi_conf.h"
 
+#include "os/os_depend.h"
+
 //提供 按键，事件，消息，窗口，报警，时间，复选框的图层
 //这些图层可能会被其他界面所使用
 //============================================================================//
@@ -89,6 +91,9 @@ static hmi_ram_mgr_t	hmi_ram;
 // local function prototypes
 //------------------------------------------------------------------------------
 static int	Init_cmmHmi( HMI *self, void *arg);
+
+
+static int CMM_Update_time(mdl_observer *self, void *p_srcMdl);
 
 static void Build_icoSheets(void);
 static void Build_otherSheets(void);
@@ -235,8 +240,8 @@ void *HMI_Ram_alloc(int bytes)
 
 CTOR( cmmHmi)
 SUPER_CTOR( HMI);
-FUNCTION_SETTING( HMI.init, Init_cmmHmi);
-//FUNCTION_SETTING( View.show, TestView_show);
+FUNCTION_SETTING(HMI.init, Init_cmmHmi);
+FUNCTION_SETTING(mdl_observer.update, CMM_Update_time);
 END_CTOR
 //=========================================================================//
 //                                                                         //
@@ -346,6 +351,7 @@ static void Build_otherSheets(void)
 {
 	shtctl 		*p_shtctl = NULL;
 	Expr 		*p_exp ;
+	cmmHmi		*cthis = GetCmmHMI();
 		
 	p_shtctl = GetShtctl();
 	
@@ -372,13 +378,29 @@ static void Build_otherSheets(void)
 	p_exp->inptSht( p_exp, (void *)timeCode, g_p_shtTime) ;
 	
 	g_p_shtTime->p_mdl = ModelCreate("time");
-	g_p_shtTime->p_mdl->attach( g_p_shtTime->p_mdl, (mdl_observer *)g_p_shtTime);
+	g_p_shtTime->p_mdl->attach( g_p_shtTime->p_mdl, &cthis->mdl_observer);
 	g_p_shtTime->cnt.data = g_p_shtTime->p_mdl->to_string(g_p_shtTime->p_mdl, 0, NULL);
 	g_p_shtTime->cnt.len = strlen(g_p_shtTime->cnt.data);
 	
 }
 
-
+//
+static int CMM_Update_time(mdl_observer *self, void *p_srcMdl)
+{
+	
+//	if(g_p_shtTime->height < 0)
+//		return RET_OK;
+	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 100) <= 0)
+		return ERR_RSU_BUSY;
+	
+	g_p_shtTime->cnt.data = g_p_shtTime->p_mdl->to_string( g_p_shtTime->p_mdl, 0, NULL);
+	g_p_shtTime->cnt.len = strlen( g_p_shtTime->cnt.data);
+	Sheet_slide(g_p_shtTime);
+	
+	Sem_post(&aci_sys.hmi_mgr.hmi_sem);
+	return RET_OK;
+	
+}
 
 
 

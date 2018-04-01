@@ -9,7 +9,8 @@
 #include "HMI_query.h"
 #include "HMI_start_sample.h"
 #include "HMI_wait_sample.h"
-
+#include "HMI_maintain.h"
+#include "HMI_input_psd.h"
 //提供 按键，事件，消息，窗口，报警，时间，复选框的图层
 //这些图层可能会被其他界面所使用
 //============================================================================//
@@ -86,12 +87,12 @@ HMI *CreateHMI(char hmi_type)
 		case HMI_WAIT_SAMPLE:
 			p_hmi = SUPER_PTR(Get_HMI_wait_sample(), HMI);
 			break;
-//		case HMI_ACCM:
-//			p_hmi = SUPER_PTR(Get_Accm_HMI(), HMI);
-//			break;
-//		case HMI_SETUP:
-//			p_hmi = SUPER_PTR(Get_Setup_HMI(), HMI);
-//			break;
+		case HMI_MAINTAIN:
+			p_hmi = SUPER_PTR(Get_HMI_maintain(), HMI);
+			break;
+		case HMI_INPUT_PSD:
+			p_hmi = SUPER_PTR(Get_HMI_input_psd(), HMI);
+			break;
 //		case HMI_SETTING:
 //			p_hmi = SUPER_PTR(Get_Setting_HMI(), HMI);
 //			break;

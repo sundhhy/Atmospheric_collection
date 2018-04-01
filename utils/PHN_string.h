@@ -11,6 +11,8 @@
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
+#define Print_psd(s, p) sprintf(s, "%02d%02d%02d", p[0], p[1], p[2])
+
 
 //------------------------------------------------------------------------------
 // typedef
@@ -34,7 +36,7 @@ int Get_str_data(char *s_data, char* str_separator, int num, uint8_t	*err);
 
 int Str_Password_match(char *p_s_psd);
 void Password_modify(char	*p_s_psd, int idx, int op);
-void Str_set_password(char	*p_s_psd);
+void Str_set_password(uint8_t *p_dst, char	*p_s_psd);
 int Password_iteartor(char	*p_time_text, int idx, int director);
 
 //model.c

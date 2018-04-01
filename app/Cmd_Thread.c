@@ -53,8 +53,9 @@ typedef struct {
 struct {
 	uint8_t		set_free_run;
 	uint8_t		set_free_tts;
+	uint8_t		set_clean_tts;		//要求清除的定时任务集合。
+
 	uint8_t		set_free_idle_run;
-	uint8_t		none;
 	time_task_t	arr_tts[NUM_TIME_TASK];
 	cmd_recv 	arr_cmd_run[NUM_RUN];
 	cmd_recv 	cmd_idle_run;
@@ -86,6 +87,7 @@ int Init_Cmd_Thread (void) {
   
 	run_mgr.set_free_run = (1 << NUM_RUN) - 1;
 	run_mgr.set_free_tts = (1 << NUM_TIME_TASK) - 1;
+	run_mgr.set_clean_tts = 0;
 	run_mgr.set_free_idle_run = 0xff;
   return(0);
 }
@@ -137,9 +139,8 @@ void Cmd_del_time_task(int	cmd_fd)
 {
 	if(cmd_fd >= NUM_RUN)
 		return;
-	run_mgr.arr_tts[cmd_fd].run_times = 0xffffffff;
-	run_mgr.arr_tts[cmd_fd].task = NULL;
-	Set_bit(&run_mgr.set_free_tts, cmd_fd);
+
+	Set_bit(&run_mgr.set_clean_tts, cmd_fd);
 	
 }
 int	Cmd_Rgt_idle_task(cmd_recv	crv)
@@ -196,6 +197,14 @@ static void Cmd_Thread (void const *argument) {
 
 		for(i = 0; i < NUM_TIME_TASK; i++)
 		{
+			if(Check_bit(&run_mgr.set_clean_tts, i))
+			{
+				//使用set_clean_tts中转，是为了减少多线程竞争引起的后果
+				Clear_bit(&run_mgr.set_clean_tts, i);
+				
+				run_mgr.arr_tts[i].run_times = 0xffffffff;
+				Set_bit(&run_mgr.set_free_tts, i);
+			}
 			if(Check_bit(&run_mgr.set_free_tts, i))
 				continue;
 			if(cur_s < run_mgr.arr_tts[i].run_times)

@@ -52,7 +52,7 @@ INTERFACE( shtCmd)
 
 /* sheet.c   */
 typedef struct SHEET {
-	int ( *update)( void *p_sht, void *p_srcMdl);	//注意：必须放在第一个位置
+//	int ( *update)( void *p_sht, void *p_srcMdl);	//注意：必须放在第一个位置
 	
 	subShtAtt_t		subAtt;
 	struct SHEET	**pp_sub;

@@ -400,8 +400,8 @@ void Password_modify(char	*p_s_psd, int idx, int op)
 	
 }
 
-//0000
-void Str_set_password(char	*p_s_psd)
+//000000
+void Str_set_password(uint8_t *p_dst,char	*p_s_psd)
 {
 	short	data;
 	char	s_data[3] = {0};
@@ -409,11 +409,15 @@ void Str_set_password(char	*p_s_psd)
 	s_data[0] = p_s_psd[0];
 	s_data[1] = p_s_psd[1];
 	data = atoi(s_data);
-	aci_sys.sys_conf.password[0] = data;
+	p_dst[0] = data;
 	s_data[0] = p_s_psd[2];
 	s_data[1] = p_s_psd[3];
 	data = atoi(s_data);
-	aci_sys.sys_conf.password[1] = data;
+	p_dst[1] = data;
+	s_data[0] = p_s_psd[4];
+	s_data[1] = p_s_psd[5];
+	data = atoi(s_data);
+	p_dst[1] = data;
 	
 
 }

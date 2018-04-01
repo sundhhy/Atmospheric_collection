@@ -91,7 +91,7 @@ struct SHTCTL* Shtctl_init(   uint16_t vxsize, uint16_t vysize)
     
     for( i = 0; i < MAX_SHEETS; i++)
     {
-		p_ctl->arr_sheets[i].update = ShtUpdate;
+//		p_ctl->arr_sheets[i].update = ShtUpdate;
         p_ctl->arr_sheets[i].flags = 0;
 //        p_ctl->arr_sheets[i].p_shtctl = p_ctl;
         
@@ -159,19 +159,19 @@ void Sheet_setbuf( struct SHEET *p_sht, uint8_t *buf, int bxsize, int bysize, in
     
 }
 
-int ShtUpdate( void *p_sht, void *p_mdl)
-{
-	struct SHEET *p = ( struct SHEET *)p_sht;
-	
-	if(Sheet_is_hide(p_sht))
-		return RET_OK;
-		
-	p->cnt.data = p->p_mdl->to_string( p->p_mdl, 0, NULL);
-	p->cnt.len = strlen( p->cnt.data);
-	Sheet_slide( p_sht);
-	return RET_OK;
-	
-}
+//int ShtUpdate( void *p_sht, void *p_mdl)
+//{
+//	struct SHEET *p = ( struct SHEET *)p_sht;
+//	
+//	if(Sheet_is_hide(p_sht))
+//		return RET_OK;
+//		
+//	p->cnt.data = p->p_mdl->to_string( p->p_mdl, 0, NULL);
+//	p->cnt.len = strlen( p->cnt.data);
+//	Sheet_slide( p_sht);
+//	return RET_OK;
+//	
+//}
 
 
 

@@ -1013,6 +1013,26 @@
               <FileType>5</FileType>
               <FilePath>..\..\HMI\HMI_wait_sample.h</FilePath>
             </File>
+            <File>
+              <FileName>HMI_maintain.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\HMI\HMI_maintain.c</FilePath>
+            </File>
+            <File>
+              <FileName>HMI_maintain.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\HMI\HMI_maintain.h</FilePath>
+            </File>
+            <File>
+              <FileName>HMI_input_psd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\HMI\HMI_input_psd.h</FilePath>
+            </File>
+            <File>
+              <FileName>HMI_input_psd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\HMI\HMI_input_psd.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

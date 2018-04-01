@@ -39,10 +39,8 @@
 CLASS( cmmHmi)
 {
 	Model			*p_mdlRtc;
-//	shtctl			*p_shtctl;
-//	sheet			*p_shtTime;
 	EXTENDS( HMI);
-	
+	IMPLEMENTS(mdl_observer);
 	
 	
 };

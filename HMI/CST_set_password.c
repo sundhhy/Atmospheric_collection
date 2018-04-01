@@ -152,7 +152,7 @@ static int PSD_commit(void *arg)
 	
 	
 	
-	Str_set_password(arr_p_vram[STG_RAM_NUM(0, 1)]);
+	Str_set_password(aci_sys.sys_conf.password, arr_p_vram[STG_RAM_NUM(0, 1)]);
 	return RET_OK;
 
 }

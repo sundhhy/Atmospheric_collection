@@ -314,6 +314,10 @@ static int STS_Tim_update( mdl_observer *self, void *p_srcMdl)
 	Model		*p_mdl;
 	struct		tm		t;
 	
+	
+	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 100) <= 0)
+		ERR_RSU_BUSY;
+	
 	p_mdl = ModelCreate("time");
 	
 	
@@ -324,6 +328,7 @@ static int STS_Tim_update( mdl_observer *self, void *p_srcMdl)
 	
 	STS_TIM_SHT->p_gp->vdraw(STS_TIM_SHT->p_gp, &STS_TIM_SHT->cnt, &STS_TIM_SHT->area);
 	Flush_LCD();
+	Sem_post(&aci_sys.hmi_mgr.hmi_sem);
 	return RET_OK;
 }
 

@@ -265,7 +265,7 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 	g_p_curHmi = p_hmi;
 		
 	
-	CLR_LCD();
+	
 	
 	if(Sem_wait(&aci_sys.hmi_mgr.hmi_sem, 1000) <= 0)
 		return;
@@ -305,6 +305,8 @@ static void	SwitchHMI( HMI *self, HMI *p_hmi)
 		
 	
 	p_hmi->build_component(p_hmi);
+	
+	CLR_LCD();
 	p_hmi->show( p_hmi);
 	
 	
@@ -325,6 +327,7 @@ static void HMI_Reset_pub_sht(void)
 	{
 		
 		arr_p_pool_shts[i]->cnt.effects = GP_CLR_EFF(arr_p_pool_shts[i]->cnt.effects, EFF_FOCUS);
+		
 	}
 	
 	for(i = 0; i < HMI_NUM_P_CHOICE_SHT; i++)

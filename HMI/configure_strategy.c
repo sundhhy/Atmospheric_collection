@@ -21,6 +21,7 @@ extern strategy_t cst_set_case_temperature;
 extern strategy_t	cst_set_sample;
 extern strategy_t cst_qry_atmosphere;
 extern strategy_t	cst_qry_dust;
+extern strategy_t	cst_set_caliper;
 //------------------------------------------------------------------------------
 // global function prototypes
 //------------------------------------------------------------------------------

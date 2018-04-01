@@ -23,9 +23,12 @@
 #		define	HMI_CONFIGURE							0x20
 
 #define	HMI_QUERY									4
-#define	HMI_START_SAMPLE					5
-#define	HMI_WAIT_SAMPLE						6
+#define	HMI_MAINTAIN						5
 
+#define	HMI_START_SAMPLE					6
+#define	HMI_WAIT_SAMPLE						7
+
+#define HMI_INPUT_PSD						8
 
 #define	HMI_NONE				0xff
 //#define HMI_MENU				4

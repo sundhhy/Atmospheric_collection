@@ -125,16 +125,16 @@ void Bulid_ChnData(sheet **pp_shts, void *code, int ( *update)( void *p_sht, voi
 		pp_shts[i]->sht_id = i;
 //		pp_shts[i]->cnt.mdl_aux = AUX_DATA;
 		
-		if(update) {
-			pp_shts[i]->update = update;
-			
-			
-			
-		}
+//		if(update) {
+//			pp_shts[i]->update = update;
+//			
+//			
+//			
+//		}
 		
 		//todo: 改成通道
 		p_mdl = pp_shts[i]->p_mdl;
-		p_mdl->attach(p_mdl, (mdl_observer *)pp_shts[i]);
+//		p_mdl->attach(p_mdl, (mdl_observer *)pp_shts[i]);
 	}
 }
 

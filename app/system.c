@@ -181,7 +181,10 @@ void System_default(void)
 void SYS_Tim_lcd_off(int after_min)
 {
 	if(after_min <= 0)
+	{
+		
 		return;
+	}
 	
 	aci_sys.hmi_mgr.fd_time_task =  Cmd_Rgt_time_task(SYS_Lcd_off, after_min * 60);
 }
@@ -223,7 +226,7 @@ void System_init(void)
 	//md_time要系统时间初始化之后初始化
 	m = ModelCreate("time");
 	m->init(m, NULL);
-	
+	aci_sys.hmi_mgr.fd_time_task = 0xff;
 	SYS_Tim_lcd_off(aci_sys.hmi_mgr.off_lcd_min);
 	
 //	w25q_init();

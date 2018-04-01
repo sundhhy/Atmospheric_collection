@@ -71,3 +71,5 @@
 .\objects\hmifactory.o: ..\..\HMI\HMI_query.h
 .\objects\hmifactory.o: ..\..\HMI\HMI_start_sample.h
 .\objects\hmifactory.o: ..\..\HMI\HMI_wait_sample.h
+.\objects\hmifactory.o: ..\..\HMI\HMI_maintain.h
+.\objects\hmifactory.o: ..\..\HMI\HMI_input_psd.h

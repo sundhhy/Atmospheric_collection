@@ -72,6 +72,8 @@
 ".\objects\hmi_start_sample.o"
 ".\objects\cst_query_dust.o"
 ".\objects\hmi_wait_sample.o"
+".\objects\hmi_maintain.o"
+".\objects\hmi_input_psd.o"
 ".\objects\model.o"
 ".\objects\model_channel.o"
 ".\objects\modelfactory.o"

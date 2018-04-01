@@ -171,7 +171,7 @@ static void HMN_Init_sheet( HMI *self )
 	arr_choice_key[0] = HMI_CONFIG;
 	arr_choice_key[1] = HMI_START_SAMPLE;
 	arr_choice_key[2] = HMI_QUERY;
-	arr_choice_key[3] = HMI_NONE;
+	arr_choice_key[3] = HMI_INPUT_PSD;
 	
 	h = 0;
 	

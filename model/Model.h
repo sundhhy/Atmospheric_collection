@@ -44,6 +44,8 @@ typedef enum {
 	em_signal_num
 }mdl_signal_t;
 
+
+
 #define MDL_OBS_NUM			4
 
 
@@ -135,6 +137,13 @@ typedef struct {
 
 	
 }sample_conf_t;
+
+typedef struct {
+	
+	uint16_t  zero;
+	
+	
+}caliper_conf_t;
 
 INTERFACE(mdl_observer)
 {
