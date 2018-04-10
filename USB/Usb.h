@@ -89,6 +89,11 @@ typedef enum {
 	et_ready,
 }e_usb_msg;
 
+typedef struct {
+	uint32_t		cpu_clk_hz;
+	
+	
+}usb_conf_t;
 
 //------------------------------------------------------------------------------
 // global variable declarations
@@ -97,8 +102,8 @@ typedef enum {
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
-int USB_Init(void* arg);
-int USB_Run(void* arg);
+int USB_Init(usb_conf_t *cnf);
+int USB_Run(void);
 int USB_Open_file(char *file_name, char mode);
 int USB_Colse_file(int fd);
 int USB_Write_file(int fd, char *buf, int len);

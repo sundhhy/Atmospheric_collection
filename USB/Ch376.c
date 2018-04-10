@@ -22,6 +22,7 @@
 #include "os/os_depend.h"
 #include "device.h"
 #include "sdhDef.h"
+#include "usb_hardware_interface.h"
 
 //------------------------------------------------------------------------------
 // const defines

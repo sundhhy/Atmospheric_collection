@@ -98,7 +98,7 @@ Usb_deal_fail, Usb_deal_identify};
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
-int USB_Run(void* arg)
+int USB_Run(void)
 {
 	int			ret = RET_OK;
 	uint8_t	msg = 0;
@@ -133,7 +133,7 @@ int USB_Run(void* arg)
 }
 
 
-int USB_Init(void* arg)
+int USB_Init(usb_conf_t *cnf)
 {
 	int	ret = -1;
 	//usb管理器初始化
