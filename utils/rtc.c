@@ -1,4 +1,6 @@
 #include "rtc.h"
+#include "utils/rtc_pcf8563.h"
+
 #include "sdhDef.h"
 //============================================================================//
 //            G L O B A L   D E F I N I T I O N S                             //
@@ -33,7 +35,7 @@
 // local vars
 //------------------------------------------------------------------------------
 
-
+static util_rtc *single_rtc;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
@@ -52,12 +54,21 @@
 /// \name Private Functions
 /// \{
 
-int UtlRtc_init( UtlRtc *self, IN void *arg)
+
+util_rtc *Get_Rtc(void)
+{
+	if(single_rtc)
+		return single_rtc;
+	single_rtc = SUPER_PTR(Pcf8563_new(), util_rtc);;
+	return single_rtc;
+}
+
+int UtlRtc_init( util_rtc *self, IN void *arg)
 {
 	
 	return RET_OK;
 }
-int UtlRtc_get( UtlRtc *self, OUT struct  tm *tm)
+int UtlRtc_get( util_rtc *self, OUT struct  tm *tm)
 {
 	uint8_t	h,m,s;
 	tm->tm_year = GetCompileYear();
@@ -71,21 +82,21 @@ int UtlRtc_get( UtlRtc *self, OUT struct  tm *tm)
 }
 
 
-int	UtlRtc_set( UtlRtc *self, IN struct  tm *tm)
+int	UtlRtc_set( util_rtc *self, IN struct  tm *tm)
 {
 	return RET_OK;
 	
 }
 
 
-int	UtlRtc_readReg( UtlRtc *self, IN uint8_t	reg, OUT uint8_t val[], uint8_t num)
+int	UtlRtc_readReg( util_rtc *self, IN uint8_t	reg, OUT uint8_t val[], uint8_t num)
 {
 	
 	return RET_OK;
 }
 	
 
-int	UtlRtc_writeReg( UtlRtc *self, IN uint8_t	reg, IN uint8_t val[], uint8_t num)
+int	UtlRtc_writeReg( util_rtc *self, IN uint8_t	reg, IN uint8_t val[], uint8_t num)
 {
 	
 	return RET_OK;
@@ -94,7 +105,7 @@ int	UtlRtc_writeReg( UtlRtc *self, IN uint8_t	reg, IN uint8_t val[], uint8_t num
 
 
 
-ABS_CTOR( UtlRtc)
+ABS_CTOR( util_rtc)
 FUNCTION_SETTING( init, UtlRtc_init);
 FUNCTION_SETTING( get, UtlRtc_get);
 FUNCTION_SETTING( set, UtlRtc_set);

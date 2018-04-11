@@ -101,20 +101,23 @@
 #define GPIO_PIN_UART2RX                                GPIO_Pin_3
 
 
+//*********usb spi1	********************************
+#define GPIO_PORT_SPI1                              	GPIOA    					 
+#define GPIO_PIN_SPI1_MOSI                               GPIO_Pin_7
+#define GPIO_PIN_SPI1_MISO                               GPIO_Pin_6
+#define GPIO_PIN_SPI1_SCK                               	GPIO_Pin_5
+#define GPIO_PIN_SPI1_NSS                               GPIO_Pin_4
 
+#define GPIO_PORT_USBRESET                              GPIOD    					 
+#define GPIO_PIN_USBRESET                              	GPIO_Pin_8
 
-//#define GPIO_PORT_UART3TX                               GPIOB    					 
-//#define GPIO_PIN_UART3TX                                GPIO_Pin_10					 
+#define GPIO_PORT_POWER                              GPIOD   					 
+#define GPIO_PIN_POWER                              	GPIO_Pin_11
 
-//#define GPIO_PORT_UART3RX                               GPIOB    					 
-//#define GPIO_PIN_UART3RX                                GPIO_Pin_11
-
-//#define GPIO_PORT_UART4TX                               GPIOC    					 
-//#define GPIO_PIN_UART4TX                                GPIO_Pin_10					 
-
-//#define GPIO_PORT_UART4RX                               GPIOC    					 
-//#define GPIO_PIN_UART4RX                                GPIO_Pin_11
-
+#define GPIO_PORT_USBINT                              	GPIOA    					 
+#define GPIO_PIN_USBINT                              GPIO_Pin_10
+#define GPIO_PORTSOURCE_USBINT                              GPIO_PortSourceGPIOA    					 
+#define GPIO_PINSOURCE_USBINT                               GPIO_PinSource10
 
 
 
@@ -152,23 +155,6 @@
 
 
 
-//*********usb spi1	********************************
-#define GPIO_PORT_SPI1                              	GPIOA    					 
-#define GPIO_PIN_SPI1_MOSI                               GPIO_Pin_7
-#define GPIO_PIN_SPI1_MISO                               GPIO_Pin_6
-#define GPIO_PIN_SPI1_SCK                               	GPIO_Pin_5
-#define GPIO_PIN_SPI1_NSS                               GPIO_Pin_4
-
-#define GPIO_PORT_USBRESET                              GPIOD    					 
-#define GPIO_PIN_USBRESET                              	GPIO_Pin_8
-
-#define GPIO_PORT_POWER                              GPIOE    					 
-#define GPIO_PIN_POWER                              	GPIO_Pin_14
-
-#define GPIO_PORT_USBINT                              	GPIOA    					 
-#define GPIO_PIN_USBINT                              GPIO_Pin_10
-#define GPIO_PORTSOURCE_USBINT                              GPIO_PortSourceGPIOA    					 
-#define GPIO_PINSOURCE_USBINT                               GPIO_PinSource10
 
 
 

@@ -46,7 +46,8 @@ static struct {
 	uint8_t		count;
 
 	uint8_t		write_file;
-}usb_test;
+	
+}test_usb;
 
 
 //------------------------------------------------------------------------------
@@ -77,21 +78,18 @@ void Test_usb(void)
 	
 	SystemCoreClockUpdate();
 	
+	Dev_open(DEVID_FM12864, (void *)&p_lcd);
+
 	
 	//按键初始化
 	p_kb = GetKeyInsance();
 	
 	//借用一下内存:&aci_sys.lcd_cmd_bytes
-	aci_sys.lcd_cmd_bytes = CONF_KEYSCAN_CYCLEMS;
-	p_kb->init( p_kb, &aci_sys.lcd_cmd_bytes);
-	aci_sys.lcd_cmd_bytes  = 0;
+//	aci_sys.lcd_cmd_bytes = CONF_KEYSCAN_CYCLEMS;
+//	p_kb->init( p_kb, &aci_sys.lcd_cmd_bytes);
+//	aci_sys.lcd_cmd_bytes  = 0;
 
 	p_kbTestOb = KbTestOb_new();
-	
-	
-	Dev_open(DEVID_FM12864, (void *)&p_lcd);
-	
-	
 	p_kbTestOb->setKeyHdl( p_kbTestOb, KeyEvent);
 	p_kb->addOb( p_kb, ( keyObservice *)p_kbTestOb);
 	osKernelStart ();                         // start thread execution 
@@ -112,25 +110,28 @@ void Test_usb(void)
 		
 	}
 	USB_Rgt_event_hdl(Usb_event);
-	usb_test.count = 0;
-	usb_test.write_file = 1;
-	usb_test.usb_buf_size = USB_MAX_WRITE_BYTE;
-	usb_test.usb_buf = malloc(usb_test.usb_buf_size);
+	test_usb.count = 0;
+	test_usb.write_file = 0;
+	test_usb.usb_buf_size = USB_MAX_WRITE_BYTE;
+	test_usb.usb_buf = malloc(test_usb.usb_buf_size);
 	
 	
 	while(1)
 	{
 		USB_Run();
 		
-		if(usb_test.write_file)
-		{
-			sprintf(file_name, "TEST_%d.TXT", usb_test.count);
-			TUSB_Write_file(file_name, TUSB_16MB);
-			usb_test.write_file = 0;
-		}
-		p_kb->run( p_kb);
-		delay_ms( 200);
+		
 		p_lcd->lcd_flush(0);
+//		p_kb->run( p_kb);
+		delay_ms( 200);
+		if(test_usb.write_file)
+		{
+			sprintf(file_name, "TEST_%d.bin", test_usb.count);
+			p_lcd->lcd_flush(0);
+			TUSB_Write_file(file_name, TUSB_16MB);
+			test_usb.write_file = 0;
+		}
+		
 	}
 	
 	
@@ -154,8 +155,8 @@ static void		TUSB_Write_file(char *file, int size)
 	short	i = 0, limit;
 	char	lcd_buf[32];
 	
-	limit = usb_test.usb_buf_size / sizeof(int);
-	p_buf = (int *)usb_test.usb_buf;
+	limit = test_usb.usb_buf_size / sizeof(int);
+	p_buf = (int *)test_usb.usb_buf;
 	
 	
 	p_lcd->dispaly_text(0, file, 0, 0, 32, FONT_12, PALLET_BLACK);
@@ -171,7 +172,7 @@ static void		TUSB_Write_file(char *file, int size)
 	
 	
 	//写入数据
-	
+	p_lcd->lcd_flush(0);
 	while(wr_data < max)
 	{
 		//复位要操作的缓存的位置
@@ -188,26 +189,32 @@ static void		TUSB_Write_file(char *file, int size)
 		}
 		
 		//把缓存的数据写入文件
-		USB_Write_file(fd, usb_test.usb_buf, i * sizeof(int));
+		USB_Write_file(fd, test_usb.usb_buf, i * sizeof(int));
 		//提示写入的数据量
 		prc = (wr_data + 1)* 4 * 100;
 		prc = prc / size;
-		sprintf(lcd_buf, "%% %3.1f", prc);
+		sprintf(lcd_buf, "%%%.1f", prc);
 		p_lcd->dispaly_text(0, lcd_buf, 0, 88, 32, FONT_12, PALLET_BLACK);
+		p_lcd->lcd_flush(0);
+		if(test_usb.write_file == 0)
+			break;
 	}
 	
 	//关闭文件
+	size = (wr_data + 1) * sizeof(int);
 	if(USB_Colse_file(fd) == 0)
 	{
 		p_lcd->dispaly_text(0, "wr", 0, 0, 48, FONT_12, PALLET_BLACK);
-		sprintf(lcd_buf, "%dMB, done", size / 1024 / 1024);
+		
+		prc = size / 1024 / 1024;
+		sprintf(lcd_buf, "%.2fMB, done",  prc);
 		p_lcd->dispaly_text(0, lcd_buf, 0, 24, 48, FONT_12, PALLET_BLACK);
 	}
 	else
 	{
 		p_lcd->dispaly_text(0, "close fail", 0, 0, 48, FONT_12, PALLET_BLACK);
 	}
-	
+	p_lcd->lcd_flush(0);
 }
 
 static int KeyEvent( char num, keyMsg_t arr_msg[])
@@ -224,12 +231,12 @@ static int KeyEvent( char num, keyMsg_t arr_msg[])
 			
 				TUSB_Display(NULL);
 				break;
-			case KEYCODE_UP:
-				
+			case KEYCODE_ESC:
+				test_usb.write_file = 0 ;
 				break;
 			case KEYCODE_ENTER:
-				usb_test.write_file = 1;
-				usb_test.count ++;
+				test_usb.write_file = 1;
+				test_usb.count ++;
 				break;
 		}
 	}
@@ -269,5 +276,8 @@ static int	Usb_event(int type)
 	
 	return 0;
 }
+
+
+
 
 #endif

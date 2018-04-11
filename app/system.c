@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "sdhDef.h"
-#include "utils/rtc_pcf8563.h"
+#include "utils/rtc.h"
 #include "utils/hw_w25q.h"
 #include "utils/FM25.h"
 
@@ -40,7 +40,7 @@ const unsigned short daytab1[13]={0,31,60,91,121,152,182,213,244,274,305,335,366
 // module global vars
 //------------------------------------------------------------------------------
 
-static UtlRtc *sys_rtc;	
+static util_rtc *sys_rtc;	
 //为了能够紧凑的定义一些静态变量，所以都定义在一起
 //只有非4字节对齐的，需要放在这里定于
 char 				*arr_p_vram[16];
@@ -217,10 +217,10 @@ void System_init(void)
 	
 	aci_sys.lcd_sem_wait_ms = 0xffffffff;
 	
-	sys_rtc = ( UtlRtc *)Pcf8563_new();
-	if(sys_rtc == NULL) while(1);
+	sys_rtc = Get_Rtc();
+	
 
-	sys_rtc->init(sys_rtc, NULL);
+	
 	sys_rtc->get(sys_rtc, &aci_sys.sys_time);
 	
 	//md_time要系统时间初始化之后初始化

@@ -16,18 +16,18 @@
 //------------------------------------------------------------------------------
 // typedef
 //------------------------------------------------------------------------------
-ABS_CLASS( UtlRtc)
+ABS_CLASS( util_rtc)
 {
 	
 	
-	int (*init)( UtlRtc *self, IN void *arg);
-	int (*get)( UtlRtc *self, OUT struct  tm *tm);
-	int	(*set)( UtlRtc *self, IN struct  tm *tm);
+	int (*init)( util_rtc *self, IN void *arg);
+	int (*get)( util_rtc *self, OUT struct  tm *tm);
+	int	(*set)( util_rtc *self, IN struct  tm *tm);
 	
 	
 	//abs and к╫сп
-	int	(*readReg)( UtlRtc *self, IN uint8_t	reg, OUT uint8_t val[], uint8_t num);
-	int	(*writeReg)( UtlRtc *self, IN uint8_t	reg, IN uint8_t val[], uint8_t num);
+	int	(*readReg)( util_rtc *self, IN uint8_t	reg, OUT uint8_t val[], uint8_t num);
+	int	(*writeReg)( util_rtc *self, IN uint8_t	reg, IN uint8_t val[], uint8_t num);
 	
 	
 };
@@ -38,5 +38,5 @@ ABS_CLASS( UtlRtc)
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
-
+util_rtc *Get_Rtc(void);
 #endif

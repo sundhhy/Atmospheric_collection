@@ -28,6 +28,8 @@
 #include "control/CtlTimer.h"
 #include "utils/time.h"
 #include "utils/keyboard.h"
+#include "utils/rtc.h"
+
 
 #include "tdd_conf.h"
 #include "unit_tests/unit_test.h"
@@ -111,6 +113,21 @@ int main (void) {
 	PVD_Init();
 
 	Init_device();
+	
+	
+	System_init();
+	
+	
+	p_kb = GetKeyInsance();
+//	
+	//借用一下内存:&aci_sys.lcd_cmd_bytes
+	aci_sys.lcd_cmd_bytes = CONF_KEYSCAN_CYCLEMS;
+	p_kb->init( p_kb, &aci_sys.lcd_cmd_bytes);
+	aci_sys.lcd_cmd_bytes  = 0;
+	
+	tid_Thread_key = osThreadCreate (osThread(ThrdKeyRun), p_kb);
+	if (!tid_Thread_key) return(-1);
+
 #if TDD_ON == 1
 	unit_test();
 #endif
@@ -119,7 +136,6 @@ int main (void) {
 	Init_Cmd_Thread();
 //	// initialize CMSIS-RTOS
 //	//各个外设驱动模块初始化
-	System_init();
 //	
 //		
 //	//控制器初始化
@@ -131,12 +147,7 @@ int main (void) {
 //	//界面初始化
 	HMI_Init();
 //	//按键初始化
-	p_kb = GetKeyInsance();
-//	
-	//借用一下内存:&aci_sys.lcd_cmd_bytes
-	aci_sys.lcd_cmd_bytes = CONF_KEYSCAN_CYCLEMS;
-	p_kb->init( p_kb, &aci_sys.lcd_cmd_bytes);
-	aci_sys.lcd_cmd_bytes  = 0;
+	
 
 //	//创建控制器
 	p_control = SUPER_PTR( Get_CtlKey(), Controller);
@@ -148,8 +159,7 @@ int main (void) {
 //	
 ////	创建线程
 //	
-	tid_Thread_key = osThreadCreate (osThread(ThrdKeyRun), p_kb);
-	if (!tid_Thread_key) return(-1);
+
 //	
 	p_mdl_time = ModelCreate("time");
 //	
@@ -333,7 +343,12 @@ static void 	Init_LCD(void)
 static void 	Init_device(void)
 {
 	dev_Char 		*p_dev_char;
-		Dev_open(DEVID_UART1, ( void *)&p_dev_char);
+	util_rtc			*rtc;
+	Dev_open(DEVID_UART1, ( void *)&p_dev_char);
+	
+	rtc = Get_Rtc();
+	rtc->init(rtc, NULL);
+	
 //	if(USB_Init(NULL) != RET_OK)
 //	{
 //		aci_sys.sys_flag |= SYSFLAG_ERR;

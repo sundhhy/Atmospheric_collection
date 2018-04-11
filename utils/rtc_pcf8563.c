@@ -75,12 +75,12 @@ static dev_Char *pcf8563_i2c;
 /// \name Private Functions
 /// \{
 
-int Pcf8563_init( UtlRtc *self, IN void *arg)
+int Pcf8563_init( util_rtc *self, IN void *arg)
 {
 	Dev_open(DEVID_IIC1, (void *)&pcf8563_i2c);
 	return RET_OK;
 }
-int Pcf8563_set( UtlRtc *self, IN struct  tm *tm)
+int Pcf8563_set( util_rtc *self, IN struct  tm *tm)
 {
 	
 	uint8_t   date[7];
@@ -118,7 +118,7 @@ int Pcf8563_set( UtlRtc *self, IN struct  tm *tm)
 }
 
 
-int	Pcf8563_get( UtlRtc *self, OUT struct  tm *tm)
+int	Pcf8563_get( util_rtc *self, OUT struct  tm *tm)
 {
 	uint8_t   date[7];
 	I2C_slave_t		pcf = {
@@ -148,14 +148,14 @@ int	Pcf8563_get( UtlRtc *self, OUT struct  tm *tm)
 }
 
 
-int	Pcf8563_readReg(UtlRtc *self, IN uint8_t	reg, OUT uint8_t val[], uint8_t num)
+int	Pcf8563_readReg(util_rtc *self, IN uint8_t	reg, OUT uint8_t val[], uint8_t num)
 {
 	
 	return RET_OK;
 }
 	
 
-int	Pcf8563_writeReg( UtlRtc *self, IN uint8_t	reg, IN uint8_t val[], uint8_t num)
+int	Pcf8563_writeReg( util_rtc *self, IN uint8_t	reg, IN uint8_t val[], uint8_t num)
 {
 	
 	return RET_OK;
@@ -165,11 +165,11 @@ int	Pcf8563_writeReg( UtlRtc *self, IN uint8_t	reg, IN uint8_t val[], uint8_t nu
 
 
 CTOR( Pcf8563)
-SUPER_CTOR( UtlRtc);
-FUNCTION_SETTING( UtlRtc.init, Pcf8563_init);		//test
-FUNCTION_SETTING( UtlRtc.get, Pcf8563_get);
-FUNCTION_SETTING( UtlRtc.set, Pcf8563_set);
-FUNCTION_SETTING( UtlRtc.readReg, Pcf8563_readReg);
-FUNCTION_SETTING( UtlRtc.writeReg, Pcf8563_writeReg);
+SUPER_CTOR( util_rtc);
+//FUNCTION_SETTING( util_rtc.init, Pcf8563_init);		//test
+//FUNCTION_SETTING( util_rtc.get, Pcf8563_get);
+FUNCTION_SETTING( util_rtc.set, Pcf8563_set);
+FUNCTION_SETTING( util_rtc.readReg, Pcf8563_readReg);
+FUNCTION_SETTING( util_rtc.writeReg, Pcf8563_writeReg);
 
 END_ABS_CTOR

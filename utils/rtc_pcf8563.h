@@ -19,7 +19,7 @@ CLASS( Pcf8563)
 {
 	
 	
-	EXTENDS( UtlRtc);
+	EXTENDS( util_rtc);
 	
 	
 };
