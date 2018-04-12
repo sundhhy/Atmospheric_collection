@@ -12,6 +12,8 @@
 #include "device.h"
 #include "utils/keyboard.h"
 #include "USB/Usb.h"
+#include "usb_hardware_interface.h"
+
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
@@ -57,7 +59,6 @@ static KbTestOb 				*p_kbTestOb;
 
 static dev_lcd 		*p_lcd;
 
-static usb_conf_t			td_usb_conf;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
@@ -98,8 +99,8 @@ void Test_usb(void)
 	p_lcd->dispaly_text(0, "Init USB:", 0, 0, 0, FONT_12, PALLET_BLACK);
 	
 	
-	td_usb_conf.cpu_clk_hz = SystemCoreClock;
-	if(USB_Init(&td_usb_conf) == 0)
+	this_usb.cpu_clk_hz = SystemCoreClock;
+	if(USB_Init(&this_usb) == 0)
 	{
 		p_lcd->dispaly_text(0, "success", 0, 80, 0, FONT_12, PALLET_BLACK);
 		

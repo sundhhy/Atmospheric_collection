@@ -2,17 +2,17 @@
 //            G L O B A L   D E F I N I T I O N S                             //
 //============================================================================//
 //提供ch372芯片与单片机之间的硬件接口
-//包括：中断引脚的操作，SPI的读写。
+//包括：中断引脚的操作，SPI的读写，系统时间的获取。
 #include "usb_hardware_interface.h"
 
-
-
 #include "os/os_depend.h"
+#include "dev_cmd.h"
 #include "deviceId.h"
+#include "device.h"
 #include "sdhDef.h"
-#include "arithmetic/cycQueue.h"
-#include "model/ModelTime.h"
 #include "system.h"
+
+#include "hardwareConfig.h"
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
@@ -20,7 +20,7 @@
 //------------------------------------------------------------------------------
 // module global vars
 //------------------------------------------------------------------------------
-
+usb_op_t	this_usb;
 
 //------------------------------------------------------------------------------
 // global function prototypes
@@ -33,7 +33,15 @@
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
+#define SET_CH376RST_HIGH	GPIO_SetBits(GPIO_PORT_USBRESET, GPIO_PIN_USBRESET)
+#define SET_CH376RST_LOW	GPIO_ResetBits(GPIO_PORT_USBRESET, GPIO_PIN_USBRESET)
 
+
+#define SET_CH376ENA_HIGH	GPIO_SetBits(GPIO_PORT_SPI1, GPIO_PIN_SPI1_NSS)
+#define SET_CH376ENA_LOW	GPIO_ResetBits(GPIO_PORT_SPI1, GPIO_PIN_SPI1_NSS)
+
+#define SET_CH376PWR_HIGH	GPIO_SetBits(GPIO_PORT_POWER, GPIO_PIN_POWER)
+#define SET_CH376PWR_LOW	GPIO_ResetBits(GPIO_PORT_POWER, GPIO_PIN_POWER)
 //------------------------------------------------------------------------------
 // local types
 //------------------------------------------------------------------------------
@@ -41,11 +49,27 @@
 //------------------------------------------------------------------------------
 // local vars
 //------------------------------------------------------------------------------
-
+static	dev_Char	*ch376_dev;
+static	dev_Char			*ch376_intr_pin;
 
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
+
+static	void				UHI_usb_power(int	on);		
+static	void				UHI_usb_reset(void);
+	
+static	void				UHI_usb_set_irq(int on);
+static	int					UHI_usb_read_intr_pin(void);
+	
+static	void				UHI_usb_delay_ms(int ms);
+	
+static	void				UHI_usb_cs_on(void);
+static	void				UHI_usb_cs_off(void);	
+static	int					UHI_usb_write_bytes(uint8_t *buf, int write_len);
+static	int					UHI_usb_read_bytes(uint8_t *buf, int read_len);
+static	void				UHI_usb_get_time(usb_file_tm *t);
+
 
 
 
@@ -53,11 +77,30 @@
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
 
-int CH376_Init_gpio(void)
+
+int UHI_Init(void)
 {
+	Dev_open(DEVID_GPIO_USB_INIT, (void *)&ch376_intr_pin);
+	Dev_open(DEVID_SPI1, (void *)&ch376_dev);
 	
+	this_usb.usb_power = UHI_usb_power;
+	this_usb.usb_reset = UHI_usb_reset;
+	
+	this_usb.usb_set_irq = UHI_usb_set_irq;
+	this_usb.usb_read_intr_pin = UHI_usb_read_intr_pin;
+	this_usb.usb_delay_ms = UHI_usb_delay_ms;
+	this_usb.usb_write_bytes = UHI_usb_write_bytes;	
+	this_usb.usb_read_bytes = UHI_usb_read_bytes;
+	this_usb.usb_get_time = UHI_usb_get_time;
+	
+	this_usb.usb_cs_off = UHI_usb_cs_off;
+	this_usb.usb_cs_on = UHI_usb_cs_on;
+	
+
 	
 }
+
+
 
 
 
@@ -71,7 +114,89 @@ int CH376_Init_gpio(void)
 //=========================================================================//
 /// \name Private Functions
 /// \{
-
+static	void	UHI_usb_power(int	on)		
+{
+	if(on) 
+	{
+		SET_CH376PWR_LOW;
+	}
+	else 
+	{
+		
+		
+		SET_CH376PWR_HIGH;
+	}
+}
+static	void				UHI_usb_reset(void)
+{
+	SET_CH376RST_HIGH;
+	this_usb.usb_delay_ms(100);
+	
+	SET_CH376RST_LOW;
+	this_usb.usb_delay_ms(100);
+	
+	this_usb.usb_cs_off();
+	this_usb.usb_delay_ms(100);
+}
+	
+static	void				UHI_usb_set_irq(int on)
+{
+	if(on) 
+	{
+		ch376_intr_pin->ioctol(ch376_intr_pin,DEVCMD_ENABLE_IRQ);
+		
+	}
+	else 
+	{
+		
+		ch376_intr_pin->ioctol(ch376_intr_pin,DEVCMD_DISABLE_IRQ);
+	}
+	
+}
+static	int					UHI_usb_read_intr_pin(void)
+{
+	
+	char	pin_val = 0;
+	ch376_intr_pin->read(ch376_intr_pin, &pin_val, 1);
+	return pin_val;
+}
+	
+static	void				UHI_usb_delay_ms(int ms)
+{
+	delay_ms(ms);
+	
+}
+	
+static	void				UHI_usb_cs_on(void)
+{
+	SET_CH376ENA_LOW;
+}
+static	void				UHI_usb_cs_off(void)	
+{
+	SET_CH376ENA_HIGH;
+}
+static	int					UHI_usb_write_bytes(uint8_t *buf, int write_len)
+{
+	return ch376_dev->write(ch376_dev, buf, write_len);
+}
+static	int					UHI_usb_read_bytes(uint8_t *buf, int read_len)
+{
+	return ch376_dev->read(ch376_dev, buf, read_len);
+}
+static	void				UHI_usb_get_time(usb_file_tm *t)
+{
+	struct tm st;
+	
+	System_time(&st);
+	
+	t->hour = st.tm_hour;
+	t->mday = st.tm_mday;
+	t->min = st.tm_min;
+	t->mon = st.tm_mon;
+	t->sec = st.tm_sec;
+	t->year = st.tm_year;
+	
+}
 
 
 

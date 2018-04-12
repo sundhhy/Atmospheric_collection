@@ -342,9 +342,18 @@ static void 	Init_LCD(void)
 
 static void 	Init_device(void)
 {
-	dev_Char 		*p_dev_char;
+	dev_Char 			*p_dev_char;
 	util_rtc			*rtc;
+
+	
+	
 	Dev_open(DEVID_UART1, ( void *)&p_dev_char);
+	
+	//初始化usb的中断引脚和spi
+	Dev_open(DEVID_GPIO_USB_INIT, (void *)&p_dev_char);
+	Dev_open(DEVID_SPI1, (void *)&p_dev_char);
+	
+	
 	
 	rtc = Get_Rtc();
 	rtc->init(rtc, NULL);
