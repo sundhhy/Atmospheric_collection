@@ -94,7 +94,7 @@ USART_InitTypeDef g_Cfg_Uart2 = {
 };
 
 USART_InitTypeDef g_Cfg_Uart3 = {
-		19200,
+		9600,
 		USART_WordLength_8b,
 		USART_StopBits_1,
 		USART_Parity_No,

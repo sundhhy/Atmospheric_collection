@@ -36,6 +36,7 @@
 //------------------------------------------------------------------------------
 
 static util_rtc *single_rtc;
+static struct  tm test_tm;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
@@ -65,11 +66,7 @@ util_rtc *Get_Rtc(void)
 
 int UtlRtc_init( util_rtc *self, IN void *arg)
 {
-	
-	return RET_OK;
-}
-int UtlRtc_get( util_rtc *self, OUT struct  tm *tm)
-{
+	struct  tm *tm = &test_tm;
 	uint8_t	h,m,s;
 	tm->tm_year = GetCompileYear();
 	tm->tm_mon =  GetCompileMoth();
@@ -78,6 +75,45 @@ int UtlRtc_get( util_rtc *self, OUT struct  tm *tm)
 	tm->tm_hour = h;
 	tm->tm_min = m;
 	tm->tm_sec = h;
+	return RET_OK;
+}
+int UtlRtc_get( util_rtc *self, OUT struct  tm *tm)
+{
+	
+	
+	
+	
+//	if(test_tm.tm_sec < 59)
+//		test_tm.tm_sec ++;
+//	else
+//	{
+//		
+//		test_tm.tm_sec = 0;
+//		test_tm.tm_min ++;
+//	}
+	
+	test_tm.tm_min ++;
+	if(test_tm.tm_min >= 60)
+	{
+		test_tm.tm_min = 0;
+		test_tm.tm_hour ++;
+		
+	}
+	
+	if(test_tm.tm_hour >= 24)
+	{
+		test_tm.tm_hour = 0;
+		test_tm.tm_mday ++;
+		
+	}
+	
+	tm->tm_year = test_tm.tm_year;
+	tm->tm_mon =  test_tm.tm_mon;
+	tm->tm_mday = test_tm.tm_mday;
+	tm->tm_hour = test_tm.tm_hour;
+	tm->tm_min = test_tm.tm_min;
+	tm->tm_sec = test_tm.tm_sec;
+	
 	return RET_OK;
 }
 

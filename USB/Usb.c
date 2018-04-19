@@ -140,7 +140,7 @@ int USB_Run(void)
 }
 
 
-int USB_Init(void *op)
+int USB_Init(void *hard_op)
 {
 	int	ret = -1;
 	//usb管理器初始化
@@ -148,11 +148,11 @@ int USB_Init(void *op)
 	CQ_Init(&usb_ctl.usb_cq, usb_cq_buf, LEN_USB_CQBUF);
 	
 	//ch376硬件初始化
-	p_usb = (usb_op_t *)op;
+	p_usb = (usb_op_t *)hard_op;
 	
 	p_usb->usb_power(1);
 //	Power_Ch376(1);
-	ret = Init_Ch376(op, Deal_status);
+	ret = Init_Ch376(hard_op, Deal_status);
 	if( ret == USB_INT_SUCCESS)
 		ret = 0;
 	else 
@@ -331,24 +331,25 @@ int USB_Write_file(int fd, char *buf, int len)
 //	uint8_t		s;
 //	
 //	
-//	uint8_t		num_bkls = 0;
+	uint8_t		num_bkls = 0;
 
-//	uint8_t		real_num_bkls = 0;
-//	
-//	
-//	
-//	num_bkls = len / DEF_SECTOR_SIZE;
+	uint8_t		real_num_bkls = 0;
+	
+	
+	
+	num_bkls =len/ DEF_SECTOR_SIZE;
 	
 //	if(len % DEF_SECTOR_SIZE)
 //		num_bkls ++;
 	
-//	if(num_bkls)
-//		CH376SecWrite((uint8_t *)buf, num_bkls, &real_num_bkls);
-//	
-//	len -= num_bkls * DEF_SECTOR_SIZE;
-	CH376ByteWrite((uint8_t *)buf, len, &real_len);
-	usb_ctl.is_file_changed = 1; 
+	if(num_bkls)
+		CH376SecWrite((uint8_t *)buf, num_bkls, &real_num_bkls);
 	
+	len -= num_bkls * DEF_SECTOR_SIZE;
+	if(len)
+		CH376ByteWrite((uint8_t *)buf, len, &real_len);
+	usb_ctl.is_file_changed = 1; 
+//	p_usb->usb_delay_ms(1);
 	return ret;
 }
 

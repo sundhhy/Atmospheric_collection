@@ -20,7 +20,7 @@
 //------------------------------------------------------------------------------
 // module global vars
 //------------------------------------------------------------------------------
-usb_op_t	this_usb;
+
 
 //------------------------------------------------------------------------------
 // global function prototypes
@@ -51,7 +51,7 @@ usb_op_t	this_usb;
 //------------------------------------------------------------------------------
 static	dev_Char	*ch376_dev;
 static	dev_Char			*ch376_intr_pin;
-
+static	usb_op_t *uhi_hop;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
@@ -71,33 +71,37 @@ static	int					UHI_usb_read_bytes(uint8_t *buf, int read_len);
 static	void				UHI_usb_get_time(usb_file_tm *t);
 
 
-
+static  void UHI_intr( void *arg, int type, int encode);
 
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
 
 
-int UHI_Init(void)
+int UHI_Init(usb_op_t *hop)
 {
 	Dev_open(DEVID_GPIO_USB_INIT, (void *)&ch376_intr_pin);
 	Dev_open(DEVID_SPI1, (void *)&ch376_dev);
+	ch376_intr_pin->ioctol(ch376_intr_pin, DEVCMD_SET_IRQHDL, UHI_intr, (void *)NULL);
 	
-	this_usb.usb_power = UHI_usb_power;
-	this_usb.usb_reset = UHI_usb_reset;
+	hop->usb_power = UHI_usb_power;
+	hop->usb_reset = UHI_usb_reset;
 	
-	this_usb.usb_set_irq = UHI_usb_set_irq;
-	this_usb.usb_read_intr_pin = UHI_usb_read_intr_pin;
-	this_usb.usb_delay_ms = UHI_usb_delay_ms;
-	this_usb.usb_write_bytes = UHI_usb_write_bytes;	
-	this_usb.usb_read_bytes = UHI_usb_read_bytes;
-	this_usb.usb_get_time = UHI_usb_get_time;
+	hop->usb_set_irq = UHI_usb_set_irq;
+	hop->usb_read_intr_pin = UHI_usb_read_intr_pin;
+	hop->usb_delay_ms = UHI_usb_delay_ms;
+	hop->usb_write_bytes = UHI_usb_write_bytes;	
+	hop->usb_read_bytes = UHI_usb_read_bytes;
+	hop->usb_get_time = UHI_usb_get_time;
 	
-	this_usb.usb_cs_off = UHI_usb_cs_off;
-	this_usb.usb_cs_on = UHI_usb_cs_on;
+	hop->usb_cs_off = UHI_usb_cs_off;
+	hop->usb_cs_on = UHI_usb_cs_on;
 	
 
+	uhi_hop = hop;
 	
+	
+	return 0;
 }
 
 
@@ -130,13 +134,13 @@ static	void	UHI_usb_power(int	on)
 static	void				UHI_usb_reset(void)
 {
 	SET_CH376RST_HIGH;
-	this_usb.usb_delay_ms(100);
+	UHI_usb_delay_ms(100);
 	
 	SET_CH376RST_LOW;
-	this_usb.usb_delay_ms(100);
+	UHI_usb_delay_ms(100);
 	
-	this_usb.usb_cs_off();
-	this_usb.usb_delay_ms(100);
+	UHI_usb_cs_off();
+	UHI_usb_delay_ms(100);
 }
 	
 static	void				UHI_usb_set_irq(int on)
@@ -195,6 +199,14 @@ static	void				UHI_usb_get_time(usb_file_tm *t)
 	t->mon = st.tm_mon;
 	t->sec = st.tm_sec;
 	t->year = st.tm_year;
+	
+}
+
+static  void UHI_intr( void *arg, int type, int encode)
+{
+	
+	if(uhi_hop->usb_irq_cb)
+		uhi_hop->usb_irq_cb();
 	
 }
 

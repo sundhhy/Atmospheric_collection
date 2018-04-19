@@ -97,7 +97,7 @@ typedef enum {
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
-int USB_Init(void *op);
+int USB_Init(void *hard_op);
 int USB_Run(void);
 int USB_Open_file(char *file_name, char mode);
 int USB_Colse_file(int fd);

@@ -150,14 +150,17 @@ void Pin_init(void)
 //    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
 //    GPIO_Init( GPIO_PORT_UART2RX, &GPIO_InitStructure);
 //	
-//	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART3TX;        //tx
-//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-//    GPIO_Init( GPIO_PORT_UART3TX, &GPIO_InitStructure);
-//	
-//    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART3RX;                   //rx
-//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-//    GPIO_Init( GPIO_PORT_UART3RX, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART3TX;        //tx
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_Init( GPIO_PORT_UART3TX, &GPIO_InitStructure);
+	
+    GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART3RX;                   //rx
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_Init( GPIO_PORT_UART3RX, &GPIO_InitStructure);
+	
+	GPIO_PinRemapConfig(GPIO_PartialRemap_USART3,ENABLE);
+	
 //	
 //	
 //	GPIO_InitStructure.GPIO_Pin = GPIO_PIN_UART4TX;        //tx

@@ -34,7 +34,6 @@
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
-#define TUSB_PAGE_MAX_NUM		7
 #define TUSB_16MB						16 * 1024 * 1024 
 
 
@@ -59,6 +58,7 @@ static KbTestOb 				*p_kbTestOb;
 
 static dev_lcd 		*p_lcd;
 
+static usb_op_t	this_usb;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
@@ -68,6 +68,7 @@ static void TUSB_Display(void *arg);
 static int 		KeyEvent( char num, keyMsg_t arr_msg[]);
 static int		Usb_event(int type);
 static void		TUSB_Write_file(char *file, int size);	
+static void 	TUSB_Clean_result_show(void);
 //============================================================================//
 //            P U B L I C   F U N C T I O N S                                 //
 //============================================================================//
@@ -100,6 +101,7 @@ void Test_usb(void)
 	
 	
 	this_usb.cpu_clk_hz = SystemCoreClock;
+	UHI_Init(&this_usb);
 	if(USB_Init(&this_usb) == 0)
 	{
 		p_lcd->dispaly_text(0, "success", 0, 80, 0, FONT_12, PALLET_BLACK);
@@ -127,7 +129,8 @@ void Test_usb(void)
 		delay_ms( 200);
 		if(test_usb.write_file)
 		{
-			sprintf(file_name, "TEST_%d.bin", test_usb.count);
+			TUSB_Clean_result_show();
+			sprintf(file_name, "TEST%d.BIN", test_usb.count);
 			p_lcd->lcd_flush(0);
 			TUSB_Write_file(file_name, TUSB_16MB);
 			test_usb.write_file = 0;
@@ -189,13 +192,14 @@ static void		TUSB_Write_file(char *file, int size)
 			
 		}
 		
+		
 		//把缓存的数据写入文件
 		USB_Write_file(fd, test_usb.usb_buf, i * sizeof(int));
 		//提示写入的数据量
 		prc = (wr_data + 1)* 4 * 100;
 		prc = prc / size;
 		sprintf(lcd_buf, "%%%.1f", prc);
-		p_lcd->dispaly_text(0, lcd_buf, 0, 88, 32, FONT_12, PALLET_BLACK);
+		p_lcd->dispaly_text(0, lcd_buf, 0, 80, 32, FONT_12, PALLET_BLACK);
 		p_lcd->lcd_flush(0);
 		if(test_usb.write_file == 0)
 			break;
@@ -208,14 +212,20 @@ static void		TUSB_Write_file(char *file, int size)
 		p_lcd->dispaly_text(0, "wr", 0, 0, 48, FONT_12, PALLET_BLACK);
 		
 		prc = size / 1024 / 1024;
-		sprintf(lcd_buf, "%.2fMB, done",  prc);
-		p_lcd->dispaly_text(0, lcd_buf, 0, 24, 48, FONT_12, PALLET_BLACK);
+		sprintf(lcd_buf, "%.3fM, done",  prc);
+		p_lcd->dispaly_text(0, lcd_buf, 0, 20, 48, FONT_12, PALLET_BLACK);
 	}
 	else
 	{
 		p_lcd->dispaly_text(0, "close fail", 0, 0, 48, FONT_12, PALLET_BLACK);
 	}
 	p_lcd->lcd_flush(0);
+}
+
+static void 	TUSB_Clean_result_show(void)
+{
+	
+	p_lcd->dispaly_text(0, "                ", 0, 0, 48, FONT_12, PALLET_BLACK);
 }
 
 static int KeyEvent( char num, keyMsg_t arr_msg[])
@@ -230,7 +240,6 @@ static int KeyEvent( char num, keyMsg_t arr_msg[])
 			case KEYCODE_SWITCH:
 				
 			
-				TUSB_Display(NULL);
 				break;
 			case KEYCODE_ESC:
 				test_usb.write_file = 0 ;

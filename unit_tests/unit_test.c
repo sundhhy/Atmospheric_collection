@@ -7,6 +7,7 @@
 #include "test_key.h"
 #include "test_smart_bus.h"
 #include "test_usb.h"
+#include "test_printer.h"
 //------------------------------------------------------------------------------
 // const defines
 //------------------------------------------------------------------------------
@@ -60,6 +61,10 @@ void unit_test(void)
 #elif TDD_USB == 1
 	
 	Test_usb();
+	
+#elif TDD_PRINTER == 1
+	
+	Test_printer();
 #endif
 }
 

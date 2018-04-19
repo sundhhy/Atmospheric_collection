@@ -32,7 +32,7 @@ typedef struct {
 	uint32_t		cpu_clk_hz;
 	
 	
-	void  (*usb_irq_cb)( void *arg, int type, int encode);		//在中断中调用, arg,type和encode 全部输入0即可。
+	void  (*usb_irq_cb)(void);		
 
 	
 	void				(*usb_power)(int	on);		//on 1:打开电源  0 关闭电源
@@ -61,11 +61,11 @@ typedef struct {
 //------------------------------------------------------------------------------
 // global variable declarations
 //------------------------------------------------------------------------------
-extern usb_op_t	this_usb;
+
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
-int UHI_Init(void);
+int UHI_Init(usb_op_t *hop);
 
 void CH376_Disable_irq(void);
 void CH376_Enable_irq(void);

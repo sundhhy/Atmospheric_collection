@@ -137,39 +137,39 @@ void EXTI9_5_IRQHandler(void)
 	}
 }
 
-void EXTI15_10_IRQHandler(void)
-{
-   if( EXTI_GetITStatus( EXTI_Line10))
-	{
-		ExtiIrq(10);
-       EXTI_ClearITPendingBit(EXTI_Line10);
-	}
-	if( EXTI_GetITStatus( EXTI_Line11))
-	{
-		ExtiIrq(11);
-       EXTI_ClearITPendingBit(EXTI_Line11);
-	}
-	if( EXTI_GetITStatus( EXTI_Line12))
-	{
-		ExtiIrq(12);
-       EXTI_ClearITPendingBit(EXTI_Line12);
-	}
-	if( EXTI_GetITStatus( EXTI_Line13))
-	{
-		ExtiIrq(13);
-       EXTI_ClearITPendingBit(EXTI_Line13);
-	}
-	if( EXTI_GetITStatus( EXTI_Line14))
-	{
-		ExtiIrq(14);
-       EXTI_ClearITPendingBit(EXTI_Line14);
-	}
-	if( EXTI_GetITStatus( EXTI_Line15))
-	{
-		ExtiIrq(15);
-       EXTI_ClearITPendingBit(EXTI_Line15);
-	}
-}
+//void EXTI15_10_IRQHandler(void)
+//{
+//   if( EXTI_GetITStatus( EXTI_Line10))
+//	{
+//		ExtiIrq(10);
+//       EXTI_ClearITPendingBit(EXTI_Line10);
+//	}
+//	if( EXTI_GetITStatus( EXTI_Line11))
+//	{
+//		ExtiIrq(11);
+//       EXTI_ClearITPendingBit(EXTI_Line11);
+//	}
+//	if( EXTI_GetITStatus( EXTI_Line12))
+//	{
+//		ExtiIrq(12);
+//       EXTI_ClearITPendingBit(EXTI_Line12);
+//	}
+//	if( EXTI_GetITStatus( EXTI_Line13))
+//	{
+//		ExtiIrq(13);
+//       EXTI_ClearITPendingBit(EXTI_Line13);
+//	}
+//	if( EXTI_GetITStatus( EXTI_Line14))
+//	{
+//		ExtiIrq(14);
+//       EXTI_ClearITPendingBit(EXTI_Line14);
+//	}
+//	if( EXTI_GetITStatus( EXTI_Line15))
+//	{
+//		ExtiIrq(15);
+//       EXTI_ClearITPendingBit(EXTI_Line15);
+//	}
+//}
 
 //=========================================================================//
 //                                                                         //

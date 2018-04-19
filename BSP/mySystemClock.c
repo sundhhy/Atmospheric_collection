@@ -14,7 +14,6 @@ void OpenPrpClock( void)
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
 	
 
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);  
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);  

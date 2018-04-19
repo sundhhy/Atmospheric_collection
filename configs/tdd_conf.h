@@ -6,4 +6,5 @@
 #define TDD_KEY			0
 #define TDD_SMARTBUS			0
 #define TDD_USB					1
+#define TDD_PRINTER				0
 #endif

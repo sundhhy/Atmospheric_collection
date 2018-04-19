@@ -94,13 +94,17 @@
 #define GPIO_PORT_UART1RX                               GPIOB    					 
 #define GPIO_PIN_UART1RX                                GPIO_Pin_7	
 
-#define GPIO_PORT_UART2TX                               GPIOA    					 
-#define GPIO_PIN_UART2TX                                GPIO_Pin_2					 
+//#define GPIO_PORT_UART2TX                               GPIOA    					 
+//#define GPIO_PIN_UART2TX                                GPIO_Pin_2					 
 
-#define GPIO_PORT_UART2RX                               GPIOA    					 
-#define GPIO_PIN_UART2RX                                GPIO_Pin_3
+//#define GPIO_PORT_UART2RX                               GPIOA    					 
+//#define GPIO_PIN_UART2RX                                GPIO_Pin_3
 
+#define GPIO_PORT_UART3TX                               GPIOC    					 
+#define GPIO_PIN_UART3TX                                GPIO_Pin_10					 
 
+#define GPIO_PORT_UART3RX                               GPIOC    					 
+#define GPIO_PIN_UART3RX                                GPIO_Pin_11
 //*********usb spi1	********************************
 #define GPIO_PORT_SPI1                              	GPIOA    					 
 #define GPIO_PIN_SPI1_MOSI                               GPIO_Pin_7

@@ -553,7 +553,7 @@ static int MdlChn_init(Model *self, IN void *arg)
 	
 	dev_Char 		*I_uart3 = NULL;
 	
-	Dev_open(DEVID_UART3, ( void *)&I_uart3);
+	Dev_open(DEVID_UART2, ( void *)&I_uart3);
 	I_uart3->ioctol(I_uart3, DEVCMD_SET_TXWAITTIME_MS, 100);
 	I_uart3->ioctol(I_uart3, DEVCMD_SET_RXWAITTIME_MS, 10);
 	
@@ -641,7 +641,7 @@ static int MdlChn_self_check( Model *self)
 	uint8_t 			i, j;
 //	uint8_t				tmp_u8;
 	
-	Dev_open(DEVID_UART3, ( void *)&I_uart3);
+	Dev_open(DEVID_UART2, ( void *)&I_uart3);
 	i = SmBus_Query(SMBUS_MAKE_CHN(SMBUS_CHN_AI, cthis->chni.chn_NO), chk_buf, 32);
 	if( I_uart3->write(I_uart3, chk_buf, i) != RET_OK)
 	{
@@ -812,7 +812,7 @@ static void MdlChn_run(Model *self)
 #else	
 	
 	
-	Dev_open(DEVID_UART3, ( void *)&I_uart3);
+	Dev_open(DEVID_UART2, ( void *)&I_uart3);
 	
 	if(aci_sys.sys_flag & SYSFLAG_READ_CET)
 	{
@@ -910,7 +910,7 @@ static int MdlChn_getData(Model *self, IN int aux, void *arg)
 	uint16_t		tmp_u16;
 	uint8_t			tmp_u8, i;
 	
-	Dev_open(DEVID_UART3, ( void *)&I_uart3);
+	Dev_open(DEVID_UART2, ( void *)&I_uart3);
 	switch(aux) {
 		case AUX_DATA:
 			if(cthis->chni.flag_err)
@@ -1044,7 +1044,7 @@ static int MdlChn_setData(  Model *self, IN int aux, void *arg)
 	uint8_t 			i, tmp_u8;
 	
 	
-	Dev_open(DEVID_UART3, ( void *)&I_uart3);
+	Dev_open(DEVID_UART2, ( void *)&I_uart3);
 	switch(aux) {
 		case AUX_SIGNALTYPE:
 			if(arg)

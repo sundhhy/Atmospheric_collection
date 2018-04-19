@@ -74,7 +74,7 @@ static void	CH376SetFileName(char *name );
 static uint8_t	CH376SendCmdDatWaitInt( uint8_t mCmd, uint8_t mDat )  ;
 static void	CH376WriteVar32(uint8_t var, uint32_t dat );  /* 写CH376芯片内部的32位变量 */
 static uint32_t	CH376Read32bitDat( void );
-static  void Ch376_intr( void *arg, int type, int encode);
+static  void Ch376_intr(void);
 static uint8_t	CH376DiskWriteSec( uint8_t *buf, uint32_t iLbaStart, uint8_t iSectorCount );
 static  uint8_t	CH376WriteReqBlock( uint8_t *buf );
 static void	CH376WriteOfsBlock(uint8_t * buf, uint8_t ofs, uint8_t len );
@@ -101,7 +101,11 @@ int	Init_Ch376(void *op, uplevel_intr up_irq)
 	
 	p_ch376->usb_set_irq(1);
 	
-	CH376GetIntStatus();
+	if( CH376GetIntStatus() == USB_INT_CONNECT)
+	{
+		
+		ch376_up_irq(USB_INT_CONNECT);
+	}
 	return ret;
 	
 }
@@ -371,6 +375,7 @@ uint8_t	CH376SecWrite( uint8_t *buf, uint8_t ReqCount, uint8_t *RealCount )
 
 	do
 	{
+		p_ch376->usb_set_irq(0);
 		xWriteCH376Cmd( CMD1H_SEC_WRITE );
 		xWriteCH376Data( ReqCount );
 		xEndCH376Cmd( );
@@ -392,12 +397,15 @@ uint8_t	CH376SecWrite( uint8_t *buf, uint8_t ReqCount, uint8_t *RealCount )
 			break;
 		s = CH376DiskWriteSec( buf, StaSec, cnt );  // 将缓冲区中的多个扇区的数据块写入U盘 
 		if ( s != USB_INT_SUCCESS )
+		{
+			p_ch376->usb_set_irq(1);
 			return( s );
+		}
 		buf += cnt * DEF_SECTOR_SIZE;
 		if ( RealCount ) *RealCount += cnt;
 		ReqCount -= cnt;
 	} while ( ReqCount );
-
+	p_ch376->usb_set_irq(1);
 	return( s );
 }
 
@@ -693,7 +701,7 @@ static int Query376Interrupt(void)
 }
 static uint8_t Wait376Interrupt(int	set_irq )  
 {
-	uint16_t	i = 10000;
+	uint16_t	i = 2000;
 	if(set_irq)
 		p_ch376->usb_set_irq(0);
 	while(1)
@@ -709,14 +717,15 @@ static uint8_t Wait376Interrupt(int	set_irq )
 		if(i)
 			i --;
 		else
-			break;
+			return( CH376GetIntStatus( ) );
+//			break;
 	}
 	if(set_irq)
 		p_ch376->usb_set_irq(1);
 	return( ERR_USB_UNKNOWN );
 }
 
-static  void Ch376_intr( void *arg, int type, int encode)
+static  void Ch376_intr(void)
 {
 	
 	uint8_t	s = CH376GetIntStatus();// 清除CH376中断
