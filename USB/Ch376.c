@@ -701,7 +701,7 @@ static int Query376Interrupt(void)
 }
 static uint8_t Wait376Interrupt(int	set_irq )  
 {
-	uint16_t	i = 2000;
+	uint16_t	i = 10000;
 	if(set_irq)
 		p_ch376->usb_set_irq(0);
 	while(1)
@@ -717,8 +717,8 @@ static uint8_t Wait376Interrupt(int	set_irq )
 		if(i)
 			i --;
 		else
-			return( CH376GetIntStatus( ) );
-//			break;
+//			return( CH376GetIntStatus( ) );
+			break;
 	}
 	if(set_irq)
 		p_ch376->usb_set_irq(1);

@@ -328,24 +328,15 @@ int USB_Write_file(int fd, char *buf, int len)
 {
 	int	ret = 0;
 	uint16_t	real_len = 0;
-//	uint8_t		s;
-//	
-//	
-	uint8_t		num_bkls = 0;
 
-	uint8_t		real_num_bkls = 0;
-	
-	
-	
-	num_bkls =len/ DEF_SECTOR_SIZE;
-	
-//	if(len % DEF_SECTOR_SIZE)
-//		num_bkls ++;
-	
-	if(num_bkls)
-		CH376SecWrite((uint8_t *)buf, num_bkls, &real_num_bkls);
-	
-	len -= num_bkls * DEF_SECTOR_SIZE;
+//	uint8_t		num_bkls = 0;
+//	uint8_t		real_num_bkls = 0;
+//	
+//	num_bkls =len/ DEF_SECTOR_SIZE;
+//	if(num_bkls)
+//		CH376SecWrite((uint8_t *)buf, num_bkls, &real_num_bkls);
+//	
+//	len -= num_bkls * DEF_SECTOR_SIZE;
 	if(len)
 		CH376ByteWrite((uint8_t *)buf, len, &real_len);
 	usb_ctl.is_file_changed = 1; 
